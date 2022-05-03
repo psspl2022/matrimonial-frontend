@@ -1,5 +1,6 @@
 // menu script.
-import $ from 'jquery';
+// import $ from 'jquery';
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 $ (document).ready(function() {
 	var fixHeight = function() {
 		$ (".navbar-nav").css(
@@ -137,7 +138,7 @@ $('.widget-owl').owlCarousel({
 // mybutton = document.getElementById("pageup");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+// window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {

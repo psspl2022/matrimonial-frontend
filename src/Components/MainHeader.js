@@ -166,7 +166,7 @@ function MainHeader() {
 						<div className="row">
 							<div className="col-lg-12 col-md-12 col-sm-12">
 								<nav className="navbar navbar-expand-lg navbar-light bg-dark1 justify-content-sm-start">
-									<a className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" href="index.html"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></a>
+									<NavLink className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto" to="/"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></NavLink>
 									<button className="navbar-toggler align-self-start" onClick={()=>setShow(!show)} type="button">
 										<i className="fas fa-bars"></i>
 									</button>
