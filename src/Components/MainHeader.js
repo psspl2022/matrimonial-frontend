@@ -144,7 +144,7 @@ function MainHeader() {
 														<i className="fas fa-sort-down"></i>
 													</a>
 													<div className="dropdown-menu account-dropdown dropdown-menu-right" aria-labelledby="dropdownAccountLink">
-														<a className="link-item" href="my_freelancer_dashboard.html">Dashboard</a>
+														<NavLink className="link-item" to="/myprofile">Dashboard</NavLink>
 														<a className="link-item" href="my_freelancer_setting.html">Setting</a>
 														<a className="link-item" href="my_freelancer_messages.html">My Messages</a>
 														<a className="link-item" href="my_freelancer_portfolio.html">My Portfolio</a>
@@ -212,7 +212,7 @@ function MainHeader() {
 												</div>
 											</li>
 										</ul>
-										<a href="#" className="search-link" role="button" dataToggle="modal" dataTarget="#searchModal"><i className="fas fa-search"></i></a>
+										<a href="#" className="search-link" role="button" datatoggle="modal" datatarget="#searchModal"><i className="fas fa-search"></i></a>
 										<NavLink to="/login" className="add-post">Login</NavLink>
 										<NavLink to="/signUp" className="add-task">Register</NavLink>
 									</div>

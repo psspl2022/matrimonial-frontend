@@ -54,7 +54,7 @@ function SignUp() {
                 </div>
                 <div className="ui checkbox apply_check check_out checked" style={{ marginTop:'6rem'}}>
                   <input type="checkbox" tabindex="0" className="" id="tandc" />
-                  <label style={{color:'#242424 !important'}} for="tandc">
+                  <label style={{color:'#242424 !important'}} htmlFor="tandc">
                     I accept the Terms of Services
                   </label>
                 </div>

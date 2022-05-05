@@ -34,7 +34,11 @@ function Login() {
                                 <div >
                                     <ReCAPTCHA sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq" onChange={onChange} style={{ marginTop:'50px' }}/>
                                 </div>
-                                <NavLink className="lr_btn" style={{ marginTop:'7rem' }} type="submit" to="/submitlogin">Login</NavLink>
+                                <NavLink className="lr_btn" style={{ marginTop:'7rem' }} onClick={(e)=>{
+                                    if(!verified){
+                                        e.preventDefault()
+                                    }
+                                }} type="submit" to="/submitlogin">Login</NavLink>
                                 <div className="done145">
                                     <div className="done146">
                                         Need an account?<NavLink to="/signUp">Join us Now<i className="fas fa-angle-double-right"></i></NavLink>

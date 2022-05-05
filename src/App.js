@@ -10,6 +10,7 @@ import SearchMatches from './Components/SearchMatches';
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
+import MyProfile from './Components/MyProfile';
 
 function App() {
   return (
@@ -39,9 +40,14 @@ function App() {
             <Login />
             <MainFooter />
           </Route>
-          \<Route path="/forgetPassword" exact>
+          <Route path="/forgetPassword" exact>
             <MainHeader />
             <ForgetPassword />
+            <MainFooter />
+          </Route>
+          <Route path="/myprofile" exact>
+            <MainHeader />
+            <MyProfile />
             <MainFooter />
           </Route>
         </Switch>
