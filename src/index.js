@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
+window.AppName = "Namdeo Matrimonial"
 ReactDOM.render(
   <React.StrictMode>
     <App />

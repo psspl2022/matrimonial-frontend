@@ -20,7 +20,7 @@ function SignUp() {
             <div className="col-md-6">
               <div className="lg_form">
                 <div className="main-heading">
-                  <h2>Sign Up to NamdeoMatrimonial</h2>
+                  <h2>Sign Up to {window.AppName}</h2>
                   <div className="line-shape1">
                     <img src="images/line.svg" alt="" />
                   </div>
@@ -41,7 +41,7 @@ function SignUp() {
                     placeholder="Enter Password"
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group mb-4">
                   <label className="label15">Confirm Password*</label>
                   <input
                     type="password"
@@ -49,21 +49,21 @@ function SignUp() {
                     placeholder="Enter Confirm Password"
                   />
                 </div>
-                
-                <div className="ui checkbox apply_check check_out checked">
-                  <input type="checkbox" tabindex="0" className="hidden" />
-                  <label style={{color:'#242424 !important'}}>
+                <div >
+                  <ReCAPTCHA sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq" onChange={onChange} style={{ marginTop:'50px' }}/>
+                </div>
+                <div className="ui checkbox apply_check check_out checked" style={{ marginTop:'6rem'}}>
+                  <input type="checkbox" tabindex="0" className="" id="tandc" />
+                  <label style={{color:'#242424 !important'}} for="tandc">
                     I accept the Terms of Services
                   </label>
                 </div>
-                <div >
-                  <ReCAPTCHA sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq" onChange={onChange}/>
-                </div>
+                
                 <NavLink to="/findMatches" className="lr_btn" onClick={(e)=>{
                   if(!verified){
                     e.preventDefault()
                   }
-                }} disabled={!verified}>
+                }}>
                   Register
                 </NavLink>
                 <div className="done140">
