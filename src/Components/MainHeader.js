@@ -213,8 +213,8 @@ function MainHeader() {
 											</li>
 										</ul>
 										<a href="#" className="search-link" role="button" dataToggle="modal" dataTarget="#searchModal"><i className="fas fa-search"></i></a>
-										<a href="post_a_job.html" className="add-post">Login</a>
-										<a href="post_a_project.html" className="add-task">Register</a>
+										<NavLink to="/login" className="add-post">Login</NavLink>
+										<NavLink to="/signUp" className="add-task">Register</NavLink>
 									</div>
 									<div className="responsive-search order-1">
 										<input type="text" className="rsp-search" placeholder="Search..." />

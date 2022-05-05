@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {NavLink} from 'react-router-dom';
 
 function MainFooter() {
 
@@ -37,36 +38,32 @@ function MainFooter() {
                         </div>
                         <div className="col-lg-3 col-md-3">
                             <div className="footer-links">
-                                <h4>About</h4>
+                                <h4>Explore</h4>
                                 <ul>
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="sign_in.html">Login</a></li>
-                                    <li><a href="my_freelancer_profile.html">My Account</a></li>
-                                    <li><a href="contact_us.html">Contact</a></li>
-                                    <li><a href="privacy_policy.html">Privacy Policy</a></li>
-                                    <li><a href="Terms.html">Terms of Use</a></li>
+                                    <li><NavLink to="/">Home</NavLink></li>
+                                    <li><a href="sign_in.html">Login / SignUp</a></li>
+                                    <li><a href="my_freelancer_profile.html">Advanced Search</a></li>
+                                    <li><a href="contact_us.html">Sitemap</a></li>
+                                    <li><a href="privacy_policy.html">Create Horoscope</a></li>
+                                    <li><a href="Terms.html">Terms and Conditions</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3">
                             <div className="footer-links">
-                                <h4>For Companies</h4>
+                                <h4>Services Offered</h4>
                                 <ul>
-                                    <li><a href="browse_freelancers.html">Browese Freelancers</a></li>
-                                    <li><a href="post_a_job.html">Post a Job</a></li>
-                                    <li><a href="post_a_project.html">Post a Project</a></li>
-                                    <li><a href="pricing_plans.html">Pricing Plans</a></li>
+                                    <li><NavLink to="/membership_plan">Membership Options</NavLink></li>
+                                    <li><NavLink to="/findMatches">Find Match</NavLink></li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3">
                             <div className="footer-links">
-                                <h4>For Candidates</h4>
+                                <h4>Seeking Help</h4>
                                 <ul>
-                                    <li><a href="browse_jobs.html">Browese Jobs</a></li>
-                                    <li><a href="my_freelancer_jobs.html">Jobs Alerts</a></li>
-                                    <li><a href="my_freelancer_jobs.html">Applied Jobs</a></li>
-                                    <li><a href="my_freelancer_bookmarks.html">Bookmarks</a></li>
+                                    <li><a href="browse_jobs.html">Contact Us</a></li>
+                                    <li><a href="my_freelancer_jobs.html">Feedback / Queries</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,7 +74,7 @@ function MainFooter() {
                         <div className="row">
                             <div className="col-lg-6 col-md-6">
                                 <div className="copyright">
-                                    <i className="far fa-copyright"></i>Copyright 2019 <span>Jobby</span> by <a href="#">Gambolthemes</a>. All Right Reserved.
+                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">NamdeoMatrimonial</a>. All Right Reserved.
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">

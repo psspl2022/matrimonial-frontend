@@ -2,6 +2,7 @@
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { NavLink } from 'react-router-dom';
 
 function LatestMatch() {
 
@@ -333,10 +334,9 @@ function LatestMatch() {
                                 {/* </div> */}
                                 <div className="text-center">
                                     <button
-                                        className="view-links"
-                                        onclick="window.location.href = '#';"
+                                        className="view-links text-white"
                                     >
-                                        BROWSE ALL MATCHES
+                                        <NavLink to='/findMatches'>BROWSE ALL MATCHES</NavLink>
                                     </button>
                                 </div>
                             </div>

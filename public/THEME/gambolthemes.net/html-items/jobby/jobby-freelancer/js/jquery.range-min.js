@@ -3,7 +3,7 @@
 $(window).on("load", function(){
 		$('.rn-slider').jRange({
     from: 0,
-    to: 5000,
+    to: 250000,
     step: 1,
     scale: [],
     format: '%s',
