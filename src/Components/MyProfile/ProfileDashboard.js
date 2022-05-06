@@ -1,60 +1,6 @@
-function MyProfileSection() {
+function ProfileDashboard() {
   return (
     <>
-      <div className="account_heading">
-        <div className="account_hd_left">
-          <h2>Manage Your Account</h2>
-        </div>
-        <div className="account_hd_right">
-          <a href="#" className="main_lg_btn">
-            Logout
-          </a>
-        </div>
-      </div>
-      <div className="account_tabs">
-        <ul className="nav nav-tabs">
-          <li className="nav-item">
-            <a className="nav-link active" href="my_freelancer_dashboard.html">
-              Dashboard
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_profile.html">
-              Basic Details
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_portfolio.html">
-              About Me
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_notifications.html">
-            Education & Career
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_messages.html">
-              Family Details
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_bookmarks.html">
-            Lifestyle
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_jobs.html">
-              Your Likes
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="my_freelancer_setting.html">
-              <i className="fas fa-cog"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
       <div className="total_1254">
         <div className="row">
           <div className="col-lg-4 col-12">
@@ -440,16 +386,16 @@ function MyProfileSection() {
           <div className="col-lg-5">
             <div className="view_chart">
               <div className="view_chart_header">
-                <h4>Order Plans Summery</h4>
+                <h4>Membership Order Plans Summery</h4>
               </div>
               <div className="view_applied_jobs_body">
                 <ul className="all_paid_plans scrollstyle_4">
                   <li>
                     <div className="plan_dts">
                       <div className="plan_dt_left">
-                        <h4>Professional Plans</h4>
+                        <h4>Gold Plans</h4>
                         <p>Order No : #12345</p>
-                        <p>Date : 10 October 2018</p>
+                        <p>Date : 10 March 2022</p>
                       </div>
                       <div className="plan_dt_right">
                         <button className="paid_btn">Paid</button>
@@ -459,33 +405,9 @@ function MyProfileSection() {
                   <li>
                     <div className="plan_dts">
                       <div className="plan_dt_left">
-                        <h4>Professional Plans</h4>
+                        <h4>Silver Plans</h4>
                         <p>Order No : #12358</p>
-                        <p>Date : 10 September 2018</p>
-                      </div>
-                      <div className="plan_dt_right">
-                        <button className="paid_btn">Paid</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="plan_dts">
-                      <div className="plan_dt_left">
-                        <h4>Professional Plans</h4>
-                        <p>Order No : #12358</p>
-                        <p>Date : 10 August 2018</p>
-                      </div>
-                      <div className="plan_dt_right">
-                        <button className="paid_btn">Paid</button>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="plan_dts">
-                      <div className="plan_dt_left">
-                        <h4>Professional Plans</h4>
-                        <p>Order No : #12365</p>
-                        <p>Date : 10 July 2018</p>
+                        <p>Date : 10 February 2022</p>
                       </div>
                       <div className="plan_dt_right">
                         <button className="paid_btn">Paid</button>
@@ -502,4 +424,4 @@ function MyProfileSection() {
   );
 }
 
-export default MyProfileSection;
+export default ProfileDashboard;

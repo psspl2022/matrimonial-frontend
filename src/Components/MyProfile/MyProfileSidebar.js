@@ -3,7 +3,7 @@ function MyProfileSidebar() {
     <>
       <div className="account_dt_left">
         <div className="job-center-dt">
-          <img src="images/homepage/candidates/img-1.jpg" alt="" />
+          <img src="profile1.jpeg" alt="" />
           <div className="job-urs-dts">
             <div className="dp_upload">
               <input type="file" id="file" />
@@ -12,9 +12,9 @@ function MyProfileSidebar() {
             <h4>John Doe</h4>
             {/* <span>UX Designer</span> */}
             <div className="avialable">
-              Available Full Time
+              Active Now
               <a href="#">
-                <i className="far fa-edit"></i>
+              <i style={{ fontSize:'13px', color:'green' }} className="fa">&#xf111;</i>
               </a>
             </div>
           </div>
@@ -23,7 +23,7 @@ function MyProfileSidebar() {
           <ul>
           <li>
               <a href="#" className="web_link">
-                <i className="fas fa-globe"></i>Current Membership Plan
+                <i className="fas fa-globe"></i>Current Membership Plan: <span style={{color:'brown'}}>Gold</span>
               </a>
             </li>
             {/* <li>
@@ -72,7 +72,7 @@ function MyProfileSidebar() {
             </div>
           </div>
         </div> */}
-        <div className="rlt_section">
+        {/* <div className="rlt_section">
           <div className="rtl_left">
             <h6>Location</h6>
           </div>
@@ -83,7 +83,7 @@ function MyProfileSidebar() {
           </div>
           <div className="my_location">
             <div id="map"></div>
-          </div>
+          </div> */}
           {/* <ul className="rlt_section2">
             <li>
               <div className="rtl_left2">
@@ -118,7 +118,7 @@ function MyProfileSidebar() {
               </div>
             </li>
           </ul> */}
-        </div>
+        {/* </div> */}
         <div className="social_section3 mb80">
           <div className="social_leftt3">
             <h6>Contact Social Account</h6>

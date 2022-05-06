@@ -156,6 +156,9 @@ transform:scale(0);
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.edit-icon:hover{
+  color: #ff0049;
+}
 
 @media screen and (max-width:768px){
  .wrapper{

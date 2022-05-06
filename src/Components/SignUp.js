@@ -9,7 +9,6 @@ function SignUp() {
   const [verified, setverified] = useState(false);
 
   function onChange(value){
-    console.log("Captcha value ",value);
     setverified(true);
   }
   return (

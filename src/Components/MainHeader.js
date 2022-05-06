@@ -144,12 +144,12 @@ function MainHeader() {
 														<i className="fas fa-sort-down"></i>
 													</a>
 													<div className="dropdown-menu account-dropdown dropdown-menu-right" aria-labelledby="dropdownAccountLink">
-														<NavLink className="link-item" to="/myprofile">Dashboard</NavLink>
-														<a className="link-item" href="my_freelancer_setting.html">Setting</a>
+														<NavLink className="link-item" to="/myprofile">My Profile</NavLink>
+														{/* <a className="link-item" href="my_freelancer_setting.html">Setting</a>
 														<a className="link-item" href="my_freelancer_messages.html">My Messages</a>
 														<a className="link-item" href="my_freelancer_portfolio.html">My Portfolio</a>
 														<a className="link-item" href="my_freelancer_bookmarks.html">My Bookmarks</a>
-														<a className="link-item" href="my_freelancer_payments.html">Payments</a>
+														<a className="link-item" href="my_freelancer_payments.html">Payments</a> */}
 														<a className="link-item" href="sign_in.html">Logout</a>
 													</div>
 												</div>

@@ -10,7 +10,8 @@ import SearchMatches from './Components/SearchMatches';
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
-import MyProfile from './Components/MyProfile';
+import MyProfile from './Components/MyProfile/MyProfile';
+import PageNotFound from './Components/404-page';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             <MyProfile />
             <MainFooter />
           </Route>
+          <Route component={PageNotFound}></Route>
         </Switch>
       </BrowserRouter>
     </div>
