@@ -12,6 +12,10 @@ import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
 import MyProfile from './Components/MyProfile/MyProfile';
 import PageNotFound from './Components/404-page';
+import RegisterHeader from './Components/Registration/RegisterHeader';
+import RegistrationStage from './Components/Registration/RegistrationStage';
+import CareerStage from './Components/Registration/CareerStage';
+import FamilyStage from './Components/Registration/FamilyStage';
 
 function App() {
   return (
@@ -44,6 +48,21 @@ function App() {
           <Route path="/forgetPassword" exact>
             <MainHeader />
             <ForgetPassword />
+            <MainFooter />
+          </Route>
+          <Route path="/registrationStage" exact>
+            <RegisterHeader />
+            <RegistrationStage />
+            <MainFooter />
+          </Route>
+          <Route path="/careerStage" exact>
+            <MainHeader />
+            <CareerStage />
+            <MainFooter />
+          </Route>
+          <Route path="/familyStage" exact>
+            <MainHeader />
+            <FamilyStage />
             <MainFooter />
           </Route>
           <Route path="/myprofile" exact>

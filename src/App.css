@@ -160,6 +160,10 @@ transform:scale(0);
   color: #ff0049;
 }
 
+#registration_header li:hover{
+  color: #ff0049;
+}
+
 @media screen and (max-width:768px){
  .wrapper{
       grid-template-columns: repeat(2,1fr);

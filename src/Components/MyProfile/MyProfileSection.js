@@ -1,5 +1,8 @@
 import { useState } from "react";
+import AboutMe from "./AboutMe";
 import BasicDetails from "./BasicDetails";
+import ContactDetails from "./ContactDetails";
+import FamilyDetails from "./FamilyDetails";
 import ProfileDetails from "./ProfileDashboard";
 
 function MyProfileSection() {
@@ -55,7 +58,7 @@ function MyProfileSection() {
             </button>
           </li>
           <li className="nav-item">
-          <button className={` nav-link ${ TabName==='family'?'active':'' }`} onClick={()=>{
+          <button className={` nav-link ${ TabName==='contact'?'active':'' }`} onClick={()=>{
               setTabName('contact');
             }}>
               Contact Details
@@ -84,6 +87,9 @@ function MyProfileSection() {
       </div>
       { TabName==='dashboard' && <ProfileDetails /> }
       { TabName==='basic' && <BasicDetails /> }
+      { TabName==='aboutme' && <AboutMe /> }
+      { TabName==='family' && <FamilyDetails /> }
+      { TabName==='contact' && <ContactDetails /> }
     </>
   );
 }

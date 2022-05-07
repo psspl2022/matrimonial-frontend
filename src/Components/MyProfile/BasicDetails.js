@@ -34,10 +34,11 @@ export default function BasicDetails() {
             <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade show active" id="my_profile" role="tabpanel">
                     <div className="view_chart">
-                        <div className="view_chart_header">
-                            <h4>My Profile </h4><span className="float-right edit-icon" onClick={()=>{ setEdit(!Edit) }}><i className="fas fa-edit fa-2x"></i></span>
+                        <div className="view_chart_header d-flex justify-content-between">
+                            <span><h2>My Profile </h2></span><span className="float-right edit-icon" onClick={()=>{ setEdit(!Edit) }}><i className="fas fa-edit fa-2x"></i><div>Edit</div></span>
                         </div>
                         <div className="post_job_body">
+                        
                             <form>
                                 <div className="row">
                                     {/* <div className="col-lg-12">
@@ -146,7 +147,7 @@ export default function BasicDetails() {
                                             <input type="text" className="job-input" placeholder="Your Gender" disabled={ Edit==false ? 'disabled' : ''} />
                                         </div>
                                     </div>
-                                    <div className="col-lg-6">
+                                    {/* <div className="col-lg-6">
                                         <div className="form-group">
                                             <label className="label15">Annual Income</label>
                                             <Select
@@ -161,7 +162,7 @@ export default function BasicDetails() {
                                                 isDisabled={ !Edit }
                                             />
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label className="label15">Sect</label>
