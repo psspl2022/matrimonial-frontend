@@ -8,9 +8,9 @@ function MainHeader() {
 	// Sticky Menu Area
 	useEffect(() => {
 		window.addEventListener('scroll', isSticky);
-		return () => {
-			window.removeEventListener('scroll', isSticky);
-		};
+		// return () => {
+		// 	window.removeEventListener('scroll', isSticky);
+		// };
 	});
 
 		   
