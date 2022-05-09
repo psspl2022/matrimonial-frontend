@@ -4,9 +4,7 @@ import CareerStage from "./CareerStage";
 import FamilyStage from "./FamilyStage";
 
 
-
 function RegistrationStage() {
-
   const [TabName, setTabName] = useState('profile');
 
   

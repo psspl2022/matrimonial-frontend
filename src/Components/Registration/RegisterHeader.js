@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import "../../App.css";
+import { useSelector, useDispatch } from 'react-redux';
+import { ACTIVE } from '../../actions/index';
 
 function RegisterHeader() {
+	const activeState = useSelector((state) => state.changeActiveLink);
+	const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
 	// Sticky Menu Area
@@ -33,13 +37,13 @@ function RegisterHeader() {
 									<NavLink className="order-lg-0 ml-lg-0 ml-3" to="/"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></NavLink>
 									<div className="d-flex flex-row justify-content-end mx-auto bg-dark1 p-3 p-lg-0 mt-lg-0" id="navbarSupportedContent">
 										<ul className="navbar-nav align-self-stretch">
-											<li className="nav-item">Profile Details
+											<li className={`nav-item ${activeState == 'profile' ? 'theme-fontcolor' : ''}`}>Profile Details 
 												{/* <NavLink className="nav-link" to="/" >Home</NavLink> */}
 											</li>
-											<li className="nav-item">Career Details
+											<li className={`nav-item ${activeState == 'career' ? 'theme-fontcolor' : ''}`}>Career Details
 												{/* <NavLink to="/findMatches" className="nav-link" >Find Matches</NavLink> */}
 											</li>
-											<li className="nav-item">Lifestyle & Family
+											<li className={`nav-item ${activeState == 'family' ? 'theme-fontcolor' : ''}`}>Lifestyle & Family
 												{/* <NavLink to="/help" className="nav-link" role="button">Help</NavLink> */}
 											</li>
 										</ul>

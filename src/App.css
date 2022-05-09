@@ -8,6 +8,10 @@ body{
   font-size: 14px;
 
 }
+
+.theme-fontcolor{
+  color: #ff0049;
+}
 .membership-plan .plan-heading{
   /* width: 100%; */
 	text-align: center;
