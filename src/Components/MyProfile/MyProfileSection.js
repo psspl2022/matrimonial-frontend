@@ -4,6 +4,8 @@ import BasicDetails from "./BasicDetails";
 import ContactDetails from "./ContactDetails";
 import EducationDetails from "./EducationDetails";
 import FamilyDetails from "./FamilyDetails";
+import LifeStyleDetails from "./LifeStyleDetails";
+import LikesDetails from "./LikesDetails";
 import ProfileDetails from "./ProfileDashboard";
 
 function MyProfileSection() {
@@ -92,6 +94,8 @@ function MyProfileSection() {
       { TabName==='education' && <EducationDetails /> }
       { TabName==='family' && <FamilyDetails /> }
       { TabName==='contact' && <ContactDetails /> }
+      { TabName==='lifestyle' && <LifeStyleDetails /> }
+      { TabName==='likes' && <LikesDetails /> }
     </>
   );
 }
