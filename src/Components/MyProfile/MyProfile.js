@@ -1,7 +1,12 @@
 import MyProfileSection from "./MyProfileSection";
 import MyProfileSidebar from "./MyProfileSidebar";
+import { useEffect } from "react";
 
 function MyProfile() {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <main className="browse-section">

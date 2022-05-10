@@ -1,9 +1,12 @@
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { useEffect } from 'react';
 
 function Banner() {
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
     
   const options = {
     margin: 10,

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from "react-select";
@@ -8,6 +8,10 @@ import Select from "react-select";
 
 function SignUp() {
   
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // const navigate = useNavigate();
   const [verified, setverified] = useState(false);
 

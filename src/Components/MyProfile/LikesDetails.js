@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
@@ -30,6 +30,8 @@ const maritalOptions = [
 
 export default function LifeStyleDetails() {
   const [Edit, setEdit] = useState(false);
+  
+
   return (
     <>
       <div className="tab-content" id="myTabContent">

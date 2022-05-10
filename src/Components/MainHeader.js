@@ -12,6 +12,7 @@ function MainHeader() {
 		// 	window.removeEventListener('scroll', isSticky);
 		// };
 	});
+	
 
 		   
 	/* Method that will fix header after a specific scrollable */
@@ -170,7 +171,7 @@ function MainHeader() {
 									<button className="navbar-toggler align-self-start" onClick={()=>setShow(!show)} type="button">
 										<i className="fas fa-bars"></i>
 									</button>
-									<div onBlur={()=>setShow(false)} className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${show ? "open" : ""}` } id="navbarSupportedContent" >
+									<div onBlur={(e)=>setShow(false)} className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${show ? "open" : ""}` } id="navbarSupportedContent" >
 										<ul className="navbar-nav align-self-stretch">
 											<li className="nav-item">
 												<NavLink className="nav-link" to="/" >Home</NavLink>

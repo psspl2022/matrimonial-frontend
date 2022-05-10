@@ -1,7 +1,12 @@
 import SearchFilters from "./SearchFilters";
 import SearchResult from "./SearchResult";
+import { useEffect } from "react";
 
 export default function SearchMatches() {
+    
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
     return (
         <>
             <main class="browse-section">

@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Login() {
     
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+
   const [verified, setverified] = useState(false);
 
     function onChange(value){
