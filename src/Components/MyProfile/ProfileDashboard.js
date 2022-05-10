@@ -243,7 +243,7 @@ function ProfileDashboard() {
       </div>
       <div className="dsh150">
         <div className="row">
-          <div className="col-lg-7">
+          {/* <div className="col-lg-7">
             <div className="view_chart">
               <div className="view_chart_header">
                 <h4>Applied Jobs</h4>
@@ -382,7 +382,7 @@ function ProfileDashboard() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-lg-5">
             <div className="view_chart">
               <div className="view_chart_header">

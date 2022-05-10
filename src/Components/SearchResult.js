@@ -74,7 +74,7 @@ export default function SearchResult() {
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-center">
                                                 <img
-                                                    src={ process.env.PUBLIC_URL + "/profile0.jpeg" }
+                                                    src={ process.env.PUBLIC_URL + "/profile1.jpg" }
                                                     alt="" style={{maxHeight:'220px'}}
                                                 />
                                         </div>
@@ -120,7 +120,7 @@ export default function SearchResult() {
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-center">
                                                 <img
-                                                    src={ process.env.PUBLIC_URL + "/profile0.jpeg" }
+                                                    src={ process.env.PUBLIC_URL + "/profile3.jpg" }
                                                     alt="" style={{maxHeight:'220px'}}
                                                 />
                                         </div>

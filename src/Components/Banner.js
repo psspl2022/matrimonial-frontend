@@ -171,16 +171,16 @@ function Banner() {
                         <div className="col-lg-4 col-md-3 col-12">
                             <div className="form-group mb-0">
                                 <input
-                                    className="search-1"
+                                    className="search-1 text-dark"
                                     type="text"
-                                    placeholder="Keywords (e.g. Job Title, Position...)"
+                                    placeholder="Keywords (e.g. Name, Caste...)"
                                 />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-12">
                             <div className="form-group mb-0 mt-15">
                                 <input
-                                    className="search-1"
+                                    className="search-1 text-dark"
                                     type="text"
                                     placeholder="Location (e.g. City, Country...)"
                                 />
@@ -189,9 +189,9 @@ function Banner() {
                         <div className="col-lg-3 col-md-3 col-12 mt-15">
                             <div className="form-group mb-0">
                                 <input
-                                    className="search-1"
+                                    className="search-1 text-dark"
                                     type="text"
-                                    placeholder="Industry (e.g. Design, Art...)"
+                                    placeholder="Industry (e.g. Engineer, Accountant...)"
                                 />
                             </div>
                         </div>

@@ -139,8 +139,8 @@ function MainHeader() {
 											<li>
 												<div className="account order-1 dropdown">
 													<a href="#" className="account-link dropdown-toggle-no-caret" role="button" id="dropdownAccountLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-														<div className="user-dp"><img src="images/dp.jpg" alt="" /></div>
-														<span>Hi! Ankit</span>
+														<div className="user-dp"><img src="profile2.jpg" alt="" /></div>
+														<span>Hi! Kartik</span>
 														<i className="fas fa-sort-down"></i>
 													</a>
 													<div className="dropdown-menu account-dropdown dropdown-menu-right" aria-labelledby="dropdownAccountLink">
@@ -170,7 +170,7 @@ function MainHeader() {
 									<button className="navbar-toggler align-self-start" onClick={()=>setShow(!show)} type="button">
 										<i className="fas fa-bars"></i>
 									</button>
-									<div className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${show ? "open" : ""}` } id="navbarSupportedContent">
+									<div onBlur={()=>setShow(false)} className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${show ? "open" : ""}` } id="navbarSupportedContent" >
 										<ul className="navbar-nav align-self-stretch">
 											<li className="nav-item">
 												<NavLink className="nav-link" to="/" >Home</NavLink>
@@ -186,16 +186,16 @@ function MainHeader() {
 											<li className="nav-item dropdown">
 												<a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Search</a>
 												<div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_projects.html">Browse Projects</a>
-													<a className="link-item" href="project_single_view.html">Single Project View</a>
-													<a className="link-item" href="post_a_project.html">Post a Project</a>
+													<a className="link-item" href="browse_projects.html">Browse Matches</a>
+													<a className="link-item" href="project_single_view.html">Single Match View</a>
+													{/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
 												</div>
 											</li>
 											<li className="nav-item dropdown">
 												<a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Upgrade Plan</a>
 												<div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_companies.html">Browse Companies</a>
-													<a className="link-item" href="other_company_profile.html">Company Profile</a>
+													<a className="link-item" href="browse_companies.html">Browse Plans</a>
+													<a className="link-item" href="other_company_profile.html">Membership Plan History</a>
 												</div>
 											</li>
 											<li className="nav-item">

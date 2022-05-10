@@ -41,8 +41,8 @@ function MainFooter() {
                                 <h4>Explore</h4>
                                 <ul>
                                     <li><NavLink to="/">Home</NavLink></li>
-                                    <li><a href="sign_in.html">Login / SignUp</a></li>
-                                    <li><a href="my_freelancer_profile.html">Advanced Search</a></li>
+                                    <li><NavLink to="/signUp">Login / SignUp</NavLink></li>
+                                    <li><NavLink to="/findMatches">Advanced Search</NavLink></li>
                                     <li><a href="contact_us.html">Sitemap</a></li>
                                     <li><a href="privacy_policy.html">Create Horoscope</a></li>
                                     <li><a href="Terms.html">Terms and Conditions</a></li>
@@ -74,7 +74,7 @@ function MainFooter() {
                         <div className="row">
                             <div className="col-lg-6 col-md-6">
                                 <div className="copyright">
-                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">NamdeoMatrimonial</a>. All Right Reserved.
+                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">Namdeo Matrimonial</a>. All Right Reserved.
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">

@@ -60,7 +60,7 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile1.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile1.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                 </div>
@@ -105,7 +105,7 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile2.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile2.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                 </div>
@@ -150,12 +150,12 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile3.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile4.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                 </div>
                                                 <div className="job-des-dt">
-                                                    <h4>Doraemon Bhandari</h4>
+                                                    <h4>Jyoti Rawat</h4>
                                                     <p>
                                                         Lorem ipsum dolor sit amet, consectetur adipiscing
                                                         elit. Etiam cursus pulvinar dolor nec...
@@ -195,7 +195,7 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile4.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile3.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                 </div>
@@ -240,7 +240,7 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile5.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile5.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                 </div>
@@ -285,12 +285,12 @@ function LatestMatch() {
                                             <div className="job-item">
                                                 <div className="job-top-dt">
                                                         <img
-                                                            src={ process.env.PUBLIC_URL + "/profile1.jpeg" }
+                                                            src={ process.env.PUBLIC_URL + "/profile1.jpg" }
                                                             alt="" style={{maxHeight:'220px'}}
                                                         />
                                                     <div className="job-right-dt">
                                                         {/* <div className="job-price">$60/hr</div> */}
-                                                        <div className="job-fp">Verified</div>
+                                                        {/* <div className="job-fp">Verified</div> */}
                                                     </div>
                                                 </div>
                                                 <div className="job-des-dt">
@@ -336,7 +336,7 @@ function LatestMatch() {
                                     <button
                                         className="view-links text-white"
                                     >
-                                        <NavLink to='/findMatches'>BROWSE ALL MATCHES</NavLink>
+                                        <NavLink to='/findMatches' className="text-white">BROWSE ALL MATCHES</NavLink>
                                     </button>
                                 </div>
                             </div>

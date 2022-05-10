@@ -1,4 +1,5 @@
 import "../App.css";
+import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 
 export default function MembershipPlan() {
   return (
@@ -32,9 +33,9 @@ export default function MembershipPlan() {
                 </li>
               </ul>
               <div className="sign-up">
-                <a href="#" className="btn bordered radius">
+                <NavLink to="/signUp" className="btn bordered radius">
                   Signup Now
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -57,9 +58,9 @@ export default function MembershipPlan() {
                 </li>
               </ul>
               <div className="sign-up">
-                <a href="#" className="btn bordered radius">
+                <NavLink to="/signUp" className="btn bordered radius">
                   Signup Now
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>
@@ -80,9 +81,9 @@ export default function MembershipPlan() {
                 <li>Make your contacts visible to others</li>
               </ul>
               <div className="sign-up">
-                <a href="#" className="btn bordered radius">
+                <NavLink to="/signUp" className="btn bordered radius">
                   Signup Now
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>

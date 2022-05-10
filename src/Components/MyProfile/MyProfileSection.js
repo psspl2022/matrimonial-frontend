@@ -2,6 +2,7 @@ import { useState } from "react";
 import AboutMe from "./AboutMe";
 import BasicDetails from "./BasicDetails";
 import ContactDetails from "./ContactDetails";
+import EducationDetails from "./EducationDetails";
 import FamilyDetails from "./FamilyDetails";
 import ProfileDetails from "./ProfileDashboard";
 
@@ -88,6 +89,7 @@ function MyProfileSection() {
       { TabName==='dashboard' && <ProfileDetails /> }
       { TabName==='basic' && <BasicDetails /> }
       { TabName==='aboutme' && <AboutMe /> }
+      { TabName==='education' && <EducationDetails /> }
       { TabName==='family' && <FamilyDetails /> }
       { TabName==='contact' && <ContactDetails /> }
     </>

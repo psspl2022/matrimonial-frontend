@@ -12,6 +12,7 @@ function SignUp() {
   const [verified, setverified] = useState(false);
 
   const [profileFor, setProfileFor] = useState("Self");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpass, setCPass] = useState("");
   const [pass, setPass] = useState("");
@@ -38,24 +39,34 @@ function SignUp() {
     const formData = new FormData()
 
     formData.append('for', profileFor)
+    formData.append('name', name)
     formData.append('email', email)
     formData.append('confirm-password', cpass)
     formData.append('password', pass)
     formData.append('contact', phno)
 
-    await axios.post(`http://localhost:8000/api/register`, formData).then(({data})=>{
+    await axios.post(`${window.Url}api/register`, formData).then(({data})=>{
+      if (data.hasOwnProperty('msg')) {
+        Swal.fire({
+          icon:"success",
+          text:data.msg
+        })
+    }
+    else{
       Swal.fire({
-        icon:"success",
-        text:data.msg
+        icon:"error",
+        text:"Check Your Fields Properly"
       })
+    }
+      
+      // console.log(data);
       // navigate("/")
-      console.log(data);
-    }).catch(({response})=>{
-      if(response.status===422){
-        setValidationError(response.data.errors)
+    }).catch(({data})=>{
+      if(data.hasOwnProperty('errors')){
+        setValidationError(data.errors)
       }else{
         Swal.fire({
-          text:response.data.message,
+          text:data.errors,
           icon:"error"
         })
       }
@@ -71,12 +82,12 @@ function SignUp() {
               <div className="lg_form">
                 <div className="main-heading">
                   <h2>Sign Up to {window.AppName}</h2>
-                  <div className="line-shape1">
+                  {/* <div className="line-shape1">
                     <img src="images/line.svg" alt="" />
-                  </div>
+                  </div> */}
                 </div>
                 <form onSubmit={registerUser}>
-                  <div className="form-group">
+                  <div className="form-group mt-0">
                     <label className="label15">Profile For*</label>
                     <Select
                       className="basic-single"
@@ -90,6 +101,20 @@ function SignUp() {
                     />
                   </div>
                   <div className="form-group">
+                    <label className="label15">Full Name*</label>
+                    <input
+                      type="text"
+                      className="job-input"
+                      placeholder="Enter Full Name"
+                      name="name"
+                      value={name} 
+                      onChange={(event)=>{
+                        setName(event.target.value)
+                      }}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
                     <label className="label15">Email Address*</label>
                     <input
                       type="email"
@@ -100,13 +125,14 @@ function SignUp() {
                       onChange={(event)=>{
                         setEmail(event.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div className="form-group">
                     <label className="label15">Phone Number*</label>
                     <input type="tel" id="phone" name="phno" className="job-input" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
                               setPhno(event.target.value)
-                            }} />
+                            }} required />
                   </div>
                   <div className="form-group">
                     <label className="label15">Password*</label>
@@ -119,6 +145,7 @@ function SignUp() {
                       onChange={(event)=>{
                         setPass(event.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div className="form-group mb-4">
@@ -132,6 +159,7 @@ function SignUp() {
                       onChange={(event)=>{
                         setCPass(event.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div>
@@ -150,6 +178,7 @@ function SignUp() {
                       tabindex="0"
                       className=""
                       id="tandc"
+                      required
                     />
                     <label
                       style={{ color: "#242424 !important" }}

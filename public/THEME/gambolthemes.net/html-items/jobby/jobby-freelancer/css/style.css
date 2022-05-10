@@ -1333,7 +1333,7 @@ span.right-cm {
 }
 
 .job-top-dt {
-	padding: 20px;
+	padding: 20px 10px;
 	width: 100%;
 	float: left;
 }
@@ -1662,8 +1662,8 @@ span.right-cm {
 }
 
 .job-center-dt img {
-    width: 110px !important;
-    height: 110px;
+    width: 180px !important;
+    height: 180px;
 	margin-bottom: 28px;
     border-radius: 100%;
     display: inline-block !important;

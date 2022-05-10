@@ -56,11 +56,11 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/homepage/candidates/img-1.jpg" }
+                            src="successmatch1.jpg"
                             alt=""
                           />
                           <div className="job-urs-dts">
-                            <a href="#"><h4>John Doe</h4></a>
+                            <a href="#"><h4>Anjali & Akash</h4></a>
                             {/* <span>UX Designer</span> */}
                             <div className="avialable">Marriage Date 23rd December 2021</div>
                           </div>
@@ -118,11 +118,11 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/homepage/candidates/img-2.jpg" }
+                            src="successmatch2.jpg"
                             alt=""
                           />
                           <div className="job-urs-dts">
-                            <a href="#"><h4>Albert Dua</h4></a>
+                            <a href="#"><h4>Ankit & Silpi</h4></a>
                             {/* <span>Wordpress Developer</span> */}
                             <div className="avialable">Marriage Date 23rd December 2021</div>
                           </div>
@@ -180,11 +180,11 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/homepage/candidates/img-3.jpg" }
+                            src="successmatch3.jpg"
                             alt=""
                           />
                           <div className="job-urs-dts">
-                            <a href="#"><h4>Rock William</h4></a>
+                            <a href="#"><h4>Rajan & Naina</h4></a>
                             {/* <span>Php Developer</span> */}
                             <div className="avialable">Marriage Date 23rd December 2021</div>
                           </div>

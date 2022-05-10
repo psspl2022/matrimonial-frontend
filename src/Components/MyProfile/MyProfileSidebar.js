@@ -3,13 +3,13 @@ function MyProfileSidebar() {
     <>
       <div className="account_dt_left">
         <div className="job-center-dt">
-          <img src="profile1.jpeg" alt="" />
+          <img src="profile2.jpg" alt="" />
           <div className="job-urs-dts">
             <div className="dp_upload">
               <input type="file" id="file" />
               <label htmlFor="file">Upload Photo</label>
             </div>
-            <h4>John Doe</h4>
+            <h4>Kartik Aryan</h4>
             {/* <span>UX Designer</span> */}
             <div className="avialable">
               Active Now
