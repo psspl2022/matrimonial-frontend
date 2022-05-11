@@ -16,7 +16,7 @@ function SignUp() {
   const [verified, setverified] = useState(false);
 
   const [profileFor, setProfileFor] = useState("Self");
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpass, setCPass] = useState("");
   const [pass, setPass] = useState("");
@@ -43,7 +43,7 @@ function SignUp() {
     const formData = new FormData()
 
     formData.append('for', profileFor)
-    formData.append('name', name)
+    // formData.append('name', name)
     formData.append('email', email)
     formData.append('confirm-password', cpass)
     formData.append('password', pass)
@@ -104,7 +104,7 @@ function SignUp() {
                       options={profileForOptions}
                     />
                   </div>
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label className="label15">Full Name*</label>
                     <input
                       type="text"
@@ -117,7 +117,7 @@ function SignUp() {
                       }}
                       required
                     />
-                  </div>
+                  </div> */}
                   <div className="form-group">
                     <label className="label15">Email Address*</label>
                     <input

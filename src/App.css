@@ -12,6 +12,9 @@ body{
 .theme-fontcolor{
   color: #ff0049;
 }
+.find-lts-jobs{
+  background-color: #fff;
+}
 .membership-plan .plan-heading{
   /* width: 100%; */
 	text-align: center;

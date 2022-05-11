@@ -2,6 +2,8 @@ import { useState } from "react";
 import ProfileStage from "./ProfileStage";
 import CareerStage from "./CareerStage";
 import FamilyStage from "./FamilyStage";
+import PhoneStage from "./PhoneStage";
+import ProfileImageStage from "./ProfileImageStage";
 
 
 function RegistrationStage() {
@@ -19,6 +21,8 @@ function RegistrationStage() {
                 { TabName==='profile' && <ProfileStage /> }
                 { TabName==='career' && <CareerStage /> }
                 { TabName==='family' && <FamilyStage /> }
+                { TabName==='phone' && <PhoneStage /> }
+                { TabName==='profile1' && <ProfileImageStage /> }
               </div>
             </div>
           </div>

@@ -1,12 +1,16 @@
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
 function CareerStage() {
 
   const [verified, setverified] = useState(false);
+    
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   function onChange(value){
     setverified(true);

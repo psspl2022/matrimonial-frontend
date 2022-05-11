@@ -30,14 +30,8 @@ export default function AboutMe() {
                                     </div>
                                     <div className="col-12">
                                         <div className="form-group">
-                                            <label className="label15">About My Education</label>
+                                            <label className="label15">About My Education & Career</label>
                                             <textarea className="w-100 p-2" rows={7} placeholder="Write About Your Education" disabled={ Edit==false ? 'disabled' : ''} ></textarea>
-                                        </div>
-                                    </div>
-                                    <div className="col-12">
-                                        <div className="form-group">
-                                            <label className="label15">About My Career</label>
-                                            <textarea className="w-100 p-2" rows={7} placeholder="Write About Your Career" disabled={ Edit==false ? 'disabled' : ''} ></textarea>
                                         </div>
                                     </div>
                                         
