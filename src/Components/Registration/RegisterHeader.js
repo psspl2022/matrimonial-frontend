@@ -43,7 +43,7 @@ function RegisterHeader() {
 											<li className={`nav-item ${activeState == 'career' ? 'theme-fontcolor' : ''}`}>Career Details
 												{/* <NavLink to="/findMatches" className="nav-link" >Find Matches</NavLink> */}
 											</li>
-											<li className={`nav-item ${activeState == 'family' ? 'theme-fontcolor' : ''}`}>Lifestyle & Family
+											<li className={`nav-item ${activeState == 'family' || activeState == 'phone' || activeState == 'profileimg' ? 'theme-fontcolor' : ''}`}>Lifestyle & Family
 												{/* <NavLink to="/help" className="nav-link" role="button">Help</NavLink> */}
 											</li>
 										</ul>

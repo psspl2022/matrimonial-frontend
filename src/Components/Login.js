@@ -38,6 +38,7 @@ function Login() {
             icon: "success",
             text: data.msg,
           });
+          window.localStorage.setItem('access_token', data.token);
           history.replace("/registrationStage");
         //   return <Redirect to='/registrationStage' />
         } else {

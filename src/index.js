@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 store.subscribe(() => console.log(store.getState()));
 
 window.AppName = "Namdeo Matrimonial";
-window.Url = "http://192.168.0.112:8000/";
+window.Url = "http://127.0.0.1:8000/";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

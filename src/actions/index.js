@@ -1,5 +1,6 @@
-export const regActiveLink = () => {
+export const regActiveLink = (activestatus) => {
     return {
-        type : "ACTIVE"
+        type : "ACTIVE",
+        payload : activestatus
     }
 }
