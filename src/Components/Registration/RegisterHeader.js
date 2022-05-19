@@ -37,13 +37,14 @@ function RegisterHeader() {
 									<NavLink className="order-lg-0 ml-lg-0 ml-3" to="/"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></NavLink>
 									<div className="d-flex flex-row justify-content-end mx-auto bg-dark1 p-3 p-lg-0 mt-lg-0" id="navbarSupportedContent">
 										<ul className="navbar-nav align-self-stretch">
+											<li className={`nav-item ${activeState == 'otp' ? 'theme-fontcolor' : ''}`}>Gmail verification 
+											</li>
 											<li className={`nav-item ${activeState == 'profile' ? 'theme-fontcolor' : ''}`}>Profile Details 
-												{/* <NavLink className="nav-link" to="/" >Home</NavLink> */}
 											</li>
 											<li className={`nav-item ${activeState == 'career' ? 'theme-fontcolor' : ''}`}>Career Details
 												{/* <NavLink to="/findMatches" className="nav-link" >Find Matches</NavLink> */}
 											</li>
-											<li className={`nav-item ${activeState == 'family' || activeState == 'phone' || activeState == 'profileimg' ? 'theme-fontcolor' : ''}`}>Lifestyle & Family
+											<li className={`nav-item ${activeState == 'family' || activeState == 'profileimg' ? 'theme-fontcolor' : ''}`}>Lifestyle & Family
 												{/* <NavLink to="/help" className="nav-link" role="button">Help</NavLink> */}
 											</li>
 										</ul>

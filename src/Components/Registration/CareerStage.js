@@ -5,12 +5,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
+import { useHistory } from "react-router-dom";
 
 
 
 function CareerStage() {
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [verified, setverified] = useState(false);
   const [highest, setHighest] = useState([]);
@@ -33,7 +35,7 @@ function CareerStage() {
     window.scrollTo(0, 0)
   }, [])
 
-  const token = window.localStorage.getItem('access_token');
+  const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
     headers: {
       'authorization': 'Bearer ' + token,
@@ -85,7 +87,7 @@ function CareerStage() {
     formData.append('income', income.value)
     formData.append('express_yourself', desc)
 
-    const token = window.localStorage.getItem('access_token');
+    const token = window.sessionStorage.getItem('access_token');
     const headers_param = {
       headers: {
           'authorization': 'Bearer '+token,
@@ -101,6 +103,7 @@ function CareerStage() {
           text:data.msg
         })
         dispatch(regActiveLink('family'));
+        history.go(0);
     }
     else{
       Swal.fire({

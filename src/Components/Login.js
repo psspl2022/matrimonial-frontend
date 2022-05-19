@@ -38,7 +38,8 @@ function Login() {
             icon: "success",
             text: data.msg,
           });
-          window.localStorage.setItem('access_token', data.token);
+          window.sessionStorage.setItem('access_token', data.token);
+          window.sessionStorage.setItem('user_data',JSON.stringify(data.user));
           history.replace("/registrationStage");
         //   return <Redirect to='/registrationStage' />
         } else {

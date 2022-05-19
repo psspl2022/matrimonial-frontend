@@ -16,7 +16,7 @@ function RegistrationStage() {
   
   // dispatch(regActiveLink('career'));
 
-  const token = window.localStorage.getItem('access_token');
+  const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
     headers: {
       'authorization': 'Bearer ' + token,
@@ -30,10 +30,10 @@ function RegistrationStage() {
    .then(async({ data }) => {
     setTabName(() => {
       switch(data[0].stage_no){
-        case 1: return 'profile' ;
-        case 2: return 'career' ;
-        case 3: return 'family' ;
-        case 4: return 'phone' ;
+        case 1: return 'otp' ;
+        case 2: return 'profile' ;
+        case 3: return 'career' ;
+        case 4: return 'family' ;
         case 5: return 'profileimg' ;
         default : return 'profile';
       }
@@ -56,7 +56,7 @@ function RegistrationStage() {
                 { TabName==='profile' && <ProfileStage /> }
                 { TabName==='career' && <CareerStage /> }
                 { TabName==='family' && <FamilyStage /> }
-                { TabName==='phone' && <PhoneStage /> }
+                { TabName==='otp' && <PhoneStage /> }
                 { TabName==='profileimg' && <ProfileImageStage /> }
               </div>
             </div>

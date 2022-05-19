@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from "react-select";
+import { useHistory } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
@@ -14,6 +15,7 @@ function SignUp() {
 
   // const navigate = useNavigate();
   const [verified, setverified] = useState(false);
+  const history = useHistory();
 
   const [profileFor, setProfileFor] = useState("Self");
   // const [name, setName] = useState("");
@@ -55,6 +57,9 @@ function SignUp() {
           icon:"success",
           text:data.msg
         })
+        window.sessionStorage.setItem('access_token', data.token);
+        window.sessionStorage.setItem('user_data',JSON.stringify(data.user));
+        history.replace("/registrationStage");
     }
     else{
       Swal.fire({

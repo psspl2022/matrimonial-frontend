@@ -5,12 +5,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
+import { useHistory } from "react-router-dom";
 
 
 
 function FamilyStage() {
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const familyTypes = [
     { value: "0", label: "Select Option" },
@@ -47,7 +49,7 @@ function FamilyStage() {
     window.scrollTo(0, 0)
   }, [])
 
-  const token = window.localStorage.getItem('access_token');
+  const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
     headers: {
       'authorization': 'Bearer ' + token,
@@ -97,7 +99,7 @@ function FamilyStage() {
     formData.append('native_city', nativeCity.value)
     formData.append('about_family', aboutFam)
 
-    const token = window.localStorage.getItem('access_token');
+    const token = window.sessionStorage.getItem('access_token');
     const headers_param = {
       headers: {
           'authorization': 'Bearer '+token,
@@ -113,6 +115,7 @@ function FamilyStage() {
           text:data.msg
         })
         dispatch(regActiveLink('phone'));
+        history.go(0);
     }
     else{
       Swal.fire({

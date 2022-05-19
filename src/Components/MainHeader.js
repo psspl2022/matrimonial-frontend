@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import "../App.css";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 function MainHeader() {
 
     const [show, setShow] = useState(false);
+	const [token, setToken] = useState('');
+	const [userData, setUserData] = useState({});
+	const history = useHistory();
 	// Sticky Menu Area
 	useEffect(() => {
 		window.addEventListener('scroll', isSticky);
@@ -12,9 +18,50 @@ function MainHeader() {
 		// 	window.removeEventListener('scroll', isSticky);
 		// };
 	});
-	
 
+	useEffect(() => {
+		if(sessionStorage.hasOwnProperty("access_token")){
+			const token_data = window.sessionStorage.getItem('access_token');
+			setToken(token_data);
+		}
+		if(sessionStorage.hasOwnProperty("user_data")){
+			const user_data = window.sessionStorage.getItem('user_data');
+			setUserData(JSON.parse(user_data));
+		}	
+	},[]);
 		   
+	const logout = async (e) => {
+		e.preventDefault();
+		
+		const token = window.sessionStorage.getItem("access_token");
+		const headers_param = {
+		  headers: {
+			authorization: "Bearer " + token,
+			Accept: "application/json",
+			"Content-Type": "application/json"
+		  },
+		};
+	
+		await axios
+		  .get(`${window.Url}api/logout`, headers_param)
+		  .then(({ data }) => {
+			if (data.hasOwnProperty("message")) {
+			  Swal.fire({
+				icon: "success",
+				text: data.message,
+			  });
+			  window.sessionStorage.removeItem('access_token');
+          	  window.sessionStorage.removeItem('user_data');
+			  history.go(0);
+			} else {
+			  Swal.fire({
+				icon: "error",
+				text: data.message,
+			  });
+			}
+		  });
+	  };
+	
 	/* Method that will fix header after a specific scrollable */
 	const isSticky = (e) => {
 		const header = document.querySelector('header');
@@ -25,6 +72,7 @@ function MainHeader() {
 	return (
 		<>
 			<header>
+				{ token.length!= 0 &&
 				<div className="top-header">
 					<div className="container">
 						<div className="row">
@@ -33,7 +81,7 @@ function MainHeader() {
 									<div className="top-left-hd">
 										<ul>
 											<li><div className="wlcm-text">Welcome to Matrimonial</div></li>
-											<li>
+											{/* <li>
 												<div className="lang-icon dropdown">
 													<i className="fas fa-globe ln-glb"></i>
 													<a href="#" className="icon15 dropdown-toggle-no-caret" role="button" data-toggle="dropdown" id="dropdownLangLink" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +95,7 @@ function MainHeader() {
 														<a className="link-item" href="#">FR</a>
 													</div>
 												</div>
-											</li>
+											</li> */}
 										</ul>
 									</div>
 									<div className="top-right-hd">
@@ -141,17 +189,12 @@ function MainHeader() {
 												<div className="account order-1 dropdown">
 													<a href="#" className="account-link dropdown-toggle-no-caret" role="button" id="dropdownAccountLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 														<div className="user-dp"><img src="profile2.jpg" alt="" /></div>
-														<span>Hi! Kartik</span>
+														<span>Hi! {userData.name}</span>
 														<i className="fas fa-sort-down"></i>
 													</a>
 													<div className="dropdown-menu account-dropdown dropdown-menu-right" aria-labelledby="dropdownAccountLink">
 														<NavLink className="link-item" to="/myprofile">My Profile</NavLink>
-														{/* <a className="link-item" href="my_freelancer_setting.html">Setting</a>
-														<a className="link-item" href="my_freelancer_messages.html">My Messages</a>
-														<a className="link-item" href="my_freelancer_portfolio.html">My Portfolio</a>
-														<a className="link-item" href="my_freelancer_bookmarks.html">My Bookmarks</a>
-														<a className="link-item" href="my_freelancer_payments.html">Payments</a> */}
-														<a className="link-item" href="sign_in.html">Logout</a>
+														<div className="link-item" onClick={logout}>Logout</div>
 													</div>
 												</div>
 											</li>
@@ -162,6 +205,7 @@ function MainHeader() {
 						</div>
 					</div>
 				</div>
+}
 				<div className="sub-header theme-color">
 					<div className="container">
 						<div className="row">
@@ -214,8 +258,8 @@ function MainHeader() {
 											</li>
 										</ul>
 										<a href="#" className="search-link" role="button" datatoggle="modal" datatarget="#searchModal"><i className="fas fa-search"></i></a>
-										<NavLink to="/login" className="add-post">Login</NavLink>
-										<NavLink to="/signUp" className="add-task">Register</NavLink>
+										{ token.length === 0 && <div><NavLink to="/login" className="add-post">Login</NavLink>
+										<NavLink to="/signUp" className="add-task">Register</NavLink> </div> }
 									</div>
 									<div className="responsive-search order-1">
 										<input type="text" className="rsp-search" placeholder="Search..." />

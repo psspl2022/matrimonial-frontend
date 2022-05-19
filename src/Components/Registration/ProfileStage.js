@@ -6,10 +6,12 @@ import Swal from "sweetalert2";
 import $ from "jquery";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
+import { useHistory } from "react-router-dom";
 
 function ProfileStage() {
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [pincode, setPincode] = useState("");
@@ -54,7 +56,7 @@ function ProfileStage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const token = window.localStorage.getItem("access_token");
+  const token = window.sessionStorage.getItem("access_token");
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,
@@ -148,7 +150,7 @@ function ProfileStage() {
     formData.append("city", city.value);
     formData.append("pincode", pincode);
 
-    const token = window.localStorage.getItem("access_token");
+    const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
       headers: {
         authorization: "Bearer " + token,
@@ -166,6 +168,7 @@ function ProfileStage() {
             text: data.msg,
           });
           dispatch(regActiveLink('career'));
+          history.go(0);
         } else {
           Swal.fire({
             icon: "error",
