@@ -1,4 +1,36 @@
+
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import $ from "jquery";
+import { useSelector, useDispatch } from "react-redux";
+import { regActiveLink } from '../../actions/index';
+import { useHistory } from "react-router-dom";
+
 function MyProfileSidebar() {
+  const token = window.sessionStorage.getItem("access_token");
+	const history = useHistory();
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/basicDropdown`, headers_param)
+      .then(({ data }) => {
+        // setCountries(
+        //   data.country.map(function (country) {
+        //     return { value: country.id, label: country.name };
+        //   })
+        // );
+
+      });
+  }, []);
+
   return (
     <>
       <div className="account_dt_left">

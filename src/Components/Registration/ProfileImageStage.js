@@ -43,7 +43,7 @@ const submitImageDetails = async (e) => {
           text: data.msg,
         });
         dispatch(regActiveLink('profileImg'));
-        history.go(0);
+        history.replace('/');
       } else {
         Swal.fire({
           icon: "error",

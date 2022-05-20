@@ -7,9 +7,48 @@ import FamilyDetails from "./FamilyDetails";
 import LifeStyleDetails from "./LifeStyleDetails";
 import LikesDetails from "./LikesDetails";
 import ProfileDetails from "./ProfileDashboard";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 function MyProfileSection() {
   const[TabName, setTabName] = useState('dashboard');
+	// const [token, setToken] = useState('');
+	// const [userData, setUserData] = useState({});
+	const history = useHistory();
+  const logout = async (e) => {
+		e.preventDefault();
+		
+		const token = window.sessionStorage.getItem("access_token");
+		const headers_param = {
+		  headers: {
+			authorization: "Bearer " + token,
+			Accept: "application/json",
+			"Content-Type": "application/json"
+		  },
+		};
+	
+		await axios
+		  .get(`${window.Url}api/logout`, headers_param)
+		  .then(({ data }) => {
+			if (data.hasOwnProperty("message")) {
+			  Swal.fire({
+				icon: "success",
+				text: data.message,
+			  });
+			  window.sessionStorage.removeItem('access_token');
+          	  window.sessionStorage.removeItem('user_data');
+				// setToken('');
+				// setUserData('');
+			  history.replace('/');
+			} else {
+			  Swal.fire({
+				icon: "error",
+				text: data.message,
+			  });
+			}
+		  });
+	  };
 
   return (
     <>
@@ -18,7 +57,7 @@ function MyProfileSection() {
           <h2>Manage Your Account</h2>
         </div>
         <div className="account_hd_right">
-          <a href="#" className="main_lg_btn">
+          <a href="#" className="main_lg_btn" onClick={logout}>
             Logout
           </a>
         </div>

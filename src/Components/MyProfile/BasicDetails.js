@@ -1,47 +1,222 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useSelector, useDispatch } from "react-redux";
+import { regActiveLink } from "../../actions/index";
+import { useHistory } from "react-router-dom";
 
-const heightOptions = [
-    { value: `4' 1" (1.34 mts)`, label: `4' 1" (1.34 mts)` },
-    { value: `4' 2" (1.34 mts)`, label: `4' 2" (1.34 mts)` },
-    { value: `4' 3" (1.34 mts)`, label: `4' 3" (1.34 mts)` },
-    { value: `4' 4" (1.34 mts)`, label: `4' 4" (1.34 mts)` },
-    { value: `4' 5" (1.34 mts)`, label: `4' 5" (1.34 mts)` },
+const IncomeOptions = [
+  { value: `No Income`, label: `No Income` },
+  { value: `Rs. 0 - 1 Lakh`, label: `Rs. 0 - 1 Lakh` },
+  { value: `Rs. 1 - 2 Lakh`, label: `Rs. 1 - 2 Lakh` },
+  { value: `Rs. 2 - 3 Lakh`, label: `Rs. 2 - 3 Lakh` },
+  { value: `Rs. 3 - 4 Lakh`, label: `Rs. 3 - 4 Lakh` },
+];
+
+const maritalOptions = [
+    { value: 1, label: "Never Married" },
+    { value: 2, label: "Awaiting Divorce" },
+    { value: 3, label: "Divorced" },
+    { value: 4, label: "Widowed" },
+    { value: 5, label: "Annulled" },
   ];
 
-  const IncomeOptions = [
-    { value: `No Income`, label: `No Income` },
-    { value: `Rs. 0 - 1 Lakh`, label: `Rs. 0 - 1 Lakh` },
-    { value: `Rs. 1 - 2 Lakh`, label: `Rs. 1 - 2 Lakh` },
-    { value: `Rs. 2 - 3 Lakh`, label: `Rs. 2 - 3 Lakh` },
-    { value: `Rs. 3 - 4 Lakh`, label: `Rs. 3 - 4 Lakh` },
-  ];
-
-  const maritalOptions = [
-    { value: "Never Married", label: "Never Married" },
-    { value: "Awaiting Divorce", label: "Awaiting Divorce" },
-    { value: "Divorced", label: "Divorced" },
-    { value: "Widowed", label: "Widowed" },
-    { value: "Annulled", label: "Annulled" },
+  const genderOptions = [
+    { value: 1, label: "Male" },
+    { value: 2, label: "Female" },
+    { value: 3, label: "Others" },
   ];
 
 export default function BasicDetails() {
+  const [Edit, setEdit] = useState(false);
+  const [name, setName] = useState("");
 
-    const[Edit, setEdit] = useState(false);
-    return (
-        <>
-            <div className="tab-content" id="myTabContent">
-                <div className="tab-pane fade show active" id="my_profile" role="tabpanel">
-                    <div className="view_chart">
-                        <div className="view_chart_header d-flex justify-content-between">
-                            <span><h2>My Profile </h2></span><span className="float-right edit-icon" onClick={()=>{ setEdit(!Edit) }}><i className="fas fa-edit fa-2x"></i><div>Edit</div></span>
-                        </div>
-                        <div className="post_job_body">
-                        
-                            <form>
-                                <div className="row">
-                                    {/* <div className="col-lg-12">
+  const [verified, setverified] = useState(false);
+  const [maritalStatus, setMaritalStatus] = useState('');
+  const [countries, setCountries] = useState({});
+  const [cities, setCities] = useState({});
+  const [states, setStates] = useState([]);
+  const [heights, setHeights] = useState([]);
+  const [moths, setMoths] = useState([]);
+  const [religions, setReligions] = useState([]);
+  const [castes, setCastes] = useState([]);
+  const [sects, setSects] = useState([]);
+  const [genders, setGenders] = useState([]);
+
+  const [country, setCountry] = useState("");
+  const [selectCountry, setSelectCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [height, setHeight] = useState("");
+  const [selectHeight, setSelectHeight] = useState("");
+  const [moth, setMoth] = useState("");
+  const [selectMoth, setSelectMoth] = useState("");
+  const [religion, setReligion] = useState("");
+  const [selectReligion, setSelectReligion] = useState("");
+  const [caste, setCaste] = useState("");
+  const [selectCaste, setSelectCaste] = useState("");
+  const [sect, setSect] = useState("");
+  const [selectSect, setSelectSect] = useState("");
+  const [matrimonial, setMatrimonial] = useState("");
+  const [date, setDate] = useState("");
+  const [gender, setGender] = useState("");
+  const [selectGender, setSelectGender] = useState("");
+
+  const token = window.sessionStorage.getItem("access_token");
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
+  useEffect(() => {
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    axios
+      .get(`${window.Url}api/basicDropdown`, headers_param)
+      .then(({ data }) => {
+        setCountries(
+          data.country.map(function (country) {
+            return { value: country.id, label: country.name };
+          })
+        );
+
+        setHeights(
+          data.height.map(function (height) {
+            return { value: height.id, label: height.height };
+          })
+        );
+
+        setMoths(
+          data.mother_tongue.map(function (mother_tongue) {
+            return {
+              value: mother_tongue.id,
+              label: mother_tongue.mother_tongue,
+            };
+          })
+        );
+
+        setReligions(
+          data.religion.map(function (religion) {
+            return { value: religion.id, label: religion.religion };
+          })
+        );
+
+        setCastes(
+          data.caste.map(function (caste) {
+            return { value: caste.id, label: caste.caste };
+          })
+        );
+      });
+
+      // axios.get(`${window.Url}api/allStateDropdown`, headers_param)
+      // .then(({ data }) => {
+      //   setStates(
+      //     data.state.map(function (state) {
+      //       return { value: state.id, label: state.name };
+      //     })
+      //   );
+      // });
+
+      // axios
+      // .get(`${window.Url}api/allCityDropdown`, headers_param)
+      // .then(({ data }) => {
+      //   setCities(
+      //     data.city.map(function (city) {
+      //       return { value: city.id, label: city.name };
+      //     })
+      //   );
+      // });
+
+      axios
+      .get(`${window.Url}api/sectDropdown`, headers_param)
+      .then(({ data }) => {
+        setSects(
+          data.sect.map(function (sect) {
+            return { value: sect.id, label: sect.name };
+          })
+        );
+      });
+
+      axios
+      .get(`${window.Url}api/showBasic/${user}`, headers_param)
+      .then(({ data }) => {
+        setName(data.basic.name);
+        setDate(data.basic.dob);
+        setMaritalStatus(data.basic.maritial_status);
+        setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
+        setHeight(data.basic.height);
+        setSelectHeight(heights[height-1]);
+        setReligion(data.basic.religion);
+        setSelectReligion(religions[religion-1]);
+        setCaste(data.basic.caste);
+        setSelectCaste(castes[caste-1]);
+        setMoth(data.basic.mother_tongue);
+        setSelectMoth(moths[moth-1]);
+        setCountry(data.basic.country);
+        setSelectCountry(countries[country-1]);
+        setSect(data.basic.sect);
+        setSelectSect(sects[sect-1]);
+        setGender(data.gender.gender);
+        setSelectGender(genderOptions[parseInt(gender)-1]);
+      });
+      
+
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
+      .then(({ data }) => {
+        setStates(
+          data.state.map(function (state) {
+            return { value: state.id, label: state.name };
+          })
+        );
+      });
+  }, [country]);
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/cityDropdown/${state.value}`, headers_param)
+      .then(({ data }) => {
+        setCities(
+          data.city.map(function (city) {
+            return { value: city.id, label: city.name };
+          })
+        );
+      });
+  }, [state]);
+
+  return (
+    <>
+      <div className="tab-content" id="myTabContent">
+        <div
+          className="tab-pane fade show active"
+          id="my_profile"
+          role="tabpanel"
+        >
+          <div className="view_chart">
+            <div className="view_chart_header d-flex justify-content-between">
+              <span>
+                <h2>My Profile </h2>
+              </span>
+              <span
+                className="float-right edit-icon"
+                onClick={() => {
+                  setEdit(!Edit);
+                }}
+              >
+                <i className="fas fa-edit fa-2x"></i>
+                <div>Edit</div>
+              </span>
+            </div>
+            <div className="post_job_body">
+              <form>
+                <div className="row">
+                  {/* <div className="col-lg-12">
                                         <div className="form-group">
                                             <label className="label15">Profile Avtar*</label>
                                             <div className="avtar_dp">
@@ -55,99 +230,214 @@ export default function BasicDetails() {
                                             </div>
                                         </div>
                                     </div> */}
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Full Name*</label>
-                                            <input type="text" className="job-input" disabled={ Edit==false ? 'disabled' : ''} placeholder="Your Full Name" />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Gender</label>
-                                            <input type="text" className="job-input" placeholder="Your Gender" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Date Of Birth</label>
-                                            <input type="date" className="job-input" placeholder="Your DOB" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Marital Status</label>
-                                            <Select
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                defaultValue={maritalOptions[0]}
-                                                isClearable
-                                                isSearchable
-                                                name="height"
-                                                placeholder="Select Your Marital Status"
-                                                options={maritalOptions}
-                                                isDisabled={ !Edit }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Height</label>
-                                            <Select
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                defaultValue={heightOptions[0]}
-                                                isClearable
-                                                isSearchable
-                                                name="height"
-                                                placeholder="Select Your Height"
-                                                options={heightOptions}
-                                                isDisabled={ !Edit }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Religion</label>
-                                            <input type="text" className="job-input" placeholder="Your Religion" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Caste</label>
-                                            <input type="text" className="job-input" placeholder="Your Caste" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Subcaste</label>
-                                            <input type="text" className="job-input" placeholder="Your Subcaste" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Mother Tongue</label>
-                                            <input type="text" className="job-input" placeholder="Your Gender" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Country Living In</label>
-                                            <input type="text" className="job-input" placeholder="Country Living In" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">State Living In</label>
-                                            <input type="text" className="job-input" placeholder="Your Gender" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">City Living In</label>
-                                            <input type="text" className="job-input" placeholder="Your Gender" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                    {/* <div className="col-lg-6">
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Full Name*</label>
+                      <input
+                        type="text"
+                        className="job-input"
+                        disabled={Edit == false ? "disabled" : ""}
+                        placeholder="Your Full Name"
+                        value={name}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Gender</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        isClearable
+                        isSearchable
+                        placeholder="Select Your Gender"
+                        value={selectGender}
+                        options={genderOptions}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectGender(e);
+                        }}
+                        
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Date Of Birth</label>
+                      <input
+                        type="date"
+                        className="job-input"
+                        placeholder="Your DOB"
+                        disabled={Edit == false ? "disabled" : ""}
+                        value={date}
+                        onChange={(e) => {
+                          setDate(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Marital Status</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Your Marital Status"
+                        value={matrimonial}
+                        options={maritalOptions}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setMatrimonial(e);
+                        }}
+                        
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Height</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        isClearable
+                        isSearchable
+                        placeholder="Select Your Height"
+                        options={heights}
+                        value={selectHeight}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectHeight(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Religion</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={religions[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Your Religion"
+                        options={religions}
+                        value={selectReligion}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectReligion(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Caste</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={castes[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Your Caste"
+                        options={castes}
+                        value={selectCaste}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectCaste(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {/* <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Subcaste</label>
+                      <input
+                        type="text"
+                        className="job-input"
+                        placeholder="Your Subcaste"
+                        disabled={Edit == false ? "disabled" : ""}
+                      />
+                    </div>
+                  </div> */}
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Mother Tongue</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={moths[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Mother Tongue"
+                        options={moths}
+                        value={selectMoth}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectMoth(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Country Living In</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={countries[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Country Living In"
+                        options={countries}
+                        value={selectCountry}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setCountry(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">State Living In</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={states[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select State Living In"
+                        options={states}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setState(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">City Living In</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={cities[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select City Living In"
+                        options={cities}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setCity(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {/* <div className="col-lg-6">
                                         <div className="form-group">
                                             <label className="label15">Annual Income</label>
                                             <Select
@@ -163,50 +453,62 @@ export default function BasicDetails() {
                                             />
                                         </div>
                                     </div> */}
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Sect</label>
-                                            <Select
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                defaultValue={IncomeOptions[0]}
-                                                isClearable
-                                                isSearchable
-                                                name="income"
-                                                placeholder="Select Sect"
-                                                options={IncomeOptions}
-                                                isDisabled={ !Edit }
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label className="label15">Profile Managed by</label>
-                                            <input type="email" className="job-input" placeholder="Profile Managed by" disabled={ Edit==false ? 'disabled' : ''} />
-                                        </div>
-                                    </div>
-                                        
-                                        <div className="col-lg-12">
-                                            <button className="post_jp_btn" type="submit">SAVE CHANGES</button>
-                                        </div>
-                                    </div>
-                            </form>
-                        </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Sect</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        isClearable
+                        isSearchable
+                        name="income"
+                        placeholder="Select Sect"
+                        options={sects}
+                        value={selectSect}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setSelectSect(e);
+                        }}
+                      />
                     </div>
-                </div>
-                <div className="tab-pane fade" id="social_accounts">
-                    <div className="view_chart">
-                        <div className="view_chart_header">
-                            <h4>Social Accounts</h4>
-                        </div>
-                        <div className="social200">
-                            <form>
-                                <button className="post_jp_btn" type="submit">SAVE CHANGES</button>
-                            </form>
-                        </div>
+                  </div>
+                  {/* <div className="col-lg-12">
+                    <div className="form-group">
+                      <label className="label15">Profile Managed by</label>
+                      <input
+                        type="email"
+                        className="job-input"
+                        placeholder="Profile Managed by"
+                        disabled={Edit == false ? "disabled" : ""}
+                      />
                     </div>
+                  </div> */}
+
+                  <div className="col-lg-12">
+                    <button className="post_jp_btn" type="submit">
+                      SAVE CHANGES
+                    </button>
+                  </div>
                 </div>
+              </form>
             </div>
-        </>
-    );
+          </div>
+        </div>
+        <div className="tab-pane fade" id="social_accounts">
+          <div className="view_chart">
+            <div className="view_chart_header">
+              <h4>Social Accounts</h4>
+            </div>
+            <div className="social200">
+              <form>
+                <button className="post_jp_btn" type="submit">
+                  SAVE CHANGES
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

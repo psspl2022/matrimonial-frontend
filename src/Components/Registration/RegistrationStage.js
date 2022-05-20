@@ -8,11 +8,13 @@ import axios from "axios";
 import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
+import { useHistory } from "react-router-dom";
 
 
 function RegistrationStage() {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
+	const history = useHistory();
   
   // dispatch(regActiveLink('career'));
 
@@ -27,7 +29,7 @@ function RegistrationStage() {
 
   useEffect(() => {
     axios.get(`${window.Url}api/getRegisterFormStatus`, headers_param)
-   .then(async({ data }) => {
+   .then(({ data }) => {
     setTabName(() => {
       switch(data[0].stage_no){
         case 1: return 'otp' ;
@@ -35,14 +37,22 @@ function RegistrationStage() {
         case 3: return 'career' ;
         case 4: return 'family' ;
         case 5: return 'profileimg' ;
+        case 6: return 'homepage';
         default : return 'profile';
       }
      })
     //  if(TabName!='')
-     await dispatch(regActiveLink(TabName));
+      
 
    });
  }, []);
+
+ useEffect(() => {
+   if(TabName==='homepage'){
+     history.replace('/');
+   }
+  dispatch(regActiveLink(TabName));
+ },[TabName])
 
   
   return (

@@ -52,7 +52,9 @@ function MainHeader() {
 			  });
 			  window.sessionStorage.removeItem('access_token');
           	  window.sessionStorage.removeItem('user_data');
-			  history.go(0);
+				setToken('');
+				setUserData('');
+			  history.replace('/');
 			} else {
 			  Swal.fire({
 				icon: "error",
