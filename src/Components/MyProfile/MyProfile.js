@@ -1,11 +1,20 @@
 import MyProfileSection from "./MyProfileSection";
 import MyProfileSidebar from "./MyProfileSidebar";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function MyProfile() {
+  
+	const history = useHistory();
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+  useEffect(() => {
+		if(!sessionStorage.hasOwnProperty("access_token")){
+      history.replace('/signUp');
+		}
+	},[]);
 
   return (
     <>

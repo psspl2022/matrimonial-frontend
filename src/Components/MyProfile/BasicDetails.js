@@ -29,7 +29,7 @@ const maritalOptions = [
   ];
 
 export default function BasicDetails() {
-  const [Edit, setEdit] = useState(false);
+  const [Edit, setEdit] = useState(true);
   const [name, setName] = useState("");
 
   const [verified, setverified] = useState(false);
@@ -47,7 +47,9 @@ export default function BasicDetails() {
   const [country, setCountry] = useState("");
   const [selectCountry, setSelectCountry] = useState("");
   const [state, setState] = useState("");
+  const [selectState, setSelectState] = useState("");
   const [city, setCity] = useState("");
+  const [selectCity, setSelectCity] = useState("");
   const [height, setHeight] = useState("");
   const [selectHeight, setSelectHeight] = useState("");
   const [moth, setMoth] = useState("");
@@ -140,35 +142,70 @@ export default function BasicDetails() {
         );
       });
 
-      axios
+      
+      
+
+  }, []);
+
+  useEffect(async() => {
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    await axios
       .get(`${window.Url}api/showBasic/${user}`, headers_param)
       .then(({ data }) => {
         setName(data.basic.name);
         setDate(data.basic.dob);
         setMaritalStatus(data.basic.maritial_status);
-        setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
+        // setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
         setHeight(data.basic.height);
-        setSelectHeight(heights[height-1]);
+        // setSelectHeight(heights[height-1]);
         setReligion(data.basic.religion);
-        setSelectReligion(religions[religion-1]);
+        // setSelectReligion(religions[religion-1]);
         setCaste(data.basic.caste);
-        setSelectCaste(castes[caste-1]);
+        // setSelectCaste(castes[caste-1]);
         setMoth(data.basic.mother_tongue);
-        setSelectMoth(moths[moth-1]);
+        // setSelectMoth(moths[moth-1]);
         setCountry(data.basic.country);
-        setSelectCountry(countries[country-1]);
+        // setSelectCountry(countries[country-1]);
         setSect(data.basic.sect);
-        setSelectSect(sects[sect-1]);
+        // setSelectSect(sects[sect-1]);
         setGender(data.gender.gender);
-        setSelectGender(genderOptions[parseInt(gender)-1]);
+        // setSelectGender(genderOptions[parseInt(gender)-1]);
+        setState(data.basic.state);
       });
-      
 
-  }, []);
+      // await axios
+      // .get(`${window.Url}api/stateDropdown/${country}`, headers_param)
+      // .then(({ data }) => {
+      //   setStates(
+      //     data.state.map(function (state) {
+      //       return { value: state.id, label: state.name };
+      //     })
+      //   );
+      // });
+  },[castes]);
+
+  useEffect(() => {
+        setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
+        setSelectHeight(heights[height-1]);
+        setSelectReligion(religions[religion-1]);
+        setSelectCaste(castes[caste-1]);
+        setSelectMoth(moths[moth-1]);
+        setSelectCountry(countries[country-1]);
+        setSelectSect(sects[sect-1]);
+        setSelectGender(genderOptions[parseInt(gender)-1]);
+        setSelectState(
+          states.filter((state_data)=>{
+            if(state_data.value===state){
+              return state_data;
+          } 
+          })
+        );
+  },[states]);
+
 
   useEffect(() => {
     axios
-      .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
+      .get(`${window.Url}api/stateDropdown/${country}`, headers_param)
       .then(({ data }) => {
         setStates(
           data.state.map(function (state) {
@@ -177,6 +214,20 @@ export default function BasicDetails() {
         );
       });
   }, [country]);
+
+  // useEffect(() => {
+  //   if({selectCountry}.length==0){
+  //   axios
+  //     .get(`${window.Url}api/stateDropdown/${selectCountry.value}`, headers_param)
+  //     .then(({ data }) => {
+  //       setStates(
+  //         data.state.map(function (state) {
+  //           return { value: state.id, label: state.name };
+  //         })
+  //       );
+  //     });
+  //   }
+  // }, [selectCountry]);
 
   useEffect(() => {
     axios
@@ -388,7 +439,6 @@ export default function BasicDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue={countries[0]}
                         isClearable
                         isSearchable
                         placeholder="Select Country Living In"
@@ -396,7 +446,7 @@ export default function BasicDetails() {
                         value={selectCountry}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setCountry(e);
+                          setSelectCountry(e);
                         }}
                       />
                     </div>
@@ -407,14 +457,14 @@ export default function BasicDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue={states[0]}
                         isClearable
                         isSearchable
                         placeholder="Select State Living In"
                         options={states}
+                        value={selectState}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setState(e);
+                          setSelectState(e);
                         }}
                       />
                     </div>

@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 function MyProfileSidebar() {
   const token = window.sessionStorage.getItem("access_token");
 	const history = useHistory();
+	const [userData, setUserData] = useState({});
+	const [userImage, setUserImage] = useState();
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,
@@ -17,6 +19,13 @@ function MyProfileSidebar() {
       "Content-Type": "application/json",
     },
   };
+
+  useEffect(() => {
+		if(sessionStorage.hasOwnProperty("user_data")){
+			const user_data = window.sessionStorage.getItem('user_data');
+			setUserData(JSON.parse(user_data));
+		}	
+	},[]);
   
   useEffect(() => {
     axios
@@ -29,19 +38,33 @@ function MyProfileSidebar() {
         // );
 
       });
+
+     axios
+    .get(`${window.Url}api/getProfileImage`, headers_param)
+    .then(({ data }) => {
+      if (data.hasOwnProperty("msg")) {
+        setUserImage(data.msg.identity_card_doc);
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: data.error_msg,
+        });
+      }
+    });
+
   }, []);
 
   return (
     <>
       <div className="account_dt_left">
         <div className="job-center-dt">
-          <img src="profile2.jpg" alt="" />
+          <img src={`${window.Url}Documents/Image_Documents/${userImage}`} alt="" />
           <div className="job-urs-dts">
             <div className="dp_upload">
               <input type="file" id="file" />
               <label htmlFor="file">Upload Photo</label>
             </div>
-            <h4>Kartik Aryan</h4>
+            <h4>{userData.name}</h4>
             {/* <span>UX Designer</span> */}
             <div className="avialable">
               Active Now
