@@ -48,8 +48,9 @@ export default function BasicDetails() {
   const [selectCountry, setSelectCountry] = useState("");
   const [state, setState] = useState("");
   const [selectState, setSelectState] = useState("");
+  const [stateData, setStateData] = useState("");
   const [city, setCity] = useState("");
-  const [selectCity, setSelectCity] = useState("");
+  const [cityData, setCityData] = useState("");
   const [height, setHeight] = useState("");
   const [selectHeight, setSelectHeight] = useState("");
   const [moth, setMoth] = useState("");
@@ -113,25 +114,6 @@ export default function BasicDetails() {
         );
       });
 
-      // axios.get(`${window.Url}api/allStateDropdown`, headers_param)
-      // .then(({ data }) => {
-      //   setStates(
-      //     data.state.map(function (state) {
-      //       return { value: state.id, label: state.name };
-      //     })
-      //   );
-      // });
-
-      // axios
-      // .get(`${window.Url}api/allCityDropdown`, headers_param)
-      // .then(({ data }) => {
-      //   setCities(
-      //     data.city.map(function (city) {
-      //       return { value: city.id, label: city.name };
-      //     })
-      //   );
-      // });
-
       axios
       .get(`${window.Url}api/sectDropdown`, headers_param)
       .then(({ data }) => {
@@ -142,9 +124,6 @@ export default function BasicDetails() {
         );
       });
 
-      
-      
-
   }, []);
 
   useEffect(async() => {
@@ -154,92 +133,122 @@ export default function BasicDetails() {
       .then(({ data }) => {
         setName(data.basic.name);
         setDate(data.basic.dob);
-        setMaritalStatus(data.basic.maritial_status);
-        // setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
-        setHeight(data.basic.height);
-        // setSelectHeight(heights[height-1]);
-        setReligion(data.basic.religion);
-        // setSelectReligion(religions[religion-1]);
-        setCaste(data.basic.caste);
-        // setSelectCaste(castes[caste-1]);
-        setMoth(data.basic.mother_tongue);
-        // setSelectMoth(moths[moth-1]);
-        setCountry(data.basic.country);
-        // setSelectCountry(countries[country-1]);
-        setSect(data.basic.sect);
-        // setSelectSect(sects[sect-1]);
-        setGender(data.gender.gender);
-        // setSelectGender(genderOptions[parseInt(gender)-1]);
-        setState(data.basic.state);
+        setMaritalStatus(
+          maritalOptions.filter((marital_data) => {
+            if (marital_data.value == data.basic.maritial_status) {
+              return marital_data;
+            }
+          })[0]
+        );
+        setHeight(
+          heights.filter((height_data) => {
+            if (height_data.value == data.basic.height) {
+              return height_data;
+            }
+          })[0]
+        );
+        setReligion(
+          religions.filter((rel_data) => {
+            if (rel_data.value == data.basic.religion) {
+              return rel_data;
+            }
+          })[0]
+        );
+        setCaste(
+          castes.filter((caste_data) => {
+            if (caste_data.value == data.basic.caste) {
+              return caste_data;
+            }
+          })[0]
+        );
+        setMoth(
+          moths.filter((moth_data) => {
+            if (moth_data.value == data.basic.mother_tongue) {
+              return moth_data;
+            }
+          })[0]
+        );
+        setCountry(
+          countries.filter((country_data) => {
+            if (country_data.value == data.basic.country) {
+              return country_data;
+            }
+          })[0]
+        );
+        setSect(
+          sects.filter((sec_data) => {
+            if (sec_data.value == data.basic.sect) {
+              return sec_data;
+            }
+          })[0]
+        );
+        setGender(
+          genderOptions.filter((gender_data) => {
+            if (gender_data.value == data.gender.gender) {
+              return gender_data;
+            }
+          })[0]
+        );
+        setStateData(data.basic.state);
+        setCityData(data.basic.city);
       });
-
-      // await axios
-      // .get(`${window.Url}api/stateDropdown/${country}`, headers_param)
-      // .then(({ data }) => {
-      //   setStates(
-      //     data.state.map(function (state) {
-      //       return { value: state.id, label: state.name };
-      //     })
-      //   );
-      // });
   },[castes]);
 
   useEffect(() => {
-        setMatrimonial(maritalOptions[parseInt(maritalStatus)-1]);
-        setSelectHeight(heights[height-1]);
-        setSelectReligion(religions[religion-1]);
-        setSelectCaste(castes[caste-1]);
-        setSelectMoth(moths[moth-1]);
-        setSelectCountry(countries[country-1]);
-        setSelectSect(sects[sect-1]);
-        setSelectGender(genderOptions[parseInt(gender)-1]);
-        setSelectState(
-          states.filter((state_data)=>{
-            if(state_data.value===state){
-              return state_data;
-          } 
-          })
-        );
-  },[states]);
+    getAllStates();
+  }, [country]);
 
-
-  useEffect(() => {
-    axios
-      .get(`${window.Url}api/stateDropdown/${country}`, headers_param)
+  const getAllStates = () => {
+     axios
+      .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
       .then(({ data }) => {
         setStates(
-          data.state.map(function (state) {
-            return { value: state.id, label: state.name };
+          data.state.map(function (state_data) {
+            return { value: state_data.id, label: state_data.name };
           })
         );
       });
-  }, [country]);
-
-  // useEffect(() => {
-  //   if({selectCountry}.length==0){
-  //   axios
-  //     .get(`${window.Url}api/stateDropdown/${selectCountry.value}`, headers_param)
-  //     .then(({ data }) => {
-  //       setStates(
-  //         data.state.map(function (state) {
-  //           return { value: state.id, label: state.name };
-  //         })
-  //       );
-  //     });
-  //   }
-  // }, [selectCountry]);
+  };
 
   useEffect(() => {
-    axios
+    setState(
+      states.filter((state_data) => {
+        if (state_data.value == stateData) {
+          return state_data;
+        }
+      })[0]
+    );
+  }, [states]);
+
+  useEffect(() => {
+    // getAllCities();
+  }, [state]);
+
+  const getAllCities = () => {
+     axios
       .get(`${window.Url}api/cityDropdown/${state.value}`, headers_param)
       .then(({ data }) => {
         setCities(
-          data.city.map(function (city) {
-            return { value: city.id, label: city.name };
+          data.city.map(function (city_data) {
+            return { value: city_data.id, label: city_data.name };
           })
         );
       });
-  }, [state]);
+  };
+
+  useEffect(() => {
+    // setCity(
+    //   cities.filter((city_data) => {
+    //     if (city_data.value == cityData) {
+    //       return city_data;
+    //     }
+    //   })[0]
+    // );
+  }, [cities]);
+
+
+
+
 
   return (
     <>
@@ -302,11 +311,11 @@ export default function BasicDetails() {
                         isClearable
                         isSearchable
                         placeholder="Select Your Gender"
-                        value={selectGender}
+                        value={gender}
                         options={genderOptions}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectGender(e);
+                          setGender(e);
                         }}
                         
                       />
@@ -333,15 +342,15 @@ export default function BasicDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
+                        // defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
                         isClearable
                         isSearchable
                         placeholder="Select Your Marital Status"
-                        value={matrimonial}
+                        value={maritalStatus}
                         options={maritalOptions}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setMatrimonial(e);
+                          setMaritalStatus(e);
                         }}
                         
                       />
@@ -357,10 +366,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select Your Height"
                         options={heights}
-                        value={selectHeight}
+                        value={height}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectHeight(e);
+                          setHeight(e);
                         }}
                       />
                     </div>
@@ -376,10 +385,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select Your Religion"
                         options={religions}
-                        value={selectReligion}
+                        value={religion}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectReligion(e);
+                          setReligion(e);
                         }}
                       />
                     </div>
@@ -395,10 +404,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select Your Caste"
                         options={castes}
-                        value={selectCaste}
+                        value={caste}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectCaste(e);
+                          setCaste(e);
                         }}
                       />
                     </div>
@@ -425,10 +434,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select Mother Tongue"
                         options={moths}
-                        value={selectMoth}
+                        value={moth}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectMoth(e);
+                          setMoth(e);
                         }}
                       />
                     </div>
@@ -443,10 +452,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select Country Living In"
                         options={countries}
-                        value={selectCountry}
+                        value={country}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectCountry(e);
+                          setCountry(e);
                         }}
                       />
                     </div>
@@ -461,10 +470,10 @@ export default function BasicDetails() {
                         isSearchable
                         placeholder="Select State Living In"
                         options={states}
-                        value={selectState}
+                        value={state}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectState(e);
+                          setState(e);
                         }}
                       />
                     </div>
@@ -475,11 +484,11 @@ export default function BasicDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue={cities[0]}
                         isClearable
                         isSearchable
                         placeholder="Select City Living In"
                         options={cities}
+                        value={city}
                         isDisabled={!Edit}
                         onChange={(e) => {
                           setCity(e);
@@ -514,10 +523,10 @@ export default function BasicDetails() {
                         name="income"
                         placeholder="Select Sect"
                         options={sects}
-                        value={selectSect}
+                        value={sect}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setSelectSect(e);
+                          setSect(e);
                         }}
                       />
                     </div>

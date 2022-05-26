@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const animatedComponents = makeAnimated();
 
@@ -29,8 +31,93 @@ const maritalOptions = [
 ];
 
 export default function LifeStyleDetails() {
-  const [Edit, setEdit] = useState(false);
-  
+
+  const [Edit, setEdit] = useState(true);
+  const [hobbies, setHobbies] = useState([]);
+  const [interests, setInterests] = useState({});
+  const [musicTypes, setMusicTypes] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [dressStyles, setDressStyles] = useState({});
+  const [moviesTypes, setMoviesTypes] = useState([]);
+  const [sports, setSports] = useState([]);
+  const [cuisines, setCuisines] = useState([]);
+
+  const [hobby, setHobby] = useState("");
+  const [interest, setInterest] = useState("");
+  const [musicType, setMusicType] = useState("");
+  const [book, setBook] = useState("");
+  const [read, setRead] = useState("");
+  const [dressStyle, setDressStyle] = useState("");
+  const [tvShow, setTVShow] = useState("");
+  const [moviesType, setMoviesType] = useState("");
+  const [movie, setMovie] = useState("");
+  const [sport, setSport] = useState("");
+  const [cuisine, setCuisine] = useState("");
+  const [cook, setCook] = useState("");
+  const [vacationDestination, setVacationDestination] = useState("");
+
+  const token = window.sessionStorage.getItem("access_token");
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/likesDropdown`, headers_param)
+      .then(({ data }) => {
+        setHobbies(
+          data.hobbies.map(function (hobby_data) {
+            return { value: hobby_data.id, label: hobby_data.hobby };
+          })
+        );
+
+        setInterests(
+          data.interests.map(function (int_data) {
+            return { value: int_data.id, label: int_data.interest };
+          })
+        );
+
+        setMusicTypes(
+          data.musicTypes.map(function (music_data) {
+            return { value: music_data.id, label: music_data.music_type };
+          })
+        );
+        setBooks(
+          data.books.map(function (book_data) {
+            return { value: book_data.id, label: book_data.book_type };
+          })
+        );
+
+        setDressStyles(
+          data.dressStyles.map(function (dress_data) {
+            return { value: dress_data.id, label: dress_data.dress_style };
+          })
+        );
+
+        setMoviesTypes(
+          data.moviesTypes.map(function (movie_data) {
+            return { value: movie_data.id, label: movie_data.movietype };
+          })
+        );
+
+        setSports(
+          data.sports.map(function (sport_data) {
+            return { value: sport_data.id, label: sport_data.sport_name };
+          })
+        );
+
+        setCuisines(
+          data.cuisines.map(function (cuisine_data) {
+            return { value: cuisine_data.id, label: cuisine_data.name };
+          })
+        );
+      });
+  }, []);
 
   return (
     <>
@@ -67,7 +154,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Your Hobbies"
-                        options={heightOptions}
+                        options={hobbies}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -81,7 +168,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Your Interests"
-                        options={heightOptions}
+                        options={interests}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -95,7 +182,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Your Favourite Music Type"
-                        options={heightOptions}
+                        options={musicTypes}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -109,7 +196,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Favourite Book"
-                        options={heightOptions}
+                        options={books}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -134,7 +221,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Dress Style"
-                        options={heightOptions}
+                        options={dressStyles}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -159,7 +246,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Favourite Movies"
-                        options={heightOptions}
+                        options={moviesTypes}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -184,7 +271,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Languages"
-                        options={heightOptions}
+                        options={sports}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -198,7 +285,7 @@ export default function LifeStyleDetails() {
                         defaultValue=""
                         isMulti
                         placeholder="Select Your Hobbies"
-                        options={heightOptions}
+                        options={cuisines}
                         isDisabled={!Edit}
                       />
                     </div>
