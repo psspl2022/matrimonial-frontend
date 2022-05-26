@@ -29,7 +29,7 @@ const maritalOptions = [
   ];
 
 export default function BasicDetails() {
-  const [Edit, setEdit] = useState(true);
+  const [Edit, setEdit] = useState(false);
   const [name, setName] = useState("");
 
   const [verified, setverified] = useState(false);

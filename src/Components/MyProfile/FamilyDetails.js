@@ -42,7 +42,7 @@ export default function FamilyDetails() {
     { value: "0", label: "No" },
   ];
 
-  const [Edit, setEdit] = useState(true);
+  const [Edit, setEdit] = useState(false);
   const [occupations, setOccupations] = useState([]);
   const [familyLivingIn, setFamilyLivingIn] = useState({});
   const [cities, setCities] = useState([]);

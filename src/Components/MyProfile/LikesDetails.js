@@ -6,33 +6,10 @@ import Swal from "sweetalert2";
 
 const animatedComponents = makeAnimated();
 
-const heightOptions = [
-  { value: `4' 1" (1.34 mts)`, label: `4' 1" (1.34 mts)` },
-  { value: `4' 2" (1.34 mts)`, label: `4' 2" (1.34 mts)` },
-  { value: `4' 3" (1.34 mts)`, label: `4' 3" (1.34 mts)` },
-  { value: `4' 4" (1.34 mts)`, label: `4' 4" (1.34 mts)` },
-  { value: `4' 5" (1.34 mts)`, label: `4' 5" (1.34 mts)` },
-];
-
-const IncomeOptions = [
-  { value: `No Income`, label: `No Income` },
-  { value: `Rs. 0 - 1 Lakh`, label: `Rs. 0 - 1 Lakh` },
-  { value: `Rs. 1 - 2 Lakh`, label: `Rs. 1 - 2 Lakh` },
-  { value: `Rs. 2 - 3 Lakh`, label: `Rs. 2 - 3 Lakh` },
-  { value: `Rs. 3 - 4 Lakh`, label: `Rs. 3 - 4 Lakh` },
-];
-
-const maritalOptions = [
-  { value: "Never Married", label: "Never Married" },
-  { value: "Awaiting Divorce", label: "Awaiting Divorce" },
-  { value: "Divorced", label: "Divorced" },
-  { value: "Widowed", label: "Widowed" },
-  { value: "Annulled", label: "Annulled" },
-];
 
 export default function LifeStyleDetails() {
 
-  const [Edit, setEdit] = useState(true);
+  const [Edit, setEdit] = useState(false);
   const [hobbies, setHobbies] = useState([]);
   const [interests, setInterests] = useState({});
   const [musicTypes, setMusicTypes] = useState([]);
