@@ -11,6 +11,7 @@ import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
 import MyProfile from './Components/MyProfile/MyProfile';
+import DesiredProfileDetails from './Components/DesiredProfile/DesiredProfileDetails';
 import PageNotFound from './Components/404-page';
 import RegisterHeader from './Components/Registration/RegisterHeader';
 import RegistrationStage from './Components/Registration/RegistrationStage';
@@ -68,6 +69,11 @@ function App() {
           <Route path="/myprofile" exact>
             <MainHeader />
             <MyProfile />
+            <MainFooter />
+          </Route>
+          <Route path="/desiredprofile" exact>
+            <MainHeader />
+            <DesiredProfileDetails />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>

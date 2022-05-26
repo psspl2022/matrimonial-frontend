@@ -67,45 +67,6 @@ function ProfileStage() {
 
   useEffect(() => {
     axios
-      .get(`${window.Url}api/basicDropdown`, headers_param)
-      .then(({ data }) => {
-        setCountries(
-          data.country.map(function (country) {
-            return { value: country.id, label: country.name };
-          })
-        );
-
-        setHeights(
-          data.height.map(function (height) {
-            return { value: height.id, label: height.height };
-          })
-        );
-
-        setMoths(
-          data.mother_tongue.map(function (mother_tongue) {
-            return {
-              value: mother_tongue.id,
-              label: mother_tongue.mother_tongue,
-            };
-          })
-        );
-
-        setReligions(
-          data.religion.map(function (religion) {
-            return { value: religion.id, label: religion.religion };
-          })
-        );
-
-        setCastes(
-          data.caste.map(function (caste) {
-            return { value: caste.id, label: caste.caste };
-          })
-        );
-      });
-  }, []);
-
-  useEffect(() => {
-    axios
       .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
       .then(({ data }) => {
         setStates(
