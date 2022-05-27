@@ -18,7 +18,7 @@ export default function AboutMe() {
   };
 
   useEffect(async () => {
-    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     await axios
       .get(`${window.Url}api/showAbout`, headers_param)
       .then(({ data }) => {

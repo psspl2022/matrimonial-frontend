@@ -76,7 +76,7 @@ export default function BasicDetails() {
   };
 
   useEffect(() => {
-    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     axios
       .get(`${window.Url}api/basicDropdown`, headers_param)
       .then(({ data }) => {
@@ -127,7 +127,7 @@ export default function BasicDetails() {
   }, []);
 
   useEffect(async() => {
-    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     await axios
       .get(`${window.Url}api/showBasic/${user}`, headers_param)
       .then(({ data }) => {

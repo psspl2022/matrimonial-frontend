@@ -90,7 +90,7 @@ const animatedComponents = makeAnimated();
   };
 
   useEffect(() => {
-    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     axios
       .get(`${window.Url}api/desiredDropdown`, headers_param)
       .then(({ data }) => {
