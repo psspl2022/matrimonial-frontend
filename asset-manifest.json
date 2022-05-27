@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/matrimonial-frontend/static/css/main.3978cc24.css",
+    "main.js": "/matrimonial-frontend/static/js/main.f1d1c1e6.js",
+    "static/js/787.3cbbf9d0.chunk.js": "/matrimonial-frontend/static/js/787.3cbbf9d0.chunk.js",
+    "index.html": "/matrimonial-frontend/index.html",
+    "main.3978cc24.css.map": "/matrimonial-frontend/static/css/main.3978cc24.css.map",
+    "main.f1d1c1e6.js.map": "/matrimonial-frontend/static/js/main.f1d1c1e6.js.map",
+    "787.3cbbf9d0.chunk.js.map": "/matrimonial-frontend/static/js/787.3cbbf9d0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3978cc24.css",
+    "static/js/main.f1d1c1e6.js"
+  ]
+}
