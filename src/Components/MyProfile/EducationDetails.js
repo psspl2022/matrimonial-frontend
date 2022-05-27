@@ -32,7 +32,7 @@ export default function EducationDetails() {
     },
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     axios
       .get(`${window.Url}api/careerDropdown`, headers_param)
       .then(({ data }) => {
