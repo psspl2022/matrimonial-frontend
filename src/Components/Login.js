@@ -109,13 +109,13 @@ function Login() {
                   <input
                     type="submit"
                     className="lr_btn"
-                    style={{ marginTop: "7rem" }}
                     onClick={(e) => {
                       if (!verified) {
                         e.preventDefault();
                       }
                     }}
                     value="Login"
+                    style={{marginTop: "7rem", cursor : verified===false ? "not-allowed" : "pointer" }}
                   />
                 </form>
                 <div className="done145">

@@ -67,6 +67,45 @@ function ProfileStage() {
 
   useEffect(() => {
     axios
+      .get(`${window.Url}api/basicDropdown`, headers_param)
+      .then(({ data }) => {
+        setCountries(
+          data.country.map(function (country) {
+            return { value: country.id, label: country.name };
+          })
+        );
+
+        setHeights(
+          data.height.map(function (height) {
+            return { value: height.id, label: height.height };
+          })
+        );
+
+        setMoths(
+          data.mother_tongue.map(function (mother_tongue) {
+            return {
+              value: mother_tongue.id,
+              label: mother_tongue.mother_tongue,
+            };
+          })
+        );
+
+        setReligions(
+          data.religion.map(function (religion) {
+            return { value: religion.id, label: religion.religion };
+          })
+        );
+
+        setCastes(
+          data.caste.map(function (caste) {
+            return { value: caste.id, label: caste.caste };
+          })
+        );
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
       .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
       .then(({ data }) => {
         setStates(
@@ -75,6 +114,8 @@ function ProfileStage() {
           })
         );
       });
+      const userName = JSON.parse(window.sessionStorage.getItem("user_data")).name;
+      setName(userName);
   }, [country]);
 
   useEffect(() => {
@@ -95,9 +136,10 @@ function ProfileStage() {
 
   const submitBasicDetails = async (e) => {
     e.preventDefault();
+    const userName = JSON.parse(window.sessionStorage.getItem("user_data")).name;
 
     const formData = new FormData();
-    formData.append("name", name);
+    formData.append("name", userName);
     formData.append("dob", date);
     formData.append("maritial_status", matrimonial.value);
     formData.append("religion", religion.value);
@@ -160,9 +202,7 @@ function ProfileStage() {
             placeholder="Enter Full Name"
             name="name"
             value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
+            disabled
             required
           />
         </div>

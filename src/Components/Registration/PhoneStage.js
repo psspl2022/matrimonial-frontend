@@ -39,7 +39,7 @@ function PhoneStage() {
   const formData = new FormData();
   formData.append("otp", otp);
 
-  const token = window.localStorage.getItem("access_token");
+  const token = window.sessionStorage.getItem("access_token");
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,

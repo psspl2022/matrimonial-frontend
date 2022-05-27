@@ -7,7 +7,7 @@ import MembershipPlan from './Components/MembershipPlan';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Switch } from 'react-router-dom';
 import SearchMatches from './Components/SearchMatches';
-import SignUp from './Components/SignUp';
+import RegistrationView from './Components/RegistrationView';
 import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
 import MyProfile from './Components/MyProfile/MyProfile';
@@ -38,7 +38,7 @@ function App() {
           </Route>
           <Route path="/signUp" exact>
             <MainHeader />
-            <SignUp />
+            <RegistrationView />
             <MainFooter />
           </Route>
           <Route path="/login" exact>
