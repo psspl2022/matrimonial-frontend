@@ -127,7 +127,7 @@ function Banner() {
                     </OwlCarousel> */}
                 {/* </div> */}
                 <div className="col-md-12 p-0">
-                    <img src="matrimonial_banner2.jpg" style={{width:'100%',maxHeight:'600px'}} alt="" />
+                    <img src={ process.env.PUBLIC_URL + "/matrimonial_banner2.jpg"} style={{width:'100%',maxHeight:'600px'}} alt="" />
                     <div className="d-none">
                         <div className="container">
                             <div className="row">

@@ -56,7 +56,7 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src="successmatch1.jpg"
+                            src={ process.env.PUBLIC_URL + "/successmatch1.jpg"}
                             alt=""
                           />
                           <div className="job-urs-dts">
@@ -118,7 +118,7 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src="successmatch2.jpg"
+                            src={ process.env.PUBLIC_URL + "/successmatch2.jpg"}
                             alt=""
                           />
                           <div className="job-urs-dts">
@@ -180,7 +180,7 @@ export default function SuccessMatches(){
                       <div className="job-top-dt1 text-center">
                         <div className="job-center-dt">
                           <img
-                            src="successmatch3.jpg"
+                            src={ process.env.PUBLIC_URL + "/successmatch3.jpg"}
                             alt=""
                           />
                           <div className="job-urs-dts">
