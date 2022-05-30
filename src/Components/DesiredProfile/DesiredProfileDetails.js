@@ -92,7 +92,6 @@ function DesiredProfileDetails(){
   const [height, setHeight] = useState({});
   const [countries, setCountries] = useState({});  
   const [moths, setMoths] = useState([]);
-<<<<<<< Updated upstream
   const [religions, setReligions] = useState([]);
   const [castes, setCastes] = useState([]);
   const [highests, setHighest] = useState([]); 
@@ -120,24 +119,6 @@ function DesiredProfileDetails(){
   const[smoking, setSmoking] = useState([]);
   const[challenge, setChallenge] = useState([]);
   const[about, setAbout] = useState("");
-=======
-  const [religion, setReligions] = useState([]);
-  const [caste, setCastes] = useState([]);
-  const [highest, setHighest] = useState([]); 
-  const [residencies, setResidencies] = useState([]);
-  const [occupation, setOccupations] = useState([]);
-
-
-  const[data1, setData1] =  useState({
-    minage:"",
-    maxage: "",
-    minheight: "",
-    maxheight: "",
-    marital: "",
-    country: "",
-    residence: ""
-});
->>>>>>> Stashed changes
    
 let history = useHistory();
 const token = window.sessionStorage.getItem('access_token');
@@ -148,15 +129,6 @@ const headers_data = {
         'Content-Type': 'application/json'
     }
 }
-<<<<<<< Updated upstream
-=======
-
-const {minage,maxage,minheight,maxheight,marital,country,residence} = data1;
-const onInputChange = (e) => {
-setData1({ ...data1, [e.target.name]:e.target.value});
-}
-
->>>>>>> Stashed changes
 
   useEffect(() => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
@@ -227,7 +199,6 @@ setData1({ ...data1, [e.target.name]:e.target.value});
   })
 }, []);
 
-<<<<<<< Updated upstream
 useEffect(async () => {
   // const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
   await axios
@@ -326,23 +297,13 @@ e.preventDefault();
 
   axios
   .post(`${window.Url}api/desiredBasic`,formData, headers_data)
-=======
-
-const addDesiredBasic = () => {
-  axios
-  .post(`${window.Url}api/desiredBasic`,data1, headers_data)
->>>>>>> Stashed changes
   .then(response => {
       if (response.data.hasOwnProperty("msg")) {
           Swal.fire({
             icon: "success",
             title: response.data.msg,
           });
-<<<<<<< Updated upstream
           history.replace("/desiredProfile");
-=======
-          // history.replace("/desiredProfile");
->>>>>>> Stashed changes
         } else {
           Swal.fire({
             icon: "error",
@@ -353,7 +314,6 @@ const addDesiredBasic = () => {
   )
 }
 
-<<<<<<< Updated upstream
 const addDesiredReligion = (e) => {
   e.preventDefault();
     const formData = new FormData();
@@ -459,8 +419,6 @@ const addDesiredAbout = (e) => {
     )
 }
 
-=======
->>>>>>> Stashed changes
     return(
         <>
         <div className="container-fluid row">
@@ -499,16 +457,10 @@ const addDesiredAbout = (e) => {
                           <div className="col-lg-6 pr-1">
                             <Select
                               closeMenuOnSelect={false}
-<<<<<<< Updated upstream
                               components={animatedComponents}                                                  
                               onChange={(e) =>
                                 setMiniage(e)
                               }
-=======
-                              components={animatedComponents}
-                              name="minage"
-                              onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                               defaultValue=""
                               options={age}  
                               placeholder="Select Min"    
@@ -518,14 +470,9 @@ const addDesiredAbout = (e) => {
                             <Select
                             closeMenuOnSelect={false}
                             components={animatedComponents}
-<<<<<<< Updated upstream
                             onChange={(e) =>
                               setMaxiage(e)
                             }
-=======
-                            name="maxage"
-                            onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                             defaultValue=""
                             placeholder="Select Max" 
                             options={age}  
@@ -542,14 +489,9 @@ const addDesiredAbout = (e) => {
                             <Select
                               closeMenuOnSelect={false}
                               components={animatedComponents}
-<<<<<<< Updated upstream
                               onChange={(e) =>
                                 setMiniheight(e)
                               }
-=======
-                              name="minheight"
-                              onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                               defaultValue=""
                               options={height}
                               placeholder="Select Min"    
@@ -559,14 +501,9 @@ const addDesiredAbout = (e) => {
                             <Select
                             closeMenuOnSelect={false}
                             components={animatedComponents}
-<<<<<<< Updated upstream
                             onChange={(e) =>
                               setMaxiheight(e)
                             }
-=======
-                            name="maxheight"
-                            onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                             defaultValue=""
                             options={height}
                             placeholder="Select Max"   
@@ -581,12 +518,7 @@ const addDesiredAbout = (e) => {
                         <Select
                           closeMenuOnSelect={false}
                           components={animatedComponents}
-<<<<<<< Updated upstream
                           onChange={handleMarital}                        
-=======
-                          name="marital"
-                          onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                           defaultValue=""
                           isMulti
                           options={maritalOptions}
@@ -600,12 +532,7 @@ const addDesiredAbout = (e) => {
                         <Select
                           closeMenuOnSelect={false}
                           components={animatedComponents}
-<<<<<<< Updated upstream
                           onChange={handleCountry} 
-=======
-                          name="country"
-                          onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                           defaultValue=""
                           isMulti
                           options={countries}
@@ -619,12 +546,7 @@ const addDesiredAbout = (e) => {
                         <Select
                           closeMenuOnSelect={false}
                           components={animatedComponents}
-<<<<<<< Updated upstream
                           onChange={handleResidence}
-=======
-                          name="residence"
-                          onChange={e => onInputChange(e)}
->>>>>>> Stashed changes
                           defaultValue=""
                           isMulti
                           options={residencies}
