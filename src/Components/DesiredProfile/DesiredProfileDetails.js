@@ -9,27 +9,6 @@ function DesiredProfileDetails(){
 
   const animatedComponents = makeAnimated();
   
-  const age = [
-    { value: "21", label: "21" },
-    { value: "22", label: "22 " },
-    { value: "23", label: "23 " },
-    { value: "24", label: "24" },
-    { value: "25", label: "25 " },
-    { value: "26", label: "26 " },
-    { value: "27", label: "27 " },
-    { value: "28", label: "28 " },
-    { value: "29", label: "29 " },
-    { value: "30", label: "30 " },
-    { value: "31", label: "31 " },
-    { value: "32", label: "32 " },
-    { value: "33", label: "33 " },
-    { value: "34", label: "34 " },
-    { value: "35", label: "35 " },
-    { value: "36", label: "36 " },
-    { value: "37", label: "36 " },
-    { value: "33", label: "38 " },
-  ];
-
   const income = [
     { value: "0", label: "0 Lakh" },
     { value: "1", label: "1 Lakh" },
@@ -88,7 +67,8 @@ function DesiredProfileDetails(){
     { value: "2", label: "Mentally" },
   ];
 
-  const [Edit, setEdit] = useState(false);
+ 
+  const [age, setAge] = useState({});
   const [height, setHeight] = useState({});
   const [countries, setCountries] = useState({});  
   const [moths, setMoths] = useState([]);
@@ -119,6 +99,20 @@ function DesiredProfileDetails(){
   const[smoking, setSmoking] = useState([]);
   const[challenge, setChallenge] = useState([]);
   const[about, setAbout] = useState("");
+  
+  const [selectMarital, setSelectMarital] = useState("");
+  const [selectCountry, setSelectCountry] = useState("");
+  const [selectResidence, setSelectResidence] = useState("");
+  const [selectReligion, setSelectReligion] = useState("");
+  const [selectCaste, setSelectCaste] = useState("");
+  const [selectMother, setSelectMother] = useState("");
+  const [selectManglik, setSelectManglik] = useState("");
+  const [selectEducation, setSelectEducation] = useState("");
+  const [selectOccupation, setSelectOccupation] = useState("");
+  const [selectDiet, setSelectDiet] = useState("");
+  const [selectDrink, setSelectDrink] = useState("");
+  const [selectSmoke, setSelectSmoke] = useState("");
+  const [selectChallenge, setSelectChallenge] = useState("");
    
 let history = useHistory();
 const token = window.sessionStorage.getItem('access_token');
@@ -138,6 +132,12 @@ const headers_data = {
         setCountries(
           data.country.map(function (country) {
             return { value: country.id, label: country.name };
+          })
+        );
+
+        setAge(
+          data.age.map(function (age) {
+            return { value: age.id, label: age.age };
           })
         );
 
@@ -200,88 +200,263 @@ const headers_data = {
 }, []);
 
 useEffect(async () => {
-  // const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
   await axios
     .get(`${window.Url}api/showDesiredDetails`, headers_data)
     .then(({ data }) => {
-      setDiet(
-        dietaryOptions.filter((diet_data)=>{
-          if(diet_data.value===data.diett){
-            return diet_data;
-        } 
+      setMiniage(
+        age.filter((minage) => {
+          if (minage.value == data.min_age) {
+            return minage;
+          }
         })[0]
+      );
+
+      setMaxiage(
+        age.filter((maxage) => {
+          if (maxage.value == data.max_age) {
+            return maxage;
+          }
+        })[0]
+      );
+
+      setMiniheight(
+        height.filter((minheight) => {
+          if (minheight.value == data.min_height) {
+            return minheight;
+          }
+        })[0]
+      );
+
+      setMaxiheight(
+        height.filter((maxheight) => {
+          if (maxheight.value == data.max_height) {
+            return maxheight;
+          }
+        })[0]
+      );
+
+      setSelectMarital(        
+        maritalOptions.filter((marital_data)=>{
+          if(data.marital != null){
+            if(data.marital.split(",").map(Number).includes(marital_data.value)){
+              return marital_data;              
+            } 
+          }
+        })
+      );
+
+      setSelectCountry(        
+        countries.filter((country_data)=>{
+          if(data.country != null){
+            if(data.country.split(",").map(Number).includes(country_data.value)){
+              return country_data;              
+            } 
+          }
+        })
+      );   
+
+      setSelectResidence(        
+        residencies.filter((residence_data)=>{  
+          if(data.residential != null){      
+            if(data.residential.split(",").map(Number).includes(residence_data.value)){
+              return residence_data;              
+            } 
+          }
+        })
+      );
+
+      setSelectReligion(        
+        religions.filter((religion_data)=>{ 
+          if(data.religion != null){       
+            if(data.religion.split(",").map(Number).includes(religion_data.value)){
+              return religion_data;              
+            } 
+          } 
+        })
+      );
+
+      setSelectCaste(        
+        castes.filter((caste_data)=>{  
+          if(data.caste != null){
+            if(data.caste.split(",").map(Number).includes(caste_data.value)){
+              return caste_data;              
+            }
+          } 
+        })
+      );
+
+      setSelectMother(        
+        moths.filter((mother_data)=>{  
+          if(data.mother_tongue != null){      
+            if(data.mother_tongue.split(",").map(Number).includes(mother_data.value)){
+              return mother_data;              
+            } 
+          }
+        })
+      );
+
+      setSelectManglik(        
+        manglikOptions.filter((manglik_data)=>{   
+          if(data.manglik != null){     
+            if(data.manglik.split(",").map(Number).includes(manglik_data.value)){
+              return manglik_data;              
+            } 
+          } 
+        })
+      );
+
+      setSelectEducation(        
+        highests.filter((education_data)=>{ 
+          if(data.highest_education != null){       
+            if(data.highest_education.split(",").map(Number).includes(education_data.value)){
+              return education_data;              
+            } 
+          }
+        })
+      );
+
+      setSelectOccupation(        
+        occupations.filter((occupation_data)=>{        
+            if(data.occupation.split(",").map(Number).includes(occupation_data.value)){
+              return occupation_data;              
+            } 
+        })
+      );
+
+      setMinincome(
+        income.filter((mininc) => {
+          if (mininc.value == data.min_income) {
+            return mininc;
+          }
+        })[0]
+      );
+
+      setMaxincome(
+        income.filter((maxinc) => {
+          if (maxinc.value == data.max_income) {
+            return maxinc;
+          }
+        })[0]
+      );
+
+      setSelectDiet(
+        dietaryOptions.filter((diet_data)=>{
+          if(data.diet.split(",").includes(diet_data.value)){
+            return diet_data;
+          } 
+        })
+      );
+
+        setSelectDrink(        
+          drinkingOptions.filter((drink_data)=>{
+            if(data.drinking.split(",").includes(drink_data.value)){
+              return drink_data;              
+            } 
+          })
         );
+
+        setSelectSmoke(        
+          smokingOptions.filter((smoke_data)=>{
+            if(data.smoking.split(",").includes(smoke_data.value)){
+              return smoke_data;              
+            } 
+          })
+        );
+
+        setSelectChallenge(             
+          ChallengedOptions.filter((challenge_data)=>{
+            if(data.challenged != null){
+            if(data.challenged.split(",").map(Number).includes(challenge_data.value)){
+              return challenge_data;              
+            } 
+          }
+          })
+        );
+
+        // console.log("disha"+ data.about_desired)
        
-        // setSchooling(data.schooling);
-        // setUGColg(data.ug_clg);
-        // setPGColg(data.pg_clg);
-        // setOrg(data.organization_name);
+        setAbout(data.about_desired);
+        
     });
-}, [challenge]);
+
+}, [occupations]);
 
 const handleMarital = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setMarital(value);
+  setSelectMarital(e);
 }
 
 const handleCountry = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setCountry(value);
+  setSelectCountry(e);
 }
 
 const handleResidence = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setResidence(value);
+  setSelectResidence(e);
 }
 
 const handleReligion = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setReligion(value);
+  setSelectReligion(e);
 }
 
 const handleMothertongue = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setMothertongue(value);
+  setSelectMother(e);
 }
 
 const handleCaste = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setCaste(value);
+  setSelectCaste(e);
 }
 
 const handleManglik = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setManglik(value);
+  setSelectManglik(e);
 }
 
 const handleEducation = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setEducation(value);
+  setSelectEducation(e);
 }
 
 const handleOccupation = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setOccupation(value);
+  setSelectOccupation(e);
 }
 
 const handleDiet = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setDiet(value);
+  setSelectDiet(e)
 }
 
 const handleDrink = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setDrinking(value);
+  setSelectDrink(e);
 }
 
 const handleSmoke = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setSmoking(value);
+  setSelectSmoke(e);
 }
 
 const handleChallenge = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
   setChallenge(value);
+  setSelectChallenge(e);
 }
 
 const addDesiredBasic = (e) => {
@@ -367,7 +542,7 @@ const addDesiredCareer = (e) => {
       }
     )
 }
-
+;
 const addDesiredLifestyle = (e) => {
   e.preventDefault();
     const formData = new FormData();
@@ -461,7 +636,7 @@ const addDesiredAbout = (e) => {
                               onChange={(e) =>
                                 setMiniage(e)
                               }
-                              defaultValue=""
+                              value={miniage}
                               options={age}  
                               placeholder="Select Min"    
                             />
@@ -473,9 +648,11 @@ const addDesiredAbout = (e) => {
                             onChange={(e) =>
                               setMaxiage(e)
                             }
-                            defaultValue=""
-                            placeholder="Select Max" 
                             options={age}  
+                            // isOptionDisabled={defaultValue <= miniage ? true : false}
+                            value={maxiage}
+                            placeholder="Select Max" 
+                            
                           />
                           </div>
                         </div>
@@ -492,7 +669,7 @@ const addDesiredAbout = (e) => {
                               onChange={(e) =>
                                 setMiniheight(e)
                               }
-                              defaultValue=""
+                              value={miniheight}
                               options={height}
                               placeholder="Select Min"    
                             />
@@ -504,7 +681,7 @@ const addDesiredAbout = (e) => {
                             onChange={(e) =>
                               setMaxiheight(e)
                             }
-                            defaultValue=""
+                            value={maxiheight}
                             options={height}
                             placeholder="Select Max"   
                           />
@@ -519,7 +696,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleMarital}                        
-                          defaultValue=""
+                          value={selectMarital}
                           isMulti
                           options={maritalOptions}
                           placeholder="Select Marital Status"   
@@ -533,7 +710,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleCountry} 
-                          defaultValue=""
+                          value={selectCountry}
                           isMulti
                           options={countries}
                           placeholder="Select Country"   
@@ -547,7 +724,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleResidence}
-                          defaultValue=""
+                          value={selectResidence}
                           isMulti
                           options={residencies}
                           placeholder="Select Reidence"   
@@ -581,7 +758,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleReligion}
-                          defaultValue=""
+                          value={selectReligion}
                           isMulti
                           options={religions}
                           placeholder="Select Religion"   
@@ -595,7 +772,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleCaste}
-                          defaultValue=""
+                          value={selectCaste}
                           isMulti
                           options={castes}
                           placeholder="Select Caste"   
@@ -609,7 +786,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleMothertongue}
-                          defaultValue=""
+                          value={selectMother}
                           isMulti
                           options={moths}
                           placeholder="Select Mother Tongue"   
@@ -623,7 +800,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleManglik}
-                          defaultValue=""
+                          value={selectManglik}
                           isMulti
                           options={manglikOptions}
                           placeholder="Select Manglik"   
@@ -658,10 +835,10 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleEducation}
-                          defaultValue=""
+                          value={selectEducation}
                           isMulti
                           options={highests}
-                          placeholder="Select Favourite Movies"   
+                          placeholder="Select Highest Education"   
                         />
                       </div>
                     </div>
@@ -672,10 +849,10 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleOccupation}
-                          defaultValue=""
+                          value={selectOccupation}
                           isMulti
                           options={occupations}
-                          placeholder="Select Favourite Movies"   
+                          placeholder="Select Occupation"   
                         />
                       </div>
                     </div>
@@ -690,7 +867,7 @@ const addDesiredAbout = (e) => {
                               onChange={(e) =>
                                 setMinincome(e)
                               }
-                              defaultValue=""
+                              value={minincome}
                               options={income}
                               placeholder="Select Min"    
                             />
@@ -702,7 +879,7 @@ const addDesiredAbout = (e) => {
                             onChange={(e) =>
                               setMaxincome(e)
                             }
-                            defaultValue=""
+                            value={maxincome}
                             options={income}
                             placeholder="Select Max"   
                           />
@@ -737,7 +914,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleDiet}
-                          value={diet}
+                          value={selectDiet}
                           isMulti
                           options={dietaryOptions}
                           placeholder="Select"   
@@ -751,7 +928,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleDrink}
-                          defaultValue=""
+                          value={selectDrink}
                           isMulti
                           options={drinkingOptions}
                           placeholder="Select "   
@@ -765,7 +942,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleSmoke}
-                          defaultValue=""
+                          value={selectSmoke}
                           isMulti
                           options={smokingOptions}
                           placeholder="Select "   
@@ -779,7 +956,7 @@ const addDesiredAbout = (e) => {
                           closeMenuOnSelect={false}
                           components={animatedComponents}
                           onChange={handleChallenge}
-                          defaultValue=""
+                          value={selectChallenge}
                           isMulti
                           options={ChallengedOptions}
                           placeholder="Select "   
@@ -810,9 +987,11 @@ const addDesiredAbout = (e) => {
                       <div className="form-group">
                         <label className="label15">About Desired Partner</label>
                         <textarea
-                        onChange={(e) =>
-                          setAbout(e.target.value)
+                        onChange={(e) => {
+                          setAbout(e.target.value);
                         }
+                        }
+                        value={about}
                           className="job-input pt-2"
                           placeholder="Enter About Desired Partner"
                           >
