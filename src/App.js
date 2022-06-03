@@ -17,6 +17,7 @@ import RegisterHeader from './Components/Registration/RegisterHeader';
 import RegistrationStage from './Components/Registration/RegistrationStage';
 import CareerStage from './Components/Registration/CareerStage';
 import FamilyStage from './Components/Registration/FamilyStage';
+import SignUp from './Components/SignUp';
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
           </Route>
           <Route path="/signUp" exact>
             <MainHeader />
-            <RegistrationView />
+            <SignUp />
             <MainFooter />
           </Route>
           <Route path="/login" exact>

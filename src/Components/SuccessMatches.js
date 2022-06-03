@@ -424,7 +424,7 @@ export default function SuccessMatches(){
                 <div className="text-center">
                   <button
                     className="view-links"
-                    onclick="window.location.href = '#';"
+                    onClick="window.location.href = '#';"
                   >
                     SEE ALL SUCCESS MATCHES
                   </button>

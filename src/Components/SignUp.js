@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Select from "react-select";
 import { useHistory } from "react-router-dom";
+import CheckTokenExist from "./CheckTokenExist";
 // import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
@@ -26,6 +27,8 @@ function SignUp() {
   const [passError, setPassError] = useState(false);
   const [validationError,setValidationError] = useState({});
 
+  const {userExists} = CheckTokenExist();
+  
   const profileForOptions = [
     { value: "Self", label: "Self" },
     { value: "Son", label: "Son" },
@@ -35,6 +38,13 @@ function SignUp() {
     { value: "Relative", label: "Relative" },
     { value: "Client - Marriage Bureau", label: "Client - Marriage Bureau" },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if(userExists){
+      history.replace("/myprofile");
+    }
+  }, []);
 
   function onChange(value) {
     setverified(true);

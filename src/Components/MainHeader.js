@@ -4,6 +4,7 @@ import "../App.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import TawkTo from 'tawkto-react';
 
 function MainHeader() {
   const [show, setShow] = useState(false);
@@ -19,6 +20,18 @@ function MainHeader() {
     // 	window.removeEventListener('scroll', isSticky);
     // };
   });
+//   useEffect(() => {
+//     if(token.length != 0){
+//     var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
+
+//     tawk.onStatusChange((status) => 
+//     {
+//       // tawk.minimize();
+//         // console.log(status)
+//     })
+//   }
+
+// }, [])
 
   useEffect(() => {
     if (sessionStorage.hasOwnProperty("access_token")) {
@@ -50,6 +63,16 @@ function MainHeader() {
           });
         }
       });
+
+      if(token){
+        var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
+    
+        tawk.onStatusChange((status) => 
+        {
+          // tawk.minimize();
+        })
+      }
+    
   }, []);
 
   const logout = async (e) => {
