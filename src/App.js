@@ -18,6 +18,7 @@ import RegistrationStage from './Components/Registration/RegistrationStage';
 import CareerStage from './Components/Registration/CareerStage';
 import FamilyStage from './Components/Registration/FamilyStage';
 import SignUp from './Components/SignUp';
+import MembershipDetails from './Components/Membership/MembershipDetails';
 
 function App() {
   return (
@@ -75,6 +76,11 @@ function App() {
           <Route path="/desiredprofile" exact>
             <MainHeader />
             <DesiredProfileDetails />
+            <MainFooter />
+          </Route>
+          <Route path="/membershipDetail/:package_id" exact>
+            <MainHeader />
+            <MembershipDetails />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>

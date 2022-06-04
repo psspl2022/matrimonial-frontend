@@ -9,8 +9,8 @@ import { Provider } from 'react-redux';
 store.subscribe(() => console.log(store.getState()));
 
 window.AppName = "Namdeo Matrimonial";
-// window.Url = "http://127.0.0.1:8000/";
-window.Url = "https://namdeomatrimony.com/matrimonial-backend/";
+window.Url = "http://127.0.0.1:8000/";
+// window.Url = "https://namdeomatrimony.com/matrimonial-backend/";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
