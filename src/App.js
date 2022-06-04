@@ -1,24 +1,25 @@
-import MainFooter from './Components/MainFooter';
-import Banner from './Components/Banner';
-import LatestMatch from './Components/LatestMatch';    
-import MainHeader from './Components/MainHeader';
-import SuccessMatches from './Components/SuccessMatches';
-import MembershipPlan from './Components/MembershipPlan';
+import MainFooter from "./Components/MainFooter";
+import Banner from "./Components/Banner";
+import LatestMatch from "./Components/LatestMatch";
+import MainHeader from "./Components/MainHeader";
+import SuccessMatches from "./Components/SuccessMatches";
+import MembershipPlan from "./Components/MembershipPlan";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Switch } from 'react-router-dom';
-import SearchMatches from './Components/SearchMatches';
-import RegistrationView from './Components/RegistrationView';
-import Login from './Components/Login';
-import ForgetPassword from './Components/ForgetPassword';
-import MyProfile from './Components/MyProfile/MyProfile';
-import DesiredProfileDetails from './Components/DesiredProfile/DesiredProfileDetails';
-import PageNotFound from './Components/404-page';
-import RegisterHeader from './Components/Registration/RegisterHeader';
-import RegistrationStage from './Components/Registration/RegistrationStage';
-import CareerStage from './Components/Registration/CareerStage';
-import FamilyStage from './Components/Registration/FamilyStage';
-import SignUp from './Components/SignUp';
-import MembershipDetails from './Components/Membership/MembershipDetails';
+import { Switch } from "react-router-dom";
+import SearchMatches from "./Components/SearchMatches";
+import RegistrationView from "./Components/RegistrationView";
+import Login from "./Components/Login";
+import ForgetPassword from "./Components/ForgetPassword";
+import MyProfile from "./Components/MyProfile/MyProfile";
+import DesiredProfileDetails from "./Components/DesiredProfile/DesiredProfileDetails";
+import DesiredList from "./Components/DesiredProfile/DesiredList";
+import PageNotFound from "./Components/404-page";
+import RegisterHeader from "./Components/Registration/RegisterHeader";
+import RegistrationStage from "./Components/Registration/RegistrationStage";
+import CareerStage from "./Components/Registration/CareerStage";
+import FamilyStage from "./Components/Registration/FamilyStage";
+import SignUp from "./Components/SignUp";
+import MembershipDetails from "./Components/Membership/MembershipDetails";
 
 function App() {
   return (
@@ -81,6 +82,10 @@ function App() {
           <Route path="/membershipDetail/:package_id" exact>
             <MainHeader />
             <MembershipDetails />
+          </Route>
+          <Route path="/desiredList" exact>
+            <MainHeader />
+            <DesiredList />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>
