@@ -1430,6 +1430,10 @@ span.right-cm {
 	margin-bottom: 18px;
 }
 
+.job-item:hover .job-buttons{
+    background:  #757575!important;
+
+}
 .job-skills {
     float: left;
     width: 100%;
@@ -1466,12 +1470,13 @@ span.right-cm {
 }
 
 .link-btn {
+    padding: 6px 0;
 	width: 100%;
     float: left;
 }
 
 .link-btn li {
-	width: 40%;
+	width:25%;
     text-align: center;
     float: left;
 }
@@ -1486,10 +1491,10 @@ span.right-cm {
 	border-right: 0 !important;
 }
 
-.link-btn li:nth-child(2) {
+/* .link-btn li:nth-child(2) {
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
-}
+} */
 
 .link-j1 {
 	font-size: 14px;
@@ -1510,19 +1515,19 @@ span.right-cm {
 }
 
 .bkd-pm {
-    padding: 10px 0;
+    padding: 2px 0;
 }
 
 .bookmark1 {
 	border: 1px solid #e5e5e5;
 	background: #fff;
-	padding: 8px 0;
+	padding: 9px 0;
 	text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     color: #757575;
     border-radius: 100%;
-    height: 30px;
-    width: 30px;
+    height: 38px;
+    width: 38px;
 }
 
 .bookmark1:hover {

@@ -12,6 +12,7 @@ import Login from './Components/Login';
 import ForgetPassword from './Components/ForgetPassword';
 import MyProfile from './Components/MyProfile/MyProfile';
 import DesiredProfileDetails from './Components/DesiredProfile/DesiredProfileDetails';
+import DesiredList from './Components/DesiredProfile/DesiredList';
 import PageNotFound from './Components/404-page';
 import RegisterHeader from './Components/Registration/RegisterHeader';
 import RegistrationStage from './Components/Registration/RegistrationStage';
@@ -74,6 +75,11 @@ function App() {
           <Route path="/desiredprofile" exact>
             <MainHeader />
             <DesiredProfileDetails />
+            <MainFooter />
+          </Route>
+          <Route path="/desiredList" exact>
+            <MainHeader />
+            <DesiredList />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>
