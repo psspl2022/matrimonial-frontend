@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import CheckTokenExist from "./CheckTokenExist";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,13 @@ function Login() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  const {userExists} = CheckTokenExist();
+  useEffect(() => {
+    if(userExists){
+      history.replace("/myprofile");
+    }
   }, []);
 
   const [verified, setverified] = useState(false);

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import makeAnimated from "react-select/animated";
+import CheckTokenExist from "../CheckTokenExist";
 
 function DesiredProfileDetails(){
 
@@ -115,6 +116,14 @@ function DesiredProfileDetails(){
   const [selectChallenge, setSelectChallenge] = useState("");
    
 let history = useHistory();
+
+const {userExists} = CheckTokenExist();
+  useEffect(() => {
+    if(!userExists){
+      history.replace("/login");
+    }
+  }, []);
+
 const token = window.sessionStorage.getItem('access_token');
 const headers_data = {
     headers: {
@@ -125,7 +134,7 @@ const headers_data = {
 }
 
   useEffect(() => {
-    const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios
       .get(`${window.Url}api/desiredDropdown`, headers_data)
       .then(({ data }) => {
