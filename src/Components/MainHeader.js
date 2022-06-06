@@ -385,14 +385,32 @@ function MainHeader() {
 													<a className="link-item" href="post_a_job.html">Post a Match</a>
 												</div> */}
                       </li>
+                      {token.length != 0 && (
                       <li className="nav-item dropdown">
+                      <a
+                          href="#"
+                          className="nav-link dropdown-toggle-no-caret"
+                          role="button"
+                          data-toggle="dropdown"
+                        >
+                          Desired Profile
+                        </a>
+                        <div className="dropdown-menu pages-dropdown">
                         <NavLink
                           to="/desiredprofile"
-                          className="nav-link"
+                          className="link-item"
                           role="button"
                         >
                           Desired Profile
                         </NavLink>
+                        <NavLink
+                          to="/desiredlist"
+                          className="link-item"
+                          role="button"
+                        >
+                          Desired Profile List
+                        </NavLink>
+                        </div>
                         {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
                         {/* <div className="dropdown-menu pages-dropdown">
 													<a className="link-item" href="browse_projects.html">Browse Matches</a>
@@ -400,6 +418,7 @@ function MainHeader() {
                         {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
                         {/* </div> */}
                       </li>
+                      ) }
                       <li className="nav-item dropdown">
                         <a
                           href="#"

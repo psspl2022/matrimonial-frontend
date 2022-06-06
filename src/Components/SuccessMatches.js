@@ -1,6 +1,7 @@
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import bgimage from "../success_bg.jpg";
 export default function SuccessMatches(){
 
   const options = {
@@ -33,7 +34,7 @@ export default function SuccessMatches(){
 
     return (
         <>
-            <div className="featured-candidates">
+            <div className="featured-candidates" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-12">

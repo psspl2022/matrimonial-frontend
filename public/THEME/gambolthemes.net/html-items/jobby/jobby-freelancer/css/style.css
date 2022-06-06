@@ -15,6 +15,11 @@ Table Of Content
 /* ================================================================================== 
 Fonts
 ===================================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display+SC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap');
 /* ================================================================================== 
 Reset Css
@@ -39,6 +44,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    /* font-family: 'Cinzel', serif; */
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -1320,10 +1326,11 @@ span.right-cm {
 }
 
 .job-item {
-	background:#fff;
+	background:#e5e5e5;
 	border: 1px solid #e5e5e5;
 	width: 100%;
 	float: left;
+    border-radius: 10px;
 }
 
 .job-item:hover {
@@ -7286,4 +7293,7 @@ span.right-cm {
 .print_btn:hover {
 	background: #242424;
 	color: #fff !important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 }

@@ -92,7 +92,7 @@ export default function SearchResult() {
                                             </div>
                                         </div>
                                         <div className="job-buttons">
-                                            <ul className="link-btn">
+                                            {/* <ul className="link-btn">
                                                 <li>
                                                     <a href="#" className="link-j1" title="Message"
                                                     >Message</a
@@ -108,6 +108,41 @@ export default function SearchResult() {
                                                 </li>
                                                 <li className="bkd-pm">
                                                     <button className="bookmark1" title="Mark Favourite">
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul> */}
+                                            <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
                                                         <i className="fas fa-heart"></i>
                                                     </button>
                                                 </li>
@@ -138,7 +173,7 @@ export default function SearchResult() {
                                             </div>
                                         </div>
                                         <div className="job-buttons">
-                                            <ul className="link-btn">
+                                            {/* <ul className="link-btn">
                                                 <li>
                                                     <a href="#" className="link-j1" title="Message"
                                                     >Message</a
@@ -154,6 +189,41 @@ export default function SearchResult() {
                                                 </li>
                                                 <li className="bkd-pm">
                                                     <button className="bookmark1" title="Mark Favourite">
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul> */}
+                                            <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
                                                         <i className="fas fa-heart"></i>
                                                     </button>
                                                 </li>

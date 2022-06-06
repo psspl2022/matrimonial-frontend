@@ -3,10 +3,10 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { NavLink } from 'react-router-dom';
+import bgimage from "../match_bg1.jpg";
 
 function LatestMatch() {
 
-    
     
   const options = {
     margin: 30,
@@ -38,13 +38,13 @@ function LatestMatch() {
 
     return (
         <>
-            <div className="find-lts-jobs mb-5">
+            <div className="find-lts-jobs mb-5" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'inset 0 0 0 2000px rgb(223 87 111 / 58%)', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 col-12">
                             <div className="main-heading">
-                                <h2>Latest Match</h2>
-                                <span>Match for a Future</span>
+                                <h1 className='text-white font-weight-bold'>Latest Match</h1>
+                                <span style={{ color: 'black' }}>Match for a Future</span>
                                 <div className="line-shape1">
                                     <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/line.svg" } alt="" />
                                 </div>
@@ -78,7 +78,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -97,7 +97,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,7 +158,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -142,7 +177,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,7 +238,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -187,7 +257,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -213,7 +318,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -232,7 +337,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -258,7 +398,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -277,7 +417,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,7 +482,7 @@ function LatestMatch() {
                                                     </div>
                                                 </div>
                                                 <div className="job-buttons">
-                                                    <ul className="link-btn">
+                                                    {/* <ul className="link-btn">
                                                         <li>
                                                             <a href="#" className="link-j1" title="Message"
                                                             >Message</a
@@ -326,7 +501,42 @@ function LatestMatch() {
                                                                 <i className="fas fa-heart"></i>
                                                             </button>
                                                         </li>
-                                                    </ul>
+                                                    </ul> */}
+                                                    <ul className="link-btn">
+                                                {/* <li>
+                                                    <a href="#" className="link-j1" title="Message"
+                                                    >Message</a
+                                                    >
+                                                </li> */}
+                                                {/* <li>
+                                                    <a
+                                                        href="job_single_view.html"
+                                                        className="link-j1"
+                                                        title="View Details"
+                                                    >View Details</a
+                                                    >
+                                                </li> */}
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-envelope 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-comment 2x"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star"></i>
+                                                    </button>
+                                                </li>
+                                                <li className="bkd-pm">
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-heart"></i>
+                                                    </button>
+                                                </li>
+                                            </ul>
                                                 </div>
                                             </div>
                                         </div>

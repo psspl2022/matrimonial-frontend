@@ -13,7 +13,8 @@ body{
   color: #ff0049;
 }
 .find-lts-jobs{
-  background-color: #fff;
+  /* background-color: #fff; */
+  /* background-image: url('../public/matches_bg.jpg'); */
 }
 .membership-plan .plan-heading{
   /* width: 100%; */
