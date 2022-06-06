@@ -2,6 +2,7 @@ import SearchFilters from "../SearchFilters";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function DesiredList() {
     const [grid, setGrid] = useState(false);
@@ -16,14 +17,64 @@ export default function DesiredList() {
         }
     }
 
-    useEffect(async () => {
-        await axios
-          .get(`${window.Url}api/showDesiredProfiles`,headers_data)
-          .then(({ data }) => {
-                setData(data)
-          });
-      
+    useEffect(() => {
+        showDesiredProfiles();      
       }, []);
+
+
+    function showDesiredProfiles(){
+        axios
+        .get(`${window.Url}api/showDesiredProfiles`,headers_data)
+        .then(({ data }) => {
+                setData(data)
+        });
+    }
+
+    const sendIntrest = (id) => {
+        const update = {
+            id: id
+        }
+        axios
+            .post(`${window.Url}api/sendIntrest`, update, headers_data)
+            .then(response => {
+                if (response.data.hasOwnProperty("succmsg")) {
+                    Swal.fire({
+                        icon: "success",
+                        title: response.data.succmsg,
+                    });
+                    showDesiredProfiles()   
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: response.data.errmsg,
+                    });
+                }
+            }
+            )
+    }
+
+    const shortlistProfile = (id) => {
+        const update = {
+            id: id
+        }
+        axios
+            .post(`${window.Url}api/shortlist`, update, headers_data)
+            .then(response => {
+                if (response.data.hasOwnProperty("succmsg")) {
+                    Swal.fire({
+                        icon: "success",
+                        title: response.data.succmsg,
+                    });
+                    showDesiredProfiles()   
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: response.data.errmsg,
+                    });
+                }
+            }
+            )
+    }
 
     return (
         <>
@@ -105,7 +156,7 @@ export default function DesiredList() {
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
                                             <div className="job-skills">
-                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px"}} className="more-skills">{item[2] }% Matched</span>
+                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px"}} className="more-skills">{item[0] }% Matched</span>
                                             </div>    
                                                 <img
                                                     src={ process.env.PUBLIC_URL + "/profile1.jpg" }
@@ -113,19 +164,19 @@ export default function DesiredList() {
                                                 />
                                         </div>
                                         <div className="job-des-dt">
-                                            <h4>{ item[0].name }</h4>
+                                            <h4>{ item[2].name }</h4>
                                             {/* <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing
                                                 elit. Etiam cursus pulvinar dolor nec...
                                             </p> */}
                                             <div className="job-skills">
-                                                <span>Age: { item[3] } years</span>
-                                                <span>Height: { item[0].get_height.height } </span>                                                
-                                                <span>Religion: { item[0].get_religion.religion } </span>
-                                                <span>Caste: { item[0].get_caste.caste } </span>
-                                                <span>Mother Tongue: { item[0].get_mother_tongue.mother_tongue } </span>
-                                                <span >Salary: { item[1].get_income.income } </span>
-                                                <span >Qualification: { item[1].get_education.education } </span>
+                                                <span>Age: { item[1] } years</span>
+                                                <span>Height: { item[2].get_height.height } </span>                                                
+                                                <span>Religion: { item[2].get_religion.religion } </span>
+                                                <span>Caste: { item[2].get_caste.caste } </span>
+                                                <span>Mother Tongue: { item[2].get_mother_tongue.mother_tongue } </span>
+                                                <span >Salary: { item[3].get_income.income } </span>
+                                                <span >Qualification: { item[3].get_education.education } </span>
                                                 {/* <span >Occupation: { item[1].get_occupation.occupation } </span> */}
                                                 {/* <span className="more-skills">+4</span> */}
                                             </div>
@@ -143,12 +194,21 @@ export default function DesiredList() {
                                                         className="link-j1"
                                                         title="View Details"
                                                     >View Details</a
-                                                    >
+                                                    >o
                                                 </li> */}
                                                 <li className="bkd-pm">
-                                                    <button className="bookmark1" >
+                                                    {item[4].includes(item[2].reg_id) && 
+                                                    ( <button className="bookmark1">
+                                                        <i className="fas fa-check 2x"></i>
+                                                    </button> )
+                                                    }
+
+                                                    {!(item[4].includes(item[2].reg_id)) && 
+                                                    <button className="bookmark1" onClick={e => sendIntrest(item[2].reg_id)}>
                                                         <i className="fas fa-envelope 2x"></i>
                                                     </button>
+                                                    }
+
                                                 </li>
                                                 <li className="bkd-pm">
                                                     <button className="bookmark1" >
@@ -156,10 +216,19 @@ export default function DesiredList() {
                                                     </button>
                                                 </li>
                                                 <li className="bkd-pm">
-                                                    <button className="bookmark1" >
+                                                {item[5].includes(item[2].reg_id) && 
+                                                    <button className="bookmark1" style={{color:"#fff", background:"#ee0a4b"}}>
                                                         <i className="fas fa-star"></i>
                                                     </button>
+                                                }
+
+                                                {!(item[5].includes(item[2].reg_id)) && 
+                                                    <button className="bookmark1" >
+                                                        <i className="fas fa-star" onClick={e => shortlistProfile(item[2].reg_id)}></i>
+                                                    </button>
+                                                }
                                                 </li>
+                                            
                                                 <li className="bkd-pm">
                                                     <button className="bookmark1" >
                                                         <i className="fas fa-heart"></i>
