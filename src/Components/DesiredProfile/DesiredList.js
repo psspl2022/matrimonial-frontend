@@ -198,7 +198,7 @@ export default function DesiredList() {
                                                 </li> */}
                                                 <li className="bkd-pm">
                                                     {item[4].includes(item[2].reg_id) && 
-                                                    ( <button className="bookmark1">
+                                                    ( <button className="bookmark1" style={{color:"#fff", background:"#ee0a4b", cursor: "none"}}>
                                                         <i className="fas fa-check 2x"></i>
                                                     </button> )
                                                     }
@@ -217,7 +217,7 @@ export default function DesiredList() {
                                                 </li>
                                                 <li className="bkd-pm">
                                                 {item[5].includes(item[2].reg_id) && 
-                                                    <button className="bookmark1" style={{color:"#fff", background:"#ee0a4b"}}>
+                                                    <button className="bookmark1" style={{color:"#fff", background:"#ee0a4b", cursor: "none"}}>
                                                         <i className="fas fa-star"></i>
                                                     </button>
                                                 }
