@@ -688,7 +688,7 @@ const addDesiredAbout = (e) => {
                             closeMenuOnSelect={false}
                             components={animatedComponents}
                             onChange={(e) =>
-                              setMaxiheight(e)
+                              setMaxiheight(e.target.value)
                             }
                             value={maxiheight}
                             options={height}

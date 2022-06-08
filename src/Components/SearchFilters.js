@@ -1,50 +1,98 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import axios from "axios";
+import DesiredList from "./DesiredProfile/DesiredList";
 
 const animatedComponents = makeAnimated();
-const religionOptions = [
-  { value: "Hindu", label: "Hindu" },
-  { value: "Muslim", label: "Muslim" },
-  { value: "Sikh", label: "Sikh" },
-  { value: "Christian", label: "Christian" },
-  { value: "Jain", label: "Jain" },
-];
-
-const heightOptions = [
-  { value: `4' 1" (1.34 mts)`, label: `4' 1" (1.34 mts)` },
-  { value: `4' 2" (1.34 mts)`, label: `4' 2" (1.34 mts)` },
-  { value: `4' 3" (1.34 mts)`, label: `4' 3" (1.34 mts)` },
-  { value: `4' 4" (1.34 mts)`, label: `4' 4" (1.34 mts)` },
-  { value: `4' 5" (1.34 mts)`, label: `4' 5" (1.34 mts)` },
-];
-
-const ageOptions = [
-  { value: "21", label: "21" },
-  { value: "22", label: "22" },
-  { value: "23", label: "23" },
-  { value: "24", label: "24" },
-  { value: "25", label: "25" },
-];
-
-const residentialOptions = [
-  { value: "Citizen", label: "Citizen" },
-  { value: "Permanent Resident", label: "Permanent Resident" },
-  { value: "Work Permit", label: "Work Permit" },
-  { value: "Student Visa", label: "Student Visa" },
-  { value: "Temporary Visa", label: "Temporary Visa" },
-];
 
 const maritalOptions = [
-  { value: "Never Married", label: "Never Married" },
-  { value: "Awaiting Divorce", label: "Awaiting Divorce" },
-  { value: "Divorced", label: "Divorced" },
-  { value: "Widowed", label: "Widowed" },
-  { value: "Annulled", label: "Annulled" },
+    { value: 1, label: "Never Married" },
+    { value: 2, label: "Awaiting Divorce" },
+    { value: 3, label: "Divorced" },
+    { value: 4, label: "Widowed" },
+    { value: 5, label: "Annulled" },
 ];
 
-export default function SearchFilters() {
+export default function SearchFilters(props) {
   const [clearAll, setClearAll] = useState(true);
+  const [ages, setAges] = useState({});
+  const [heights, setHeights] = useState({}); 
+  const [moths, setMoths] = useState([]);
+  const [religions, setReligions] = useState([]);
+  const [castes, setCastes] = useState([]);
+  const [incomes, setIncomes] = useState([]);
+  
+  const [miniAge, setMiniAge] = useState("");
+  const [maxAge, setMaxAge] = useState("");
+  const [miniHeight, setMinHeight] = useState("");
+  const [maxHeight, setMaxHeight] = useState("");
+  const [maxIncome, setMaxIncome] = useState("");
+  const [minIncome, setMinIncome] = useState("");
+  const [religion, setReligion] = useState([]);
+  const [moth, setMoth] = useState([]);
+  const [marital, setMarital] = useState([]);
+
+  const token = window.sessionStorage.getItem('access_token');
+const headers_data = {
+    headers: {
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+}
+
+  useEffect(() => {
+    // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
+    axios
+      .get(`${window.Url}api/desiredDropdown`, headers_data)
+      .then(({ data }) => {
+
+        setAges(
+          data.age.map(function (age) {
+            return { value: age.id, label: age.age };
+          })
+        );
+
+        setHeights(
+          data.height.map(function (height) {
+            return { value: height.id, label: height.height };
+          })
+        );     
+
+        setReligions(
+          data.religion.map(function (religion) {
+            return { value: religion.id, label: religion.religion };
+          })
+        );
+
+        setCastes(
+          data.caste.map(function (caste) {
+            return { value: caste.id, label: caste.caste };
+          })
+        );
+
+        setIncomes(
+          data.income.map(function (income_data) {
+            return { value: income_data.id, label: income_data.income };
+          })
+        );
+
+        setMoths(
+          data.mother_tongue.map(function (mother_tongue) {
+            return {
+              value: mother_tongue.id,
+              label: mother_tongue.mother_tongue,
+            };
+          })
+        );
+  })
+}, []);
+
+const SubmitFilter = () => {
+  const filterData = [(miniAge)?miniAge.label:"", (maxAge)?maxAge.label:"", (miniHeight)?miniHeight.value:"", (maxHeight)?maxHeight.value:"", (minIncome)?minIncome.value:"", (maxIncome)?maxIncome.value:"", religion, moth, marital];
+  props.setParFilterData(filterData);
+}
 
   return (
     <>
@@ -67,12 +115,13 @@ export default function SearchFilters() {
               <Select
                 className="basic-single"
                 classNamePrefix="select"
-                defaultValue={heightOptions[0]}
                 isClearable
                 isSearchable
-                name="fromheight"
+                onChange={(e) =>
+                  setMinHeight(e)
+                }
                 placeholder="From Height"
-                options={heightOptions}
+                options={heights}
               />
             </div>
             <div className="col-md-6">
@@ -80,12 +129,13 @@ export default function SearchFilters() {
               <Select
                 className="basic-single"
                 classNamePrefix="select"
-                defaultValue={heightOptions[4]}
                 isClearable
                 isSearchable
-                name="toheight"
+                onChange={(e) =>
+                  setMaxHeight(e)
+                }
                 placeholder="To Height"
-                options={heightOptions}
+                options={heights}
               />
             </div>
           </div>
@@ -103,12 +153,14 @@ export default function SearchFilters() {
               <Select
                 className="basic-single"
                 classNamePrefix="select"
-                defaultValue={ageOptions[0]}
                 isClearable
-                isSearchable
-                name="fromheight"
+                isSearchable                                                  
+                onChange={(e) =>
+                  setMiniAge(e)
+                }
+                value={miniAge}
                 placeholder="From Age"
-                options={ageOptions}
+                options={ages}
               />
             </div>
             <div className="col-md-6">
@@ -116,12 +168,14 @@ export default function SearchFilters() {
               <Select
                 className="basic-single"
                 classNamePrefix="select"
-                defaultValue={ageOptions[4]}
                 isClearable
                 isSearchable
-                name="toheight"
+                onChange={(e) =>
+                  setMaxAge(e)
+                }
+                value={maxAge}
                 placeholder="To Age"
-                options={ageOptions}
+                options={ages}
               />
             </div>
           </div>
@@ -136,25 +190,30 @@ export default function SearchFilters() {
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
-            defaultValue={religionOptions[0]}
+            onChange={(e) => 
+              setReligion(Array.isArray(e) ? e.map(x => x.value) : [])
+            }
             isMulti
             placeholder="Select Religions"
-            options={religionOptions}
+            options={religions}
           />
         </div>
 
         <div className="fltr-group">
           <div className="fltr-items-heading">
             <div className="fltr-item-left">
-              <h6>Residential Status</h6>
+              <h6>Mother Tongue</h6>
             </div>
           </div>
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
+            onChange={(e) => 
+              setMoth(Array.isArray(e) ? e.map(x => x.value) : [])
+            }
             isMulti
-            placeholder="Select Residential Status"
-            options={residentialOptions}
+            placeholder="Select Mother Tongue"
+            options={moths}
           />
         </div>
 
@@ -165,23 +224,36 @@ export default function SearchFilters() {
                 Income Range <span>(Monthly Basis)</span>
               </h6>
             </div>
-            <div className="fltr-item-right">
+            {/* <div className="fltr-item-right">
               <a href="#">Clear</a>
-            </div>
+            </div> */}
           </div>
-          <div className="filter-dd">
-            <div className="rg-slider">
-              <input
-                className="rn-slider slider-input"
-                type="hidden"
-                value="30000"
-              />
-            </div>
-            <div className="rg-limit">
-              <h4>0</h4>
-              <h4>250000</h4>
-            </div>
-          </div>
+          <div className="row">
+                          <div className="col-lg-6 pr-1">
+                            <Select
+                              closeMenuOnSelect={false}
+                              components={animatedComponents}
+                              onChange={(e) =>
+                                setMinIncome(e)
+                              }
+                              // value={minincome}
+                              options={incomes}
+                              placeholder="Select Min"    
+                            />
+                          </div>
+                          <div className="col-lg-6 pl-0 ">
+                            <Select
+                            closeMenuOnSelect={false}
+                            components={animatedComponents}
+                            onChange={(e) =>
+                              setMaxIncome(e)
+                            }
+                            // value={maxincome}
+                            options={incomes}
+                            placeholder="Select Max"   
+                          />
+                          </div>
+                        </div>
         </div>
 
         <div className="fltr-group">
@@ -193,7 +265,9 @@ export default function SearchFilters() {
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
-            defaultValue={maritalOptions[0]}
+            onChange={(e) => 
+              setMarital(Array.isArray(e) ? e.map(x => x.value) : [])
+            }
             isMulti
             placeholder="Select Marital Status"
             options={maritalOptions}
@@ -201,7 +275,7 @@ export default function SearchFilters() {
         </div>
 
         <div className="filter-button">
-          <button className="flr-btn">Search Now</button>
+          <button className="flr-btn" onClick={SubmitFilter}>Search Now</button>
         </div>
       </div>
     </>

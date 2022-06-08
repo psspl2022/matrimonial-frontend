@@ -7,6 +7,8 @@ import Swal from "sweetalert2";
 export default function DesiredList() {
     const [grid, setGrid] = useState(false);
     const [data, setData] = useState([]);
+    const [forFilter, setForFilter] = useState([]);
+    const [parfilterData , setParFilterData] = useState([]);
 
     const token = window.sessionStorage.getItem('access_token');
     const headers_data = {
@@ -18,15 +20,27 @@ export default function DesiredList() {
     }
 
     useEffect(() => {
-        showDesiredProfiles();      
+        showDesiredProfiles(); 
+        console.log(parfilterData);     
       }, []);
+
+      useEffect(() => {
+          setData(
+            forFilter.filter((prof_data)=>{
+            if(((parfilterData[0]!="") ? prof_data[1] >= parfilterData[0] : 1) && ((parfilterData[1]!="") ? prof_data[1] <= parfilterData[1] : 1) && ((parfilterData[2]!="") ? prof_data[2].height >= parfilterData[2] : 1) && ((parfilterData[3]!="") ? prof_data[2].height <= parfilterData[3] : 1) && ((parfilterData[4]!="") ? prof_data[3].income >= parfilterData[4] : 1) && ((parfilterData[5]!="") ? prof_data[3].income <= parfilterData[5] : 1) && ((parfilterData[6]!="") ? parfilterData[6].includes(prof_data[2].religion) : 1) && ((parfilterData[7]!="") ? parfilterData[7].includes(prof_data[2].mother_tongue) : 1)){
+                return prof_data;
+            }
+          })  
+          )
+      }, [parfilterData]);
 
 
     function showDesiredProfiles(){
         axios
         .get(`${window.Url}api/showDesiredProfiles`,headers_data)
         .then(({ data }) => {
-                setData(data)
+                setData(data);
+                setForFilter(data);
         });
     }
 
@@ -82,7 +96,7 @@ export default function DesiredList() {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
-                            <SearchFilters />
+                            <SearchFilters setParFilterData={setParFilterData}/>
                         </div>
                         <div class="col-lg-8 col-md-7 mainpage">
                         <div class="browse-banner">
@@ -152,7 +166,7 @@ export default function DesiredList() {
                             {
                                             data.map((item)=>
 
-                                <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`}>
+                                <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
                                             <div className="job-skills">

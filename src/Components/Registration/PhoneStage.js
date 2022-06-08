@@ -71,14 +71,14 @@ function PhoneStage() {
   return (
     <>
       <div className="main-heading">
-        <h2>Verify Your Gmail</h2>
+        <h2>Verify Your E-mail</h2>
         <div className="line-shape1">
           <img src="images/line.svg" alt="" />
         </div>
       </div>   
       <form onSubmit={submitOtpDetails}>   
       <div className="form-group">
-        <label className="label15">Check Your Gmail and Enter Otp Below</label>
+        <label className="label15">Check Your E-mail and Enter Otp Below</label>
         <input type="text" className="job-input" placeholder="Enter Otp Below" onChange={(event) => {
               setOtp(event.target.value);
             }}
