@@ -1447,8 +1447,8 @@ span.right-cm {
 }
 
 .job-skills a, .job-skills span {
-	font-size: 14px;
-    font-weight: 400;
+	font-size: 15px;
+    font-weight: 600;
     background: #fafafa;
     color: #757575;
     border: 1px solid #e5e5e5;
@@ -1477,6 +1477,7 @@ span.right-cm {
 }
 
 .link-btn {
+    border-top:2px solid #fff;
     padding: 6px 0;
 	width: 100%;
     float: left;
@@ -2464,7 +2465,7 @@ span.right-cm {
 	color:#242424;
 	font-weight:500;
 	font-family: "Roboto";
-    font-size: 14px;
+    font-size: 22px;
     line-height:24px;
 	padding: 0 0 10px !important;
 	margin-right:30px;

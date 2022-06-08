@@ -20,6 +20,9 @@ import CareerStage from "./Components/Registration/CareerStage";
 import FamilyStage from "./Components/Registration/FamilyStage";
 import SignUp from "./Components/SignUp";
 import MembershipDetails from "./Components/Membership/MembershipDetails";
+import Interest from "./Components/SendIntrest/Interest";
+import Accept from "./Components/SendIntrest/Accept";
+import Shortlist from "./Components/Shortlist/Shortlist";
 
 function App() {
   return (
@@ -86,6 +89,21 @@ function App() {
           <Route path="/desiredList" exact>
             <MainHeader />
             <DesiredList />
+            <MainFooter />
+          </Route>
+          <Route path="/interest" exact>
+            <MainHeader />
+            <Interest />
+            <MainFooter />
+          </Route>
+          <Route path="/accept" exact>
+            <MainHeader />
+            <Accept />
+            <MainFooter />
+          </Route>
+          <Route path="/shortlist" exact>
+            <MainHeader />
+            <Shortlist />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>

@@ -218,7 +218,7 @@ export default function DesiredList() {
                                                     }
 
                                                     {!(item[4].includes(item[2].reg_id)) && 
-                                                    <button className="bookmark1" onClick={e => sendIntrest(item[2].reg_id)}>
+                                                    <button className="bookmark1" onClick={e => sendIntrest(item[2].reg_id)} title="Send Interest">
                                                         <i className="fas fa-envelope 2x"></i>
                                                     </button>
                                                     }
@@ -231,14 +231,14 @@ export default function DesiredList() {
                                                 </li>
                                                 <li className="bkd-pm">
                                                 {item[5].includes(item[2].reg_id) && 
-                                                    <button className="bookmark1" style={{color:"#fff", background:"#ee0a4b", cursor: "none"}}>
+                                                    <button className="bookmark1" onClick={e => shortlistProfile(item[2].reg_id)} style={{color:"#fff", background:"#ee0a4b"}}>
                                                         <i className="fas fa-star"></i>
                                                     </button>
                                                 }
 
                                                 {!(item[5].includes(item[2].reg_id)) && 
                                                     <button className="bookmark1" >
-                                                        <i className="fas fa-star" onClick={e => shortlistProfile(item[2].reg_id)}></i>
+                                                        <i className="fas fa-star" onClick={e => shortlistProfile(item[2].reg_id)} title="Shortlist Profile"></i>
                                                     </button>
                                                 }
                                                 </li>

@@ -326,6 +326,9 @@ function MainHeader() {
                               <NavLink className="link-item" to="/myprofile">
                                 My Profile
                               </NavLink>
+                              <NavLink className="link-item" to="/desiredProfile">
+                                Desired Partner Profile
+                              </NavLink>
                               <div className="link-item" onClick={logout}>
                                 Logout
                               </div>
@@ -393,22 +396,56 @@ function MainHeader() {
                           role="button"
                           data-toggle="dropdown"
                         >
-                          Desired Profile
+                          Matches
                         </a>
                         <div className="dropdown-menu pages-dropdown">
                         <NavLink
-                          to="/desiredprofile"
+                          to="/shortlist"
                           className="link-item"
                           role="button"
                         >
-                          Desired Profile
+                          Shortlist Profile
                         </NavLink>
                         <NavLink
                           to="/desiredlist"
                           className="link-item"
                           role="button"
                         >
-                          Desired Profile List
+                          Desired Profile Match
+                        </NavLink>
+                        </div>
+                        {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
+                        {/* <div className="dropdown-menu pages-dropdown">
+													<a className="link-item" href="browse_projects.html">Browse Matches</a>
+													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
+                        {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
+                        {/* </div> */}
+                      </li>
+                      ) }
+                      {token.length != 0 && (
+                      <li className="nav-item dropdown">
+                      <a
+                          href="#"
+                          className="nav-link dropdown-toggle-no-caret"
+                          role="button"
+                          data-toggle="dropdown"
+                        >
+                          Inbox
+                        </a>
+                        <div className="dropdown-menu pages-dropdown">
+                        <NavLink
+                          to="/interest"
+                          className="link-item"
+                          role="button"
+                        >
+                          Interest
+                        </NavLink>
+                        <NavLink
+                          to="/accept"
+                          className="link-item"
+                          role="button"
+                        >
+                          Acceptances
                         </NavLink>
                         </div>
                         {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
