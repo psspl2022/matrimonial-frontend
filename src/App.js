@@ -23,6 +23,7 @@ import MembershipDetails from "./Components/Membership/MembershipDetails";
 import Interest from "./Components/SendIntrest/Interest";
 import Accept from "./Components/SendIntrest/Accept";
 import Shortlist from "./Components/Shortlist/Shortlist";
+import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 
 function App() {
   return (
@@ -104,6 +105,11 @@ function App() {
           <Route path="/shortlist" exact>
             <MainHeader />
             <Shortlist />
+            <MainFooter />
+          </Route>
+          <Route path="/profileDetail" exact>
+            <MainHeader />
+            <ProfileDetails />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>

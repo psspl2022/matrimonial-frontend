@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
 export default function DesiredList() {
     const [grid, setGrid] = useState(false);
@@ -27,7 +28,7 @@ export default function DesiredList() {
       useEffect(() => {
           setData(
             forFilter.filter((prof_data)=>{
-            if(((parfilterData[0]!="") ? prof_data[1] >= parfilterData[0] : 1) && ((parfilterData[1]!="") ? prof_data[1] <= parfilterData[1] : 1) && ((parfilterData[2]!="") ? prof_data[2].height >= parfilterData[2] : 1) && ((parfilterData[3]!="") ? prof_data[2].height <= parfilterData[3] : 1) && ((parfilterData[4]!="") ? prof_data[3].income >= parfilterData[4] : 1) && ((parfilterData[5]!="") ? prof_data[3].income <= parfilterData[5] : 1) && ((parfilterData[6]!="") ? parfilterData[6].includes(prof_data[2].religion) : 1) && ((parfilterData[7]!="") ? parfilterData[7].includes(prof_data[2].mother_tongue) : 1)){
+            if(((parfilterData[0]!="") ? prof_data[1] >= parfilterData[0] : 1) && ((parfilterData[1]!="") ? prof_data[1] <= parfilterData[1] : 1) && ((parfilterData[2]!="") ? prof_data[2].height >= parfilterData[2] : 1) && ((parfilterData[3]!="") ? prof_data[2].height <= parfilterData[3] : 1) && ((parfilterData[4]!="") ? prof_data[3].income >= parfilterData[4] : 1) && ((parfilterData[5]!="") ? prof_data[3].income <= parfilterData[5] : 1) && ((parfilterData[6]!="") ? parfilterData[6].includes(prof_data[2].religion) : 1) && ((parfilterData[7]!="") ? parfilterData[7].includes(prof_data[2].mother_tongue) : 1) && ((parfilterData[8]!="") ? parfilterData[8].includes(prof_data[2].maritial_status) : 1)){
                 return prof_data;
             }
           })  
@@ -52,16 +53,16 @@ export default function DesiredList() {
             .post(`${window.Url}api/sendIntrest`, update, headers_data)
             .then(response => {
                 if (response.data.hasOwnProperty("succmsg")) {
-                    Swal.fire({
-                        icon: "success",
-                        title: response.data.succmsg,
-                    });
+                    // Swal.fire({
+                    //     icon: "success",
+                    //     title: response.data.succmsg,
+                    // });
                     showDesiredProfiles()   
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: response.data.errmsg,
-                    });
+                    // Swal.fire({
+                    //     icon: "error",
+                    //     title: response.data.errmsg,
+                    // });
                 }
             }
             )
@@ -75,16 +76,16 @@ export default function DesiredList() {
             .post(`${window.Url}api/shortlist`, update, headers_data)
             .then(response => {
                 if (response.data.hasOwnProperty("succmsg")) {
-                    Swal.fire({
-                        icon: "success",
-                        title: response.data.succmsg,
-                    });
+                    // Swal.fire({
+                    //     icon: "success",
+                    //     title: response.data.succmsg,
+                    // });
                     showDesiredProfiles()   
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: response.data.errmsg,
-                    });
+                    // Swal.fire({
+                    //     icon: "error",
+                    //     title: response.data.errmsg,
+                    // });
                 }
             }
             )
@@ -108,7 +109,7 @@ export default function DesiredList() {
                         </div>
                     </div>
                     <div class="bbnr-right">
-                        <button class="plan-btn">Upgrade Plan</button>
+                    <NavLink to="/membershipDetail/3" className="plan-btn">Upgrade Plan</NavLink>
                     </div>
                 </div>
                 <div class="main-tabs">
@@ -169,13 +170,15 @@ export default function DesiredList() {
                                 <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
-                                            <div className="job-skills">
-                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px"}} className="more-skills">{item[0] }% Matched</span>
-                                            </div>    
+                                            <div className="desired_percent">
+                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px" }} className={`${item[0]<=40 && 'yellow' } ${item[0]<=90 && 'green' } ${item[0]>90 && 'pink' }`}>{item[0] }% Matched</span>
+                                            </div>  
+                                            <div className="img-profile">  
                                                 <img
                                                     src={ process.env.PUBLIC_URL + "/profile1.jpg" }
-                                                    alt="" style={{maxHeight:'220px'}}
+                                                    alt="" style={{maxHeight:'220px', width: '100%'}}
                                                 />
+                                                </div>
                                         </div>
                                         <div className="job-des-dt">
                                             <h4>{ item[2].name }</h4>

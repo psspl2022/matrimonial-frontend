@@ -71,14 +71,15 @@ function MembershipDetails() {
         formdat.append("returnUrl", data.msg.returnUrl);
         formdat.append("signature", data.msg.signature);
 
-        axios.post(`https://test.cashfree.com/billpay/checkout/post/submit`, formdat, headers_param1)
-    .then(({ data }) => {
-      if (data.hasOwnProperty("msg1")) {
+        axios.post(`https://test.cashfree.com/billpay/checkout/post/submit`, formdat)
+    .then(({ data2 }) => {
+      if (data2.hasOwnProperty("msg1")) {
         console.log(data);
       } else {
         console.log("no data");
       }
     });
+
       } else {
         console.log("no data");
       }
@@ -160,7 +161,7 @@ function MembershipDetails() {
                     className="mt-5"
                     style={{ fontSize: "32px", fontWeight: "bold" }}
                   >
-                    {planData.price}
+                    RS. {planData.price}
                   </div>
                 </div>
                 {/* <div  className="col-12">
@@ -169,7 +170,7 @@ function MembershipDetails() {
               </div>
 
               <div className="row">
-                <div className="col-md-3 mx-auto">
+                <div className="col-md-5 col-lg-3 mx-auto">
                   <form onSubmit={submitMembership}>
                     <input
                       type="submit"

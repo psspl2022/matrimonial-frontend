@@ -14,7 +14,7 @@ function MainFooter() {
                                     <div className="text-step1">
                                         <h4>Subscribe to Newsletter</h4>
                                         <div className="btext-heading mt-2">
-                                            <i className="fas fa-check-circle"></i>Cras nunc mauris, rhoncus eu justo at, egestas sagittis felis. Ut sed feugiat eros.
+                                            <i className="fas fa-check-circle"></i>For Notifications Updates join our Newsletter.
                                         </div>
                                     </div>
                                 </div>

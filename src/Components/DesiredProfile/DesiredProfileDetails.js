@@ -136,7 +136,7 @@ const headers_data = {
   useEffect(() => {
     // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios
-      .get(`${window.Url}api/desiredDropdown`, headers_data)
+      .get(`${window.Url}api/desiredDropdown`)
       .then(({ data }) => {
         setCountries(
           data.country.map(function (country) {

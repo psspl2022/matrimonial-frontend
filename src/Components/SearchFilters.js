@@ -7,11 +7,11 @@ import DesiredList from "./DesiredProfile/DesiredList";
 const animatedComponents = makeAnimated();
 
 const maritalOptions = [
-    { value: 1, label: "Never Married" },
-    { value: 2, label: "Awaiting Divorce" },
-    { value: 3, label: "Divorced" },
-    { value: 4, label: "Widowed" },
-    { value: 5, label: "Annulled" },
+    { value: "1", label: "Never Married" },
+    { value: "2", label: "Awaiting Divorce" },
+    { value: "3", label: "Divorced" },
+    { value: "4", label: "Widowed" },
+    { value: "5", label: "Annulled" },
 ];
 
 export default function SearchFilters(props) {
@@ -34,18 +34,18 @@ export default function SearchFilters(props) {
   const [marital, setMarital] = useState([]);
 
   const token = window.sessionStorage.getItem('access_token');
-const headers_data = {
-    headers: {
-        'authorization': 'Bearer ' + token,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    }
-}
+// const headers_data = {
+//     headers: {
+//         'authorization': 'Bearer ' + token,
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//     }
+// }
 
   useEffect(() => {
     // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios
-      .get(`${window.Url}api/desiredDropdown`, headers_data)
+      .get(`${window.Url}api/desiredDropdown`)
       .then(({ data }) => {
 
         setAges(

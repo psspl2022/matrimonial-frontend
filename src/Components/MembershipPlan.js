@@ -19,8 +19,8 @@ export default function MembershipPlan() {
     <>
       <div className="membership-plan">
         <div className="plan-heading">
-          <h2>Membership Plans & Pricing</h2>
-          <span>Access all the paid services in reasonable prices.</span>
+          <h2 style={{ fontSize: '2.71rem' }}>Membership Plans & Pricing</h2>
+          <span style={{ fontSize: '20px' }}>Access all the paid services in reasonable prices</span>
         </div>
         <div className="wrapper">
           <div className="pricing-table gprice-single">

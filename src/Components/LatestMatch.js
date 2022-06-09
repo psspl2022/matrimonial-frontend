@@ -43,8 +43,8 @@ function LatestMatch() {
                     <div className="row">
                         <div className="col-md-12 col-12">
                             <div className="main-heading">
-                                <h1 className='text-white font-weight-bold'>Latest Match</h1>
-                                <span style={{ color: 'black' }}>Match for a Future</span>
+                                <div className='main_heading_style'>Latest Match</div>
+                                <span className='main_heading_span'>Match for a Future</span>
                                 <div className="line-shape1">
                                     <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/line.svg" } alt="" />
                                 </div>

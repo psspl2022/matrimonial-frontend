@@ -78,7 +78,7 @@ function PhoneStage() {
       </div>   
       <form onSubmit={submitOtpDetails}>   
       <div className="form-group">
-        <label className="label15">Check Your E-mail and Enter Otp Below</label>
+        <label className="label15">Check Your E-mail and Enter Otp Below <span style={{float:'right'}}>Skip</span></label>
         <input type="text" className="job-input" placeholder="Enter Otp Below" onChange={(event) => {
               setOtp(event.target.value);
             }}
