@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function AcceptByMe() {
     const [grid, setGrid] = useState(false);
     const [data, setData] = useState([]);
+    const [fetchDone, setFetchDone] = useState(false);
 
     const token = window.sessionStorage.getItem('access_token');
     const headers_data = {
@@ -25,7 +27,8 @@ export default function AcceptByMe() {
         axios
         .get(`${window.Url}api/acceptByMe`,headers_data)
         .then(({ data }) => {
-                setData(data)
+                setData(data);
+                setFetchDone(true);
         });
     }
 
@@ -95,9 +98,9 @@ export default function AcceptByMe() {
                         <div class="tab-pane active" id="tab-1">
                             <div class="row view-group " id="products">
                             {
-                                            data.map((item)=>
+                                            data.map((item, index)=>
 
-                                <div class={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid==true?'list-group-item1':''}`}>
+                                <div class={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid==true?'list-group-item1':''}`} key={index}>
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
                                             <div className="job-skills">
@@ -114,7 +117,7 @@ export default function AcceptByMe() {
                                                 elit. Etiam cursus pulvinar dolor nec...
                                             </p> */}
                                             <div className="job-skills">
-                                                <span>Age: { item.age } years</span>
+                                                <span>Age: { Math.floor((Date.now() - new Date(item.dob)) / (31557600000)) } years</span>
                                                 <span>Height: { item.get_height.height } </span>                                                
                                                 <span>Religion: { item.get_religion.religion } </span>
                                                 <span>Caste: { item.get_caste.caste } </span>
@@ -128,6 +131,13 @@ export default function AcceptByMe() {
                                     </div>
                                 </div>
                                 
+                               )}
+
+                               { ( data.length==0 && !fetchDone ) && (
+                                 <div className="desired_section">
+                                     <ProfileSkeleton />
+                                     <ProfileSkeleton />
+                                 </div>
                                )}
                                 
                                 <div class="col-12">

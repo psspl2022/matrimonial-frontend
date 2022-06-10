@@ -55,12 +55,13 @@ function MainHeader() {
       .get(`${window.Url}api/getProfileImage`, headers_param)
       .then(({ data }) => {
         if (data.hasOwnProperty("msg")) {
-          setUserImage(data.msg.identity_card_doc);
+          setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`);
         } else {
-          Swal.fire({
-            icon: "error",
-            text: data.error_msg,
-          });
+          setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
+          // Swal.fire({
+          //   icon: "error",
+          //   text: data.error_msg,
+          // });
         }
       });
 
@@ -165,8 +166,8 @@ function MainHeader() {
                             <i className="fas fa-envelope"></i>
                             <div className="circle-alrt"></div>
                           </a>
-                          <div className="dropdown-menu message-dropdown dropdown-menu-right">
-                            <div className="user-request-list">
+                          {/*<div className="dropdown-menu message-dropdown dropdown-menu-right">
+                             <div className="user-request-list">
                               <div className="request-users">
                                 <div className="user-request-dt">
                                   <a href="#">
@@ -207,7 +208,7 @@ function MainHeader() {
                                 </div>
                                 <div className="time5">10 min ago</div>
                               </div>
-                            </div>
+                            </div> 
                             <div className="user-request-list">
                               <a
                                 href="my_freelancer_messages.html"
@@ -216,7 +217,7 @@ function MainHeader() {
                                 View All Messages
                               </a>
                             </div>
-                          </div>
+                          </div>*/}
                         </li>
                         <li className="dropdown">
                           <a
@@ -228,7 +229,7 @@ function MainHeader() {
                             <i className="fas fa-bell"></i>
                             <div className="circle-alrt"></div>
                           </a>
-                          <div className="dropdown-menu message-dropdown dropdown-menu-right">
+                          {/* <div className="dropdown-menu message-dropdown dropdown-menu-right">
                             <div className="user-request-list">
                               <div className="request-users">
                                 <div className="user-request-dt">
@@ -296,7 +297,7 @@ function MainHeader() {
                                 View All Notifications
                               </a>
                             </div>
-                          </div>
+                          </div> */}
                         </li>
                         <li>
                           <div className="account order-1 dropdown">
@@ -311,7 +312,7 @@ function MainHeader() {
                             >
                               <div className="user-dp">
                                 <img
-                                  src={`${window.Url}Documents/Image_Documents/${userImage}`}
+                                  src={userImage}
                                   alt=""
                                 />
                                 {/* <img src="profile2.jpg" alt="" /> */}

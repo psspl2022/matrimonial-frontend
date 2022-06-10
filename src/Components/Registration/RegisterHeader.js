@@ -37,7 +37,7 @@ function RegisterHeader() {
 									<NavLink className="order-lg-0 ml-lg-0 ml-3" to="/"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></NavLink>
 									<div className="d-flex flex-row justify-content-end mx-auto bg-dark1 p-3 p-lg-0 mt-lg-0" id="navbarSupportedContent">
 										<ul className="navbar-nav align-self-stretch">
-											<li className={`nav-item ${activeState == 'otp' ? 'theme-fontcolor' : ''}`}>Gmail verification 
+											<li className={`nav-item ${activeState == 'otp' ? 'theme-fontcolor' : ''}`}>Email verification 
 											</li>
 											<li className={`nav-item ${activeState == 'profile' ? 'theme-fontcolor' : ''}`}>Profile Details 
 											</li>

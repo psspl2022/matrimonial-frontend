@@ -52,6 +52,33 @@ function PhoneStage() {
     .post(`${window.Url}api/checkOtp`, formData, headers_param)
     .then(({ data }) => {
       if (data.hasOwnProperty("msg")) {
+        dispatch(regActiveLink('profile'));
+        history.go(0);
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: data.error_msg,
+        });
+      }
+    });
+};
+
+const skipStage = async (e) => {
+  e.preventDefault();
+
+  const token = window.sessionStorage.getItem("access_token");
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
+  await axios
+    .get(`${window.Url}api/skipOtp`, headers_param)
+    .then(({ data }) => {
+      if (data.hasOwnProperty("msg")) {
         Swal.fire({
           icon: "success",
           text: data.msg,
@@ -78,7 +105,7 @@ function PhoneStage() {
       </div>   
       <form onSubmit={submitOtpDetails}>   
       <div className="form-group">
-        <label className="label15">Check Your E-mail and Enter Otp Below <span style={{float:'right'}}>Skip</span></label>
+        <label className="label15">Check Your E-mail and Enter Otp Below </label><span className="float-right mr-2 text-primary bg-light font-weight-bold" onClick={skipStage}><u>Skip Now</u></span>
         <input type="text" className="job-input" placeholder="Enter Otp Below" onChange={(event) => {
               setOtp(event.target.value);
             }}

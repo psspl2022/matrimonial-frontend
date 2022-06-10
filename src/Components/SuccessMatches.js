@@ -39,8 +39,8 @@ export default function SuccessMatches(){
           <div className="row">
             <div className="col-md-12 col-12">
               <div className="main-heading">
-                <h2>Success Matches By Us</h2>
-                <span>Happily Married Couples.</span>
+                <h2 style={{ fontSize: '2.71rem' }}>Success Matches By Us</h2>
+                <span style={{ fontSize: '20px' }}>Happily Married Couples.</span>
                 <div className="line-shape1">
                   <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/line.svg" } alt="" />
                 </div>

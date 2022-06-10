@@ -135,7 +135,7 @@ body{
 .pricing-table .content ul li{
   margin: 20px 0px;
   font-size: 14px;
-  color:#555;
+  color:#232323;
 }
 
 .membershipDetails ul li{
@@ -489,5 +489,133 @@ transform:scale(0);
   .ProfileDetails .tabs .content {
     top: 200px;
  }
+}
+
+
+/* Desired Card Section */
+.desired_section header {
+  position: fixed;
+  left: 0;
+  right:0;
+  margin:auto;
+  top: .5rem;
+  text-align: center;
+  color: #222;
+}
+.desired_section .card{
+  max-width: 350px;
+  width: 100%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+}
+.desired_section .card .header{
+  display: flex;
+  align-items: center;
+}
+.desired_section .header .img{
+  height: 75px;
+  width: 75px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.desired_section .header .details{
+  margin-left: 20px;
+}
+.desired_section .details span{
+  display: block;
+  background: #d9d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.desired_section .details .name{
+  height: 15px;
+  width: 100px;
+}
+.desired_section .details .about{
+  height: 13px;
+  width: 150px;
+  margin-top: 10px;
+}
+.desired_section .card .description{
+  margin: 25px 0;
+}
+.desired_section .description .line{
+  background: #d9d9d9;
+  border-radius: 10px;
+  height: 13px;
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+.desired_section .description .line-1{
+  width: calc(100% - 15%);
+}
+.desired_section .description .line-3{
+  width: calc(100% - 40%);
+}
+.desired_section .card .btns{
+  display: flex;
+}
+.desired_section .card .btns .btn{
+  height: 45px;
+  width: 100%;
+  background: #d9d9d9;
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+}
+.desired_section .btns .btn-1{
+  margin-right: 8px;
+}
+.desired_section .btns .btn-2{
+  margin-left: 8px;
+}
+.desired_section .header .img::before,
+.desired_section .details span::before,
+.desired_section .description .line::before,
+.desired_section .btns .btn::before{
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, #d9d9d9 0%, rgba(0,0,0,0.05) 20%, #d9d9d9 40%, #d9d9d9 100%);
+  background-repeat: no-repeat;
+  background-size: 450px 400px;
+  animation: shimmer 1s linear infinite;
+}
+.desired_section .header .img::before{
+  background-size: 650px 600px;
+}
+.desired_section .details span::before{
+  animation-delay: 0.2s;
+}
+.desired_section .btns .btn-2::before{
+  animation-delay: 0.22s;
+}
+@keyframes shimmer {
+  0%{
+    background-position: -450px 0;
+  }
+  100%{
+    background-position: 450px 0;
+  }
+}
+
+.desired_section{
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 1100px) {
+  .desired_section{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
 }
 

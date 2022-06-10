@@ -43,12 +43,13 @@ function MyProfileSidebar() {
     .get(`${window.Url}api/getProfileImage`, headers_param)
     .then(({ data }) => {
       if (data.hasOwnProperty("msg")) {
-        setUserImage(data.msg.identity_card_doc);
+        setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`);
       } else {
-        Swal.fire({
-          icon: "error",
-          text: data.error_msg,
-        });
+        setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
+        // Swal.fire({
+        //   icon: "error",
+        //   text: data.error_msg,
+        // });
       }
     });
 
@@ -58,7 +59,7 @@ function MyProfileSidebar() {
     <>
       <div className="account_dt_left">
         <div className="job-center-dt">
-          <img src={`${window.Url}Documents/Image_Documents/${userImage}`} alt="" />
+          <img src={userImage} alt="" />
           <div className="job-urs-dts">
             <div className="dp_upload">
               <input type="file" id="file" />

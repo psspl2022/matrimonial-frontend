@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function IntrestSent() {
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
+  const [fetchDone, setFetchDone] = useState(false);
 
   const token = window.sessionStorage.getItem("access_token");
   const headers_data = {
@@ -25,12 +27,13 @@ export default function IntrestSent() {
       .get(`${window.Url}api/interestSent`, headers_data)
       .then(({ data }) => {
         setData(data);
+        setFetchDone(true);
       });
   }
 
   return (
     <>
-      <main class="browse-section" style={{ padding : "0px" }}>
+      <main class="browse-section" style={{ padding: "0px" }}>
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-md-12 mainpage mx-auto">
@@ -141,7 +144,14 @@ export default function IntrestSent() {
                                                 elit. Etiam cursus pulvinar dolor nec...
                                             </p> */}
                               <div className="job-skills">
-                                <span>Age: { Math.floor((Date.now() - new Date(item.dob)) / (31557600000)) } years</span>
+                                <span>
+                                  Age:{" "}
+                                  {Math.floor(
+                                    (Date.now() - new Date(item.dob)) /
+                                      31557600000
+                                  )}{" "}
+                                  years
+                                </span>
                                 <span>Height: {item.get_height.height} </span>
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
@@ -164,6 +174,14 @@ export default function IntrestSent() {
                           </div>
                         </div>
                       ))}
+
+                      {data.length == 0 && !fetchDone && (
+                        <div className="desired_section">
+                          <ProfileSkeleton />
+                          <ProfileSkeleton />
+                          <ProfileSkeleton />
+                        </div>
+                      )}
 
                       <div class="col-12">
                         <div class="main-p-pagination">

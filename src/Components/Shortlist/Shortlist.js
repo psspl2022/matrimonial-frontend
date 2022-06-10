@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function Shortlist() {
     const [grid, setGrid] = useState(false);
     const [data, setData] = useState([]);
+    const [fetchDone, setFetchDone] = useState(false);
 
     const token = window.sessionStorage.getItem('access_token');
     const headers_data = {
@@ -25,7 +27,8 @@ export default function Shortlist() {
         axios
         .get(`${window.Url}api/getShortlist`,headers_data)
         .then(({ data }) => {
-                setData(data)
+                setData(data);
+                setFetchDone(true);
         });
     }
 
@@ -35,69 +38,69 @@ export default function Shortlist() {
 
     return (
         <>
-          <main class="browse-section">
-                <div class="container">
-                    <div class="row">
+          <main className="browse-section">
+                <div className="container">
+                    <div className="row">
                         
-                        <div class="col-lg-12 col-md-12 mainpage mx-auto">
-                        <div class="browse-banner">
-                    <div class="bbnr-left">
+                        <div className="col-lg-12 col-md-12 mainpage mx-auto">
+                        <div className="browse-banner">
+                    <div className="bbnr-left">
                         <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/browse/trophy.png"} alt="" />
-                        <div class="bbnr-text">
+                        <div className="bbnr-text">
                             <h4>Upgrade to Pro</h4>
                             <p>Unlimited Matches and Apply.</p>
                         </div>
                     </div>
-                    <div class="bbnr-right">
-                        <button class="plan-btn">Upgrade Plan</button>
+                    <div className="bbnr-right">
+                        <button className="plan-btn">Upgrade Plan</button>
                     </div>
                 </div>
-                <div class="main-tabs">
-                    <div class="res-tabs">
-                        <div class="mtab-left">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a href="#tab-1" class="nav-link active" data-toggle="tab"
+                <div className="main-tabs">
+                    <div className="res-tabs">
+                        <div className="mtab-left">
+                            <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                <li className="nav-item">
+                                    <a href="#tab-1" className="nav-link active" data-toggle="tab"
                                    >Shortlist Profile</a
                                     >
                                 </li>
                             </ul>
                         </div>
-                        <div class="mtab-right">
+                        <div className="mtab-right">
                             <ul>
-                                <li class="sort-list-dt">
+                                <li className="sort-list-dt">
                                     <div
-                                        class="ui selection dropdown skills-search sort-dropdown"
+                                        className="ui selection dropdown skills-search sort-dropdown"
                                     >
                                         <input name="gender" type="hidden" value="default" />
-                                        <i class="dropdown icon d-icon"></i>
-                                        <div class="text">Sort By</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="0">Relevance</div>
-                                            <div class="item" data-value="1">New</div>
-                                            <div class="item" data-value="2">Old</div>
-                                            <div class="item" data-value="3">Last 15 Days</div>
+                                        <i className="dropdown icon d-icon"></i>
+                                        <div className="text">Sort By</div>
+                                        <div className="menu">
+                                            <div className="item" data-value="0">Relevance</div>
+                                            <div className="item" data-value="1">New</div>
+                                            <div className="item" data-value="2">Old</div>
+                                            <div className="item" data-value="3">Last 15 Days</div>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="grid-list">
-                                    <button class="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
-                                        <i class="fas fa-th-large"></i>
+                                <li className="grid-list">
+                                    <button className="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
+                                        <i className="fas fa-th-large"></i>
                                     </button>
-                                    <button class="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
-                                        <i class="fas fa-th-list"></i>
+                                    <button className="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
+                                        <i className="fas fa-th-list"></i>
                                     </button>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="tab-content ">
-                        <div class="tab-pane active" id="tab-1">
-                            <div class="row view-group " id="products">
+                    <div className="tab-content ">
+                        <div className="tab-pane active" id="tab-1">
+                            <div className="row view-group " id="products">
                             {
-                                            data.map((item)=>
+                                            data.map((item, index)=>
 
-                                <div class={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid==true?'list-group-item1':''}`}>
+                                <div className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid==true?'list-group-item1':''}`} key={index}>
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
                                             <div className="job-skills">
@@ -129,9 +132,17 @@ export default function Shortlist() {
                                 </div>
                                 
                                )}
+
+                               { ( data.length==0 && !fetchDone ) && (
+                                 <div className="desired_section">
+                                     <ProfileSkeleton />
+                                     <ProfileSkeleton />
+                                     <ProfileSkeleton />
+                                 </div>
+                               )}
                                 
-                                <div class="col-12">
-                                    <div class="main-p-pagination">
+                                <div className="col-12">
+                                    <div className="main-p-pagination">
                                         <nav aria-label="Page navigation example">
                                      
                                         </nav>

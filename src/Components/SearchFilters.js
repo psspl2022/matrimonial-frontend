@@ -42,6 +42,7 @@ export default function SearchFilters(props) {
 //     }
 // }
 
+
   useEffect(() => {
     // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios

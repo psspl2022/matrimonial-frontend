@@ -91,7 +91,7 @@ function MainFooter() {
                     </div>
                 </div>
             </footer>
-            <button onClick="topFunction()" id="pageup" title="Go to top"><i className="fas fa-arrow-up"></i></button>
+            <button id="pageup" title="Go to top"><i className="fas fa-arrow-up"></i></button>
 
             
         </>
