@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import CheckTokenExist from "./CheckTokenExist";
 import { useHistory } from "react-router-dom";
+import bgimage from "../success_bg.jpg";
 
 export default function MembershipPlan() {
 
@@ -17,10 +18,10 @@ export default function MembershipPlan() {
 
   return (
     <>
-      <div className="membership-plan">
+      <div className="membership-plan" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
         <div className="plan-heading">
-          <h2 style={{ fontSize: '2.71rem' }}>Membership Plans & Pricing</h2>
-          <span style={{ fontSize: '20px' }}>Access all the paid services in reasonable prices</span>
+          <h2 className="font-lobster" style={{ fontSize: '2.71rem'}}>Membership Plans & Pricing</h2>
+          <span style={{ fontSize: '18px',fontWeight: '500' }}>Access all the paid services in reasonable prices</span>
         </div>
         <div className="wrapper">
           <div className="pricing-table gprice-single">

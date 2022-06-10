@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
+import bgimage from "../background1.jpeg";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -71,19 +72,19 @@ function Login() {
   };
   return (
     <>
-      <main className="browse-section">
+      <main className="browse-section " style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'rgb(228 130 147 / 15%) 0px 0px 0px 2000px inset',  paddingBottom: '40px' }}>
         <div className="container">
           <div className="row justify-content-md-center">
             <div className="col-md-6">
               <div className="lg_form">
                 <div className="main-heading">
                   <h2>Sign in to {window.AppName}</h2>
-                  <div className="line-shape1">
+                  {/* <div className="line-shape1">
                     <img src="images/line.svg" alt="" />
-                  </div>
+                  </div> */}
                 </div>
                 <form onSubmit={loginUser}>
-                  <div className="form-group">
+                  <div className="form-group mt-0">
                     <label className="label15">Email Address*</label>
                     <input
                       type="email"
@@ -111,7 +112,7 @@ function Login() {
                     <ReCAPTCHA
                       sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq"
                       onChange={onChange}
-                      style={{ marginTop: "50px" }}
+                      style={{ marginTop: "30px" }}
                     />
                   </div>
                   <input

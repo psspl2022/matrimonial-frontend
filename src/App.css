@@ -9,6 +9,10 @@ body{
 
 }
 
+.Search-section label{
+  color:#fff;
+  font-weight:500;
+}
 .theme-fontcolor{
   color: #ff0049;
 }
@@ -98,7 +102,7 @@ body{
 
 .pricing-table .head .title{
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
 }
 
@@ -134,8 +138,9 @@ body{
 
 .pricing-table .content ul li{
   margin: 20px 0px;
-  font-size: 14px;
-  color:#555;
+  font-size: 16px;
+  color: #3f2d2d;
+  font-weight: 600;
 }
 
 .membershipDetails ul li{
@@ -155,7 +160,7 @@ body{
 
 .pricing-table .btn {
 color: #fff;
-padding: 14px 40px;
+padding: 10px 32px;
 display: inline-block;
 text-align: center;
 font-weight: 600;
@@ -163,7 +168,7 @@ font-weight: 600;
 -moz-transition: all 0.3 linear;
 transition: all 0.3 linear;
 border: none;
-font-size: 14px;
+font-size: 19px;
 text-transform: capitalize;
 position: relative;
 text-decoration: none;

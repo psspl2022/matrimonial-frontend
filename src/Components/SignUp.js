@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import Select from "react-select";
 import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
+import bgimage from "../background2.jpeg";
 // import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
@@ -108,7 +109,7 @@ function SignUp() {
 
   return (
     <>
-      <main className="browse-section">
+      <main className="browse-section" style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',  paddingBottom: '40px' }}>
         <div className="container">
           <div className="row justify-content-md-center">
             <div className="col-md-6">

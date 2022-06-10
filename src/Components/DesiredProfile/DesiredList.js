@@ -181,7 +181,7 @@ export default function DesiredList() {
                                                 </div>
                                         </div>
                                         <div className="job-des-dt">
-                                            <h4>{ item[2].name }</h4>
+                                            <h4 style={{ fontWeight: "200" }} >{ item[2].name }</h4>
                                             {/* <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing
                                                 elit. Etiam cursus pulvinar dolor nec...

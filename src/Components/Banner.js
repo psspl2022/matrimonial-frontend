@@ -1,9 +1,22 @@
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import Select from "react-select";
 import { useEffect } from 'react';
 
 function Banner() {
+
+    const lookingForOptions = [
+        { value: "2", label: "Bride"},
+        { value: "1", label: "Groom" },
+        { value: "Daughter", label: "Daughter" },
+        { value: "Brother", label: "Brother" },
+        { value: "Sister", label: "Sister" },
+        { value: "Relative", label: "Relative" },
+        { value: "Client - Marriage Bureau", label: "Client - Marriage Bureau" },
+      ];
+
+      
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
@@ -128,78 +141,88 @@ function Banner() {
                 {/* </div> */}
                 <div className="col-md-12 p-0">
                     <img src={ process.env.PUBLIC_URL + "/matrimonial_banner2.jpg"} style={{width:'100%',maxHeight:'600px'}} alt="" />
-                    <div className="d-none">
-                        <div className="container">
-                            <div className="row">
-                                <div className='col-md-4 Search-section'>
-                                <div className="col-10">
-                                    <div className="form-group mb-0">
-                                        <input
-                                            className="search-1"
-                                            type="text"
-                                            placeholder="Keywords (e.g. Job Title, Position...)"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-10">
-                                    <div className="form-group mb-0 mt-15">
-                                        <input
-                                            className="search-1"
-                                            type="text"
-                                            placeholder="Location (e.g. City, Country...)"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-10 mt-15">
-                                    <div className="form-group mb-0">
-                                        <input
-                                            className="search-1"
-                                            type="text"
-                                            placeholder="Industry (e.g. Design, Art...)"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="col-10 mt-15">
-                                    <button className="srch-btn" type="submit">Search Now</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div className="Search-section">
                 <div className="container">
+                <div className="row">
+                    <div className="col-lg-2 col-md-2 col-12">
+                        <label>I'am looking for a</label>
+                    </div>                   
+                    <div className="col-lg-4 col-md-4 col-12">
+                        <label>aged</label>
+                    </div>
+                    <div className="col-lg-2 col-md-2 col-12 ml-3">
+                        <label>of Religion</label>
+                    </div>
+                    <div className="col-lg-2 col-md-2 col-12">
+                        <label>and Mother Tongue</label>
+                    </div>
+                    
+                </div>
                     <div className="row">
-                        <div className="col-lg-4 col-md-3 col-12">
-                            <div className="form-group mb-0">
-                                <input
-                                    className="search-1 text-dark"
-                                    type="text"
-                                    placeholder="Keywords (e.g. Name, Caste...)"
+                        <div className="col-lg-2 col-md-2 col-12">
+                            <div className="form-group mb-0">                               
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="select"
+                                    name="lookingForOptions"
+                                    placeholder="Looking For"
+                                    options={lookingForOptions}
                                 />
                             </div>
                         </div>
-                        <div className="col-lg-3 col-md-3 col-12">
+                        <div className="col-lg-2 col-md-2 col-12">
                             <div className="form-group mb-0 mt-15">
-                                <input
-                                    className="search-1 text-dark"
-                                    type="text"
-                                    placeholder="Location (e.g. City, Country...)"
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="select"
+                                    name="minage"
+                                    placeholder="Min Age"
+                                    options={lookingForOptions}
                                 />
                             </div>
                         </div>
-                        <div className="col-lg-3 col-md-3 col-12 mt-15">
+                        {/* <label className="mt-2">to</label> */}
+                        <div className="col-lg-2 col-md-2 col-12 mt-15">                           
+                            <div className="form-group mb-0"
+                                    style={{ position: 'relative'  }}>
+                            <span style={{ position: 'absolute', top: '5px', left: '-21px', color:'#fff'  }}>to</span>
+                            
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="select"
+                                    name="minage"
+                                    placeholder="Max Age"
+                                    options={lookingForOptions}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12 mt-15">
                             <div className="form-group mb-0">
-                                <input
-                                    className="search-1 text-dark"
-                                    type="text"
-                                    placeholder="Industry (e.g. Engineer, Accountant...)"
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="select"
+                                    name="religion"
+                                    placeholder="Religion"
+                                    options={lookingForOptions}
                                 />
                             </div>
                         </div>
-                        <div className="col-lg-2 col-md-3 col-12 mt-15">
-                            <button className="srch-btn" type="submit">Search Now</button>
+                        <div className="col-lg-2 col-md-2 col-12 mt-15">
+                            <div className="form-group mb-0">
+                                <Select
+                                    className="basic-single"
+                                    classNamePrefix="select"
+                                    name="mother"
+                                    placeholder="Mother Tongue"
+                                    options={lookingForOptions}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-lg-2 col-md-2 col-12 mt-15">
+                            <button style={{letterSpacing: "0.5px"}} className="srch-btn " type="submit">Search Now <i class="fa fa-heart" aria-hidden="true"></i>
+</button>
                         </div>
                     </div>
                 </div>
