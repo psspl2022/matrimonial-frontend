@@ -21,6 +21,7 @@ Fonts
 @import url('https://fonts.googleapis.com/css2?family=Asap:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;display=swap');
+
 /* ================================================================================== 
 Reset Css
 ===================================================================================== */
@@ -60,15 +61,6 @@ footer, header, hgroup, menu, nav, section {
 ::selection {
 	color: #fff;
 	background: #ee0a4b;
-}
-
-body {
-	line-height: 1;
-	font-family: "Roboto" !important;
-	overflow-x: hidden;
-	font-weight: 400 !important;
-	background: #fafafa !important;
-	margin:0 auto;
 }
 
 .theme-color{
@@ -862,12 +854,13 @@ span.right-cm {
 }
 
 .srch-btn {
+    font-weight:500;
     border: 2px solid #fff;
     height: 40px;
     width: 100%;
     background: #ee0a4b;
     color: #fff;
-    font-size: 14px;
+    font-size: 17px;
     text-transform: uppercase;
     border-radius: 3px;
 }
@@ -1241,10 +1234,11 @@ span.right-cm {
 }
 
 .main-heading span {
-	font-size: 14px;
-	color: #757575;
-	line-height: 1.2;
-	font-family: 'Roboto', sans-serif;
+	font-size: 22px;
+    color: #625757;
+    line-height: 1.2;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
 }
 
 .line-shape1 {
@@ -1363,7 +1357,7 @@ span.right-cm {
     color: #242424;
     font-weight: 500;
     line-height: 1.2;
-    font-family: 'Roboto';
+    font-family: 'Lato,'Helvetica Neue',Arial,Helvetica,sans-serif'!important;
     margin-bottom: 5px !important;
     margin-top: 3px !important;
 }
@@ -1416,11 +1410,11 @@ span.right-cm {
 }
 
 .job-des-dt h4 {
-	font-size: 18px;
+    font-weight: 400;
+	font-size:1.71428571rem;;
     color: #242424;
-    font-weight: 500;
     line-height: 1.2;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato,'Helvetica Neue',Arial,Helvetica,sans-serif'!important;
 	text-align: left;
 	margin-bottom: 13px;
 	text-overflow: ellipsis;
@@ -1428,13 +1422,13 @@ span.right-cm {
     overflow: hidden;
 }
 
-.job-des-dt p {
-	font-size: 14px;
-	font-family: "Open Sans";
-	color: #757575;
-	font-weight: 400;
-	line-height: 26px;
-	text-align: left;
+.job-des-dt p {	
+    font-size: 15px;
+    font-family: "Open Sans";
+    color: #000000;
+    font-weight: 500;
+    line-height: 23px;
+    text-align: left;
 	margin-bottom: 18px;
 }
 
@@ -1698,12 +1692,13 @@ span.right-cm {
 }
 
 .job-urs-dts h4 {
+    font-weight: 600;
 	font-size: 18px;
     color: #242424;
     font-weight: 500;
     line-height: 1.2;
     text-align: center;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Lato,'Helvetica Neue',Arial,Helvetica,sans-serif'!important;
     margin-bottom: 8px !important;
 }
 
@@ -1716,13 +1711,8 @@ span.right-cm {
 }
 
 .job-urs-dts .avialable {
-	font-size: 14px;
-    color: #ee0a4b;
-    font-weight: 400;
-    text-align: center;
-    margin-bottom: 0px;
-	margin-top: 8px;
-	text-decoration: none;
+	
+    
 }
 
 .job-urs-dts .c-link {
@@ -1894,7 +1884,7 @@ span.right-cm {
 }
 
 .subscribe-newsletter {
-    padding: 30px 0 25px;
+    padding: 20px 0 20px;
 	border-bottom: 1px solid #353535;
 }
 
@@ -1956,7 +1946,8 @@ span.right-cm {
 }
 
 .about-jobby p {
-	font-size: 14px;
+    font-weight: 800;
+	font-size: 16px;
 	font-family: 'Roboto', sans-serif;
 	color: #acacac;
 	line-height: 26px;
@@ -1966,7 +1957,7 @@ span.right-cm {
 }
 
 .footer-links {
-	margin-top: 63px;
+    margin-top: 22px;
 }
 
 .footer-links h4 {
@@ -1994,7 +1985,7 @@ span.right-cm {
 }
 
 .copy-social {
-	margin-top: 50px;
+	margin-top: 18px;
 	padding: 20px 0;
 	border-top: 1px solid #353535;
 }
@@ -2114,7 +2105,7 @@ span.right-cm {
 .browse-section {
 	float: left;
 	width: 100%;
-	padding: 80px 0;
+	padding: 35px 0;
 }
 
 .browser-job-filters {
@@ -5030,7 +5021,7 @@ span.right-cm {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     color: #242424;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     line-height: 24px;
 }
 
@@ -5946,15 +5937,17 @@ span.right-cm {
 /* === Login Register Page === */
 
 .lg_form {
+    border-radius: 8px;
     float: left;
     width: 100%;
     background: #fff;
     border: 1px solid #e5e5e5;
-    padding: 50px 30px;
+    padding: 35px 30px;
+    box-shadow: 0 0 22px #6e5050;
 }
 
 .lg_form .form-group {
-    margin-top: 27px;
+    margin-top: 15px;
     margin-bottom: 0;
     float: left;
     width: 100%;
@@ -7300,4 +7293,15 @@ span.right-cm {
 }
 h1,h2,h3,h4,h5,h6{
     font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.marriagedate{
+    font-size: 14px!important;
+    color: #ee0a4b!important;
+    font-weight: 700 !important;
+   }
+.successheart{
+    padding-right:4px;
+    font-size: 13px!important;
+    color: #e8658a !important;
 }

@@ -14,7 +14,7 @@ function MainFooter() {
                                     <div className="text-step1">
                                         <h4>Subscribe to Newsletter</h4>
                                         <div className="btext-heading mt-2">
-                                            <i className="fas fa-check-circle"></i>For Notifications Updates join our Newsletter.
+                                            <i className="fa fa-heart"></i>For Notifications Updates join our Newsletter.
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@ function MainFooter() {
                         <div className="col-lg-3 col-md-3">
                             <div className="about-jobby">
                                 <a href="index.html"><img src="images/logo1.svg" alt="" /></a>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu purus et diam blandit vehicula sit amet sed metus. Fusce condimentum non neque at fringilla. Aenean malesuada aliquet tincidunt.</p>
+                                <p><sup><i class="fa fa-quote-left" style={{fontSize:"10px"}} aria-hidden="true"></i></sup> A good marriage is one  where each partner secretly suspects they got the better deal  <sup><i class="fa fa-quote-right" style={{fontSize:"10px"}} aria-hidden="true"></i></sup></p>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3">
@@ -74,7 +74,7 @@ function MainFooter() {
                         <div className="row">
                             <div className="col-lg-6 col-md-6">
                                 <div className="copyright">
-                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">Namdeo Matrimonial</a>. All Right Reserved.
+                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">Namdeo <i class="fa fa-heart " aria-hidden="true"></i>Matrimony</a>. All Right Reserved.
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">

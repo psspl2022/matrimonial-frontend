@@ -262,6 +262,56 @@ export default function DesiredList() {
                               <div className="job-des-dt">
                                 <h4>{item[2].name}</h4>
                                 {/* <p>
+                        <div class="mtab-right">
+                            <ul>
+                                <li class="sort-list-dt">
+                                    <div
+                                        class="ui selection dropdown skills-search sort-dropdown"
+                                    >
+                                        <input name="gender" type="hidden" value="default" />
+                                        <i class="dropdown icon d-icon"></i>
+                                        <div class="text">Sort By</div>
+                                        <div class="menu">
+                                            <div class="item" data-value="0">Relevance</div>
+                                            <div class="item" data-value="1">New</div>
+                                            <div class="item" data-value="2">Old</div>
+                                            <div class="item" data-value="3">Last 15 Days</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="grid-list">
+                                    <button class="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
+                                        <i class="fas fa-th-large"></i>
+                                    </button>
+                                    <button class="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
+                                        <i class="fas fa-th-list"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-1">
+                            <div class="row view-group" id="products">
+                            {
+                                            data.map((item)=>
+
+                                <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
+                                    <div className="job-item mt-30">
+                                        <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
+                                            <div className="desired_percent">
+                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px" }} className={`${item[0]<=40 && 'yellow' } ${item[0]<=90 && 'green' } ${item[0]>90 && 'pink' }`}>{item[0] }% Matched</span>
+                                            </div>  
+                                            <div className="img-profile">  
+                                                <img
+                                                    src={ process.env.PUBLIC_URL + "/profile1.jpg" }
+                                                    alt="" style={{maxHeight:'220px', width: '100%'}}
+                                                />
+                                                </div>
+                                        </div>
+                                        <div className="job-des-dt">
+                                            <h4 style={{ fontWeight: "200" }} >{ item[2].name }</h4>
+                                            {/* <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing
                                                 elit. Etiam cursus pulvinar dolor nec...
                                             </p> */}

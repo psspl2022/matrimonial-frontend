@@ -353,11 +353,20 @@ function MainHeader() {
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
                     to="/"
                   >
-                    <img
-                      src="matrimonial_logo.png"
-                      alt=""
-                      style={{ maxHeight: "40px" }}
-                    />
+                    <div className="row">
+                      <div className="col-4">
+                      <img
+                        src="matrimonial_logo.png"
+                        alt=""
+                        style={{ maxHeight: "40px"}}
+                      />
+                      </div>                    
+                      <div className="col-8">
+                      <span style={{color:'#ee0a4b', fontSize:"28px", fontStyle: "italic", fontWeight:"700"}} >Namdeo</span><r /><br /><span style={{ letterSpacing: "0px", fontWeight:"700"}}> MATRIMONY <i class="fa fa-heart" aria-hidden="true"></i></span>
+                      </div>
+                    </div>
+                    
+                   
                   </NavLink>
                   <button
                     className="navbar-toggler align-self-start"
@@ -375,12 +384,12 @@ function MainHeader() {
                   >
                     <ul className="navbar-nav align-self-stretch">
                       <li className="nav-item">
-                        <NavLink className="nav-link" to="/">
+                        <NavLink className="nav-link font-lobster" to="/">
                           Home
                         </NavLink>
                       </li>
                       <li className="nav-item">
-                        <NavLink to="/findMatches" className="nav-link">
+                        <NavLink to="/findMatches" className= "font-lobster nav-link">
                           Find Matches
                         </NavLink>
                         {/* <div className="dropdown-menu pages-dropdown">
@@ -393,23 +402,23 @@ function MainHeader() {
                       <li className="nav-item dropdown">
                       <a
                           href="#"
-                          className="nav-link dropdown-toggle-no-caret"
+                          className="nav-link dropdown-toggle-no-caret font-lobster"
                           role="button"
                           data-toggle="dropdown"
                         >
                           Matches
                         </a>
-                        <div className="dropdown-menu pages-dropdown">
+                        <div className="dropdown-menu pages-dropdown ">
                         <NavLink
                           to="/shortlist"
-                          className="link-item"
+                          className="link-item font-lobster"
                           role="button"
                         >
                           Shortlist Profile
                         </NavLink>
                         <NavLink
                           to="/desiredlist"
-                          className="link-item"
+                          className="link-item font-lobster"
                           role="button"
                         >
                           Desired Profile Match
@@ -436,14 +445,14 @@ function MainHeader() {
                         <div className="dropdown-menu pages-dropdown">
                         <NavLink
                           to="/interest"
-                          className="link-item"
+                          className="link-item font-lobster"
                           role="button"
                         >
                           Interest
                         </NavLink>
                         <NavLink
                           to="/accept"
-                          className="link-item"
+                          className="link-item font-lobster"
                           role="button"
                         >
                           Acceptances
@@ -460,18 +469,18 @@ function MainHeader() {
                       <li className="nav-item dropdown">
                         <a
                           href="#"
-                          className="nav-link dropdown-toggle-no-caret"
+                          className="nav-link dropdown-toggle-no-caret font-lobster"
                           role="button"
                           data-toggle="dropdown"
                         >
                           Upgrade Plan
                         </a>
-                        <div className="dropdown-menu pages-dropdown">
+                        <div className="dropdown-menu pages-dropdown ">
                           <a className="link-item" href="browse_companies.html">
                             Browse Plans
                           </a>
                           <a
-                            className="link-item"
+                            className="link-item font-lobster"
                             href="other_company_profile.html"
                           >
                             Membership Plan History
@@ -479,14 +488,14 @@ function MainHeader() {
                         </div>
                       </li>
                       <li className="nav-item">
-                        <NavLink to="/help" className="nav-link" role="button">
+                        <NavLink to="/help" className="nav-link font-lobster" role="button">
                           Help
                         </NavLink>
                       </li>
                       <li className="nav-item dropdown pages152">
                         <a
                           href="#"
-                          className="nav-link dropdown-toggle-no-caret"
+                          className="nav-link dropdown-toggle-no-caret font-lobster"
                           role="button"
                           id="dropdownPageLink"
                           data-toggle="dropdown"
@@ -522,10 +531,10 @@ function MainHeader() {
                     </a>
                     {token.length === 0 && (
                       <div>
-                        <NavLink to="/login" className="add-post">
+                        <NavLink to="/login" style={{letterSpacing: "1px"}} className="add-post font-fredokaone">
                           Login
                         </NavLink>
-                        <NavLink to="/signUp" className="add-task">
+                        <NavLink to="/signUp" style={{letterSpacing: "1px"}} className="add-task font-fredokaone">
                           Register
                         </NavLink>{" "}
                       </div>

@@ -3,7 +3,7 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { NavLink } from 'react-router-dom';
-import bgimage from "../match_bg1.jpg";
+import bgimage from "../background2.jpeg";
 
 function LatestMatch() {
 
@@ -38,12 +38,12 @@ function LatestMatch() {
 
     return (
         <>
-            <div className="find-lts-jobs mb-5" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'inset 0 0 0 2000px rgb(223 87 111 / 58%)', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
+            <div className="find-lts-jobs mb-5" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'rgb(228 130 147 / 15%) 0px 0px 0px 2000px inset', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 col-12">
                             <div className="main-heading">
-                                <div className='main_heading_style'>Latest Match</div>
+                                <div className='main_heading_style font-lobster'>Latest Match</div>
                                 <span className='main_heading_span'>Match for a Future</span>
                                 <div className="line-shape1">
                                     <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/line.svg" } alt="" />
@@ -65,7 +65,7 @@ function LatestMatch() {
                                                         />
                                                 </div>
                                                 <div className="job-des-dt">
-                                                    <h4>Kartik Kumar</h4>
+                                                    <h4 >Kartik Kumar</h4>
                                                     <p>
                                                         Lorem ipsum dolor sit amet, consectetur adipiscing
                                                         elit. Etiam cursus pulvinar dolor nec...
