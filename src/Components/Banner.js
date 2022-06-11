@@ -2,24 +2,56 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';  
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import Select from "react-select";
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 function Banner() {
 
     const lookingForOptions = [
         { value: "2", label: "Bride"},
         { value: "1", label: "Groom" },
-        { value: "Daughter", label: "Daughter" },
-        { value: "Brother", label: "Brother" },
-        { value: "Sister", label: "Sister" },
-        { value: "Relative", label: "Relative" },
-        { value: "Client - Marriage Bureau", label: "Client - Marriage Bureau" },
       ];
+      const [age, setAge] = useState({});
+      const [moths, setMoths] = useState([]);
+      const [religions, setReligions] = useState([]);
 
+      const [miniage, setMiniage] = useState([]);
+      const [maxiage, setMaxiage] = useState([]);
+      const[caste, setCaste] = useState([]);
+      const[mothertongue, setMothertongue] = useState([]);
+
+      const [selectReligion, setSelectReligion] = useState("");
+      const [selectCaste, setSelectCaste] = useState("");
       
     useEffect(() => {
         window.scrollTo(0, 0);
         document.title = "Home";
+        axios
+        .get(`${window.Url}api/desiredDropdown`)
+        .then(({ data }) => {
+          
+          setAge(
+            data.age.map(function (age) {
+              return { value: age.id, label: age.age };
+            })
+          );
+
+          setReligions(
+            data.religion.map(function (religion) {
+              return { value: religion.id, label: religion.religion };
+            })
+          );
+
+          setMoths(
+            data.mother_tongue.map(function (mother_tongue) {
+              return {
+                value: mother_tongue.id,
+                label: mother_tongue.mother_tongue,
+              };
+            })
+          );
+         
+    })
       }, [])
     
   const options = {
@@ -146,24 +178,10 @@ function Banner() {
             </div>
             <div className="Search-section">
                 <div className="container">
-                <div className="row">
-                    <div className="col-lg-2 col-md-2 col-12">
-                        <label>I'am looking for a</label>
-                    </div>                   
-                    <div className="col-lg-4 col-md-4 col-12">
-                        <label>aged</label>
-                    </div>
-                    <div className="col-lg-2 col-md-2 col-12 ml-3">
-                        <label>of Religion</label>
-                    </div>
-                    <div className="col-lg-2 col-md-2 col-12">
-                        <label>and Mother Tongue</label>
-                    </div>
-                    
-                </div>
                     <div className="row">
                         <div className="col-lg-2 col-md-2 col-12">
-                            <div className="form-group mb-0">                               
+                            <div className="form-group mb-0">     
+                            <label>I'am looking for a</label>                          
                                 <Select
                                     className="basic-single"
                                     classNamePrefix="select"
@@ -175,19 +193,20 @@ function Banner() {
                         </div>
                         <div className="col-lg-2 col-md-2 col-12">
                             <div className="form-group mb-0 mt-15">
+                            <label>aged</label>
                                 <Select
                                     className="basic-single"
                                     classNamePrefix="select"
                                     name="minage"
                                     placeholder="Min Age"
-                                    options={lookingForOptions}
+                                    options={age}
                                 />
                             </div>
                         </div>
-                        {/* <label className="mt-2">to</label> */}
-                        <div className="col-lg-2 col-md-2 col-12 mt-15">                           
+   
+                        <div className="col-lg-2 col-md-2 col-12 mt-15" style={{ marginTop:'auto' }}>                           
                             <div className="form-group mb-0"
-                                    style={{ position: 'relative'  }}>
+                                    style={{ position: 'relative' }}>
                             <span style={{ position: 'absolute', top: '5px', left: '-21px', color:'#fff'  }}>to</span>
                             
                                 <Select
@@ -195,33 +214,35 @@ function Banner() {
                                     classNamePrefix="select"
                                     name="minage"
                                     placeholder="Max Age"
-                                    options={lookingForOptions}
+                                    options={age}
                                 />
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12 mt-15">
                             <div className="form-group mb-0">
+                            <label>of Religion</label>
                                 <Select
                                     className="basic-single"
                                     classNamePrefix="select"
                                     name="religion"
                                     placeholder="Religion"
-                                    options={lookingForOptions}
+                                    options={religions}
                                 />
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-2 col-12 mt-15">
                             <div className="form-group mb-0">
+                            <label>and Mother Tongue</label>
                                 <Select
                                     className="basic-single"
                                     classNamePrefix="select"
                                     name="mother"
                                     placeholder="Mother Tongue"
-                                    options={lookingForOptions}
+                                    options={moths}
                                 />
                             </div>
                         </div>
-                        <div className="col-lg-2 col-md-2 col-12 mt-15">
+                        <div className="col-lg-2 col-md-2 col-12 mt-15" style={{marginTop:'auto'}}>
                             <button style={{letterSpacing: "0.5px"}} className="srch-btn " type="submit">Search Now <i class="fa fa-heart" aria-hidden="true"></i>
 </button>
                         </div>

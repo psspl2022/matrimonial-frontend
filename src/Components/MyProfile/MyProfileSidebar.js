@@ -3,15 +3,20 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import $ from "jquery";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 
+
 function MyProfileSidebar() {
   const token = window.sessionStorage.getItem("access_token");
+  const dispatch = useDispatch();
 	const history = useHistory();
+  const [memdata, setMemData] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [userImage, setUserImage] = useState();
+  const [image, setImage] = useState();
+  
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,
@@ -24,22 +29,27 @@ function MyProfileSidebar() {
 		if(sessionStorage.hasOwnProperty("user_data")){
 			const user_data = window.sessionStorage.getItem('user_data');
 			setUserData(JSON.parse(user_data));
+      profileSidebar();
+      basicDropdown();
+      getProfileImage();
 		}	
 	},[]);
-  
-  useEffect(() => {
+
+  const basicDropdown = () => {
     axios
-      .get(`${window.Url}api/basicDropdown`, headers_param)
-      .then(({ data }) => {
-        // setCountries(
-        //   data.country.map(function (country) {
-        //     return { value: country.id, label: country.name };
-        //   })
-        // );
+    .get(`${window.Url}api/basicDropdown`, headers_param)
+    .then(({ data }) => {
+      // setCountries(
+      //   data.country.map(function (country) {
+      //     return { value: country.id, label: country.name };
+      //   })
+      // );
 
-      });
-
-     axios
+    }); 
+  }
+  
+  const getProfileImage = () => {
+    axios
     .get(`${window.Url}api/getProfileImage`, headers_param)
     .then(({ data }) => {
       if (data.hasOwnProperty("msg")) {
@@ -52,8 +62,40 @@ function MyProfileSidebar() {
         // });
       }
     });
+  }
 
-  }, []);
+  const uploadPhoto = (e) => {
+    e.preventDefault();
+    setImage(e.target.files[0]);
+    console.warn(e.target.files[0]);
+  }
+
+  const profileSidebar = () => {
+    axios
+    .get(`${window.Url}api/profileSidebar`, headers_param)
+    .then(( response ) => {
+      setMemData(response.data)
+      console.log(response.data.get_package.name)
+  });
+}
+useEffect(() => {  
+
+  const formData = new FormData();
+  formData.append("image", image);
+     axios
+      .post(`${window.Url}api/storeProfileImage`, formData, headers_param)
+      .then(({ data }) => {
+        if (data.hasOwnProperty("msg")) {
+          dispatch(regActiveLink('profileImg'));
+          getProfileImage();
+        } else {
+          // Swal.fire({
+          //   icon: "error",
+          //   text: data.error_msg,
+          // });
+        }
+      });
+    },[image]);
 
   return (
     <>
@@ -62,8 +104,8 @@ function MyProfileSidebar() {
           <img src={userImage} alt="" />
           <div className="job-urs-dts">
             <div className="dp_upload">
-              <input type="file" id="file" />
-              <label htmlFor="file">Upload Photo</label>
+              <input type="file" name="image"  onChange={e => uploadPhoto(e)} id="file" />
+              <label htmlFor="file"  >Upload Photo</label>
             </div>
             <h4>{userData.name}</h4>
             {/* <span>UX Designer</span> */}
@@ -79,19 +121,10 @@ function MyProfileSidebar() {
           <ul>
           <li>
               <a href="#" className="web_link">
-                <i className="fas fa-globe"></i>Current Membership Plan: <span style={{color:'brown'}}>Gold</span>
+                <i className="fas fa-globe"></i>Current Membership Plan: <span style={{color:'brown'}}>
+                  { memdata && (memdata.get_package.name) } </span>
               </a>
             </li>
-            {/* <li>
-              <a href="#" className="web_link">
-                <i className="fas fa-globe"></i>www.companysite.com
-              </a>
-            </li>
-            <li>
-              <a href="#" className="web_link">
-                <i className="far fa-edit"></i>www.blogsite.com
-              </a>
-            </li> */}
           </ul>
         </div>
         <div className="group_skills_bar">

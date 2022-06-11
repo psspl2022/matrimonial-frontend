@@ -113,7 +113,7 @@ function SignUp() {
       <main className="browse-section" style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',  paddingBottom: '40px' }}>
         <div className="container">
           <div className="row justify-content-md-center">
-            <div className="col-md-6">
+            <div className="col-md-8">
               <div className="lg_form">
                 <div className="main-heading">
                   <h2>Sign Up to {window.AppName}</h2>
@@ -122,122 +122,135 @@ function SignUp() {
                   </div> */}
                 </div>
                 <form onSubmit={registerUser}>
-                  <div className="form-group mt-0">
-                    <label className="label15">Profile For*</label>
-                    <Select
-                      className="basic-single"
-                      classNamePrefix="select"
-                      defaultValue={profileForOptions[0]}
-                      isClearable
-                      isSearchable
-                      name="profile_for"
-                      placeholder="Select Profile For"
-                      options={profileForOptions}
-                    />
+                <div className="row">                
+                  <div className="col-md-6">
+                    <div className="form-group ">
+                      <label className="label15">Profile For*</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={profileForOptions[0]}
+                        isClearable
+                        isSearchable
+                        name="profile_for"
+                        placeholder="Select Profile For"
+                        options={profileForOptions}
+                      />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label className="label15">Full Name*</label>
-                    <input
-                      type="text"
-                      className="job-input"
-                      placeholder="Enter Full Name"
-                      value={name} 
-                      onChange={(event)=>{
-                        setName(event.target.value)
-                      }}
-                      required
-                    />
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="label15">Full Name*</label>
+                      <input
+                        type="text"
+                        className="job-input"
+                        placeholder="Enter Full Name"
+                        value={name} 
+                        onChange={(event)=>{
+                          setName(event.target.value)
+                        }}
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label className="label15">Email Address*</label>
-                    <input
-                      type="email"
-                      className="job-input"
-                      placeholder="Enter Email Address"
-                      name="email"
-                      value={email} 
-                      onChange={(event)=>{
-                        setEmail(event.target.value)
-                      }}
-                      required
-                    />
+                 
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="label15">Email Address*</label>
+                      <input
+                        type="email"
+                        className="job-input"
+                        placeholder="Enter Email Address"
+                        name="email"
+                        value={email} 
+                        onChange={(event)=>{
+                          setEmail(event.target.value)
+                        }}
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label className="label15">Phone Number*</label>
-                    <input type="tel" id="phone" name="phno" className="job-input" maxLength="10" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
-                              setPhno(event.target.value)
-                            }} required />
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="label15">Phone Number*</label>
+                      <input type="tel" id="phone" name="phno" className="job-input" maxLength="10" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
+                                setPhno(event.target.value)
+                              }} required />
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label className="label15">Password*</label>
-                    <input
-                      type="password"
-                      className="job-input"
-                      placeholder="Enter Password"
-                      name="password"
-                      value={pass}
-                      onChange={(event)=>{
-                        setPass(event.target.value)
-                      }}
-                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                      required
-                    />
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <label className="label15">Password*</label>
+                      <input
+                        type="password"
+                        className="job-input"
+                        placeholder="Enter Password"
+                        name="password"
+                        value={pass}
+                        onChange={(event)=>{
+                          setPass(event.target.value)
+                        }}
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        required
+                      />
+                    </div>
                   </div>
-                  <div className="form-group mb-4">
-                    <label className="label15">Confirm Password*</label>
-                    <input
-                      type="password"
-                      className="job-input"
-                      placeholder="Enter Confirm Password"
-                      name="confirm-password"
-                      value={cpass}
-                      onChange={(event)=>{
-                        confirmPass(event.target.value)
-                      }}
-                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                      required
-                    />
-                    {passError==true && (<span className="text-danger">Confirm Password and Password does not matched</span>) }
+                  <div className="col-md-6">                    
+                    <div className="form-group mb-4">
+                      <label className="label15">Confirm Password*</label>
+                      <input
+                        type="password"
+                        className="job-input"
+                        placeholder="Enter Confirm Password"
+                        name="confirm-password"
+                        value={cpass}
+                        onChange={(event)=>{
+                          confirmPass(event.target.value)
+                        }}
+                        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        required
+                      />
+                      {passError==true && (<span className="text-danger">Confirm Password and Password does not matched</span>) }
+                    </div>
                   </div>
-                  <div>
-                    <ReCAPTCHA
-                      sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq"
-                      onChange={onChange}
-                      style={{ marginTop: "50px" }}
-                    />
-                  </div>
-                  <div
-                    className="ui checkbox apply_check check_out checked"
-                    style={{ marginTop: "6rem" }}
-                  >
-                    <input
-                      type="checkbox"
-                      tabindex="0"
-                      className=""
-                      id="tandc"
-                      required
-                    />
-                    <label
-                      style={{ color: "#242424 !important" }}
-                      htmlFor="tandc"
-                    >
-                      I accept the Terms of Services
-                    </label>
-                  </div>
+                  <div className="col-md-8"> 
+                    <div>
+                      <ReCAPTCHA
+                        sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq"
+                        onChange={onChange}
+                      />
+                    </div>
+                    <div className="ui checkbox apply_check check_out checked">
+                      <input
+                        type="checkbox"
+                        tabindex="0"
+                        className=""
+                        id="tandc"
+                        required
+                      />
+                      <label
+                        style={{ color: "#242424 !important" }}
+                        htmlFor="tandc"
+                      >
+                        I accept the Terms of Services
+                      </label>
+                    </div>
+                  </div>  
+                    
 
-                  <input
-                    type="submit"
-                    className="lr_btn"
-                    onClick={(e) => {
-                      if (!verified) {
-                        e.preventDefault();
-                      }
-                    }}
-                    value="Register"
-                    style={{cursor : verified===false ? "not-allowed" : "pointer" }}
-                  />
+                    <input
+                      type="submit"
+                      className="lr_btn mx-auto"
+                      onClick={(e) => {
+                        if (!verified) {
+                          e.preventDefault();
+                        }
+                      }}
+                      value="Register"
+                      style={{cursor : verified===false ? "not-allowed" : "pointer" }}
+                    />                
+                </div>
                 </form>
-
                 {/* </Button> */}
                 <div className="done140">
                   Already have an account?

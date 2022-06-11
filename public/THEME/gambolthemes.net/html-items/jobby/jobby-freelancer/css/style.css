@@ -2107,7 +2107,7 @@ span.right-cm {
 .browse-section {
 	float: left;
 	width: 100%;
-	padding: 35px 0;
+	padding: 20px 0;
 }
 
 .browser-job-filters {
@@ -2897,7 +2897,7 @@ span.right-cm {
 }	
 
 .apply_check {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 #products {
@@ -5023,8 +5023,7 @@ span.right-cm {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     color: #242424;
-    margin-bottom: 5px;
-    line-height: 24px;
+    line-height: 15px;
 }
 
 .textarea_input {
@@ -5961,13 +5960,13 @@ span.right-cm {
     font-family: 'Roboto', sans-serif;
 	color: #fff;
 	text-transform: uppercase;
-	border-radius: 3px;
+	border-radius: 50px;
 	background-color: #ee0a4b;
 	float: left;
-	width: 100%;
+	width: 90%;
 	height: 50px;
 	border: 0;
-	margin: 30px 0 0;
+	margin: 10px 0 0;
 	padding: 15px 0;
     text-align: center;
 }
@@ -5981,7 +5980,7 @@ span.right-cm {
     float: left;
     width: 100%;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 12px;
     font-size: 14px;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
