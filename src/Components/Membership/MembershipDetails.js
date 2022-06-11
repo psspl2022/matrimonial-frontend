@@ -21,6 +21,7 @@ function MembershipDetails() {
 
   useEffect(async () => {
     // const package_id = 2;
+        document.title = "Membership Plans";
     await axios
       .get(`${window.Url}api/getMembershipDetail/${package_id}`, headers_param)
       .then(({ data }) => {

@@ -77,6 +77,7 @@ export default function BasicDetails() {
 
   useEffect(() => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
+    document.title = "Basic Details";
     axios
       .get(`${window.Url}api/basicDropdown`, headers_param)
       .then(({ data }) => {

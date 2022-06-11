@@ -12,7 +12,8 @@ import bgimage from "../background2.jpeg";
 function SignUp() {
   
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    document.title = "SignUp";
   }, [])
 
   // const navigate = useNavigate();

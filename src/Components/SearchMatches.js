@@ -5,7 +5,8 @@ import { useEffect } from "react";
 export default function SearchMatches() {
     
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    document.title = "Search Matches";
   }, [])
     return (
         <>

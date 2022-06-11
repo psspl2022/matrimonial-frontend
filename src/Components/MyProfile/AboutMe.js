@@ -26,6 +26,7 @@ export default function AboutMe() {
         setAboutFamily(data.family.about_family);
         setAboutEducation(data.career.express_yourself);
       });
+      document.title = "About Me";
   }, []);
 
   const submitAboutMeDetails = async (e) => {

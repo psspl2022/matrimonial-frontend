@@ -33,6 +33,7 @@ export default function EducationDetails() {
   };
 
   useEffect(() => { 
+    document.title = "Education Details";
     axios
       .get(`${window.Url}api/careerDropdown`, headers_param)
       .then(({ data }) => {

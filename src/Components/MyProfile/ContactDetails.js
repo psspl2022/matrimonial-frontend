@@ -26,6 +26,7 @@ export default function ContactDetails() {
     };
   
     useEffect(() => {
+        document.title = "Contact Details";
       axios
         .get(`${window.Url}api/showContact`, headers_param)
         .then(({ data }) => {

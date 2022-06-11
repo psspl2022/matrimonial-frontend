@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 function ProfileDashboard() {
+  useEffect(() => {
+        document.title = "Profile Dashboard";
+  }, [])
+
   return (
     <>
       <div className="total_1254">

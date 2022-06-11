@@ -9,6 +9,7 @@ function Interest() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Interest Request";
   }, []);
   useEffect(() => {
     if (!sessionStorage.hasOwnProperty("access_token")) {

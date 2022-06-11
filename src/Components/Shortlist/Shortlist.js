@@ -19,7 +19,8 @@ export default function Shortlist() {
     }
 
     useEffect(() => {
-        acceptMe();      
+        acceptMe();  ;
+        document.title = "Shortlist Profiles";    
       }, []);
 
 

@@ -14,7 +14,7 @@ body{
   font-weight:500;
 }
 .theme-fontcolor{
-  color: #ff0049;
+  color: #ff0049!important;
 }
 .main_heading_style{
   min-height: 1rem;

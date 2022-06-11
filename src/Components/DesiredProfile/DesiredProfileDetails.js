@@ -134,6 +134,7 @@ const headers_data = {
 }
 
   useEffect(() => {
+    document.title = "Desired Partner";
     // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios
       .get(`${window.Url}api/desiredDropdown`)

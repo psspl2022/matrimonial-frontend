@@ -488,9 +488,9 @@ function MainHeader() {
                         </div>
                       </li>
                       <li className="nav-item">
-                        <NavLink to="/help" className="nav-link font-lobster" role="button">
+                        <a href="javascript:void(Tawk_API.toggle())" className="nav-link font-lobster" role="button">
                           Help
-                        </NavLink>
+                        </a>
                       </li>
                       <li className="nav-item dropdown pages152">
                         <a

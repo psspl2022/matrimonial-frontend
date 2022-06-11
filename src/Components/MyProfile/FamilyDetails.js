@@ -74,6 +74,7 @@ export default function FamilyDetails() {
   };
 
   useEffect(() => {
+    document.title = "Family Details";
     axios
       .get(`${window.Url}api/familyDropdown`, headers_param)
       .then(({ data }) => {

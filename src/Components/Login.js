@@ -16,6 +16,7 @@ function Login() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = "Login";
   }, []);
 
   const {userExists} = CheckTokenExist();

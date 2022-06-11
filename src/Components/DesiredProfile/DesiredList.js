@@ -25,6 +25,7 @@ export default function DesiredList() {
   useEffect(() => {
     window.scrollTo(0, 0)
         showDesiredProfiles();
+        document.title = "Desired Partner List";
   }, []);
 
   useEffect(() => {

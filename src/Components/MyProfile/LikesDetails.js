@@ -115,6 +115,7 @@ export default function LikesDetails() {
   };
 
   useEffect(() => {
+    document.title = "Likes Details";
     axios
       .get(`${window.Url}api/likesDropdown`, headers_param)
       .then(({ data }) => {

@@ -70,6 +70,7 @@ export default function LifeStyleDetails() {
     };
   
     useEffect(() => {
+      document.title = "LifeStyle Details";
       axios
         .get(`${window.Url}api/showLifeStyle`, headers_param)
         .then(({ data }) => {

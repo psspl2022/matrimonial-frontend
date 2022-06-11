@@ -8,7 +8,8 @@ function Accept() {
 	const history = useHistory();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    document.title = "Request Accept";
   }, [])
   useEffect(() => {
 		if(!sessionStorage.hasOwnProperty("access_token")){
