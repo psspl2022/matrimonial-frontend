@@ -32,7 +32,6 @@ export default function BasicDetails() {
   const [Edit, setEdit] = useState(false);
   const [name, setName] = useState("");
 
-  const [verified, setverified] = useState(false);
   const [maritalStatus, setMaritalStatus] = useState('');
   const [countries, setCountries] = useState({});
   const [cities, setCities] = useState({});

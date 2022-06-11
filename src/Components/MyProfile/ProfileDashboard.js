@@ -32,7 +32,7 @@ function ProfileDashboard() {
           </div>
         </div>
       </div>
-      <div className="view_chart">
+      {/* <div className="view_chart">
         <div className="view_chart_header">
           <h4 className="mt-2">Your Profile View</h4>
           <div className="date_selector">
@@ -55,14 +55,14 @@ function ProfileDashboard() {
           </div>
         </div>
         <div className="view_chart_body">
-          {/* <canvas
+          <canvas
             id="chart"
             width="890"
             height="300"
             className="chartjs-render-monitor"
-          ></canvas> */}
+          ></canvas>
         </div>
-      </div>
+      </div> */}
       <div className="dsh150">
         <div className="row">
           <div className="col-lg-6">
@@ -383,7 +383,7 @@ function ProfileDashboard() {
               </div>
             </div>
           </div> */}
-          <div className="col-lg-5">
+          {/* <div className="col-lg-5">
             <div className="view_chart">
               <div className="view_chart_header">
                 <h4>Membership Order Plans Summery</h4>
@@ -417,7 +417,7 @@ function ProfileDashboard() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
