@@ -11,7 +11,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState({});
-  
+
   const history = useHistory();
 
   useEffect(() => {
@@ -19,9 +19,9 @@ function Login() {
     document.title = "Login";
   }, []);
 
-  const {userExists} = CheckTokenExist();
+  const { userExists } = CheckTokenExist();
   useEffect(() => {
-    if(userExists){
+    if (userExists) {
       history.replace("/myprofile");
     }
   }, []);
@@ -48,17 +48,16 @@ function Login() {
             icon: "success",
             text: data.msg,
           });
-          window.sessionStorage.setItem('access_token', data.token);
-          window.sessionStorage.setItem('user_data',JSON.stringify(data.user));
+          window.sessionStorage.setItem("access_token", data.token);
+          window.sessionStorage.setItem("user_data", JSON.stringify(data.user));
           history.replace("/registrationStage");
-        //   return <Redirect to='/registrationStage' />
+          //   return <Redirect to='/registrationStage' />
         } else {
           Swal.fire({
             icon: "error",
             text: data.error,
           });
         }
-
       })
       .catch(({ data }) => {
         if (data.hasOwnProperty("error")) {
@@ -73,7 +72,16 @@ function Login() {
   };
   return (
     <>
-      <main className="browse-section " style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'rgb(228 130 147 / 15%) 0px 0px 0px 2000px inset',  paddingBottom: '40px' }}>
+      <main
+        className="browse-section "
+        style={{
+          backgroundImage: `url(${bgimage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          boxShadow: "rgb(228 130 147 / 15%) 0px 0px 0px 2000px inset",
+          paddingBottom: "40px",
+        }}
+      >
         <div className="container">
           <div className="row justify-content-md-center">
             <div className="col-md-6">
@@ -125,7 +133,10 @@ function Login() {
                       }
                     }}
                     value="Login"
-                    style={{marginTop: "7rem", cursor : verified===false ? "not-allowed" : "pointer" }}
+                    style={{
+                      marginTop: "7rem",
+                      cursor: verified === false ? "not-allowed" : "pointer",
+                    }}
                   />
                 </form>
                 <div className="done145">
@@ -144,6 +155,7 @@ function Login() {
           </div>
         </div>
       </main>
+
     </>
   );
 }

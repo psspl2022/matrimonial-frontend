@@ -90,8 +90,9 @@ function SignUp() {
     else{
       Swal.fire({
         icon:"error",
-        text:"Check Your Fields Properly"
+        text:data.error
       })
+      history.replace("/login");
     }
       
       // console.log(data);
@@ -173,7 +174,7 @@ function SignUp() {
                   <div className="col-md-6">
                     <div className="form-group">
                       <label className="label15">Phone Number*</label>
-                      <input type="tel" id="phone" name="phno" className="job-input" maxLength="10" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
+                      <input type="tel" id="phone" name="phno" className="job-input" minlength="10" maxLength="10" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
                                 setPhno(event.target.value)
                               }} required />
                     </div>

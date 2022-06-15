@@ -1,6 +1,6 @@
 import changeActiveLink from './regActiveLink';
 
-import { combineReducers, CombineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     changeActiveLink

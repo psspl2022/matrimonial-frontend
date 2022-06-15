@@ -12,6 +12,7 @@ function MainHeader() {
   const [userData, setUserData] = useState({});
   const history = useHistory();
   const [userImage, setUserImage] = useState();
+  const [loaderImg, setLoaderImage] = useState(false);
 
   // Sticky Menu Area
   useEffect(() => {
@@ -555,6 +556,17 @@ function MainHeader() {
           </div>
         </div>
       </header>
+      { loaderImg && 
+      <div className="main_loader">
+        <div class="loading">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+}
     </>
   );
 }
