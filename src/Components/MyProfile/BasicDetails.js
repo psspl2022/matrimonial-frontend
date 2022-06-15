@@ -276,20 +276,7 @@ export default function BasicDetails() {
             <div className="post_job_body">
               <form>
                 <div className="row">
-                  {/* <div className="col-lg-12">
-                                        <div className="form-group">
-                                            <label className="label15">Profile Avtar*</label>
-                                            <div className="avtar_dp">
-                                                <img src="images/profile_dp.jpg" alt="" />
-                                            </div>
-                                            <div className="image-upload-wrap1 ml5">
-                                                <input className="file-upload-input1" id="file3" type="file" onchange="readURL(this);" accept="image/*" />
-                                                <div className="drag-text1">
-                                                    Upload Files
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
+          
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Full Name*</label>

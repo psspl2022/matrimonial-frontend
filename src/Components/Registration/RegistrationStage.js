@@ -58,9 +58,9 @@ function RegistrationStage() {
   return (
     <>
       <main className="browse-section pt-4">
-        <div className="container">
+        <div className="container my-3">
           <div className="row justify-content-md-center">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="lg_form">
                 
                 { TabName==='profile' && <ProfileStage /> }
