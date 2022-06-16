@@ -97,24 +97,28 @@ const skipStage = async (e) => {
 
   return (
     <>
-      <div className="main-heading">
+      <div className="main-heading ">
         <h2>Verify Your E-mail</h2>
         <div className="line-shape1">
           <img src="images/line.svg" alt="" />
         </div>
       </div>   
-      <form onSubmit={submitOtpDetails}>   
-      <div className="form-group">
-        <label className="label15">Check Your E-mail and Enter Otp Below </label><span className="float-right mr-2 text-primary bg-light font-weight-bold" onClick={skipStage}><u>Skip Now</u></span>
+      <form onSubmit={submitOtpDetails}>
+        <div className="row">
+          <div className="col-md-8">
+          <div className="form-group">
+        <label className="label15">Check Your E-mail and Enter Otp Below </label><span className="float-right mr-2 text-primary bg-light font-weight-bold" style={{ cursor:'pointer'}}onClick={skipStage}><u>Skip Now</u></span>
         <input type="text" className="job-input" placeholder="Enter Otp Below" onChange={(event) => {
               setOtp(event.target.value);
             }}
             required />
       </div>
-
-      <input type="submit" className="lr_btn" value="Continue with Otp verification" />
+          </div>
+          <div className="col-md-4 mt-4">
+          <input type="submit" className="lr_btn" value="Continue with Otp verification" />
+          </div>
+     </div>
       </form>
-
     </>
   );
 }

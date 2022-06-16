@@ -408,9 +408,7 @@ header {
 	width: 100%;
 }
 
-.top-header {
-	
-}
+
 
 .sub-header {
     background-color: #fff !important;
@@ -5499,6 +5497,11 @@ span.right-cm {
 
 .description_actions a:hover {
     color: #242424 !important;
+}
+
+textarea{
+    border-radius: 5px;
+    border: 1px solid #bcbdbd;
 }
 
 .textarea70 {

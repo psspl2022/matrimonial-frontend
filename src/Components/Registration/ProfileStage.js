@@ -8,7 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 
+
+
 function ProfileStage() {
+
+ 
+
+
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -194,222 +200,243 @@ function ProfileStage() {
         </div>
       </div>
       <form onSubmit={submitBasicDetails}>
-        <div className="form-group">
-          <label className="label15">Full Name*</label>
-          <input
-            type="text"
-            className="job-input"
-            placeholder="Enter Full Name"
-            name="name"
-            value={name}
-            disabled
-            required
-          />
+        <div className="row">
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Full Name*</label>
+            <input
+              type="text"
+              className="job-input"
+              placeholder="Enter Full Name"
+              name="name"
+              value={name}
+              disabled
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Date Of Birth*</label>
+            <input
+              type="date"
+              className="job-input"
+              placeholder="Enter Email Address"
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Mother Tongue*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isClearable
+              isSearchable
+              name="mother_tongue"
+              placeholder="Select Mother Tongue"
+              options={moths}
+              onChange={(e) => {
+                setMoth(e);
+              }}
+              hasValue
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Religion*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              isClearable
+              isSearchable
+              name="religion"
+              placeholder="Select Religion"
+              options={religions}
+              onChange={(e) => {
+                setReligion(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Caste*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="caste"
+              placeholder="Select Caste"
+              options={castes}
+              onChange={(e) => {
+                setCaste(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Are you manglik?*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="religion"
+              placeholder="Select Option"
+              options={generalOptions}
+              onChange={(e) => {
+                setManglik(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Horoscope Match is necessary?*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="horoscope"
+              placeholder="Select Horoscope"
+              options={generalOptions}
+              onChange={(e) => {
+                setHoroscope(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Marital Status*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="marital_status"
+              placeholder="Select Marital Status"
+              options={maritalOptions}
+              onChange={(e) => {
+                setMatrimonial(e);
+              }}
+              isRequired
+            />
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="form-group">
+            <label className="label15">Height*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="height"
+              placeholder="Select Height"
+              options={heights}
+              onChange={(e) => {
+                setHeight(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+            <label className="label15">Country*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="country"
+              id="country"
+              placeholder="Select Country"
+              options={countries}
+              onChange={(e) => {
+                setCountry(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+            <label className="label15">State*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="state"
+              placeholder="Select State"
+              options={states}
+              onChange={(e) => {
+                setState(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+            <label className="label15">City*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="city"
+              placeholder="Select City"
+              options={cities}
+              onChange={(e) => {
+                setCity(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+            <label className="label15">Pincode</label>
+            <input
+              type="text"
+              className="job-input"
+              placeholder="Enter Pincode"
+              value={pincode}
+              onChange={(event) => {
+                setPincode(event.target.value);
+              }}
+              required
+            />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label className="label15">Date Of Birth*</label>
-          <input
-            type="date"
-            className="job-input"
-            placeholder="Enter Email Address"
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-            required
-          />
+        <div className="col-md-12 text-center mt-3">
+          <input type="submit" className="lr_btn float-none" value="Continue" />
         </div>
-
-        <div className="form-group">
-          <label className="label15">Mother Tongue*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="mother_tongue"
-            placeholder="Select Mother Tongue"
-            options={moths}
-            onChange={(e) => {
-              setMoth(e);
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label15">Religion*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="religion"
-            placeholder="Select Religion"
-            options={religions}
-            onChange={(e) => {
-              setReligion(e);
-            }}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="label15">Caste*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="caste"
-            placeholder="Select Caste"
-            options={castes}
-            onChange={(e) => {
-              setCaste(e);
-            }}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="label15">Are you manglik?*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="religion"
-            placeholder="Select Option"
-            options={generalOptions}
-            onChange={(e) => {
-              setManglik(e);
-            }}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="label15">Horoscope Match is necessary?*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="horoscope"
-            placeholder="Select Horoscope"
-            options={generalOptions}
-            onChange={(e) => {
-              setHoroscope(e);
-            }}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="label15">Marital Status*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="marital_status"
-            placeholder="Select Marital Status"
-            options={maritalOptions}
-            onChange={(e) => {
-              setMatrimonial(e);
-            }}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="label15">Height*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="height"
-            placeholder="Select Height"
-            options={heights}
-            onChange={(e) => {
-              setHeight(e);
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label15">Country*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="country"
-            id="country"
-            placeholder="Select Country"
-            options={countries}
-            onChange={(e) => {
-              setCountry(e);
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label15">State*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="state"
-            placeholder="Select State"
-            options={states}
-            onChange={(e) => {
-              setState(e);
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label15">City*</label>
-          <Select
-            className="basic-single"
-            classNamePrefix="select"
-            defaultValue=""
-            isClearable
-            isSearchable
-            name="city"
-            placeholder="Select City"
-            options={cities}
-            onChange={(e) => {
-              setCity(e);
-            }}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label className="label15">Pincode</label>
-          <input
-            type="text"
-            className="job-input"
-            placeholder="Enter Pincode"
-            value={pincode}
-            onChange={(event) => {
-              setPincode(event.target.value);
-            }}
-            required
-          />
-        </div>
-
-        <input type="submit" className="lr_btn" value="Continue" />
       </form>
     </>
   );

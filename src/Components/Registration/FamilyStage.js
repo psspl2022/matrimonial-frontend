@@ -135,7 +135,9 @@ function FamilyStage() {
                   </div>
                 </div>
                 <form onSubmit={submitFamilyDetails}>
-                <div className="form-group">
+                  <div className="row">
+                    <div className="col-md-4">
+                    <div className="form-group">
                   <label className="label15">Family Type*</label>
                   <Select
                     className="basic-single"
@@ -152,7 +154,9 @@ function FamilyStage() {
                     required
                   />
                 </div>
-                <div className="form-group">
+                    </div>
+                    <div className="col-md-4">
+                    <div className="form-group">
                   <label className="label15">Father's Occupation*</label>
                   <Select
                     className="basic-single"
@@ -169,7 +173,9 @@ function FamilyStage() {
                     required
                   />
                 </div>
-                <div className="form-group">
+                    </div>
+                    <div className="col-md-4">
+                    <div className="form-group">
                   <label className="label15">mother's Occupation*</label>
                   <Select
                     className="basic-single"
@@ -186,7 +192,9 @@ function FamilyStage() {
                     required
                   />
                 </div>
-                <div className="form-group">
+                    </div>
+                    <div className="col-md-4">
+                    <div className="form-group">
                   <label className="label15">Brother*</label>
                   <Select
                     className="basic-single"
@@ -203,6 +211,26 @@ function FamilyStage() {
                     required
                   />
                 </div>
+                    <div className="form-group">
+                  <label className="label15">Family Living In*</label>
+                  <Select
+                    className="basic-single"
+                    classNamePrefix="select"
+                    defaultValue=''
+                    isClearable
+                    isSearchable
+                    name="family_living_in"
+                    placeholder="Select State"
+                    options={familyLivingIn}
+                    onChange={(event) => {
+                      setFamLiving(event);
+                    }}
+                    required
+                  />
+                </div>
+                    </div>
+                    <div className="col-md-4">
+                   
                 <div className="form-group">
                   <label className="label15">Sister*</label>
                   <Select
@@ -220,25 +248,6 @@ function FamilyStage() {
                     required
                   />
                 </div>
-
-                <div className="form-group">
-                  <label className="label15">Family Living In*</label>
-                  <Select
-                    className="basic-single"
-                    classNamePrefix="select"
-                    defaultValue=''
-                    isClearable
-                    isSearchable
-                    name="family_living_in"
-                    placeholder="Select State"
-                    options={familyLivingIn}
-                    onChange={(event) => {
-                      setFamLiving(event);
-                    }}
-                    required
-                  />
-                </div>
-
                 <div className="form-group">
                   <label className="label15">Native City*</label>
                   <Select
@@ -256,19 +265,35 @@ function FamilyStage() {
                     required
                   />
                 </div>
-
-                <div className="form-group">
+                    </div>
+                    <div className="col-md-4">
+                    <div className="form-group">
                     <label className="label15">About My Family</label>
                     <textarea className="w-100 p-2" rows={7} placeholder="Write About My Family" onChange={(event) => {
                       setAboutFam(event.target.value);
                     }}
                     required ></textarea>
                 </div>
-                
-                <input
+                    </div>
+                    <div className="col-md-12 text-center">
+                    <input
         type="submit"
-        className="lr_btn"
+        className="lr_btn float-none"
         value="Add to my Profile" />
+                    </div>
+                  </div>
+               
+               
+              
+               
+
+               
+
+               
+
+               
+                
+               
         </form>
       
     </>

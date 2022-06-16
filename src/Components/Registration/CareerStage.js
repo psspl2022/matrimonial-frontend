@@ -130,105 +130,110 @@ function CareerStage() {
         </div>
       </div>
       <form onSubmit={submitCareerDetails}>
-      <div className="form-group">
-        <label className="label15">Schooling</label>
-        <input type="text" className="job-input" placeholder="Enter Schooling" 
-          onChange={(event) => {
-            setSchooling(event.target.value);
-          }}
-          required />
-      </div>
-
-      <div className="form-group">
-        <label className="label15">Highest Degree*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="highest_degree"
-          placeholder="Select Highest Degree"
-          options={highest}
-          onChange={(event) => {
-            setHigh(event);
-          }}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label className="label15">UG Degree*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="ug_deg"
-          placeholder="Select UG Degree"
-          options={ugDegrees}
-          onChange={(event) => {
-            setUG(event);
-          }}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="label15">PG Degree*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="pg_degree"
-          placeholder="Select PG Degree"
-          options={pgDegrees}
-          onChange={(event) => {
-            setPG(event);
-          }}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label className="label15">Employed In*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="employed_in"
-          placeholder="Select Employed Sector"
-          options={employedSectors}
-          onChange={(event) => {
-            setEmployed(event);
-          }}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label className="label15">Occupation*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="occupation"
-          placeholder="Select Occupation"
-          options={occupations}
-          onChange={(event) => {
-            setOccupation(event);
-          }}
-          required
-        />
-      </div>
-
-      <div className="form-group">
+        <div className="row">
+          <div className="col-md-4">
+            <div className="form-group">
+              <label className="label15">Schooling</label>
+              <input type="text" className="job-input" placeholder="Enter Schooling" 
+                onChange={(event) => {
+                  setSchooling(event.target.value);
+                }}
+                required />
+            </div>
+          </div>
+          <div className="col-md-4">
+              <div className="form-group">
+              <label className="label15">Highest Degree*</label>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue=''
+                isClearable
+                isSearchable
+                name="highest_degree"
+                placeholder="Select Highest Degree"
+                options={highest}
+                onChange={(event) => {
+                  setHigh(event);
+                }}
+                required
+              />
+            </div>
+          </div>
+          <div className="col-md-4">
+                <div className="form-group">
+              <label className="label15">UG Degree*</label>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue=''
+                isClearable
+                isSearchable
+                name="ug_deg"
+                placeholder="Select UG Degree"
+                options={ugDegrees}
+                onChange={(event) => {
+                  setUG(event);
+                }}
+                required
+              />
+            </div>
+          </div>
+          <div className="col-md-4">
+              <div className="form-group">
+            <label className="label15">PG Degree*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=''
+              isClearable
+              isSearchable
+              name="pg_degree"
+              placeholder="Select PG Degree"
+              options={pgDegrees}
+              onChange={(event) => {
+                setPG(event);
+              }}
+              required
+            />
+          </div>
+          <div className="form-group">
+              <label className="label15">Employed In*</label>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue=''
+                isClearable
+                isSearchable
+                name="employed_in"
+                placeholder="Select Employed Sector"
+                options={employedSectors}
+                onChange={(event) => {
+                  setEmployed(event);
+                }}
+                required
+              />
+              </div> 
+          </div>
+          <div className="col-md-4">
+             <div className="form-group">
+              <label className="label15">Occupation*</label>
+              <Select
+                className="basic-single"
+                classNamePrefix="select"
+                defaultValue=''
+                isClearable
+                isSearchable
+                name="occupation"
+                placeholder="Select Occupation"
+                options={occupations}
+                onChange={(event) => {
+                  setOccupation(event);
+                }}
+                required
+              />
+            </div>
+            <div className="form-group">
         <label className="label15">Annual Income*</label>
         <Select
           className="basic-single"
@@ -245,8 +250,9 @@ function CareerStage() {
           required
         />
       </div>
-
-      <div className="form-group">
+          </div>
+          <div className="col-md-4">
+          <div className="form-group">
         <label className="label15">Describe Yourself</label>
         <textarea className="w-100 p-2" rows={7} placeholder="Write About YourSelf" 
           onChange={(event) => {
@@ -254,12 +260,14 @@ function CareerStage() {
           }}
           required></textarea>
       </div>
-
-      <input
+          </div>
+          <div className="col-md-12 text-center">
+          <input
         type="submit"
-        className="lr_btn"
+        className="lr_btn float-none"
         value="Continue" />
-
+          </div>
+        </div>
     </form>
 
     </>
