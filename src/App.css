@@ -748,7 +748,7 @@ transform:scale(0);
 }
 
 
-.select__placeholder{
+.react-select__placeholder{
   color: #000!important;
   font-weight: 500!important;
 }
