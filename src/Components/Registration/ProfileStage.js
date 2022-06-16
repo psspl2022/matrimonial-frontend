@@ -8,7 +8,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 
+
+
 function ProfileStage() {
+
+ 
+
+
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -229,7 +235,6 @@ function ProfileStage() {
             <Select
               className="basic-single"
               classNamePrefix="select"
-              defaultValue=""
               isClearable
               isSearchable
               name="mother_tongue"
@@ -238,7 +243,7 @@ function ProfileStage() {
               onChange={(e) => {
                 setMoth(e);
               }}
-              required
+              hasValue
             />
             </div>
           </div>
@@ -248,7 +253,6 @@ function ProfileStage() {
             <Select
               className="basic-single"
               classNamePrefix="select"
-              defaultValue=""
               isClearable
               isSearchable
               name="religion"
@@ -333,7 +337,7 @@ function ProfileStage() {
               onChange={(e) => {
                 setMatrimonial(e);
               }}
-              required
+              isRequired
             />
             </div>
           </div>
