@@ -748,4 +748,7 @@ transform:scale(0);
 }
 
 
-
+.react-select__placeholder{
+  color: #000!important;
+  font-weight: 500!important;
+}

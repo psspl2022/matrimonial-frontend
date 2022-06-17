@@ -82,6 +82,7 @@ function Banner() {
     },
 };
 
+
     return (
         <>
             
@@ -184,7 +185,7 @@ function Banner() {
                             <label>I'am looking for a</label>                          
                                 <Select
                                     className="basic-single"
-                                    classNamePrefix="select"
+                                    classNamePrefix="react-select"
                                     name="lookingForOptions"
                                     placeholder="Looking For"
                                     options={lookingForOptions}
@@ -196,7 +197,7 @@ function Banner() {
                             <label>aged</label>
                                 <Select
                                     className="basic-single"
-                                    classNamePrefix="select"
+                                    classNamePrefix="react-select"
                                     name="minage"
                                     placeholder="Min Age"
                                     options={age}
@@ -211,7 +212,7 @@ function Banner() {
                             
                                 <Select
                                     className="basic-single"
-                                    classNamePrefix="select"
+                                    classNamePrefix="react-select"
                                     name="minage"
                                     placeholder="Max Age"
                                     options={age}
@@ -223,7 +224,7 @@ function Banner() {
                             <label>of Religion</label>
                                 <Select
                                     className="basic-single"
-                                    classNamePrefix="select"
+                                    classNamePrefix="react-select"
                                     name="religion"
                                     placeholder="Religion"
                                     options={religions}
@@ -235,7 +236,7 @@ function Banner() {
                             <label>and Mother Tongue</label>
                                 <Select
                                     className="basic-single"
-                                    classNamePrefix="select"
+                                    classNamePrefix="react-select"
                                     name="mother"
                                     placeholder="Mother Tongue"
                                     options={moths}
