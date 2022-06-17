@@ -97,6 +97,13 @@ const skipStage = async (e) => {
 
   return (
     <>
+    <div className="col-md-6 mx-auto">
+    
+
+{/* <script src="js/jquery-2.1.4.js"></script>
+<script src="js/jquery.mobile.custom.min.js"></script>
+<script src="js/main.js"></script>  */}
+    <div className="lg_form">
       <div className="main-heading ">
         <h2>Verify Your E-mail</h2>
         <div className="line-shape1">
@@ -105,7 +112,7 @@ const skipStage = async (e) => {
       </div>   
       <form onSubmit={submitOtpDetails}>
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-12">
           <div className="form-group">
         <label className="label15">Check Your E-mail and Enter Otp Below </label><span className="float-right mr-2 text-primary bg-light font-weight-bold" style={{ cursor:'pointer'}}onClick={skipStage}><u>Skip Now</u></span>
         <input type="text" className="job-input" placeholder="Enter Otp Below" onChange={(event) => {
@@ -114,11 +121,13 @@ const skipStage = async (e) => {
             required />
       </div>
           </div>
-          <div className="col-md-4 mt-4">
-          <input type="submit" className="lr_btn" value="Continue with Otp verification" />
+          <div className="col-md-12 mt-4 text-center">
+          <input type="submit" className="lr_btn float-none" value="Continue with Otp verification" />
           </div>
      </div>
       </form>
+      </div>
+      </div>
     </>
   );
 }

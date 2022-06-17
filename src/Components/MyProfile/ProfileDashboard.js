@@ -1,9 +1,35 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
+import axios from "axios";
 
 function ProfileDashboard() {
+  const token = window.sessionStorage.getItem("access_token");
+  const [userData, setUserData] = useState({});
+  const [data, setData] = useState({});
+
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
   useEffect(() => {
-        document.title = "Profile Dashboard";
-  }, [])
+    if (sessionStorage.hasOwnProperty("user_data")) {
+      const user_data = window.sessionStorage.getItem("user_data");
+      setUserData(JSON.parse(user_data));
+      document.title = "Profile Dashboard";
+      profileDashboard();
+    }
+  }, []);
+
+  const profileDashboard = () => {
+    axios
+      .get(`${window.Url}api/profileDashboard`, headers_param)
+      .then((response) => {
+        setData(response.data);
+      });
+  };
 
   return (
     <>
@@ -24,7 +50,7 @@ function ProfileDashboard() {
                 <i className="fas fa-bullseye col_icon2"></i>
               </div>
               <h4>Shortlist View Left</h4>
-              <span>10</span>
+              <span>{data['creditDetail'].length!=0 && data['creditDetail'].shortlist_count}</span>
             </div>
           </div>
           <div className="col-lg-4 col-12">
@@ -96,7 +122,7 @@ function ProfileDashboard() {
                         <h6>Interest Sent</h6>
                       </div>
                       <div className="static_right">
-                        <span>30</span>
+                        <span>{data.SendInterest}</span>
                       </div>
                     </div>
                   </li>
@@ -110,7 +136,7 @@ function ProfileDashboard() {
                         <h6>Interest Received</h6>
                       </div>
                       <div className="static_right">
-                        <span>20</span>
+                        <span>{data.ReceiveInterest}</span>
                       </div>
                     </div>
                   </li>
@@ -124,7 +150,7 @@ function ProfileDashboard() {
                         <h6>Shortlisted</h6>
                       </div>
                       <div className="static_right">
-                        <span>10</span>
+                        <span>{ data.shortlist}</span>
                       </div>
                     </div>
                   </li>

@@ -128,6 +128,7 @@ function FamilyStage() {
 
   return (
     <>
+    <div className="lg_form">
                 <div className="main-heading">
                   <h2>Fill The Fields Related to Family</h2>
                   <div className="line-shape1">
@@ -281,21 +282,9 @@ function FamilyStage() {
         className="lr_btn float-none"
         value="Add to my Profile" />
                     </div>
-                  </div>
-               
-               
-              
-               
-
-               
-
-               
-
-               
-                
-               
+                  </div>   
         </form>
-      
+      </div>
     </>
   );
 }

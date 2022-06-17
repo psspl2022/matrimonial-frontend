@@ -123,6 +123,7 @@ function CareerStage() {
   return (
     <>
 
+<div className="lg_form">
       <div className="main-heading">
         <h2>Fill The Fields Related to Career</h2>
         <div className="line-shape1">
@@ -269,7 +270,7 @@ function CareerStage() {
           </div>
         </div>
     </form>
-
+</div>
     </>
   );
 }

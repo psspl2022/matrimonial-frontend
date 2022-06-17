@@ -237,11 +237,10 @@ function SignUp() {
                       </label>
                     </div>
                   </div>  
-                    
-
+                  <div className="col-md-12 text-center">
                     <input
                       type="submit"
-                      className="lr_btn mx-auto"
+                      className="lr_btn float-none"
                       onClick={(e) => {
                         if (!verified) {
                           e.preventDefault();
@@ -249,7 +248,8 @@ function SignUp() {
                       }}
                       value="Register"
                       style={{cursor : verified===false ? "not-allowed" : "pointer" }}
-                    />                
+                    />  
+                    </div>              
                 </div>
                 </form>
                 {/* </Button> */}

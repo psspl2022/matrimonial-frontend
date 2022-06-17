@@ -61,14 +61,13 @@ function RegistrationStage() {
         <div className="container my-3">
           <div className="row justify-content-md-center">
             <div className="col-md-12">
-              <div className="lg_form">
                 
                 { TabName==='profile' && <ProfileStage /> }
                 { TabName==='career' && <CareerStage /> }
                 { TabName==='family' && <FamilyStage /> }
                 { TabName==='otp' && <PhoneStage /> }
                 { TabName==='profileimg' && <ProfileImageStage /> }
-              </div>
+            
             </div>
           </div>
         </div>

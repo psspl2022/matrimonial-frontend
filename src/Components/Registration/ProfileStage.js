@@ -193,6 +193,8 @@ function ProfileStage() {
 
   return (
     <>
+    
+    <div className="lg_form">
       <div className="main-heading">
         <h2>Welcome to the {window.AppName}</h2>
         <div className="line-shape1">
@@ -438,6 +440,7 @@ function ProfileStage() {
           <input type="submit" className="lr_btn float-none" value="Continue" />
         </div>
       </form>
+      </div>
     </>
   );
 }

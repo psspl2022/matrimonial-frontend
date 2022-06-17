@@ -56,6 +56,8 @@ const submitImageDetails = async (e) => {
 
   return (
     <>
+    
+    <div className="lg_form">
       <div className="main-heading">
         <h2>Setup Your Profile Image</h2>
         <div className="line-shape1">
@@ -70,6 +72,7 @@ const submitImageDetails = async (e) => {
 
         <input type="submit" className="lr_btn" value="Ready to go" />
       </form>
+      </div>
     </>
   );
 }
