@@ -50,7 +50,7 @@ function ProfileDashboard() {
                 <i className="fas fa-bullseye col_icon2"></i>
               </div>
               <h4>Shortlist View Left</h4>
-              <span>{data['creditDetail'].length!=0 && data['creditDetail'].shortlist_count}</span>
+              <span>{data['creditDetail']  && data['creditDetail'].shortlist_count}</span>
             </div>
           </div>
           <div className="col-lg-4 col-12">
