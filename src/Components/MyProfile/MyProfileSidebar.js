@@ -139,7 +139,7 @@ function MyProfileSidebar() {
             <li>
               <a href="#" className="web_link">
                 <i className="fas fa-globe"></i>Current Membership Plan:{" "}
-                <span style={{ color: "brown" }}>
+                <span style={{ color: "brown", fontWeight:"600" }} >
                   {memdata.length != 0 && memdata.get_package.name}{" "}
                 </span>
               </a>

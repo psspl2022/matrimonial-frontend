@@ -3554,7 +3554,7 @@ span.right-cm {
 
 .collection_item h4 {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -3684,10 +3684,11 @@ span.right-cm {
 }
 
 .static_right span {
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'Roboto', sans-serif;
-    color: #757575;
-    font-weight: 400;
+    color: #9088b1;
+    font-weight: 600;
+
 }
 
 .all_notes {
