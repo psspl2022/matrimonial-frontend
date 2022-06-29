@@ -108,10 +108,10 @@ export default function DesiredList() {
           // });
           showDesiredProfiles();
         } else {
-          // Swal.fire({
-          //     icon: "error",
-          //     title: response.data.errmsg,
-          // });
+          Swal.fire({
+              icon: "error",
+              title: response.data.errmsg,
+          });
         }
       });
   };
@@ -227,202 +227,195 @@ export default function DesiredList() {
                             }`}
                             key={index}
                           >
-                            <div className="job-item mt-30">
-                              <div
-                                className="job-top-dt text-right"
-                                style={{ paddingTop: "3px" }}
-                              >
-                                <div className="desired_percent">
-                                  <span
-                                    stye={{
-                                      padding: "3px 8px",
-                                      marginTop: "-4px",
-                                      marginRight: "-4px",
-                                      fontSize: "12px",
-                                    }}
-                                    className={`${item[0] <= 40 && "yellow"} ${
-                                      item[0] <= 90 && "green"
-                                    } ${item[0] > 90 && "pink"}`}
-                                  >
-                                    {item[0]}% Matched
-                                  </span>
-                                </div>
-                                <div className="img-profile">
-                                  <img
-                                    src={
-                                      process.env.PUBLIC_URL + "/profile1.jpg"
-                                    }
-                                    alt=""
-                                    style={{
-                                      maxHeight: "220px",
-                                      width: "100%",
-                                    }}
-                                  />
-                                </div>
-                              </div>
-                              <div className="job-des-dt">
-                                <h4>{item[2].name}</h4>
-                                {/* <p>
-                        <div class="mtab-right">
-                            <ul>
-                                <li class="sort-list-dt">
-                                    <div
-                                        class="ui selection dropdown skills-search sort-dropdown"
+                            <NavLink to={`/profileDetail/${item[2].reg_id}`} >
+                              <div className="job-item mt-30">
+                                <div
+                                  className="job-top-dt text-right"
+                                  style={{ paddingTop: "3px" }}
+                                >
+                                  <div className="desired_percent">
+                                    <span
+                                      stye={{
+                                        padding: "3px 8px",
+                                        marginTop: "-4px",
+                                        marginRight: "-4px",
+                                        fontSize: "12px",
+                                      }}
+                                      className={`${item[0] <= 40 && "yellow"} ${
+                                        item[0] <= 90 && "green"
+                                      } ${item[0] > 90 && "pink"}`}
                                     >
-                                        <input name="gender" type="hidden" value="default" />
-                                        <i class="dropdown icon d-icon"></i>
-                                        <div class="text">Sort By</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="0">Relevance</div>
-                                            <div class="item" data-value="1">New</div>
-                                            <div class="item" data-value="2">Old</div>
-                                            <div class="item" data-value="3">Last 15 Days</div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="grid-list">
-                                    <button class="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
-                                        <i class="fas fa-th-large"></i>
-                                    </button>
-                                    <button class="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
-                                        <i class="fas fa-th-list"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab-1">
-                            <div class="row view-group" id="products">
-                            {
-                                            data.map((item)=>
-
-                                <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
-                                    <div className="job-item mt-30">
-                                        <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
-                                            <div className="desired_percent">
-                                                <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px" }} className={`${item[0]<=40 && 'yellow' } ${item[0]<=90 && 'green' } ${item[0]>90 && 'pink' }`}>{item[0] }% Matched</span>
-                                            </div>  
-                                            <div className="img-profile">  
-                                                <img
-                                                    src={ process.env.PUBLIC_URL + "/profile1.jpg" }
-                                                    alt="" style={{maxHeight:'220px', width: '100%'}}
-                                                />
-                                                </div>
-                                        </div>
-                                        <div className="job-des-dt">
-                                            <h4 style={{ fontWeight: "200" }} >{ item[2].name }</h4>
-                                            {/* <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Etiam cursus pulvinar dolor nec...
-                                            </p> */}
-                                <div className="job-skills">
-                                  <span>Age: {item[1]} years</span>
-                                  <span>
-                                    Height: {item[2].get_height.height}{" "}
-                                  </span>
-                                  <span>
-                                    Religion: {item[2].get_religion.religion}{" "}
-                                  </span>
-                                  <span>Caste: {item[2].get_caste.caste} </span>
-                                  <span>
-                                    Mother Tongue:{" "}
-                                    {item[2].get_mother_tongue.mother_tongue}{" "}
-                                  </span>
-                                  <span>
-                                    Salary: {item[3].get_income.income}{" "}
-                                  </span>
-                                  <span>
-                                    Qualification:{" "}
-                                    {item[3].get_education.education}{" "}
-                                  </span>
-                                  {/* <span >Occupation: { item[1].get_occupation.occupation } </span> */}
-                                  {/* <span className="more-skills">+4</span> */}
+                                      {item[0]}% Matched
+                                    </span>
+                                  </div>
+                                  <div className="img-profile text-center">
+                                  <img src={item['6'] && `${window.Url}Documents/Image_Documents/${item['6'].identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="job-buttons">
-                                <ul className="link-btn">
-                                  {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                  {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >o
-                                                </li> */}
-                                  <li className="bkd-pm">
-                                    {item[4].includes(item[2].reg_id) && (
-                                      <button
-                                        className="bookmark1"
-                                        style={{
-                                          color: "#fff",
-                                          background: "#ee0a4b",
-                                          cursor: "none",
-                                        }}
+                                <div className="job-des-dt">
+                                  <h4>{item[2].name}</h4>
+                                  {/* <p>
+                          <div class="mtab-right">
+                              <ul>
+                                  <li class="sort-list-dt">
+                                      <div
+                                          class="ui selection dropdown skills-search sort-dropdown"
                                       >
-                                        <i className="fas fa-check 2x"></i>
-                                      </button>
-                                    )}
-
-                                    {!item[4].includes(item[2].reg_id) && (
-                                      <button
-                                        className="bookmark1"
-                                        onClick={(e) =>
-                                          sendIntrest(item[2].reg_id)
-                                        }
-                                        title="Send Interest"
-                                      >
-                                        <i className="fas fa-envelope 2x"></i>
-                                      </button>
-                                    )}
+                                          <input name="gender" type="hidden" value="default" />
+                                          <i class="dropdown icon d-icon"></i>
+                                          <div class="text">Sort By</div>
+                                          <div class="menu">
+                                              <div class="item" data-value="0">Relevance</div>
+                                              <div class="item" data-value="1">New</div>
+                                              <div class="item" data-value="2">Old</div>
+                                              <div class="item" data-value="3">Last 15 Days</div>
+                                          </div>
+                                      </div>
                                   </li>
-                                  <li className="bkd-pm">
-                                    <button className="bookmark1">
-                                      <i className="fas fa-comment 2x"></i>
-                                    </button>
-                                  </li>
-                                  <li className="bkd-pm">
-                                    {item[5].includes(item[2].reg_id) && (
-                                      <button
-                                        className="bookmark1"
-                                        onClick={(e) =>
-                                          shortlistProfile(item[2].reg_id)
-                                        }
-                                        style={{
-                                          color: "#fff",
-                                          background: "#ee0a4b",
-                                        }}
-                                      >
-                                        <i className="fas fa-star"></i>
+                                  <li class="grid-list">
+                                      <button class="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
+                                          <i class="fas fa-th-large"></i>
                                       </button>
-                                    )}
+                                      <button class="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
+                                          <i class="fas fa-th-list"></i>
+                                      </button>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="tab-content">
+                          <div class="tab-pane active" id="tab-1">
+                              <div class="row view-group" id="products">
+                              {
+                                              data.map((item)=>
 
-                                    {!item[5].includes(item[2].reg_id) && (
+                                  <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
+                                      <div className="job-item mt-30">
+                                          <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
+                                              <div className="desired_percent">
+                                                  <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px" }} className={`${item[0]<=40 && 'yellow' } ${item[0]<=90 && 'green' } ${item[0]>90 && 'pink' }`}>{item[0] }% Matched</span>
+                                              </div>  
+                                              <div className="img-profile">  
+                                                  <img
+                                                      src={ process.env.PUBLIC_URL + "/profile1.jpg" }
+                                                      alt="" style={{maxHeight:'220px', width: '100%'}}
+                                                  />
+                                                  </div>
+                                          </div>
+                                          <div className="job-des-dt">
+                                              <h4 style={{ fontWeight: "200" }} >{ item[2].name }</h4>
+                                              {/* <p>
+                                                  Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                  elit. Etiam cursus pulvinar dolor nec...
+                                              </p> */}
+                                  <div className="job-skills">
+                                    <span>Age: {item[1]} years</span>
+                                    <span>
+                                      Height: {item[2].get_height.height}{" "}
+                                    </span>
+                                    <span>
+                                      Religion: {item[2].get_religion.religion}{" "}
+                                    </span>
+                                    <span>Caste: {item[2].get_caste.caste} </span>
+                                    <span>
+                                      Mother Tongue:{" "}
+                                      {item[2].get_mother_tongue.mother_tongue}{" "}
+                                    </span>
+                                    <span>
+                                      Salary: {item[3].get_income.income}{" "}
+                                    </span>
+                                    <span>
+                                      Qualification:{" "}
+                                      {item[3].get_education.education}{" "}
+                                    </span>
+                                    {/* <span >Occupation: { item[1].get_occupation.occupation } </span> */}
+                                    {/* <span className="more-skills">+4</span> */}
+                                  </div>
+                                </div>
+                                <div className="job-buttons">
+                                  <ul className="link-btn">
+                                    {/* <li>
+                                                      <a href="#" className="link-j1" title="Message"
+                                                      >Message</a
+                                                      >
+                                                  </li> */}
+                                    {/* <li>
+                                                      <a
+                                                          href="job_single_view.html"
+                                                          className="link-j1"
+                                                          title="View Details"
+                                                      >View Details</a
+                                                      >o
+                                                  </li> */}
+                                    <li className="bkd-pm">
+                                      {item[4].includes(item[2].reg_id) && (
+                                        <button
+                                          className="bookmark1"
+                                          style={{
+                                            color: "#fff",
+                                            background: "#ee0a4b",
+                                            cursor: "none",
+                                          }}
+                                        >
+                                          <i className="fas fa-check 2x"></i>
+                                        </button>
+                                      )}
+
+                                      {!item[4].includes(item[2].reg_id) && (
+                                        <button
+                                          className="bookmark1"
+                                          onClick={(e) =>
+                                            sendIntrest(item[2].reg_id)
+                                          }
+                                          title="Send Interest"
+                                        >
+                                          <i className="fas fa-envelope 2x"></i>
+                                        </button>
+                                      )}
+                                    </li>
+                                    <li className="bkd-pm">
                                       <button className="bookmark1">
-                                        <i
-                                          className="fas fa-star"
+                                        <i className="fas fa-comment 2x"></i>
+                                      </button>
+                                    </li>
+                                    <li className="bkd-pm">
+                                      {item[5].includes(item[2].reg_id) && (
+                                        <button
+                                          className="bookmark1"
                                           onClick={(e) =>
                                             shortlistProfile(item[2].reg_id)
                                           }
-                                          title="Shortlist Profile"
-                                        ></i>
-                                      </button>
-                                    )}
-                                  </li>
+                                          style={{
+                                            color: "#fff",
+                                            background: "#ee0a4b",
+                                          }}
+                                        >
+                                          <i className="fas fa-star"></i>
+                                        </button>
+                                      )}
 
-                                  <li className="bkd-pm">
-                                    <button className="bookmark1">
-                                      <i className="fas fa-heart"></i>
-                                    </button>
-                                  </li>
-                                </ul>
+                                      {!item[5].includes(item[2].reg_id) && (
+                                        <button className="bookmark1">
+                                          <i
+                                            className="fas fa-star"
+                                            onClick={(e) =>
+                                              shortlistProfile(item[2].reg_id)
+                                            }
+                                            title="Shortlist Profile"
+                                          ></i>
+                                        </button>
+                                      )}
+                                    </li>
+
+                                    <li className="bkd-pm">
+                                      <button className="bookmark1">
+                                        <i className="fas fa-heart"></i>
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
                               </div>
-                            </div>
+                            </NavLink>
                           </div>
                         ))}
 

@@ -107,7 +107,7 @@ function App() {
             <Shortlist />
             <MainFooter />
           </Route>
-          <Route path="/profileDetail" exact>
+          <Route path="/profileDetail/:reg_id" exact>
             <MainHeader />
             <ProfileDetails />
             <MainFooter />

@@ -7310,3 +7310,27 @@ h1,h2,h3,h4,h5,h6{
     font-size: 13px!important;
     color: #e8658a !important;
 }
+.view_head_span{
+    line-height: 23px;
+    font-weight: 600;
+}
+.view_head_span1{
+    line-height: 26px;
+    font-weight: 600;
+}
+.view_profile_font1{
+    font-size:20px;
+    margin:13px 10px;
+    color:#fff;
+
+}
+.view_profile_font2{
+    font-size:28px;
+    margin:13px;
+}
+.view_profile_about_span{
+    line-height: 22px;
+    font-size: 15px;
+    color: #000;
+}
+
