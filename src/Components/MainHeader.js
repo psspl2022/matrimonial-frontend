@@ -10,6 +10,7 @@ function MainHeader() {
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState({});
+  const [gender, setGender] = useState({});
   const history = useHistory();
   const [userImage, setUserImage] = useState();
   const [loaderImg, setLoaderImage] = useState(false);
@@ -42,6 +43,7 @@ function MainHeader() {
     if (sessionStorage.hasOwnProperty("user_data")) {
       const user_data = window.sessionStorage.getItem("user_data");
       setUserData(JSON.parse(user_data));
+      setGender(window.sessionStorage.getItem("gender"));
     }
 	const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
@@ -58,7 +60,11 @@ function MainHeader() {
         if (data.hasOwnProperty("msg")) {
           setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`);
         } else {
+          if(gender.gender == 1){
           setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
+          } else{
+            setUserImage(`${ process.env.PUBLIC_URL + "/female_avatar.png" }`);
+          }
           // Swal.fire({
           //   icon: "error",
           //   text: data.error_msg,
@@ -467,7 +473,7 @@ function MainHeader() {
                         {/* </div> */}
                       </li>
                       ) }
-                      <li className="nav-item dropdown">
+                      {/* <li className="nav-item dropdown">
                         <a
                           href="#"
                           className="nav-link dropdown-toggle-no-caret font-lobster"
@@ -487,13 +493,13 @@ function MainHeader() {
                             Membership Plan History
                           </a>
                         </div>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <a href="javascript:void(Tawk_API.toggle())" className="nav-link font-lobster" role="button">
                           Help
                         </a>
                       </li>
-                      <li className="nav-item dropdown pages152">
+                      {/* <li className="nav-item dropdown pages152">
                         <a
                           href="#"
                           className="nav-link dropdown-toggle-no-caret font-lobster"
@@ -519,7 +525,7 @@ function MainHeader() {
                             Signle Blog View
                           </NavLink>
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                     <a
                       href="#"

@@ -12,6 +12,7 @@ function MyProfileSidebar() {
   const history = useHistory();
   const [memdata, setMemData] = useState([]);
   const [userData, setUserData] = useState({});
+  const [gender, setGender] = useState({});
   const [userImage, setUserImage] = useState();
   const [image, setImage] = useState();
   const [imageInProcess, setImageInProcess] = useState(false);
@@ -28,6 +29,7 @@ function MyProfileSidebar() {
     if (sessionStorage.hasOwnProperty("user_data")) {
       const user_data = window.sessionStorage.getItem("user_data");
       setUserData(JSON.parse(user_data));
+      setGender(window.sessionStorage.getItem("gender"));
       profileSidebar();
       basicDropdown();
       getProfileImage();
@@ -51,11 +53,13 @@ function MyProfileSidebar() {
       .get(`${window.Url}api/getProfileImage`, headers_param)
       .then(({ data }) => {
         if (data.hasOwnProperty("msg")) {
-          setUserImage(
-            `${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`
-          );
+         setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`)
         } else {
-          setUserImage(`${process.env.PUBLIC_URL + "/male_avatar.png"}`);
+          if(gender.gender == 1){
+            setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
+            } else{
+              setUserImage(`${ process.env.PUBLIC_URL + "/female_avatar.png" }`);
+            }
           // Swal.fire({
           //   icon: "error",
           //   text: data.error_msg,

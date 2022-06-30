@@ -50,6 +50,7 @@ function Login() {
           });
           window.sessionStorage.setItem("access_token", data.token);
           window.sessionStorage.setItem("user_data", JSON.stringify(data.user));
+          window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
           history.replace("/registrationStage");
           //   return <Redirect to='/registrationStage' />
         } else {
