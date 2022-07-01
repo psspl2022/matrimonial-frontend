@@ -23,7 +23,7 @@ export default function Shortlist() {
         document.title = "Shortlist Profiles";    
       }, []);
 
-  function acceptMe() {
+  function shortlist() {
     axios
       .get(`${window.Url}api/getShortlist`, headers_data)
       .then(({ data }) => {
@@ -93,6 +93,9 @@ export default function Shortlist() {
                             </div>
                           </div>
                         </div>
+                      </li>  
+                    </ul> 
+                  </div>   
                         <div className="mtab-right">
                             <ul>
                                 <li className="sort-list-dt">
@@ -174,7 +177,7 @@ export default function Shortlist() {
                             </div>
                           </div>
                         </div>
-                      ))}
+                      )}
 
                       {data.length == 0 && !fetchDone && (
                         <div className="desired_section">
