@@ -129,11 +129,11 @@ export default function AcceptMe() {
                               style={{ paddingTop: "3px" }}
                             >
                               <div className="job-skills"></div>
-                              <img
-                                src={process.env.PUBLIC_URL + "/profile1.jpg"}
-                                alt=""
-                                style={{ maxHeight: "220px" }}
-                              />
+                              <div className="img-profile text-center">
+                              {item.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+
+{!item.get_profile_image && (<img src={ (item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                            </div>
                             </div>
                             <div className="job-des-dt">
                               <h2 style={{ fontWeight: "200" }}>{item.name}</h2>

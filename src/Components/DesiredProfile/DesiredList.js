@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function DesiredList() {
-  const [grid, setGrid] = useState(false);
+  const [grid, setGrid] = useState(false);  
   const [data, setData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([]);
@@ -227,8 +227,9 @@ export default function DesiredList() {
                             }`}
                             key={index}
                           >
-                            <NavLink to={`/profileDetail/${item[2].reg_id}`} >
+                           
                               <div className="job-item mt-30">
+                              <NavLink to={`/profileDetail/${item[2].reg_id}`} >
                                 <div
                                   className="job-top-dt text-right"
                                   style={{ paddingTop: "3px" }}
@@ -249,7 +250,9 @@ export default function DesiredList() {
                                     </span>
                                   </div>
                                   <div className="img-profile text-center">
-                                  <img src={item['6'] && `${window.Url}Documents/Image_Documents/${item['6'].identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>
+                                  {item[2].get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${item[2].get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+
+                                  {!item['2'].get_profile_image && (<img src={ (item[2].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
                                   </div>
                                 </div>
                                 <div className="job-des-dt">
@@ -332,6 +335,7 @@ export default function DesiredList() {
                                     {/* <span className="more-skills">+4</span> */}
                                   </div>
                                 </div>
+                                </NavLink>
                                 <div className="job-buttons">
                                   <ul className="link-btn">
                                     {/* <li>
@@ -415,7 +419,7 @@ export default function DesiredList() {
                                   </ul>
                                 </div>
                               </div>
-                            </NavLink>
+                           
                           </div>
                         ))}
 

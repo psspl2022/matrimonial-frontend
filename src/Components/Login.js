@@ -125,9 +125,10 @@ function Login() {
                       style={{ marginTop: "30px" }}
                     />
                   </div>
+                  <div className="form-group text-center">
                   <input
                     type="submit"
-                    className="lr_btn"
+                    className="lr_btn float-none"
                     onClick={(e) => {
                       if (!verified) {
                         e.preventDefault();
@@ -139,6 +140,7 @@ function Login() {
                       cursor: verified === false ? "not-allowed" : "pointer",
                     }}
                   />
+                  </div>  
                 </form>
                 <div className="done145">
                   <div className="done146">

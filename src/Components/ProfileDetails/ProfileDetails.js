@@ -38,7 +38,6 @@ function ProfileDetails() {
       .get(`${window.Url}api/introduction/${reg_id}`, headers_data)
       .then(( response ) => {
           setData(response.data);
-       
       });
   };
 
@@ -100,7 +99,11 @@ function ProfileDetails() {
               <h1 className="text-center">Profile Details Section</h1>
               <div className="row" style={{background: "aliceblue"}}>
                 <div className="col-lg-3 col-md-4">
-                  <img src={data['basicData'] && `${window.Url}Documents/Image_Documents/${data['img_file'].identity_card_doc}`} alt="user profile image" style={{height:"200px", width:"200px"}}/>
+                { data.lenth!=0 &&(<img src={`${window.Url}Documents/Image_Documents/${data['basicData'].get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+
+{ data.lenth==0 && (<img src={ (data['basicData'].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                            
+                  {/* <img src={data['basicData'] && `${window.Url}Documents/Image_Documents/${data['img_file'].identity_card_doc}`} alt="user profile image" style={{height:"200px", width:"200px"}}/> */}
                 </div>
                 <div className="col-lg-6 col-md-4">
                   <div className="row">
