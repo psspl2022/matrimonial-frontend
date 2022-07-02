@@ -228,7 +228,7 @@ export default function DesiredList() {
                             key={index}
                           >
                            
-                              <div className="job-item mt-30">
+                              <div className="job-item detail-card mt-30">
                               <NavLink to={`/profileDetail/${item[2].reg_id}`} >
                                 <div
                                   className="job-top-dt text-right"

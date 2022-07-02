@@ -1432,7 +1432,7 @@ span.right-cm {
 	margin-bottom: 18px;
 }
 
-.job-item:hover .job-buttons{
+.detail-card:hover .job-buttons{
     background:  #757575!important;
 
 }
@@ -1501,7 +1501,7 @@ span.right-cm {
 	border-right: 1px solid #e5e5e5;
 } */
 
-.link-j1 {
+.accept-link, .reject-link {
 	font-size: 14px;
     font-weight: 500;
 	font-family: 'Roboto', sans-serif;
@@ -1514,9 +1514,14 @@ span.right-cm {
 	text-transform: uppercase;
 }
 
-.link-j1:hover {
+.accept-link:hover {
     color: #fff !important;
-    background: #ee0a4b;
+    background: green;
+}
+
+.reject-link:hover {
+    color: #fff !important;
+    background: red;
 }
 
 .bkd-pm {

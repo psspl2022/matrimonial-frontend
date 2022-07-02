@@ -204,7 +204,7 @@ export default function IntrestReceived() {
                                   }}
                                 >
                                   <button
-                                    className="btn btn-md link-j1 py-2"
+                                    className="btn btn-md accept-link py-2"
                                     style={{
                                       borderRadius: "20px",
                                       fontWeight: "700",
@@ -219,7 +219,7 @@ export default function IntrestReceived() {
                                 </li>
                                 <li style={{ width: "44%", margin: "0 10px" }}>
                                   <button
-                                    className=" btn btn-md link-j1 py-2"
+                                    className=" btn btn-md reject-link py-2"
                                     style={{
                                       borderRadius: "20px",
                                       fontWeight: "700",
