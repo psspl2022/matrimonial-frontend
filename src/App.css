@@ -65,9 +65,12 @@ body{
   background-color: 	#ffd700;
  }
 
+ .job-item .img-profile img{
+  transition: transform 0.3s linear;
+ }
+
  .job-item:hover .img-profile img{
   transform: scale(1.2)!important;
-  transition: transform 0.3s linear;
  }
 
  .img-profile{
