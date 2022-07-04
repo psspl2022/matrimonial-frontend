@@ -25,15 +25,16 @@ export default function LatestProfile() {
   useEffect(() => {
     window.scrollTo(0, 0)
         latestProfile();
-        document.title = "Desired Partner List";
+        document.title = "Latest Profile";
   }, []);
 
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
         if (
-          (parfilterData[0] != "" ? prof_data >= parfilterData[0] : 1) &&
-          (parfilterData[1] != "" ? prof_data <= parfilterData[1] : 1) &&
+        (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
+        (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
+    
           (parfilterData[2] != ""
             ? prof_data.height >= parfilterData[2]
             : 1) &&
@@ -236,7 +237,7 @@ export default function LatestProfile() {
                                   <h4>{item.name}</h4>
                                  
                                   <div className="job-skills">
-                                    <span>Age:  years</span>
+                                  <span>Age: {Math.floor((Date.now() - new Date(item.dob)) / (31557600000))} years</span>
                                     <span>
                                       Height: {item.get_height.height}{" "}
                                     </span>

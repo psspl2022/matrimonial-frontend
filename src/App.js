@@ -25,6 +25,7 @@ import Accept from "./Components/SendIntrest/Accept";
 import Shortlist from "./Components/Shortlist/Shortlist";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import LatestProfile from "./Components/Match/LatestProfile";
+import DailyRecommendation from "./Components/Match/DailyRecommendation";
 
 function App() {
   return (
@@ -113,9 +114,14 @@ function App() {
             <ProfileDetails />
             <MainFooter />
           </Route>
-          <Route path="/latest/" exact>
+          <Route path="/latest" exact>
             <MainHeader />
             <LatestProfile />
+            <MainFooter />
+          </Route>
+          <Route path="/dailyRecommendation" exact>
+            <MainHeader />
+            <DailyRecommendation />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>

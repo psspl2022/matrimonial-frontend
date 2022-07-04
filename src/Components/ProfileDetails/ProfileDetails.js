@@ -101,7 +101,7 @@ function ProfileDetails() {
                 <div className="col-lg-3 col-md-4">
                 { data.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
 
-{ !data.get_profile_image && (<img src={ (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+        { !data.get_profile_image && (<img src={ data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
                             
                    </div>
                 <div className="col-lg-6 col-md-4">
@@ -111,7 +111,8 @@ function ProfileDetails() {
                   <hr />
                   </div>
                     <div className="col-lg-6 col-md-4" >
-                      <span className="view_head_span">{data.length != 0  && data.get_height.height}</span><br />
+                    <span className="view_head_span">{Math.floor((Date.now() - new Date(data.dob)) / (31557600000))}, </span>
+                                  <span className="view_head_span">{data.length != 0  && data.get_height.height}</span><br />
                       <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}: ${data.get_caste.caste}`) }</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_mother_tongue.mother_tongue}</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_city.name} </span>                 

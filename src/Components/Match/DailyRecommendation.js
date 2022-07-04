@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
-export default function LatestProfile() {
+export default function DailyRecommendation() {
   const [grid, setGrid] = useState(false);  
   const [data, setData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
@@ -24,16 +24,18 @@ export default function LatestProfile() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-        latestProfile();
-        document.title = "Desired Partner List";
+    dailyRecommendation();
+        document.title = "Daily Recommendation";
   }, []);
 
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
         if (
-          (parfilterData[0] != "" ? prof_data >= parfilterData[0] : 1) &&
-          (parfilterData[1] != "" ? prof_data <= parfilterData[1] : 1) &&
+
+          (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
+        (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
+    
           (parfilterData[2] != ""
             ? prof_data.height >= parfilterData[2]
             : 1) &&
@@ -62,9 +64,9 @@ export default function LatestProfile() {
     );
   }, [parfilterData]);
 
-  function latestProfile() {
+  function dailyRecommendation() {
     axios
-      .get(`${window.Url}api/latestProfile`, headers_data)
+      .get(`${window.Url}api/dailyRecommendation`, headers_data)
       .then(({ data }) => {
         setData(data);
         setForFilter(data);
@@ -84,7 +86,7 @@ export default function LatestProfile() {
           //     icon: "success",
           //     title: response.data.succmsg,
           // });
-          latestProfile();
+          dailyRecommendation();
         } else {
           // Swal.fire({
           //     icon: "error",
@@ -106,7 +108,7 @@ export default function LatestProfile() {
           //     icon: "success",
           //     title: response.data.succmsg,
           // });
-          latestProfile();
+          dailyRecommendation();
         } else {
           Swal.fire({
               icon: "error",
@@ -155,7 +157,7 @@ export default function LatestProfile() {
                           className="nav-link active"
                           data-toggle="tab"
                         >
-                          Latest Profile
+                          Daily Recommendation
                         </a>
                       </li>
                      
@@ -236,7 +238,7 @@ export default function LatestProfile() {
                                   <h4>{item.name}</h4>
                                  
                                   <div className="job-skills">
-                                    <span>Age:  years</span>
+                                  <span>Age: {Math.floor((Date.now() - new Date(item.dob)) / (31557600000))} years</span>
                                     <span>
                                       Height: {item.get_height.height}{" "}
                                     </span>
