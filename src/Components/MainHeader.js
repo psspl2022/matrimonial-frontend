@@ -417,6 +417,13 @@ function MainHeader() {
                         </a>
                         <div className="dropdown-menu pages-dropdown ">
                         <NavLink
+                          to="/latest"
+                          className="link-item font-lobster"
+                          role="button"
+                        >
+                          Latest Profile
+                        </NavLink>
+                        <NavLink
                           to="/shortlist"
                           className="link-item font-lobster"
                           role="button"

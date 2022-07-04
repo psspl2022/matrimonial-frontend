@@ -99,47 +99,46 @@ function ProfileDetails() {
               <h1 className="text-center">Profile Details Section</h1>
               <div className="row" style={{background: "aliceblue"}}>
                 <div className="col-lg-3 col-md-4">
-                { data.lenth!=0 &&(<img src={`${window.Url}Documents/Image_Documents/${data['basicData'].get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                { data.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
 
-{ data.lenth==0 && (<img src={ (data['basicData'].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+{ !data.get_profile_image && (<img src={ (data.get_user_register == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
                             
-                  {/* <img src={data['basicData'] && `${window.Url}Documents/Image_Documents/${data['img_file'].identity_card_doc}`} alt="user profile image" style={{height:"200px", width:"200px"}}/> */}
-                </div>
+                   </div>
                 <div className="col-lg-6 col-md-4">
                   <div className="row">
                   <div className="col-12" style={{margin: "15px 0px"}}>
-                  <h3>{data['basicData'] && data['basicData'].name}</h3>
+                  <h3>{data.length != 0  && data.name}</h3>
                   <hr />
                   </div>
                     <div className="col-lg-6 col-md-4" >
-                      <span className="view_head_span">{data['basicData'] && data['basicData'].get_height.height}</span><br />
-                      <span className="view_head_span">{data['basicData'] && (`${data['basicData'].get_religion.religion}: ${data['basicData'].get_caste.caste}`) }</span><br />
-                      <span className="view_head_span">{data['basicData'] && data['basicData'].get_mother_tongue.mother_tongue}</span><br />
-                      <span className="view_head_span">{data['basicData'] && data['basicData'].get_city.name} </span>                 
+                      <span className="view_head_span">{data.length != 0  && data.get_height.height}</span><br />
+                      <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}: ${data.get_caste.caste}`) }</span><br />
+                      <span className="view_head_span">{data.length != 0  && data.get_mother_tongue.mother_tongue}</span><br />
+                      <span className="view_head_span">{data.length != 0  && data.get_city.name} </span>                 
                     </div>
                     <div className="col-lg-6 col-md-4">
-                    <span className="view_head_span">{data['basicData'] && data['basicData'].get_occupation.occupation}</span><br />
-                    <span className="view_head_span">{data['basicData'] && (data['basicData'].get_income.income != '0 Lakh' &&(data['basicData'].get_income.income) )}
-                      {data['basicData'] && (data['basicData'].get_income.income == '0 Lakh' && ('No Income'))} </span><br />
-                      <span className="view_head_span">{/* {data['basicData'] && data.mother_tongue.get_city.mother_tongue} */}</span>
-                      <span className="view_head_span">{data['basicData'] && (data['basicData'].maritial_status == 1 && 'Never Married')} </span>  
-                      <span className="view_head_span">{data['basicData'] && (data['basicData'].maritial_status == 2 && 'Awaiting Divorce')} </span>  
-                      <span className="view_head_span">{data['basicData'] && (data['basicData'].maritial_status == 3 && 'Divorced')}</span>  
-                      <span className="view_head_span">{data['basicData'] && (data['basicData'].maritial_status == 4 && 'Widowed')} </span> 
+                    <span className="view_head_span">{data.length != 0 && data.get_occupation.occupation}</span><br />
+                    <span className="view_head_span">{data.length != 0 && (data.get_income.income != '0 Lakh' &&(data.get_income.income) )}
+                      {data.length != 0&& (data.get_income.income == '0 Lakh' && ('No Income'))} </span><br />
+                      {/* <span className="view_head_span"> {data.length != 0 && data.get_city.name} </span> */}
+                      <span className="view_head_span">{data.length != 0 && (data.maritial_status == 1 && 'Never Married')} </span>  
+                      <span className="view_head_span">{data.length != 0 && (data.maritial_status == 2 && 'Awaiting Divorce')} </span>  
+                      <span className="view_head_span">{data.length != 0 && (data.maritial_status == 3 && 'Divorced')}</span>  
+                      <span className="view_head_span">{data.length != 0 && (data.maritial_status == 4 && 'Widowed')} </span> 
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-4" style={{background:"rgb(222 19 82)"}}>
 
-                {(data.interest > 0) && (
+                {(!data.get_interest_sent) && (
                       <><span className="view_profile_font1"><i className="fas fa-check view_profile_font2"    style={{
                         color: "black",
                       }} 
                       ></i>Send Interest</span><br /></>
                   )}
 
-                  {(data.interest == 0) && (
-                      <><span className="view_profile_font1"><i className="fas fa-check view_profile_font2"   onClick={(e) =>sendIntrest(data['basicData'].reg_id)} style={{
+                  {(data.get_interest_sent) && (
+                      <><span className="view_profile_font1"><i className="fas fa-check view_profile_font2"   onClick={(e) =>sendIntrest(data.reg_id)} style={{
                         cursor:"pointer"
                       }} 
                       ></i>Send Interest</span><br /></>
@@ -147,15 +146,15 @@ function ProfileDetails() {
                   
                   <span className="view_profile_font1"><i className="fas fa-comment view_profile_font2"></i> Chat</span><br />
                  
-                  {(data.shortlist > 0) && (
-                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) =>shortlistProfile(data['basicData'].reg_id)} style={{
+                  {(!data.get_shortlist) && (
+                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) =>shortlistProfile(data.reg_id)} style={{
                         color: "black",
                         cursor:"pointer"
                       }} ></i> Shortlist</span><br /></>
                   )}
 
-                  {(data.shortlist == 0) && (
-                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) =>shortlistProfile(data['basicData'].reg_id)} style={{
+                  {(data.get_shortlist) && (
+                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) =>shortlistProfile(data.reg_id)} style={{
                           cursor:"pointer"
                       }} ></i> Shortlist</span><br /></>
                   )}

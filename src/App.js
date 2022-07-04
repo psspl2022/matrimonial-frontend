@@ -24,6 +24,7 @@ import Interest from "./Components/SendIntrest/Interest";
 import Accept from "./Components/SendIntrest/Accept";
 import Shortlist from "./Components/Shortlist/Shortlist";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
+import LatestProfile from "./Components/Match/LatestProfile";
 
 function App() {
   return (
@@ -110,6 +111,11 @@ function App() {
           <Route path="/profileDetail/:reg_id" exact>
             <MainHeader />
             <ProfileDetails />
+            <MainFooter />
+          </Route>
+          <Route path="/latest/" exact>
+            <MainHeader />
+            <LatestProfile />
             <MainFooter />
           </Route>
           <Route component={PageNotFound}></Route>
