@@ -101,7 +101,7 @@ function ProfileDetails() {
                 <div className="col-lg-3 col-md-4">
                 { data.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
 
-{ !data.get_profile_image && (<img src={ (data.get_user_register == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+{ !data.get_profile_image && (<img src={ (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
                             
                    </div>
                 <div className="col-lg-6 col-md-4">
