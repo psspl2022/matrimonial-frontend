@@ -63,12 +63,15 @@ const submitImageDetails = async (e) => {
         </div>
       </div>
       <form onSubmit={submitImageDetails} encType="multipart/form-data">
-        <div className="form-group">
-          <label className="label15">Select Profile Image</label>
-          <input type="file" className="form-control" onChange={ handleChange } />
+        <div className="col-sm-6 col-md-5 col-lg-4 mx-auto d-flex justify-content-center flex-column ">
+          <div className="form-group">
+            <label className="label15">Select Profile Image</label>
+            <input type="file" className="form-control" onChange={ handleChange } />
+          </div>
+          <div className="col-md-8 text-center mx-auto">
+            <input type="submit" className="lr_btn" value="Ready to go" />
+          </div>
         </div>
-
-        <input type="submit" className="lr_btn" value="Ready to go" />
       </form>
     </>
   );

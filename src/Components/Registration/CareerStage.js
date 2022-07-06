@@ -134,7 +134,7 @@ function CareerStage() {
         <div className="row">
           <div className="col-md-4">
             <div className="form-group">
-              <label className="label15">Schooling</label>
+              <label className="label15">Schooling Board</label>
               <input type="text" className="job-input" placeholder="Enter Schooling" 
                 onChange={(event) => {
                   setSchooling(event.target.value);
@@ -144,7 +144,7 @@ function CareerStage() {
           </div>
           <div className="col-md-4">
               <div className="form-group">
-              <label className="label15">Highest Degree*</label>
+              <label className="label15">Highest Degree</label>
               <Select
                 className="basic-single"
                 classNamePrefix="select"
@@ -163,7 +163,7 @@ function CareerStage() {
           </div>
           <div className="col-md-4">
                 <div className="form-group">
-              <label className="label15">UG Degree*</label>
+              <label className="label15">UG Degree</label>
               <Select
                 className="basic-single"
                 classNamePrefix="select"
@@ -182,7 +182,7 @@ function CareerStage() {
           </div>
           <div className="col-md-4">
               <div className="form-group">
-            <label className="label15">PG Degree*</label>
+            <label className="label15">PG Degree</label>
             <Select
               className="basic-single"
               classNamePrefix="select"
