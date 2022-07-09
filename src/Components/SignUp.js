@@ -20,7 +20,8 @@ function SignUp() {
   const [verified, setverified] = useState(false);
   const history = useHistory();
 
-  const [profileFor, setProfileFor] = useState("Self");
+  const [profileFor, setProfileFor] = useState("");
+  const [gender, setGender] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpass, setCPass] = useState("");
@@ -39,6 +40,13 @@ function SignUp() {
     { value: "Sister", label: "Sister" },
     { value: "Relative", label: "Relative" },
     { value: "Client - Marriage Bureau", label: "Client - Marriage Bureau" },
+  ];
+
+  const genderOptions = [    
+    { value: "0", label: "Select Gender" },
+    { value: "1", label: "Male" },
+    { value: "2", label: "Female" },
+    { value: "3", label: "Other" },
   ];
 
   useEffect(() => {
@@ -70,7 +78,8 @@ function SignUp() {
 
     const formData = new FormData()
 
-    formData.append('for', profileFor)
+    formData.append('for', profileFor.value)
+    formData.append('gender', gender.value)
     formData.append('name', name)
     formData.append('email', email)
     formData.append('confirm-password', cpass)
@@ -114,7 +123,7 @@ function SignUp() {
       <main className="browse-section" style={{ backgroundImage: `url(${bgimage})`, backgroundAttachment: 'fixed', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',  paddingBottom: '40px' }}>
         <div className="container">
           <div className="row justify-content-md-center">
-            <div className="col-md-8">
+            <div className="col-md-10">
               <div className="lg_form">
                 <div className="main-heading">
                   <h2>Sign Up to {window.AppName}</h2>
@@ -124,7 +133,7 @@ function SignUp() {
                 </div>
                 <form onSubmit={registerUser}>
                 <div className="row">                
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="form-group ">
                       <label className="label15">Profile For*</label>
                       <Select
@@ -136,10 +145,31 @@ function SignUp() {
                         name="profile_for"
                         placeholder="Select Profile For"
                         options={profileForOptions}
+                        onChange={(event)=>{
+                          setProfileFor(event)
+                        }}
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
+                  <div className="form-group">
+                    <label className="label15">Gender*</label>
+                    <Select
+                      className="basic-single"
+                      classNamePrefix="select"
+                      defaultValue={genderOptions[0]}
+                      isClearable
+                      isSearchable
+                      name="gender"
+                      placeholder="Select Gender"
+                      options={genderOptions}
+                      onChange={(event)=>{
+                        setGender(event)
+                      }}
+                    />
+                  </div>
+                  </div>
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label className="label15">Full Name*</label>
                       <input
@@ -155,7 +185,7 @@ function SignUp() {
                     </div>
                   </div>
                  
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label className="label15">Email Address*</label>
                       <input
@@ -171,7 +201,7 @@ function SignUp() {
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label className="label15">Phone Number*</label>
                       <input type="tel" id="phone" name="phno" className="job-input" minlength="10" maxLength="10" placeholder="Enter Phone No." value={phno} onChange={(event)=>{
@@ -179,7 +209,7 @@ function SignUp() {
                               }} required />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <label className="label15">Password*</label>
                       <input
@@ -196,7 +226,7 @@ function SignUp() {
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">                    
+                  <div className="col-md-4">                    
                     <div className="form-group mb-4">
                       <label className="label15">Confirm Password*</label>
                       <input
@@ -214,7 +244,7 @@ function SignUp() {
                       {passError==true && (<span className="text-danger">Confirm Password and Password does not matched</span>) }
                     </div>
                   </div>
-                  <div className="col-md-8"> 
+                  <div className="col-md-12"> 
                     <div>
                       <ReCAPTCHA
                         sitekey="6Lfd4sIfAAAAAE__2qvNpSoJHjCUIn5SM2RXVWXq"

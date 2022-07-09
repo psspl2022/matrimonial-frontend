@@ -28,8 +28,6 @@ function PhoneStage() {
   useEffect(() => {
     axios.get(`${window.Url}api/sendOtp`, headers_param)
    .then(({ data }) => {
-    console.log(data);
-
    });
  }, []);
 
@@ -97,7 +95,7 @@ const skipStage = async (e) => {
 
   return (
     <>
-    <div className="col-md-6 mx-auto">
+<div className="col-md-6 mx-auto">
     
 
 {/* <script src="js/jquery-2.1.4.js"></script>

@@ -4,6 +4,8 @@ import LatestMatch from "./Components/LatestMatch";
 import MainHeader from "./Components/MainHeader";
 import SuccessMatches from "./Components/SuccessMatches";
 import MembershipPlan from "./Components/MembershipPlan";
+import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import SearchMatches from "./Components/SearchMatches";
@@ -28,104 +30,120 @@ import LatestProfile from "./Components/Match/LatestProfile";
 import DailyRecommendation from "./Components/Match/DailyRecommendation";
 
 function App() {
+  const [browse, setBrowse] = useState(null);
+  const [browseid, setBrowseId] = useState(null);
+  const [url, setUrl] = useState(null);
+
+ useEffect(()=>{
+   setUrl(window.location.pathname)
+ })
+
+  function getUrl(url)
+  {
+    setUrl(url)    
+  }
+
+
+  function getBrowseProfileBy(browse,id)
+  {
+    setBrowse(browse)
+    setBrowseId(id)
+    
+  }
   return (
     <div className="App">
       <BrowserRouter>
+      { url != "/registrationStage" && <>
+      <MainHeader getBrowsedata={getBrowseProfileBy}/>
         <Switch>
-          <Route path="/" exact>
-            <MainHeader />
+            <Route path="/" exact>
+            {browse==null &&
+            <>
             <Banner />
             <LatestMatch />
             <MembershipPlan />
-            <SuccessMatches />
-            <MainFooter />
-          </Route>
+            <SuccessMatches />  
+            </>
+            } 
+          {browse!=null &&
+           <SearchMatches browse={browse} browseId={browseid} />
+          }     
+          </Route>         
           <Route path="/findMatches" exact>
-            <MainHeader />
-            <SearchMatches />
-            <MainFooter />
+            <SearchMatches browse={browse} browseId={browseid} />
           </Route>
           <Route path="/signUp" exact>
-            <MainHeader />
             <SignUp />
-            <MainFooter />
           </Route>
           <Route path="/login" exact>
-            <MainHeader />
             <Login />
-            <MainFooter />
           </Route>
           <Route path="/forgetPassword" exact>
-            <MainHeader />
             <ForgetPassword />
-            <MainFooter />
-          </Route>
-          <Route path="/registrationStage" exact>
-            <RegisterHeader />
-            <RegistrationStage />
-            <MainFooter />
           </Route>
           <Route path="/careerStage" exact>
-            <MainHeader />
             <CareerStage />
-            <MainFooter />
           </Route>
           <Route path="/familyStage" exact>
-            <MainHeader />
             <FamilyStage />
-            <MainFooter />
           </Route>
           <Route path="/myprofile" exact>
-            <MainHeader />
             <MyProfile />
-            <MainFooter />
           </Route>
           <Route path="/desiredprofile" exact>
-            <MainHeader />
             <DesiredProfileDetails />
-            <MainFooter />
           </Route>
           <Route path="/membershipDetail/:package_id" exact>
-            <MainHeader />
             <MembershipDetails />
           </Route>
           <Route path="/desiredList" exact>
-            <MainHeader />
             <DesiredList />
-            <MainFooter />
           </Route>
           <Route path="/interest" exact>
-            <MainHeader />
             <Interest />
-            <MainFooter />
           </Route>
           <Route path="/accept" exact>
-            <MainHeader />
             <Accept />
-            <MainFooter />
           </Route>
           <Route path="/shortlist" exact>
-            <MainHeader />
             <Shortlist />
-            <MainFooter />
           </Route>
           <Route path="/profileDetail/:reg_id" exact>
-            <MainHeader />
             <ProfileDetails />
-            <MainFooter />
           </Route>
           <Route path="/latest" exact>
-            <MainHeader />
             <LatestProfile />
-            <MainFooter />
           </Route>
           <Route path="/dailyRecommendation" exact>
-            <MainHeader />
             <DailyRecommendation />
-            <MainFooter />
-          </Route>
-          <Route component={PageNotFound}></Route>
+          </Route>   
+          <Route component={PageNotFound}></Route>      
         </Switch>
+        <MainFooter />
+        </> 
+        }  
+        <Switch>
+        
+        <Route path="/" exact>
+            {browse==null &&
+            <>
+            <MainHeader getBrowsedata={getBrowseProfileBy}/>
+            <Banner />
+            <LatestMatch />
+            <MembershipPlan />
+            <SuccessMatches />  
+            <MainFooter />
+            </>
+            } 
+          </Route>
+          
+       
+        <Route path="/registrationStage" exact>
+            <RegisterHeader />
+            <RegistrationStage  getUrlData={getUrl}/>
+          </Route>
+        </Switch>    
+         
       </BrowserRouter>
     </div>
   );

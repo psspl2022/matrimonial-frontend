@@ -30,13 +30,20 @@ function SignUp() {
   const {userExists} = CheckTokenExist();
   
   const profileForOptions = [
-    { value: "Self", label: "Self" },
+    { value: "Self", label: "NULL" },
     { value: "Son", label: "Son" },
     { value: "Daughter", label: "Daughter" },
     { value: "Brother", label: "Brother" },
     { value: "Sister", label: "Sister" },
     { value: "Relative", label: "Relative" },
     { value: "Client - Marriage Bureau", label: "Client - Marriage Bureau" },
+  ];
+
+  const genderOptions = [    
+    { value: "0", label: "Select Gender" },
+    { value: "1", label: "Male" },
+    { value: "2", label: "Female" },
+    { value: "3", label: "Other" },
   ];
 
   useEffect(() => {

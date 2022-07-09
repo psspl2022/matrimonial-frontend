@@ -755,3 +755,25 @@ transform:scale(0);
   color: #000!important;
   font-weight: 500!important;
 }
+
+.home-div{
+  position:absolute;
+  top:0px; 
+  left:140px;
+  min-width:450px;
+  min-height:216px;
+  max-height:216px;
+  background-color: #fff;
+  line-height:30px;
+  /* border-left: 1px #6c757d solid; */
+  box-shadow: 0 0 4px;
+  
+  overflow:scroll;
+}
+
+.home-browse-span{
+  cursor: pointer;
+}
+
+
+

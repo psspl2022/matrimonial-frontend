@@ -30,6 +30,7 @@ function ProfileStage() {
   const [moths, setMoths] = useState([]);
   const [religions, setReligions] = useState([]);
   const [castes, setCastes] = useState([]);
+  const [residences, setResidences] = useState([]);
 
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
@@ -42,7 +43,7 @@ function ProfileStage() {
   const [horoscope, setHoroscope] = useState("");
   const [matrimonial, setMatrimonial] = useState("");
   const [date, setDate] = useState("");
-
+  const [residence, setResidence] = useState("0");
   // var countries = {};
   const maritalOptions = [
     { value: "1", label: "Never Married" },
@@ -57,6 +58,8 @@ function ProfileStage() {
     { value: "1", label: "Yes" },
     { value: "0", label: "No" },
   ];
+
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -95,7 +98,14 @@ function ProfileStage() {
             };
           })
         );
-
+        setResidences(
+          data.residence.map(function (residence) {
+            return {
+              value: residence.id,
+              label: residence.residence,
+            };
+          })
+        );
         setReligions(
           data.religion.map(function (religion) {
             return { value: religion.id, label: religion.religion };
@@ -147,13 +157,14 @@ function ProfileStage() {
     const formData = new FormData();
     formData.append("name", userName);
     formData.append("dob", date);
-    formData.append("maritial_status", matrimonial.value);
+    formData.append("marital_status", matrimonial.value);
     formData.append("religion", religion.value);
     formData.append("caste", caste.value);
     formData.append("mother_tongue", moth.value);
     formData.append("horrorscope_match_required", horoscope.value);
     formData.append("height", height.value);
     formData.append("manglik", manglik.value);
+    formData.append("residence", residence.value);
     formData.append("country", country.value);
     formData.append("state", state.value);
     formData.append("city", city.value);
@@ -305,7 +316,7 @@ function ProfileStage() {
             />
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
             <label className="label15">Horoscope Match is necessary?*</label>
             <Select
@@ -324,7 +335,7 @@ function ProfileStage() {
             />
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
             <label className="label15">Marital Status*</label>
             <Select
@@ -343,7 +354,7 @@ function ProfileStage() {
             />
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-3">
             <div className="form-group">
             <label className="label15">Height*</label>
             <Select
@@ -357,6 +368,25 @@ function ProfileStage() {
               options={heights}
               onChange={(e) => {
                 setHeight(e);
+              }}
+              required
+            />
+            </div>
+          </div>
+          <div className="col-md-3">
+            <div className="form-group">
+            <label className="label15">Residence*</label>
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              defaultValue=""
+              isClearable
+              isSearchable
+              name="height"
+              placeholder="Select Residence"
+              options={residences}
+              onChange={(e) => {
+                setResidence(e);
               }}
               required
             />

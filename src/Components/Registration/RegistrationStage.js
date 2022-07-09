@@ -11,12 +11,17 @@ import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 
 
-function RegistrationStage() {
+function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
 	const history = useHistory();
   
   // dispatch(regActiveLink('career'));
+  useEffect(() => {
+    
+  props.getUrlData('/registrationStage')
+  },[])
+
 
   const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
@@ -57,7 +62,7 @@ function RegistrationStage() {
   
   return (
     <>
-      <main className="browse-section pt-4">
+      <main className="browse-section pt-4" >
         <div className="container my-3">
           <div className="row justify-content-md-center">
             <div className="col-md-12">

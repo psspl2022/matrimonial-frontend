@@ -6,10 +6,17 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import TawkTo from 'tawkto-react';
 
-function MainHeader() {
+function MainHeader(props) {
+  const [religionStyle, setReligionStyle] = useState({display: 'block,'});
+  const [casteStyle, setCasteStyle] = useState({display: 'none'});
+  const [motherStyle, setMotherStyle] = useState({display: 'none'});
+  const [stateStyle, setStateStyle] = useState({display: 'none'});
+  const [cityStyle, setCityStyle] = useState({display: 'none'});
+  const [occupationStyle, setOccupationStyle] = useState({display: 'none'});
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState({});
+  const [data, setData] = useState({});
   const [gender, setGender] = useState({});
   const history = useHistory();
   const [userImage, setUserImage] = useState();
@@ -45,6 +52,7 @@ function MainHeader() {
       setUserData(JSON.parse(user_data));
       setGender(window.sessionStorage.getItem("gender"));
     }
+
 	const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
       headers: {
@@ -53,7 +61,7 @@ function MainHeader() {
         "Content-Type": "application/json",
       },
     };
-
+    
     axios
       .get(`${window.Url}api/getProfileImage`, headers_param)
       .then(({ data }) => {
@@ -80,8 +88,19 @@ function MainHeader() {
           // tawk.minimize();
         })
       }
+
+      browseProfileBy();
     
   }, []);
+
+ 
+  const browseProfileBy = () => {
+    axios
+      .get(`${window.Url}api/browseProfileBy`)
+      .then(( response ) => {
+          setData(response.data);
+      });
+  };
 
   const logout = async (e) => {
     e.preventDefault();
@@ -356,6 +375,7 @@ function MainHeader() {
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12">
                 <nav className="navbar navbar-expand-lg navbar-light bg-dark1 justify-content-sm-start">
+                  
                   <NavLink
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
                     to="/"
@@ -391,10 +411,185 @@ function MainHeader() {
                   >
                     <ul className="navbar-nav align-self-stretch">
                       <li className="nav-item">
-                        <NavLink className="nav-link font-lobster" to="/">
+                        <NavLink className="nav-link font-lobster" to="/" onClick={() => props.getBrowsedata(null, null)}>
                           Home
                         </NavLink>
                       </li>
+                      {token.length != 0 && (
+                      <li className="nav-item dropdown">
+                      <a
+                          href="#"
+                          className="nav-link dropdown-toggle-no-caret font-lobster"
+                          role="button"
+                          data-toggle="dropdown"
+                        >
+                          Browse Profiles By
+                        </a>
+                        <div className="dropdown-menu pages-dropdown row" style={{width:"0px", }}>
+                          <div className="col-3" style={{position:"relative", }}>
+                        <NavLink
+                          to="/latest"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'block'});
+                            setCasteStyle({display: 'none'});
+                            setMotherStyle({display: 'none'});
+                            setStateStyle({display: 'none'});
+                            setCityStyle({display: 'none'});
+                            setOccupationStyle({display: 'none'});
+                        }}
+                      
+                        >
+                          Religion
+                        </NavLink>
+                        <NavLink
+                          to="/latest"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'none'});
+                            setCasteStyle({display: 'block'});
+                            setMotherStyle({display: 'none'});
+                            setStateStyle({display: 'none'});
+                            setCityStyle({display: 'none'});
+                            setOccupationStyle({display: 'none'});
+                        }}
+                        
+                        >
+                          Caste 
+                        </NavLink>
+                        <NavLink
+                          to="/shortlist"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'none'});
+                            setCasteStyle({display: 'none'});
+                            setMotherStyle({display: 'block'});
+                            setStateStyle({display: 'none'});
+                            setCityStyle({display: 'none'});
+                            setOccupationStyle({display: 'none'});
+                        }}
+                       
+                        >
+                          Mother Tongue 
+                        </NavLink>
+                        <NavLink
+                          to="/desiredlist"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'none'});
+                            setCasteStyle({display: 'none'});
+                            setMotherStyle({display: 'none'});
+                            setStateStyle({display: 'block'});
+                            setCityStyle({display: 'none'});
+                            setOccupationStyle({display: 'none'});
+                        }}
+                        // onMouseLeave={e => {
+                        //     setMotherStyle({display: 'none'})
+                        // }}
+                        >
+                          State
+                        </NavLink>
+                        <NavLink
+                          to="/shortlist"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'none'});
+                            setCasteStyle({display: 'none'});
+                            setMotherStyle({display: 'none'});
+                            setStateStyle({display: 'none'});
+                            setCityStyle({display: 'block'});
+                            setOccupationStyle({display: 'none'});
+                        }}
+                       
+                        >
+                        City 
+                        </NavLink>
+                        <NavLink
+                          to="/shortlist"
+                          className="link-item font-lobster"
+                          role="button"
+                          onMouseEnter={e => {
+                            setReligionStyle({display: 'none'});
+                            setCasteStyle({display: 'none'});
+                            setMotherStyle({display: 'none'});
+                            setStateStyle({display: 'none'});
+                            setCityStyle({display: 'none'});
+                            setOccupationStyle({display: 'block'});
+                        }}
+                        >
+                          Occupation 
+                        </NavLink>
+                        </div>
+                        <div className="home-div col-9" style={religionStyle}>
+                          <div className="row mt-2">
+                          {data['religion'] && data.religion.map((item) => (
+                            <div className="col-md-4">
+                              <span className="home-browse-span" onClick={() => props.getBrowsedata('religion', item.id)}
+                              >{item.religion}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        <div className="home-div col-9" style={casteStyle} >
+                        <div className="row mt-2">
+                          {data['caste'] && data.caste.map((item) => (
+                            <div className="col-md-4">
+                              <span className="home-browse-span" onClick={() => props.getBrowsedata('caste', item.id)}>{item.caste}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        <div className="home-div col-9" style={motherStyle} >
+                        <div className="row mt-2">
+                          {data['mother_tongue'] && data.mother_tongue.map((item) => (
+                            <div className="col-md-4">
+                            <span className="home-browse-span" onClick={() => props.getBrowsedata('mother', item.id)}>{item.mother_tongue}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        <div className="home-div col-9" style={stateStyle}>
+                        <div className="row mt-2">
+                          {data['state'] && data.state.map((item) => (
+                            <div className="col-md-4">
+                              <span className="home-browse-span" onClick={() => props.getBrowsedata('state', item.id)}>{item.name}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        <div className="home-div col-9" style={cityStyle}>
+                        <div className="row mt-2">
+                          {data['city'] && data.city.map((item) => (
+                            <div className="col-md-4">
+                              <span className="home-browse-span" onClick={() => props.getBrowsedata('city', item.id)}>{item.name}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        <div className="home-div col-9" style={occupationStyle}>
+                        <div className="row mt-2">
+                          {data['occupation'] && data.occupation.map((item) => (
+                            <div className="col-md-4">
+                              <span className="home-browse-span" onClick={() => props.getBrowsedata('occupation', item.id)}>{item.occupation}</span>
+                            </div>
+                          ))}
+                          </div>
+                        </div>
+                        </div>
+                       
+                        {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
+                        {/* <div className="dropdown-menu pages-dropdown">
+													<a className="link-item" href="browse_projects.html">Browse Matches</a>
+													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
+                        {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
+                        {/* </div> */}
+                      </li>
+                      ) }
                       <li className="nav-item">
                         <NavLink to="/findMatches" className= "font-lobster nav-link">
                           Find Matches
@@ -416,6 +611,13 @@ function MainHeader() {
                           Matches
                         </a>
                         <div className="dropdown-menu pages-dropdown ">
+                        <NavLink
+                          to="/latest"
+                          className="link-item font-lobster"
+                          role="button"
+                        >
+                          Daily Recommendation
+                        </NavLink>
                         <NavLink
                           to="/latest"
                           className="link-item font-lobster"
