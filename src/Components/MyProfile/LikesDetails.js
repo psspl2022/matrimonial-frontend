@@ -17,6 +17,7 @@ export default function LikesDetails() {
   const [sports, setSports] = useState([]);
   const [cuisines, setCuisines] = useState([]);
 
+  const [color, setColor] = useState("");
   const [hobby, setHobby] = useState("");
   const [interest, setInterest] = useState("");
   const [musicType, setMusicType] = useState("");
@@ -52,6 +53,9 @@ export default function LikesDetails() {
   const arrayOfValues = (e) => {
     const value = Array.isArray(e) ? e.map((x) => x.value) : [];
     return value;
+  };
+  const handleColor = (e) => {
+    setColor(e.target.value);
   };
 
   const handleHobby = (e) => {
@@ -253,6 +257,7 @@ export default function LikesDetails() {
           })
         );
 
+        setTVShow(data.color);
         setRead(data.fav_read);
         setTVShow(data.tv_show);
         setMovie(data.movie);
@@ -264,7 +269,8 @@ export default function LikesDetails() {
 
   const submitLikesDetails = (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    const formData = new FormData();    
+    formData.append("color", color);
     formData.append("hobbies", hobby);
     formData.append("interest", interest);
     formData.append("music", musicType);
@@ -323,19 +329,31 @@ export default function LikesDetails() {
             <div className="post_job_body">
               <form onSubmit={submitLikesDetails}>
                 <div className="row">
-                  <div className="col-lg-6">
+                <div className="col-lg-6">
                     <div className="form-group">
-                      <label className="label15">Hobbies</label>
+                      <label className="label15">Color</label>
                       <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         defaultValue=""
                         isMulti
-                        placeholder="Select Your Hobbies"
-                        options={hobbies}
+                        placeholder="Enter Color"
                         value={selectHobby}
                         onChange={handleHobby}
                         isDisabled={!Edit}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Color</label>
+                      <input
+                        type="text"
+                        className="job-input"
+                        placeholder="Enter TV Shows"
+                        disabled={Edit == false ? "disabled" : ""}
+                        onChange={handleColor}
+                        value={color}
                       />
                     </div>
                   </div>

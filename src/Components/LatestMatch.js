@@ -4,6 +4,10 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { NavLink } from 'react-router-dom';
 import bgimage from "../background2.jpeg";
+import { useState } from 'react';
+import { useEffect } from 'react';
+import ProfileSkeleton from './Dummy Skeleton/ProfileSkeleton';
+import axios from 'axios';
 
 function LatestMatch() {
 
@@ -36,6 +40,20 @@ function LatestMatch() {
     },
 };
 
+const [data, setData] = useState([]);
+
+useEffect(() => {
+    profiles();
+}, [])
+
+function profiles(){
+    axios
+    .get(`${window.Url}api/homeProfile`)
+    .then(({data})=> {
+        setData(data)
+    })
+}
+
     return (
         <>
             <div className="find-lts-jobs mb-5" style={{ backgroundImage: `url(${bgimage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', boxShadow: 'rgb(228 130 147 / 15%) 0px 0px 0px 2000px inset', backgroundAttachment: 'fixed', paddingBottom: '40px' }}>
@@ -52,503 +70,61 @@ function LatestMatch() {
                         </div>
                         <div className="col-md-12 col-12">
                             <div className="lts-jobs-slider">
-                                {/* <div className="owl-carousel jobs-owl owl-theme"> */}
-                                    <OwlCarousel
-                                        className="owl-theme"
-                                        {...options} >
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile1.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4 >Kartik Kumar</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                        <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="Mark Favourite">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
+                                    <OwlCarousel className="owl-theme" {...options} >
+                                                                        
+                                    {
+                                            data.map((item, index)=>
+
+                                <div className="item" key={index}>
+                                    <div className="job-item mt-30">
+                                        <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
+                                            <div className="job-skills">
+                                                </div>    
+                                                <div className="img-profile text-center">
+                              {item.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px auto", width:"auto"}}/>)}
+
+{!item.get_profile_image && (<img src={ (item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px auto", width:"auto"}}/>)}
+                            </div>
                                         </div>
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile2.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4>Roshan Gupta</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                        <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="bookmark">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile4.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4>Jyoti Rawat</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                        <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="bookmark">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile3.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4>Arjun Bisht</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                        <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="bookmark">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile5.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4>Darshan Kumar</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                    <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="bookmark">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="item">
-                                            <div className="job-item">
-                                                <div className="job-top-dt">
-                                                        <img
-                                                            src={ process.env.PUBLIC_URL + "/profile1.jpg" }
-                                                            alt="" style={{maxHeight:'220px'}}
-                                                        />
-                                                    <div className="job-right-dt">
-                                                        {/* <div className="job-price">$60/hr</div> */}
-                                                        {/* <div className="job-fp">Verified</div> */}
-                                                    </div>
-                                                </div>
-                                                <div className="job-des-dt">
-                                                    <h4>Nirbhay Kumar</h4>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                        elit. Etiam cursus pulvinar dolor nec...
-                                                    </p>
-                                                    <div className="job-skills">
-                                                    <span >Location: Faridabad</span>
-                                                        <span href="#">Height: 5'4</span>
-                                                        <span href="#">Salary: 10-12Lakhs</span>
-                                                        <span href="#" className="more-skills">+4</span>
-                                                    </div>
-                                                </div>
-                                                <div className="job-buttons">
-                                                    {/* <ul className="link-btn">
-                                                        <li>
-                                                            <a href="#" className="link-j1" title="Message"
-                                                            >Message</a
-                                                            >
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="job_single_view.html"
-                                                                className="link-j1"
-                                                                title="View Details"
-                                                            >View Details</a
-                                                            >
-                                                        </li>
-                                                        <li className="bkd-pm">
-                                                            <button className="bookmark1" title="bookmark">
-                                                                <i className="fas fa-heart"></i>
-                                                            </button>
-                                                        </li>
-                                                    </ul> */}
-                                                    <ul className="link-btn">
-                                                {/* <li>
-                                                    <a href="#" className="link-j1" title="Message"
-                                                    >Message</a
-                                                    >
-                                                </li> */}
-                                                {/* <li>
-                                                    <a
-                                                        href="job_single_view.html"
-                                                        className="link-j1"
-                                                        title="View Details"
-                                                    >View Details</a
-                                                    >
-                                                </li> */}
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-envelope 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-comment 2x"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-star"></i>
-                                                    </button>
-                                                </li>
-                                                <li className="bkd-pm">
-                                                    <button className="bookmark1" >
-                                                        <i className="fas fa-heart"></i>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div className="job-des-dt">
+                                            <h2 style={{fontWeight:"200"}}>{ item.name }</h2>
+                                            {/* <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit. Etiam cursus pulvinar dolor nec...
+                                            </p> */}
+                              <div className="job-skills">
+                                <span>
+                                  Age:{" "}
+                                  {Math.floor(
+                                    (Date.now() - new Date(item.dob)) /
+                                      31557600000
+                                  )}{" "}
+                                  years
+                                </span>
+                                <span>Height: {item.get_height.height} </span>
+                                <span>
+                                  Religion: {item.get_religion.religion}{" "}
+                                </span>
+                                <span>Caste: {item.get_caste.caste} </span>
+                                <span>
+                                  Mother Tongue:{" "}
+                                  {item.get_mother_tongue.mother_tongue}{" "}
+                                </span>
+                                <span>Salary: {item.get_income.income} </span>
+                                <span>
+                                  Qualification: {item.get_education.education}{" "}
+                                </span>
+                                <span>
+                                  Occupation: {item.get_occupation.occupation}{" "}
+                                </span>
+                                {/* <span className="more-skills">+4</span> */}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        )}
+
                                         </OwlCarousel>
-                                {/* </div> */}
-                                <div className="text-center">
-                                    <button
-                                        className="view-links text-white"
-                                    >
-                                        <NavLink to='/findMatches' className="text-white">BROWSE ALL MATCHES</NavLink>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>

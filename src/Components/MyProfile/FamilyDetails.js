@@ -52,7 +52,9 @@ export default function FamilyDetails() {
   const [motherOcc, setMotherOcc] = useState([]);
   const [fatherOcc, setFatherOcc] = useState([]);
   const [sis, setSis] = useState([]);
+  const [marriedSis, setMarriedSis] = useState([]);
   const [bro, setBro] = useState([]);
+  const [marriedBro, setMarriedBro] = useState([]);
   const [gothra, setGothra] = useState([]);
   const [maternalGothra, setMaternalGothra] = useState([]);
   const [familySta, setFamilySta] = useState("");
@@ -121,9 +123,23 @@ export default function FamilyDetails() {
           }
         })[0]
       );
+      setMarriedSis(
+        broAndSister.filter((married_sis) => {
+          if (married_sis.value === data.married_sister_count) {
+            return sis;
+          }
+        })[0]
+      );
       setBro(
         broAndSister.filter((bro) => {
           if (bro.value === data.brother_count) {
+            return bro;
+          }
+        })[0]
+      );
+      setMarriedBro(
+        broAndSister.filter((married_bro) => {
+          if (married_bro.value === data.married_brother_count) {
             return bro;
           }
         })[0]
@@ -168,7 +184,7 @@ export default function FamilyDetails() {
       );
       setFamilyLiv(
         familyLivingIn.filter((fam_stat) => {
-          if (fam_stat.value == data.family_live_in) {
+          if (fam_stat.value == data.native_state) {
             return fam_stat;
           }
         })[0]
@@ -211,14 +227,16 @@ export default function FamilyDetails() {
     formData.append('father_occupation', fatherOcc.value)
     formData.append('mother_occupation', motherOcc.value)
     formData.append('brother_count', bro.value)
+    formData.append('married_brother_count', marriedBro.value)
     formData.append('sister_count', sis.value)
+    formData.append('married_sister_count', marriedSis.value)
     formData.append('gotra', gothra)
     formData.append('gotra_maternal', maternalGothra)
     formData.append('family_status', familySta.value)
     formData.append('family_values', familyVal.value)
     formData.append('family_type', familyTyp.value)
     formData.append('family_income', familyInc.value)
-    formData.append('family_live_in', familyLiv.value)
+    formData.append('native_state', familyLiv.value)
     formData.append('native_city', familyCity.value)
     formData.append('living_with_parent', livingWithFam.value)
 
@@ -331,11 +349,31 @@ export default function FamilyDetails() {
                         isClearable
                         isSearchable
                         name="sister"
-                        placeholder="Select Sister"
+                        placeholder="Enter Sister Count"
                         options={broAndSister}
                         value={sis}
                         onChange={(event) => {
                           setSis(event);
+                        }}
+                        isDisabled={!Edit}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Married Sisters</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue=""
+                        isClearable
+                        isSearchable
+                        name="sister"
+                        placeholder="Enter Married Sister Count"
+                        options={broAndSister}
+                        value={marriedSis}
+                        onChange={(event) => {
+                          setMarriedSis(event);
                         }}
                         isDisabled={!Edit}
                       />
@@ -351,11 +389,31 @@ export default function FamilyDetails() {
                         isClearable
                         isSearchable
                         name="brother"
-                        placeholder="Select Brother"
+                        placeholder="Enter Brother Count"
                         options={broAndSister}
                         value={bro}
                         onChange={(event) => {
                           setBro(event);
+                        }}
+                        isDisabled={!Edit}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Married Brothers</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue=""
+                        isClearable
+                        isSearchable
+                        name="brother"
+                        placeholder="Enter Married Brother Count"
+                        options={broAndSister}
+                        value={marriedBro}
+                        onChange={(event) => {
+                          setMarriedBro(event);
                         }}
                         isDisabled={!Edit}
                       />

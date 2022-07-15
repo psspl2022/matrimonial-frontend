@@ -124,6 +124,7 @@ function MainHeader(props) {
           });
           window.sessionStorage.removeItem("access_token");
           window.sessionStorage.removeItem("user_data");
+          window.sessionStorage.removeItem("gender");
           setToken("");
           setUserData("");
           history.replace("/");
@@ -161,21 +162,6 @@ function MainHeader(props) {
                             Welcome to Matrimonial
                           </div>
                         </li>
-                        {/* <li>
-												<div className="lang-icon dropdown">
-													<i className="fas fa-globe ln-glb"></i>
-													<a href="#" className="icon15 dropdown-toggle-no-caret" role="button" data-toggle="dropdown" id="dropdownLangLink" aria-haspopup="true" aria-expanded="false">
-														EN <i className="fas fa-caret-down p-crt"></i>
-													</a>
-													<div className="dropdown-menu lanuage-dropdown dropdown-menu-left" aria-labelledby="dropdownLangLink">
-														<a className="link-item" href="#">EN</a>
-														<a className="link-item" href="#">DE</a>
-														<a className="link-item" href="#">RU</a>
-														<a className="link-item" href="#">ES</a>
-														<a className="link-item" href="#">FR</a>
-													</div>
-												</div>
-											</li> */}
                       </ul>
                     </div>
                     <div className="top-right-hd">
@@ -192,58 +178,7 @@ function MainHeader(props) {
                             <i className="fas fa-envelope"></i>
                             <div className="circle-alrt"></div>
                           </a>
-                          {/*<div className="dropdown-menu message-dropdown dropdown-menu-right">
-                             <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <img src="images/user-dp-1.jpg" alt="" />
-                                    <div className="user-title1">
-                                      Jassica William{" "}
-                                    </div>
-                                    <span>Hey How are you John Doe...</span>
-                                  </a>
-                                </div>
-                                <div className="time5">2 min ago</div>
-                              </div>
-                            </div>
-                            <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <img src="images/user-dp-1.jpg" alt="" />
-                                    <div className="user-title1">
-                                      Rock Smith{" "}
-                                    </div>
-                                    <span>
-                                      Interesting Event! I will join this...
-                                    </span>
-                                  </a>
-                                </div>
-                                <div className="time5">5 min ago</div>
-                              </div>
-                            </div>
-                            <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <img src="images/user-dp-1.jpg" alt="" />
-                                    <div className="user-title1">Joy Doe </div>
-                                    <span>Hey Sir! What about you...</span>
-                                  </a>
-                                </div>
-                                <div className="time5">10 min ago</div>
-                              </div>
-                            </div> 
-                            <div className="user-request-list">
-                              <a
-                                href="my_freelancer_messages.html"
-                                className="view-all"
-                              >
-                                View All Messages
-                              </a>
-                            </div>
-                          </div>*/}
+                         
                         </li>
                         <li className="dropdown">
                           <a
@@ -254,76 +189,7 @@ function MainHeader(props) {
                           >
                             <i className="fas fa-bell"></i>
                             <div className="circle-alrt"></div>
-                          </a>
-                          {/* <div className="dropdown-menu message-dropdown dropdown-menu-right">
-                            <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <div className="noti-icon">
-                                      <i className="fas fa-users"></i>
-                                    </div>
-                                    <div className="user-title1">
-                                      Rock William{" "}
-                                    </div>
-                                    <span>
-                                      applied for a{" "}
-                                      <ins className="noti-p-link">
-                                        Php Developer
-                                      </ins>
-                                      .
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <div className="noti-icon">
-                                      <i className="fas fa-bullseye"></i>
-                                    </div>
-                                    <div className="user-title1">
-                                      Johnson Smith
-                                    </div>
-                                    <span>
-                                      placed a bid on your{" "}
-                                      <ins className="noti-p-link">
-                                        I Need a ...
-                                      </ins>
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="user-request-list">
-                              <div className="request-users">
-                                <div className="user-request-dt">
-                                  <a href="#">
-                                    <div className="noti-icon">
-                                      <i className="fas fa-exclamation"></i>
-                                    </div>
-                                    <span className="pt-2">
-                                      Your job listing{" "}
-                                      <ins className="noti-p-link">
-                                        Wordpress Developer
-                                      </ins>{" "}
-                                      is expiring.
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="user-request-list">
-                              <a
-                                href="my_freelancer_notifications.html"
-                                className="view-all"
-                              >
-                                View All Notifications
-                              </a>
-                            </div>
-                          </div> */}
+                          </a>                          
                         </li>
                         <li>
                           <div className="account order-1 dropdown">
@@ -378,7 +244,7 @@ function MainHeader(props) {
                   
                   <NavLink
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
-                    to="/"
+                    to=""
                   >
                     <div className="row">
                       <div className="col-4">
@@ -415,7 +281,11 @@ function MainHeader(props) {
                           Home
                         </NavLink>
                       </li>
-                      {token.length != 0 && (
+                      {/* {token.length == 0 && (
+                        <>
+                      
+                      </>
+                      )} */}
                       <li className="nav-item dropdown">
                       <a
                           href="#"
@@ -428,7 +298,7 @@ function MainHeader(props) {
                         <div className="dropdown-menu pages-dropdown row" style={{width:"0px", }}>
                           <div className="col-3" style={{position:"relative", }}>
                         <NavLink
-                          to="/latest"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -444,7 +314,7 @@ function MainHeader(props) {
                           Religion
                         </NavLink>
                         <NavLink
-                          to="/latest"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -460,7 +330,7 @@ function MainHeader(props) {
                           Caste 
                         </NavLink>
                         <NavLink
-                          to="/shortlist"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -476,7 +346,7 @@ function MainHeader(props) {
                           Mother Tongue 
                         </NavLink>
                         <NavLink
-                          to="/desiredlist"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -494,7 +364,7 @@ function MainHeader(props) {
                           State
                         </NavLink>
                         <NavLink
-                          to="/shortlist"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -510,7 +380,7 @@ function MainHeader(props) {
                         City 
                         </NavLink>
                         <NavLink
-                          to="/shortlist"
+                          to=""
                           className="link-item font-lobster"
                           role="button"
                           onMouseEnter={e => {
@@ -527,69 +397,65 @@ function MainHeader(props) {
                         </div>
                         <div className="home-div col-9" style={religionStyle}>
                           <div className="row mt-2">
-                          {data['religion'] && data.religion.map((item) => (
+                          {data['religion'] && data.religion.map((item, index) => (
                             <div className="col-md-4">
-                              <span className="home-browse-span" onClick={() => props.getBrowsedata('religion', item.id)}
-                              >{item.religion}</span>
+                              <NavLink to='/findMatches'><span className="home-browse-span" key={'r'+item.id} onClick={() => props.getBrowsedata('religion', item.id)}
+                              >{item.religion}</span></NavLink>
                             </div>
                           ))}
                           </div>
                         </div>
                         <div className="home-div col-9" style={casteStyle} >
                         <div className="row mt-2">
-                          {data['caste'] && data.caste.map((item) => (
+                          {data['caste'] && data.caste.map((item, index) => (
                             <div className="col-md-4">
-                              <span className="home-browse-span" onClick={() => props.getBrowsedata('caste', item.id)}>{item.caste}</span>
+                              <NavLink to='/findMatches'><span className="home-browse-span" key={'c'+item.id} onClick={() => props.getBrowsedata('caste', item.id)}>{item.caste}</span>
+                              </NavLink>
                             </div>
                           ))}
                           </div>
                         </div>
                         <div className="home-div col-9" style={motherStyle} >
                         <div className="row mt-2">
-                          {data['mother_tongue'] && data.mother_tongue.map((item) => (
+                          {data['mother_tongue'] && data.mother_tongue.map((item, index) => (
                             <div className="col-md-4">
-                            <span className="home-browse-span" onClick={() => props.getBrowsedata('mother', item.id)}>{item.mother_tongue}</span>
+                            <NavLink to='/findMatches'><span className="home-browse-span" key={'m'+item.id} onClick={() => props.getBrowsedata('mother', item.id)}>{item.mother_tongue}</span>
+                            </NavLink>
                             </div>
                           ))}
                           </div>
                         </div>
                         <div className="home-div col-9" style={stateStyle}>
                         <div className="row mt-2">
-                          {data['state'] && data.state.map((item) => (
+                          {data['state'] && data.state.map((item, index) => (
                             <div className="col-md-4">
-                              <span className="home-browse-span" onClick={() => props.getBrowsedata('state', item.id)}>{item.name}</span>
+                              <NavLink to='/findMatches'><span className="home-browse-span" key={'s'+item.id} onClick={() => props.getBrowsedata('state', item.id)}>{item.name}</span>
+                            </NavLink>
                             </div>
                           ))}
                           </div>
                         </div>
                         <div className="home-div col-9" style={cityStyle}>
                         <div className="row mt-2">
-                          {data['city'] && data.city.map((item) => (
+                          {data['city'] && data.city.map((item, index) => (
                             <div className="col-md-4">
-                              <span className="home-browse-span" onClick={() => props.getBrowsedata('city', item.id)}>{item.name}</span>
+                              <span className="home-browse-span" key={'ci'+item.id} onClick={() => props.getBrowsedata('city', item.id)}>{item.name}</span>
                             </div>
                           ))}
                           </div>
                         </div>
                         <div className="home-div col-9" style={occupationStyle}>
                         <div className="row mt-2">
-                          {data['occupation'] && data.occupation.map((item) => (
+                          {data['occupation'] && data.occupation.map((item, index) => (
                             <div className="col-md-4">
-                              <span className="home-browse-span" onClick={() => props.getBrowsedata('occupation', item.id)}>{item.occupation}</span>
+                              <span className="home-browse-span" key={'o'+item.id } onClick={() => props.getBrowsedata('occupation', item.id)}>{item.occupation}</span>
                             </div>
                           ))}
                           </div>
                         </div>
                         </div>
-                       
-                        {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
-                        {/* <div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_projects.html">Browse Matches</a>
-													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
-                        {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
-                        {/* </div> */}
                       </li>
-                      ) }
+                      {token.length != 0 && (
                       <li className="nav-item">
                         <NavLink to="/findMatches" className= "font-lobster nav-link">
                           Find Matches
@@ -600,6 +466,7 @@ function MainHeader(props) {
 													<a className="link-item" href="post_a_job.html">Post a Match</a>
 												</div> */}
                       </li>
+                      ) }
                       {token.length != 0 && (
                       <li className="nav-item dropdown">
                       <a
@@ -674,12 +541,6 @@ function MainHeader(props) {
                           Acceptances
                         </NavLink>
                         </div>
-                        {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
-                        {/* <div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_projects.html">Browse Matches</a>
-													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
-                        {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
-                        {/* </div> */}
                       </li>
                       ) }
                       {/* <li className="nav-item dropdown">
@@ -747,10 +608,10 @@ function MainHeader(props) {
                     </a>
                     {token.length === 0 && (
                       <div>
-                        <NavLink to="/login" style={{letterSpacing: "1px"}} className="add-post font-fredokaone">
+                        <NavLink to="/login" style={{letterSpacing: "1px"}} onClick={() => props.getUrl('/login')} className="add-post font-fredokaone">
                           Login
                         </NavLink>
-                        <NavLink to="/signUp" style={{letterSpacing: "1px"}} className="add-task font-fredokaone">
+                        <NavLink to="/signUp" style={{letterSpacing: "1px"}} onClick={()=> props.getUrl('/signUp')} className="add-task font-fredokaone">
                           Register
                         </NavLink>{" "}
                       </div>

@@ -95,7 +95,7 @@ function FamilyStage() {
     formData.append('mother_occupation', motherOccupation.value)
     formData.append('brother_count', bro.value)
     formData.append('sister_count', sis.value)
-    formData.append('family_live_in', famLiving.value)
+    formData.append('native_state', famLiving.value)
     formData.append('native_city', nativeCity.value)
     formData.append('about_family', aboutFam)
 

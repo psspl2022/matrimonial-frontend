@@ -54,7 +54,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       { url != "/registrationStage" && <>
-      <MainHeader getBrowsedata={getBrowseProfileBy}/>
+      <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}/>
         <Switch>
             <Route path="/" exact>
             {browse==null &&
@@ -127,7 +127,7 @@ function App() {
         <Route path="/" exact>
             {browse==null &&
             <>
-            <MainHeader getBrowsedata={getBrowseProfileBy}/>
+            <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}                                      B                                                                                                                                                                                                              V />
             <Banner />
             <LatestMatch />
             <MembershipPlan />

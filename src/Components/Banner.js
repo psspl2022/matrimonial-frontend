@@ -5,6 +5,9 @@ import Select from "react-select";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import { forSearch } from '../actions/index';
+import { useDispatch } from "react-redux";
+import {NavLink} from "react-router-dom";
 
 function Banner() {
   const lookingForOptions = [
@@ -23,10 +26,11 @@ function Banner() {
 
   const [selectReligion, setSelectReligion] = useState("");
   const [selectCaste, setSelectCaste] = useState("");
+  
+  const dispatch = useDispatch();
 
   const searchSubmit = () => {
-    console.log("submitted");
-    return <Redirect to='/login'  />
+    dispatch(forSearch([lookingFor.value,minAge.label,maxAge.label,religion.value,moth.value])) 
   }
 
   useEffect(() => {
@@ -54,6 +58,7 @@ function Banner() {
         })
       );
     });
+
   }, []);
 
   const options = {
@@ -275,7 +280,8 @@ function Banner() {
             <div
               className="col-lg-2 col-md-2 col-12 mt-15"
               style={{ marginTop: "auto" }}
-            >
+            ><NavLink
+            to="/findMatches">
               <button
                 style={{ letterSpacing: "0.5px" }}
                 className="srch-btn "
@@ -284,8 +290,9 @@ function Banner() {
                   }}
                 type="submit"
               >
-                Search Now <i class="fa fa-heart" aria-hidden="true"></i>
+                Search Now <i class="fa fa-heart" aria-hidden="true" ></i>
               </button>
+              </NavLink>
             </div>
           </div>
         </div>

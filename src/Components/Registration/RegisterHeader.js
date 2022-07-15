@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 import "../../App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { ACTIVE } from "../../actions/index";
 
 function RegisterHeader() {
   const activeState = useSelector((state) => state.changeActiveLink);
