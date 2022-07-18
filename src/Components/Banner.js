@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 import { forSearch } from '../actions/index';
+import { resetSearch } from '../actions/index';
 import { useDispatch } from "react-redux";
 import {NavLink} from "react-router-dom";
 

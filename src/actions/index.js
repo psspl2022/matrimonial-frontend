@@ -12,7 +12,9 @@ const forSearch = (searchdata) => {
     }
 }
 
-export { regActiveLink, forSearch };
+const resetSearch = () => ({ type: 'RESET' });
+
+export { regActiveLink, forSearch, resetSearch };
 
 
 

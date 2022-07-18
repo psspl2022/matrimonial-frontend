@@ -4,7 +4,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "./Dummy Skeleton/ProfileSkeleton";
 import { useSelector } from 'react-redux';
-import { forSearch } from '../actions/index';
+import { resetSearch } from '../actions/index';
 import { useDispatch } from "react-redux";
 
 export default function SearchMatches(props) {
@@ -212,12 +212,12 @@ export default function SearchMatches(props) {
   }, []);
 
   useEffect(()=> {
-    //  const formData = new FormData()
-    //  formData.append('gender',search[0])
-    //  formData.append('min_age' , search[1])
-    //  formData.append('max_age', search[2])
-    //  formData.append('religion', search[3])
-    //  formData.append('mother', search[4])
+     const formData = new FormData()
+     formData.append('gender',search[0])
+     formData.append('min_age' , search[1])
+     formData.append('max_age', search[2])
+     formData.append('religion', search[3])
+     formData.append('mother', search[4])
 
       setData(
         forFilter.filter((prof_data) => {
@@ -238,20 +238,16 @@ export default function SearchMatches(props) {
           }
         })
       );
-        if(search!=false){
-          dispatch(forSearch(false));
-        }
-        else{
-          console.log("empty");
-        }
-      // dispatch(forSearch(false)); 
 
-    //  axios
-    //  .post(`${window.Url}api/searchProfile`, formData)
-    //  .then(({ data }) => {
-    //    setSearchData(data);               
-    //    setFetchDone(true);
-    //  });
+     axios
+     .post(`${window.Url}api/searchProfile`, formData)
+     .then(({ data }) => {
+       setSearchData(data);               
+       setFetchDone(true);
+       window.setTimeout(() => {
+        dispatch(resetSearch())
+      },5000);
+     });
     }, [forFilter] );
 
   useEffect(() => {
@@ -271,8 +267,8 @@ export default function SearchMatches(props) {
         <>
         {!token &&(
           <>
-        (browseData.length == 0) &&(
-        (search) && 
+        {(browseData.length == 0) &&(
+        
            <>
             <main className="browse-section">
          <div className="container">
@@ -425,9 +421,9 @@ export default function SearchMatches(props) {
          </div>
             </main>
            </>
-        )
+        )}
 
-       (browseData.length != 0) && (
+       {(browseData.length != 0) && (
               <>
               <main className="browse-section">
             <div className="container">
@@ -581,7 +577,7 @@ export default function SearchMatches(props) {
               </main>
               </>
               
-            )
+            )}
         </>
         )}
      
