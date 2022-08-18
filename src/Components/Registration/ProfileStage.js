@@ -45,7 +45,7 @@ function ProfileStage() {
   const [date, setDate] = useState("");
   const [residence, setResidence] = useState("0");
   // var countries = {};
-  const maritalOptions = [
+  const maritialOptions = [
     { value: "1", label: "Never Married" },
     { value: "2", label: "Awaiting Divorce" },
     { value: "3", label: "Divorced" },
@@ -157,7 +157,7 @@ function ProfileStage() {
     const formData = new FormData();
     formData.append("name", userName);
     formData.append("dob", date);
-    formData.append("marital_status", matrimonial.value);
+    formData.append("maritial_status", matrimonial.value);
     formData.append("religion", religion.value);
     formData.append("caste", caste.value);
     formData.append("mother_tongue", moth.value);
@@ -337,16 +337,16 @@ function ProfileStage() {
           </div>
           <div className="col-md-3">
             <div className="form-group">
-            <label className="label15">Marital Status*</label>
+            <label className="label15">Maritial Status*</label>
             <Select
               className="basic-single"
               classNamePrefix="select"
               defaultValue=""
               isClearable
               isSearchable
-              name="marital_status"
-              placeholder="Select Marital Status"
-              options={maritalOptions}
+              name="maritial_status"
+              placeholder="Select Maritial Status"
+              options={maritialOptions}
               onChange={(e) => {
                 setMatrimonial(e);
               }}

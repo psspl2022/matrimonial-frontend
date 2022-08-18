@@ -128,6 +128,7 @@ function MainHeader(props) {
           setToken("");
           setUserData("");
           history.replace("/");
+          props.getBrowsedata(null, null)
         } else {
           Swal.fire({
             icon: "error",
@@ -222,7 +223,7 @@ function MainHeader(props) {
                               <NavLink className="link-item" to="/desiredProfile">
                                 Desired Partner Profile
                               </NavLink>
-                              <div className="link-item" onClick={logout}>
+                              <div className="link-item" onClick={logout} >
                                 Logout
                               </div>
                             </div>
@@ -244,7 +245,7 @@ function MainHeader(props) {
                   
                   <NavLink
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
-                    to=""
+                    to="" style={{ width: "200px"}}
                   >
                     <div className="row">
                       <div className="col-4">

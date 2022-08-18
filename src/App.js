@@ -32,7 +32,7 @@ import DailyRecommendation from "./Components/Match/DailyRecommendation";
 function App() {
   const [browse, setBrowse] = useState(null);
   const [browseid, setBrowseId] = useState(null);
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState('/');
 
  useEffect(()=>{
    setUrl(window.location.pathname)
@@ -53,6 +53,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      
       { url != "/registrationStage" && <>
       <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}/>
         <Switch>
@@ -124,7 +125,7 @@ function App() {
         }  
         <Switch>
         
-        <Route path="/" exact>
+        {/* <Route path="/" exact>
             {browse==null &&
             <>
             <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}                                      B                                                                                                                                                                                                              V />
@@ -135,7 +136,7 @@ function App() {
             <MainFooter />
             </>
             } 
-          </Route>
+        </Route> */}
           
        
         <Route path="/registrationStage" exact>

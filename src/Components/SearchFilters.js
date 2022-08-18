@@ -6,7 +6,7 @@ import DesiredList from "./DesiredProfile/DesiredList";
 
 const animatedComponents = makeAnimated();
 
-const maritalOptions = [
+const maritialOptions = [
     { value: "1", label: "Never Married" },
     { value: "2", label: "Awaiting Divorce" },
     { value: "3", label: "Divorced" },
@@ -31,7 +31,7 @@ export default function SearchFilters(props) {
   const [minIncome, setMinIncome] = useState("");
   const [religion, setReligion] = useState([]);
   const [moth, setMoth] = useState([]);
-  const [marital, setMarital] = useState([]);
+  const [maritial, setMaritial] = useState([]);
 
   const token = window.sessionStorage.getItem('access_token');
 // const headers_data = {
@@ -91,7 +91,7 @@ export default function SearchFilters(props) {
 }, []);
 
 const SubmitFilter = () => {
-  const filterData = [(miniAge)?miniAge.label:"", (maxAge)?maxAge.label:"", (miniHeight)?miniHeight.value:"", (maxHeight)?maxHeight.value:"", (minIncome)?minIncome.value:"", (maxIncome)?maxIncome.value:"", religion, moth, marital];
+  const filterData = [(miniAge)?miniAge.label:"", (maxAge)?maxAge.label:"", (miniHeight)?miniHeight.value:"", (maxHeight)?maxHeight.value:"", (minIncome)?minIncome.value:"", (maxIncome)?maxIncome.value:"", religion, moth, maritial];
   props.setParFilterData(filterData);
 }
 
@@ -260,18 +260,18 @@ const SubmitFilter = () => {
         <div className="fltr-group">
           <div className="fltr-items-heading">
             <div className="fltr-item-left">
-              <h6>Marital Status</h6>
+              <h6>Maritial Status</h6>
             </div>
           </div>
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
             onChange={(e) => 
-              setMarital(Array.isArray(e) ? e.map(x => x.value) : [])
+              setMaritial(Array.isArray(e) ? e.map(x => x.value) : [])
             }
             isMulti
-            placeholder="Select Marital Status"
-            options={maritalOptions}
+            placeholder="Select Maritial Status"
+            options={maritialOptions}
           />
         </div>
 

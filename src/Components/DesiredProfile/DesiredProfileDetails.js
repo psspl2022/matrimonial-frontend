@@ -29,7 +29,7 @@ function DesiredProfileDetails(){
    
   ];
   
-  const maritalOptions = [
+  const maritialOptions = [
     { value: 1, label: "Never Married" },
     { value: 2, label: "Awaiting Divorce" },
     { value: 3, label: "Divorced" },
@@ -84,7 +84,7 @@ function DesiredProfileDetails(){
   const [maxiage, setMaxiage] = useState([]);
   const [miniheight, setMiniheight] = useState([]);
   const [maxiheight, setMaxiheight] = useState([]);
-  const [marital, setMarital] = useState([]);
+  const [maritial, setMaritial] = useState([]);
   const [country, setCountry] = useState([]);
   const [residence, setResidence] = useState([]);  
   const[religion, setReligion] = useState([]);
@@ -101,7 +101,7 @@ function DesiredProfileDetails(){
   const[challenge, setChallenge] = useState([]);
   const[about, setAbout] = useState("");
   
-  const [selectMarital, setSelectMarital] = useState("");
+  const [selectMaritial, setSelectMaritial] = useState("");
   const [selectCountry, setSelectCountry] = useState("");
   const [selectResidence, setSelectResidence] = useState("");
   const [selectReligion, setSelectReligion] = useState("");
@@ -245,11 +245,11 @@ useEffect(async () => {
         })[0]
       );
 
-      setSelectMarital(        
-        maritalOptions.filter((marital_data)=>{
-          if(data.marital != null){
-            if(data.marital.split(",").map(Number).includes(marital_data.value)){
-              return marital_data;              
+      setSelectMaritial(        
+        maritialOptions.filter((maritial_data)=>{
+          if(data.maritial != null){
+            if(data.maritial.split(",").map(Number).includes(maritial_data.value)){
+              return maritial_data;              
             } 
           }
         })
@@ -391,10 +391,10 @@ useEffect(async () => {
 
 }, [occupations]);
 
-const handleMarital = (e) =>{
+const handleMaritial = (e) =>{
   const value = (Array.isArray(e) ? e.map(x => x.value) : []);
-  setMarital(value);
-  setSelectMarital(e);
+  setMaritial(value);
+  setSelectMaritial(e);
 }
 
 const handleCountry = (e) =>{
@@ -478,7 +478,7 @@ e.preventDefault();
   formData.append("maxheight", maxiheight.value);
   formData.append("country", country);
   formData.append("residence", residence);
-  formData.append("marital", marital);
+  formData.append("maritial", maritial);
 
   axios
   .post(`${window.Url}api/desiredBasic`,formData, headers_data)
@@ -701,15 +701,15 @@ const addDesiredAbout = (e) => {
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group">
-                        <label className="label15">Marital Status</label>
+                        <label className="label15">Maritial Status</label>
                         <Select
                           closeMenuOnSelect={false}
                           components={animatedComponents}
-                          onChange={handleMarital}                        
-                          value={selectMarital}
+                          onChange={handleMaritial}                        
+                          value={selectMaritial}
                           isMulti
-                          options={maritalOptions}
-                          placeholder="Select Marital Status"   
+                          options={maritialOptions}
+                          placeholder="Select Maritial Status"   
                         />
                       </div>
                     </div>

@@ -14,7 +14,7 @@ const IncomeOptions = [
   { value: `Rs. 3 - 4 Lakh`, label: `Rs. 3 - 4 Lakh` },
 ];
 
-const maritalOptions = [
+const maritialOptions = [
     { value: 1, label: "Never Married" },
     { value: 2, label: "Awaiting Divorce" },
     { value: 3, label: "Divorced" },
@@ -32,7 +32,7 @@ export default function BasicDetails() {
   const [Edit, setEdit] = useState(false);
   const [name, setName] = useState("");
 
-  const [maritalStatus, setMaritalStatus] = useState('');
+  const [maritialStatus, setMaritialStatus] = useState('');
   const [countries, setCountries] = useState({});
   const [cities, setCities] = useState({});
   const [states, setStates] = useState([]);
@@ -133,10 +133,10 @@ export default function BasicDetails() {
       .then(({ data }) => {
         setName(data.basic.name);
         setDate(data.basic.dob);
-        setMaritalStatus(
-          maritalOptions.filter((marital_data) => {
-            if (marital_data.value == data.basic.maritial_status) {
-              return marital_data;
+        setMaritialStatus(
+          maritialOptions.filter((maritial_data) => {
+            if (maritial_data.value == data.basic.maritial_status) {
+              return maritial_data;
             }
           })[0]
         );
@@ -325,19 +325,19 @@ export default function BasicDetails() {
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <label className="label15">Marital Status</label>
+                      <label className="label15">Maritial Status</label>
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        // defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
+                        // defaultValue={maritialOptions[parseInt(maritialStatus)-1]}
                         isClearable
                         isSearchable
-                        placeholder="Select Your Marital Status"
-                        value={maritalStatus}
-                        options={maritalOptions}
+                        placeholder="Select Your Maritial Status"
+                        value={maritialStatus}
+                        options={maritialOptions}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setMaritalStatus(e);
+                          setMaritialStatus(e);
                         }}
                         
                       />

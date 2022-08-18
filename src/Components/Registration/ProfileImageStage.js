@@ -42,7 +42,7 @@ const submitImageDetails = async (e) => {
           icon: "success",
           text: data.msg,
         });
-        dispatch(regActiveLink('profileImg'));
+        dispatch(regActiveLink('homepage'));
         history.replace('/');
       } else {
         Swal.fire({

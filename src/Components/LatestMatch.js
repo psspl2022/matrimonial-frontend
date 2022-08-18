@@ -44,14 +44,14 @@ const [data, setData] = useState([]);
 
 useEffect(() => {
     profiles();
-}, [])
+}, []);
 
 function profiles(){
     axios
     .get(`${window.Url}api/homeProfile`)
     .then(({data})=> {
-        setData(data)
-    })
+        setData(data);
+    });
 }
 
     return (
@@ -60,21 +60,20 @@ function profiles(){
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 col-12">
-                            <div className="main-heading">
+                            <div className="main-heading" style={{marginBottom: '0px', paddingBottom: '0px'}}>
                                 <div className='main_heading_style font-lobster'>Latest Match</div>
                                 <span className='main_heading_span'>Match for a Future</span>
-                                <div className="line-shape1">
+                                {/* <div className="line-shape1" style={{marginfTop : '-30px'}}>
                                     <img src={ process.env.PUBLIC_URL + "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/line.svg" } alt="" />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-md-12 col-12">
-                            <div className="lts-jobs-slider">
-                                    <OwlCarousel className="owl-theme" {...options} >
-                                                                        
-                                    {
-                                            data.map((item, index)=>
-
+                            <div className="lts-jobs-slider" style={{marginTop: '0px'}}>
+                            {
+                                      (data.length!=0)  &&
+                                <> <OwlCarousel className="owl-theme" {...options} >                        
+                                     { (data.map((item, index)=>
                                 <div className="item" key={index}>
                                     <div className="job-item mt-30">
                                         <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
@@ -122,9 +121,12 @@ function profiles(){
                             </div>
                           </div>
                         </div>
-                        )}
-
-                                        </OwlCarousel>
+                        ))
+                       
+} 
+                                      </OwlCarousel> 
+                                      </>
+                                       }
                             </div>
                         </div>
                     </div>

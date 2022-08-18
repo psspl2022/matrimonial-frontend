@@ -17,9 +17,8 @@ function RegistrationStage(props) {
 	const history = useHistory();
   
   // dispatch(regActiveLink('career'));
-  useEffect(() => {
-    
-  props.getUrlData('/registrationStage')
+  useEffect(() => {    
+    props.getUrlData('/registrationStage')
   },[])
 
 
@@ -55,6 +54,7 @@ function RegistrationStage(props) {
  useEffect(() => {
    if(TabName==='homepage'){
      history.replace('/');
+     props.getUrlData('/')
    }
   dispatch(regActiveLink(TabName));
  },[TabName])
