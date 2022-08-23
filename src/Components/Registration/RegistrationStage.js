@@ -15,7 +15,12 @@ function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
 	const history = useHistory();
-  
+  const activeState = useSelector((state) => state.changeActiveLink);
+
+  useEffect(() => {    
+    if(activeState == 'homepage')
+    props.getUrlData('/')
+  });
   // dispatch(regActiveLink('career'));
   useEffect(() => {    
     props.getUrlData('/registrationStage')

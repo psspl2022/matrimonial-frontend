@@ -172,7 +172,7 @@ function ProfileDashboard() {
               </div>
             </div>
           </div>
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <div className="view_chart">
               <div className="view_chart_header">
                 <h4>Notes</h4>
@@ -270,7 +270,7 @@ function ProfileDashboard() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="dsh150">

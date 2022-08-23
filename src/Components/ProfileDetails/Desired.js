@@ -140,21 +140,21 @@ export default function Desired(reg_id) {
                   </>                  
                   ) }
 
-                  {(data.maritial>=0) && (
+                  {(data.marital>=0) && (
                   <>
                   <div className="col-md-3 my-3">
-                  <div className="row "><span>Maritial</span></div>
+                  <div className="row "><span>Marital</span></div>
                   </div>
                   <div className="col-md-6 my-3">
                   <span className="view_head_span1  ">
                   {data['desired'] && <>
-                  {data['desired']['data'].maritial.includes('0') && "Not filled"} {data['desired']['data'].maritial.includes('1') && "Never Marrired,"} {data['desired']['data'].maritial.includes('2') && "Awaiting Divorce,"} {data['desired']['data'].maritial.includes('3') && "Divorced,"} {data['desired']['data'].maritial.includes('4') && "Widowed,"} {data['desired']['data'].maritial.includes('5') && "Anulled,"} 
+                  {data['desired']['data'].marital.includes('0') && "Not filled"} {data['desired']['data'].marital.includes('1') && "Never Marrired,"} {data['desired']['data'].marital.includes('2') && "Awaiting Divorce,"} {data['desired']['data'].marital.includes('3') && "Divorced,"} {data['desired']['data'].marital.includes('4') && "Widowed,"} {data['desired']['data'].marital.includes('5') && "Anulled,"} 
                   </>
                       }
                     </span>
                   </div>
                   <div className="col-md-3 my-3">
-                  {(data.maritial==1) ?
+                  {(data.marital==1) ?
                   <span>
                       <i class="fa fa-check" aria-hidden="true"></i>
                   </span>                

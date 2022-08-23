@@ -43,9 +43,9 @@ function ProfileStage() {
   const [horoscope, setHoroscope] = useState("");
   const [matrimonial, setMatrimonial] = useState("");
   const [date, setDate] = useState("");
-  const [residence, setResidence] = useState("0");
+  const [residence, setResidence] = useState("");
   // var countries = {};
-  const maritialOptions = [
+  const maritalOptions = [
     { value: "1", label: "Never Married" },
     { value: "2", label: "Awaiting Divorce" },
     { value: "3", label: "Divorced" },
@@ -78,12 +78,7 @@ function ProfileStage() {
     axios
       .get(`${window.Url}api/basicDropdown`, headers_param)
       .then(({ data }) => {
-        setCountries(
-          data.country.map(function (country) {
-            return { value: country.id, label: country.name };
-          })
-        );
-
+       
         setHeights(
           data.height.map(function (height) {
             return { value: height.id, label: height.height };
@@ -112,13 +107,36 @@ function ProfileStage() {
           })
         );
 
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/casteDropdown/${religion.value}`, headers_param)
+      .then(({ data }) => {
         setCastes(
           data.caste.map(function (caste) {
             return { value: caste.id, label: caste.caste };
           })
         );
       });
-  }, []);
+      const userName = JSON.parse(window.sessionStorage.getItem("user_data")).name;
+      setName(userName);
+  }, [religion]);
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/countryDropdown/${residence.value}`, headers_param)
+      .then(({ data }) => {
+        setCountries(
+          data.country.map(function (country) {
+            return { value: country.id, label: country.name };
+          })
+        );
+      });
+      const userName = JSON.parse(window.sessionStorage.getItem("user_data")).name;
+      setName(userName);
+  }, [residence]);
 
   useEffect(() => {
     axios
@@ -157,7 +175,7 @@ function ProfileStage() {
     const formData = new FormData();
     formData.append("name", userName);
     formData.append("dob", date);
-    formData.append("maritial_status", matrimonial.value);
+    formData.append("marital_status", matrimonial.value);
     formData.append("religion", religion.value);
     formData.append("caste", caste.value);
     formData.append("mother_tongue", moth.value);
@@ -337,16 +355,16 @@ function ProfileStage() {
           </div>
           <div className="col-md-3">
             <div className="form-group">
-            <label className="label15">Maritial Status*</label>
+            <label className="label15">Marital Status*</label>
             <Select
               className="basic-single"
               classNamePrefix="select"
               defaultValue=""
               isClearable
               isSearchable
-              name="maritial_status"
-              placeholder="Select Maritial Status"
-              options={maritialOptions}
+              name="marital_status"
+              placeholder="Select Marital Status"
+              options={maritalOptions}
               onChange={(e) => {
                 setMatrimonial(e);
               }}

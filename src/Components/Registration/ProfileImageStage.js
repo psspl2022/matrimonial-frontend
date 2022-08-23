@@ -43,7 +43,8 @@ const submitImageDetails = async (e) => {
           text: data.msg,
         });
         dispatch(regActiveLink('homepage'));
-        history.replace('/');
+        history.go(0);
+        // history.replace('/');
       } else {
         Swal.fire({
           icon: "error",

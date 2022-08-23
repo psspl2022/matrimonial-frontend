@@ -150,7 +150,7 @@ function MyProfileSidebar() {
             </li>
           </ul>
         </div>
-        <div className="group_skills_bar">
+        {/* <div className="group_skills_bar">
           <h6>Profile Completeness</h6>
           <div className="group_bar1">
             <span>85%</span>
@@ -168,7 +168,7 @@ function MyProfileSidebar() {
           <a href="#" className="skiils_button">
             Complete Required Skills
           </a>
-        </div>
+        </div> */}
         {/* <div className="rlt_section">
           <div className="rtl_left">
             <h6>Rating</h6>
@@ -231,7 +231,7 @@ function MyProfileSidebar() {
             </li>
           </ul> */}
         {/* </div> */}
-        <div className="social_section3 mb80">
+        {/* <div className="social_section3 mb80">
           <div className="social_leftt3">
             <h6>Contact Social Account</h6>
           </div>
@@ -276,9 +276,9 @@ function MyProfileSidebar() {
                 <i className="fab fa-github g1"></i>
                 http://github.com/johndoe
               </a>
-            </li> */}
+            </li> 
           </ul>
-        </div>
+        </div> */}
       </div>
     </>
   );

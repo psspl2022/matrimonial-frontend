@@ -14,7 +14,7 @@ const IncomeOptions = [
   { value: `Rs. 3 - 4 Lakh`, label: `Rs. 3 - 4 Lakh` },
 ];
 
-const maritialOptions = [
+const maritalOptions = [
     { value: 1, label: "Never Married" },
     { value: 2, label: "Awaiting Divorce" },
     { value: 3, label: "Divorced" },
@@ -32,12 +32,13 @@ export default function BasicDetails() {
   const [Edit, setEdit] = useState(false);
   const [name, setName] = useState("");
 
-  const [maritialStatus, setMaritialStatus] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
   const [countries, setCountries] = useState({});
   const [cities, setCities] = useState({});
   const [states, setStates] = useState([]);
   const [heights, setHeights] = useState([]);
   const [moths, setMoths] = useState([]);
+  const [residences, setResidences] = useState([]);
   const [religions, setReligions] = useState([]);
   const [castes, setCastes] = useState([]);
   const [sects, setSects] = useState([]);
@@ -45,6 +46,7 @@ export default function BasicDetails() {
 
   const [country, setCountry] = useState("");
   const [selectCountry, setSelectCountry] = useState("");
+  const [countryData, setCountryData] = useState("");
   const [state, setState] = useState("");
   const [selectState, setSelectState] = useState("");
   const [stateData, setStateData] = useState("");
@@ -54,10 +56,12 @@ export default function BasicDetails() {
   const [selectHeight, setSelectHeight] = useState("");
   const [moth, setMoth] = useState("");
   const [selectMoth, setSelectMoth] = useState("");
+  const [residence, setResidence] = useState("");
   const [religion, setReligion] = useState("");
   const [selectReligion, setSelectReligion] = useState("");
   const [caste, setCaste] = useState("");
   const [selectCaste, setSelectCaste] = useState("");
+  const [casteData, setCasteData] = useState("");
   const [sect, setSect] = useState("");
   const [selectSect, setSelectSect] = useState("");
   const [matrimonial, setMatrimonial] = useState("");
@@ -80,12 +84,12 @@ export default function BasicDetails() {
     axios
       .get(`${window.Url}api/basicDropdown`, headers_param)
       .then(({ data }) => {
-        setCountries(
-          data.country.map(function (country) {
-            return { value: country.id, label: country.name };
+        setResidences(
+          data.residence.map(function (residence) {
+            return { value: residence.id, label: residence.residence };
           })
         );
-
+        
         setHeights(
           data.height.map(function (height) {
             return { value: height.id, label: height.height };
@@ -100,6 +104,7 @@ export default function BasicDetails() {
             };
           })
         );
+       
 
         setReligions(
           data.religion.map(function (religion) {
@@ -107,11 +112,6 @@ export default function BasicDetails() {
           })
         );
 
-        setCastes(
-          data.caste.map(function (caste) {
-            return { value: caste.id, label: caste.caste };
-          })
-        );
       });
 
       axios
@@ -133,10 +133,10 @@ export default function BasicDetails() {
       .then(({ data }) => {
         setName(data.basic.name);
         setDate(data.basic.dob);
-        setMaritialStatus(
-          maritialOptions.filter((maritial_data) => {
-            if (maritial_data.value == data.basic.maritial_status) {
-              return maritial_data;
+        setMaritalStatus(
+          maritalOptions.filter((marital_data) => {
+            if (marital_data.value == data.basic.marital_status) {
+              return marital_data;
             }
           })[0]
         );
@@ -147,6 +147,7 @@ export default function BasicDetails() {
             }
           })[0]
         );
+       
         setReligion(
           religions.filter((rel_data) => {
             if (rel_data.value == data.basic.religion) {
@@ -154,13 +155,13 @@ export default function BasicDetails() {
             }
           })[0]
         );
-        setCaste(
-          castes.filter((caste_data) => {
-            if (caste_data.value == data.basic.caste) {
-              return caste_data;
-            }
-          })[0]
-        );
+        // setCaste(
+        //   castes.filter((caste_data) => {
+        //     if (caste_data.value == data.basic.caste) {
+        //       return caste_data;
+        //     }
+        //   })[0]
+        // );
         setMoth(
           moths.filter((moth_data) => {
             if (moth_data.value == data.basic.mother_tongue) {
@@ -168,13 +169,20 @@ export default function BasicDetails() {
             }
           })[0]
         );
-        setCountry(
-          countries.filter((country_data) => {
-            if (country_data.value == data.basic.country) {
-              return country_data;
+        setResidence(
+          residences.filter((rel_data) => {
+            if (rel_data.value == data.basic.residence) {
+              return rel_data;
             }
           })[0]
         );
+        // setCountry(
+        //   countries.filter((country_data) => {
+        //     if (country_data.value == data.basic.country) {
+        //       return country_data;
+        //     }
+        //   })[0]
+        // );
         setSect(
           sects.filter((sec_data) => {
             if (sec_data.value == data.basic.sect) {
@@ -189,10 +197,73 @@ export default function BasicDetails() {
             }
           })[0]
         );
+        setCasteData(data.basic.caste);
+        setCountryData(data.basic.country);
         setStateData(data.basic.state);
         setCityData(data.basic.city);
       });
-  },[castes]);
+  },[sect]);
+
+  useEffect(() => {
+    setTimeout(()=>{
+      getAllCastes();
+    },10)
+  }, [religion]);
+
+  const getAllCastes = () => {
+    axios
+     .get(`${window.Url}api/casteDropdown/${religion.value}`, headers_param)
+     .then(({ data }) => {
+      setCastes(
+         data.caste.map(function (caste_data) {
+           return { value: caste_data.id, label: caste_data.caste };
+         })
+       );
+     });
+ };
+
+ useEffect(() => {
+  setTimeout(()=>{
+    setCaste(
+      castes.filter((caste_data) => {
+        if (caste_data.value == casteData) {
+          return caste_data;
+        }
+      })[0]
+    );
+  },10)
+}, [castes]);
+
+useEffect(() => {
+  setTimeout(()=>{
+    getAllCountries();
+  },10);  
+}, [residence]);
+
+  const getAllCountries = () => {
+    axios
+     .get(`${window.Url}api/countryDropdown/${residence.value}`, headers_param)
+     .then(({ data }) => {
+      setCountries(
+         data.country.map(function (country_data) {
+           return { value: country_data.id, label: country_data.name };
+         })
+       );
+     });
+ };
+
+ useEffect(() => {
+  setTimeout(()=>{
+    setCountry(
+      countries.filter((country_data) => {
+        if (country_data.value == countryData) {
+          return country_data;
+        }
+      })[0]
+    );
+  },10)   
+ }, [countries]);
+
 
   useEffect(() => {
     getAllStates();
@@ -220,8 +291,13 @@ export default function BasicDetails() {
     );
   }, [states]);
 
-  useEffect(() => {
-    // getAllCities();
+
+
+   useEffect(() => {
+        setTimeout(()=>{
+          getAllCities();
+        },10)
+    
   }, [state]);
 
   const getAllCities = () => {
@@ -233,18 +309,22 @@ export default function BasicDetails() {
             return { value: city_data.id, label: city_data.name };
           })
         );
-      });
-  };
+      });      
+    };
 
-  useEffect(() => {
-    // setCity(
-    //   cities.filter((city_data) => {
-    //     if (city_data.value == cityData) {
-    //       return city_data;
-    //     }
-    //   })[0]
-    // );
-  }, [cities]);
+    useEffect(() => {
+      setTimeout(()=>{
+        setCity(
+          cities.filter((city_data) => {
+            if (city_data.value == cityData) {
+              return city_data;
+            }
+          })[0]
+        );
+      },10)
+    }, [cities]);
+
+  
 
 
 
@@ -325,19 +405,19 @@ export default function BasicDetails() {
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <label className="label15">Maritial Status</label>
+                      <label className="label15">Marital Status</label>
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        // defaultValue={maritialOptions[parseInt(maritialStatus)-1]}
+                        // defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
                         isClearable
                         isSearchable
-                        placeholder="Select Your Maritial Status"
-                        value={maritialStatus}
-                        options={maritialOptions}
+                        placeholder="Select Your Marital Status"
+                        value={maritalStatus}
+                        options={maritalOptions}
                         isDisabled={!Edit}
                         onChange={(e) => {
-                          setMaritialStatus(e);
+                          setMaritalStatus(e);
                         }}
                         
                       />
@@ -361,6 +441,7 @@ export default function BasicDetails() {
                       />
                     </div>
                   </div>
+               
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Religion</label>
@@ -425,6 +506,25 @@ export default function BasicDetails() {
                         isDisabled={!Edit}
                         onChange={(e) => {
                           setMoth(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                    <div className="form-group">
+                      <label className="label15">Residence</label>
+                      <Select
+                        className="basic-single"
+                        classNamePrefix="select"
+                        defaultValue={residences[0]}
+                        isClearable
+                        isSearchable
+                        placeholder="Select Residence"
+                        options={residences}
+                        value={residence}
+                        isDisabled={!Edit}
+                        onChange={(e) => {
+                          setResidence(e);
                         }}
                       />
                     </div>

@@ -53,7 +53,7 @@ export default function DesiredList() {
             ? parfilterData[7].includes(prof_data[2].mother_tongue)
             : 1) &&
           (parfilterData[8] != ""
-            ? parfilterData[8].includes(prof_data[2].maritial_status)
+            ? parfilterData[8].includes(prof_data[2].marital_status)
             : 1)
         ) {
           return prof_data;

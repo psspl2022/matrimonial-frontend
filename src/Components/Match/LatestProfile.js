@@ -54,7 +54,7 @@ export default function LatestProfile() {
             ? parfilterData[7].includes(prof_data.mother_tongue)
             : 1) &&
           (parfilterData[8] != ""
-            ? parfilterData[8].includes(prof_data.maritial_status)
+            ? parfilterData[8].includes(prof_data.marital_status)
             : 1)
         ) {
           return prof_data;
