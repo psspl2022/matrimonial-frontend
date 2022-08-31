@@ -37,7 +37,7 @@ export default function SearchMatches(props) {
     };
     //   useEffect(() => {
     //     setData(props.profileData);
-    //   }, [props]);
+    //   }, [props]);y
   
 
     useEffect(() => {
