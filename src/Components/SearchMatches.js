@@ -1,129 +1,125 @@
 import SearchFilters from "./SearchFilters";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "./Dummy Skeleton/ProfileSkeleton";
-import { useSelector } from 'react-redux';
-import { resetSearch } from '../actions/index';
+import { useSelector } from "react-redux";
+import { resetSearch } from "../actions/index";
+
 import { useDispatch } from "react-redux";
-
+import Usercard from "./common/Usercard";
+import Topcat from "./common/Topcat";
+import Upgradebanner from "./common/Upgradebanner";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 export default function SearchMatches(props) {
-    
-    const search = useSelector((state) => state.changeSearch);
-    const [grid, setGrid] = useState(false);
-    const [data, setData] = useState([]);
-    const [searchData, setSearchData] = useState([]);
-    const [browseData, setBrowseData] = useState([]);    
-    const [forFilter, setForFilter] = useState([]);
-    const [parfilterData, setParFilterData] = useState([]);
-    const [fetchDone, setFetchDone] = useState(false);
-    
+  const search = useSelector((state) => state.changeSearch);
+  const [grid, setGrid] = useState(false);
+  const [data, setData] = useState([]);
+  const [key, setKey] = useState([]);
+  const [page, setPage] = useState("0");
+  const [searchData, setSearchData] = useState([]);
+  const [browseData, setBrowseData] = useState([]);
+  const [forFilter, setForFilter] = useState([]);
+  const [parfilterData, setParFilterData] = useState([]);
+  const [fetchDone, setFetchDone] = useState(false);
+  const [CurrentPage, setCurrentPage] = useState(0);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = "Find Matches List";
+    showAllProfiles(page);
+  }, []);
 
-    const dispatch = useDispatch();
-  
-    useEffect(() => {
-      window.scrollTo(0, 0);
-      document.title = "Find Matches List";
-      showAllProfiles();
-    }, []);
-  
-    const token = window.sessionStorage.getItem("access_token");
-    const headers_data = {
-      headers: {
-        authorization: "Bearer " + token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
-    //   useEffect(() => {
-    //     setData(props.profileData);
-    //   }, [props]);
-  
+  const token = window.sessionStorage.getItem("access_token");
+  const headers_data = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  //   useEffect(() => {
+  //     setData(props.profileData);
+  //   }, [props]);
+  // it run before loading data 
+  const loding = () => {
+    return (
+      <div
+        className="desired_section"
+        style={{
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "auto auto",
+          columnGap: "20px",
+        }}
+      >
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+      </div>
+    );
+  };
+  useEffect(() => {
+    setData(
+      forFilter.filter((prof_data) => {
+        // console.log(prof_data);
+        // console.log(prof_data.marital_status + "=>" + parfilterData[8]);
+        // console.log(prof_data.height +">= "+parfilterData[3]);
+        const check = (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
+          (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
+          (parfilterData[2] != ""
+            ? prof_data.height >= parfilterData[2]
+            : 1) &&
+          (parfilterData[3] != ""
+            ? prof_data.height <= parfilterData[3]
+            : 1) &&
+          (parfilterData[4] != ""
+            ? prof_data.get_income.income >= parfilterData[4]
+            : 1) &&
+          (parfilterData[5] != ""
+            ? prof_data.get_income.income <= parfilterData[5]
+            : 1) &&
+          (parfilterData[6] != ""
+            ? parfilterData[6].includes(prof_data.religion)
+            : 1) &&
+          (parfilterData[7] != ""
+            ? parfilterData[7].includes(prof_data.mother_tongue)
+            : 1) &&
+          (parfilterData[8] != ""
+            ? parfilterData[8].includes(prof_data.marital_status)
+            : 1);
+        // console.log(check);
+        if (check) {
+          // console.log(prof_data.length);
+          // return prof_data.length;
+          return prof_data;
+        }
 
-    useEffect(() => {
+      })
+    );
+  }, [parfilterData]);
+  function showAllProfiles(page) {
+    axios
+      .get(`${window.Url}api/getAllUserProfiles/` + page, headers_data)
+      .then(({ data }) => {
+        // console.log(data);
+        setData(data.data);
+        setKey(data.key);
+        setCurrentPage(data.page);
+        setForFilter(data.data);
+        setFetchDone(true);
+      });
+  }
+  // browese profile by 
+  useEffect(() => {
+    if (props.browse == 'religion') {
       setData(
         forFilter.filter((prof_data) => {
           if (
-            (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
-            (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
-            (parfilterData[2] != ""
-              ? prof_data.height >= parfilterData[2]
-              : 1) &&
-            (parfilterData[3] != ""
-              ? prof_data.height <= parfilterData[3]
-              : 1) &&
-            (parfilterData[4] != ""
-              ? prof_data[3].get_income.income >= parfilterData[4]
-              : 1) &&
-            (parfilterData[5] != ""
-              ? prof_data[3].get_income.income <= parfilterData[5]
-              : 1) &&
-            (parfilterData[6] != ""
-              ? parfilterData[6].includes(prof_data.religion)
-              : 1) &&
-            (parfilterData[7] != ""
-              ? parfilterData[7].includes(prof_data.mother_tongue)
-              : 1) &&
-            (parfilterData[8] != ""
-              ? parfilterData[8].includes(prof_data.maritial_status)
-              : 1)
-          ) {
-            return prof_data;
-          }
-        })
-      );
-    }, [parfilterData]);
-  
-    function showAllProfiles() {
-      axios
-        .get(`${window.Url}api/getAllUserProfiles`, headers_data)
-        .then(({ data }) => {
-          setData(data);
-          setForFilter(data);
-          setFetchDone(true);
-        });
-    }
-  
-    const sendIntrest = (id) => {
-      const update = {
-        id: id,
-      };
-      axios
-        .post(`${window.Url}api/sendIntrest`, update, headers_data)
-        .then((response) => {
-          if (response.data.hasOwnProperty("succmsg")) {
-            showAllProfiles();
-          } else {
-          }
-        });
-    };
-  
-    const shortlistProfile = (id) => {
-      const update = {
-        id: id,
-      };
-      axios
-        .post(`${window.Url}api/shortlist`, update, headers_data)
-        .then((response) => {
-          if (response.data.hasOwnProperty("succmsg")) {
-            showAllProfiles();
-          } else {
-            //   Swal.fire({
-            //       icon: "error",
-            //       title: response.data.errmsg,
-            //   });
-          }
-        });
-    };
-  
-    useEffect(() => {
-    if(props.browse == 'religion' ){
-      setData(
-        forFilter.filter((prof_data) => { 
-          if (
             (props.browseId != ""
               ? (props.browseId == prof_data.religion)
-              : 0 )
+              : 0)
           ) {
             return prof_data;
           }
@@ -131,7 +127,7 @@ export default function SearchMatches(props) {
       )
     }
 
-    if(props.browse == 'caste'){
+    if (props.browse == 'caste') {
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -145,7 +141,7 @@ export default function SearchMatches(props) {
       )
     }
 
-    if(props.browse == 'mother'){
+    if (props.browse == 'mother') {
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -159,7 +155,7 @@ export default function SearchMatches(props) {
       )
     }
 
-    if(props.browse == 'state'){
+    if (props.browse == 'state') {
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -173,7 +169,7 @@ export default function SearchMatches(props) {
       )
     }
 
-    if(props.browse == 'city'){
+    if (props.browse == 'city') {
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -187,7 +183,8 @@ export default function SearchMatches(props) {
       )
     }
 
-    if(props.browse == 'occupation'){ alert("ok");
+    if (props.browse == 'occupation') {
+      alert("ok");
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -200,68 +197,68 @@ export default function SearchMatches(props) {
         })
       )
     }
-    },[props,forFilter]);
-
-  
-   
+  }, [props, forFilter]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     // showAllProfiles();
     document.title = "Search Matches";
   }, []);
-
-  useEffect(()=> {
-     const formData = new FormData()
-     formData.append('gender',search[0])
-     formData.append('min_age' , search[1])
-     formData.append('max_age', search[2])
-     formData.append('religion', search[3])
-     formData.append('mother', search[4])
-
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (search[1] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= search[1] : 1) &&
-            (search[2] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= search[2] : 1) &&
-            (search[0] != undefined
-              ? (search[0] == prof_data.get_user_register.gender)
-              : 1) &&
-            (search[3] != undefined
-              ? (search[3] == prof_data.religion)
-              : 1) &&
-            (search[4] != undefined
-              ? (search[4] == prof_data.mother_tongue)
-              : 1)
-          ) {
-            return prof_data;
-          }
-        })
-      );
-
-     axios
-     .post(`${window.Url}api/searchProfile`, formData)
-     .then(({ data }) => {
-       setSearchData(data);               
-       setFetchDone(true);
-       window.setTimeout(() => {
-        dispatch(resetSearch())
-      },5000);
-     });
-    }, [forFilter] );
+  useEffect(() => {
+    showAllProfiles(page);
+  }, [page]);
 
   useEffect(() => {
-    const formData = new FormData() 
+    const formData = new FormData()
+    formData.append('gender', search[0])
+    formData.append('min_age', search[1])
+    formData.append('max_age', search[2])
+    formData.append('religion', search[3])
+    formData.append('mother', search[4])
+
+    setData(
+      forFilter.filter((prof_data) => {
+        if (
+          (search[1] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= search[1] : 1) &&
+          (search[2] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= search[2] : 1) &&
+          (search[0] != undefined
+            ? (search[0] == prof_data.get_user_register.gender)
+            : 1) &&
+          (search[3] != undefined
+            ? (search[3] == prof_data.religion)
+            : 1) &&
+          (search[4] != undefined
+            ? (search[4] == prof_data.mother_tongue)
+            : 1)
+        ) {
+          return prof_data;
+        }
+      })
+    );
+
+    axios
+      .post(`${window.Url}api/searchProfile`, formData)
+      .then(({ data }) => {
+        setSearchData(data);
+        setFetchDone(true);
+        window.setTimeout(() => {
+          dispatch(resetSearch())
+        }, 5000);
+      });
+  }, [forFilter]);
+
+  useEffect(() => {
+    const formData = new FormData()
     formData.append('browse', props.browse)
     formData.append('browseId', props.browseId)
 
     axios
-      .post(`${window.Url}api/postBrowseProfile`,formData )
+      .post(`${window.Url}api/postBrowseProfile`, formData)
       .then(({ data }) => {
-        setBrowseData(data);        
+        setBrowseData(data);
         setFetchDone(true);
       });
-    }, [props]);
+  }, [props]);
 
     return (
         <>
@@ -292,7 +289,7 @@ export default function SearchMatches(props) {
                    </div>
                    <div className="mtab-right">
                      <ul>
-                       {/* <li className="sort-list-dt">
+                       <li className="sort-list-dt">
                          <div className="ui selection dropdown skills-search sort-dropdown">
                            <input name="gender" type="hidden" value="default" />
                            <i className="dropdown icon d-icon"></i>
@@ -312,12 +309,12 @@ export default function SearchMatches(props) {
                              </div>
                            </div>
                          </div>
-                       </li>   */}
+                       </li>  
                      </ul> 
                    </div>   
                          <div className="mtab-right">
                              <ul>
-                                 {/* <li className="sort-list-dt">
+                                 <li className="sort-list-dt">
                                      <div
                                          className="ui selection dropdown skills-search sort-dropdown"
                                      >
@@ -331,7 +328,7 @@ export default function SearchMatches(props) {
                                              <div className="item" data-value="3">Last 15 Days</div>
                                          </div>
                                      </div>
-                                 </li> */}
+                                 </li>
                                  <li className="grid-list">
                                      <button className="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
                                          <i className="fas fa-th-large"></i>
@@ -379,7 +376,7 @@ export default function SearchMatches(props) {
                                  <span>
                                    Religion: {item.get_religion.religion}{" "}
                                  </span>
-                                 {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                 <span>Caste: {item.get_caste.caste} </span>
                                  <span>
                                    Mother Tongue:{" "}
                                    {item.get_mother_tongue.mother_tongue}{" "}
@@ -447,7 +444,7 @@ export default function SearchMatches(props) {
                       </div>
                       <div className="mtab-right">
                         <ul>
-                          {/* <li className="sort-list-dt">
+                          <li className="sort-list-dt">
                             <div className="ui selection dropdown skills-search sort-dropdown">
                               <input name="gender" type="hidden" value="default" />
                               <i className="dropdown icon d-icon"></i>
@@ -467,12 +464,12 @@ export default function SearchMatches(props) {
                                 </div>
                               </div>
                             </div>
-                          </li>   */}
+                          </li>  
                         </ul> 
                       </div>   
                             <div className="mtab-right">
                                 <ul>
-                                    {/* <li className="sort-list-dt">
+                                    <li className="sort-list-dt">
                                         <div
                                             className="ui selection dropdown skills-search sort-dropdown"
                                         >
@@ -486,7 +483,7 @@ export default function SearchMatches(props) {
                                                 <div className="item" data-value="3">Last 15 Days</div>
                                             </div>
                                         </div>
-                                    </li> */}
+                                    </li>
                                     <li className="grid-list">
                                         <button className="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
                                             <i className="fas fa-th-large"></i>

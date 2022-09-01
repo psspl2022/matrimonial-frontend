@@ -5,9 +5,11 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
-
+import Usercard from "../common/Usercard";
+import Upgradebanner from "../common/Upgradebanner";
+import { Topcat } from "../common/Topcat";
 export default function LatestProfile() {
-  const [grid, setGrid] = useState(false);  
+  const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([]);
@@ -29,18 +31,19 @@ export default function LatestProfile() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-        latestProfile();
-        document.title = "Latest Profile";
+    window.scrollTo(0, 0);
+    latestProfile();
+    document.title = "Latest Profile";
   }, []);
 
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
-        if (
-        (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
-        (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
-    
+        // console.log(prof_data);
+        // console.log(prof_data.marital_status + "=>" + parfilterData[8]);
+        // console.log(prof_data.height +">= "+parfilterData[3]);
+        const check = (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
+          (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
           (parfilterData[2] != ""
             ? prof_data.height >= parfilterData[2]
             : 1) &&
@@ -48,10 +51,10 @@ export default function LatestProfile() {
             ? prof_data.height <= parfilterData[3]
             : 1) &&
           (parfilterData[4] != ""
-            ? prof_data.income >= parfilterData[4]
+            ? prof_data.get_income.income >= parfilterData[4]
             : 1) &&
           (parfilterData[5] != ""
-            ? prof_data.income <= parfilterData[5]
+            ? prof_data.get_income.income <= parfilterData[5]
             : 1) &&
           (parfilterData[6] != ""
             ? parfilterData[6].includes(prof_data.religion)
@@ -61,14 +64,17 @@ export default function LatestProfile() {
             : 1) &&
           (parfilterData[8] != ""
             ? parfilterData[8].includes(prof_data.marital_status)
-            : 1)
-        ) {
+            : 1);
+        // console.log(check);
+        if (check) {
+          // console.log(prof_data.length);
+          // return prof_data.length;
           return prof_data;
         }
+
       })
     );
   }, [parfilterData]);
-
   function latestProfile() {
     axios
       .get(`${window.Url}api/latestProfile`, headers_data)
@@ -119,7 +125,6 @@ export default function LatestProfile() {
               icon: "error",
               title: response.data.errmsg,
           });
-          close();
         }
       });
   };
@@ -133,88 +138,9 @@ export default function LatestProfile() {
               <SearchFilters setParFilterData={setParFilterData} />
             </div>
             <div className="col-lg-8 col-md-7 mainpage">
-              <div className="browse-banner">
-                <div className="bbnr-left">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL +
-                      "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/browse/trophy.png"
-                    }
-                    alt=""
-                  />
-                  <div className="bbnr-text">
-                    <h4>Upgrade to Pro</h4>
-                    <p>Unlimited Matches and Apply.</p>
-                  </div>
-                </div>
-                <div className="bbnr-right">
-                  <NavLink to="/membershipDetail/3" className="plan-btn">
-                    Upgrade Plan
-                  </NavLink>
-                </div>
-              </div>
+              <Upgradebanner />
               <div className="main-tabs">
-                <div className="res-tabs">
-                  <div className="mtab-left">
-                    <ul className="nav nav-tabs" id="myTab" role="tablist">
-                      <li className="nav-item">
-                        <a
-                          href="#tab-1"
-                          className="nav-link active"
-                          data-toggle="tab"
-                        >
-                          Latest Profile
-                        </a>
-                      </li>
-                     
-                    </ul>
-                  </div>
-                  <div className="mtab-right">
-                    <ul>
-                      <li className="sort-list-dt">
-                        <div className="ui selection dropdown skills-search sort-dropdown">
-                          <input name="gender" type="hidden" value="default" />
-                          <i className="dropdown icon d-icon"></i>
-                          <div className="text">Sort By</div>
-                          <div className="menu">
-                            <div className="item" data-value="0">
-                              Relevance
-                            </div>
-                            <div className="item" data-value="1">
-                              New
-                            </div>
-                            <div className="item" data-value="2">
-                              Old
-                            </div>
-                            <div className="item" data-value="3">
-                              Last 15 Days
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="grid-list">
-                        <button
-                          className="gl-btn"
-                          onClick={() => {
-                            setGrid(false);
-                          }}
-                          id="grid"
-                        >
-                          <i className="fas fa-th-large"></i>
-                        </button>
-                        <button
-                          className="gl-btn"
-                          onClick={() => {
-                            setGrid(true);
-                          }}
-                          id="list"
-                        >
-                          <i className="fas fa-th-list"></i>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <Topcat title="Latest Profile" setGrid={setGrid} />
                 <div className="tab-content">
                   <div className="tab-pane active" id="tab-1">
                     <div className="row view-group" id="products">
@@ -251,7 +177,7 @@ export default function LatestProfile() {
                                     <span>
                                       Religion: {item.get_religion.religion}{" "}
                                     </span>
-                                    {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                    <span>Caste: {item.get_caste.caste} </span>
                                     <span>
                                       Mother Tongue:{" "}
                                       {item.get_mother_tongue.mother_tongue}{" "}
@@ -308,7 +234,6 @@ export default function LatestProfile() {
                                           onClick={(e) =>
                                             shortlistProfile(item.reg_id)
                                           }
-                                          title="Un-Shortlist Profile"
                                           style={{
                                             color: "#fff",
                                             background: "#ee0a4b",
@@ -343,10 +268,10 @@ export default function LatestProfile() {
                           </div>
                         ))}
 
-                      { ( data.length==0 && !fetchDone ) && (
+                      {data.length == 0 && !fetchDone && (
                         <div className="desired_section">
-                            <ProfileSkeleton />
-                            <ProfileSkeleton />
+                          <ProfileSkeleton />
+                          <ProfileSkeleton />
                         </div>
                       )}
 
@@ -358,9 +283,7 @@ export default function LatestProfile() {
 
                       <div className="col-12">
                         <div className="main-p-pagination">
-                          <nav aria-label="Page navigation example">
-                           
-                          </nav>
+                          <nav aria-label="Page navigation example"></nav>
                         </div>
                       </div>
                     </div>

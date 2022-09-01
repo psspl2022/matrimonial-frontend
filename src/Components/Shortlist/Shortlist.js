@@ -3,13 +3,17 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
-
+import Usercard from "../common/Usercard";
+import Topcat from "../common/Topcat";
+import Upgradebanner from "../common/Upgradebanner";
 export default function Shortlist() {
+  const [key, setKey] = useState([]);
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [fetchDone, setFetchDone] = useState(false);
-
+  const [page, setPage] = useState("0");
   const token = window.sessionStorage.getItem("access_token");
+  const [CurrentPage, setCurrentPage] = useState(0);
   const headers_data = {
     headers: {
       authorization: "Bearer " + token,
@@ -18,10 +22,10 @@ export default function Shortlist() {
     },
   };
 
-    useEffect(() => {
-        shortlist();  ;
-        document.title = "Shortlist Profiles";    
-      }, []);
+  useEffect(() => {
+    shortlist();;
+    document.title = "Shortlist Profiles";
+  }, []);
 
   function shortlist() {
     axios
@@ -38,24 +42,7 @@ export default function Shortlist() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12 mainpage mx-auto">
-              <div className="browse-banner">
-                <div className="bbnr-left">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL +
-                      "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/browse/trophy.png"
-                    }
-                    alt=""
-                  />
-                  <div className="bbnr-text">
-                    <h4>Upgrade to Pro</h4>
-                    <p>Unlimited Matches and Apply.</p>
-                  </div>
-                </div>
-                <div className="bbnr-right">
-                  <button className="plan-btn">Upgrade Plan</button>
-                </div>
-              </div>
+              <Upgradebanner />
               <div className="main-tabs">
                 <div className="res-tabs">
                   <div className="mtab-left">
@@ -160,7 +147,7 @@ export default function Shortlist() {
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
                                 </span>
-                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                <span>Caste: {item.get_caste.caste} </span>
                                 <span>
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}
@@ -195,7 +182,80 @@ export default function Shortlist() {
 
                       <div className="col-12">
                         <div className="main-p-pagination">
-                          <nav aria-label="Page navigation example"></nav>
+                          {data.length > 0 && key.length > 1 && key && (
+                            <nav aria-label="Page navigation example">
+                              <ul className="pagination">
+                                <li className="page-item">
+                                  <a
+                                    className={
+                                      key[0] == key[CurrentPage]
+                                        ? "page-link disable_link"
+                                        : "page-link"
+                                    }
+                                    aria-label="Previous"
+                                    onClick={(e) => {
+                                      key[0] != key[CurrentPage] &&
+                                        setPage(key[CurrentPage - 1]);
+                                    }}
+                                    style={{
+                                      cursor:
+                                        key[0] == key[CurrentPage]
+                                          ? "not-allowed"
+                                          : "pointer",
+                                    }}
+                                  >
+                                    PREV
+                                  </a>
+                                </li>
+                                {key.length > 0 &&
+                                  key &&
+                                  key.map((item, index) => (
+                                    <li className="page-item">
+                                      <a
+                                        style={{
+                                          cursor: "pointer",
+                                        }}
+                                        className={
+                                          key[CurrentPage] == item
+                                            ? "page-link active"
+                                            : "page-link"
+                                        }
+                                        onClick={(e) => {
+                                          setPage(item);
+                                        }}
+                                      >
+                                        {index + 1}
+                                      </a>
+                                    </li>
+                                  ))}
+                                <li className="page-item">
+                                  <a
+                                    className={
+                                      key[key.length - 1] ==
+                                        key[CurrentPage]
+                                        ? "page-link disable_link"
+                                        : "page-link"
+                                    }
+                                    aria-label="Previous"
+                                    onClick={(e) => {
+                                      key[key.length - 1] !=
+                                        key[CurrentPage] &&
+                                        setPage(key[CurrentPage + 1]);
+                                    }}
+                                    style={{
+                                      cursor:
+                                        key[key.length - 1] ==
+                                          key[CurrentPage]
+                                          ? "not-allowed"
+                                          : "pointer",
+                                    }}
+                                  >
+                                    NEXT
+                                  </a>
+                                </li>
+                              </ul>
+                            </nav>
+                          )}
                         </div>
                       </div>
                     </div>
