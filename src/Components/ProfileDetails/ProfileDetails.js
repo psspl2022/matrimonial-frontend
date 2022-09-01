@@ -98,13 +98,13 @@ function ProfileDetails() {
             <div className="col-lg-10 col-md-10 mx-auto" >
               <h1 className="text-center">Profile Details Section</h1>
               <div className="row" style={{background: "aliceblue"}}>
-                <div className="col-lg-3 col-md-4">
-                { data.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                <div className="col-lg-4 col-md-4 text-center d-flex align-items-center">
+                { data.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image"class="mx-auto" style={{height:"180px", margin:"0px 10px"}}/>)}
 
         { !data.get_profile_image && (<img src={ data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
                             
                    </div>
-                <div className="col-lg-6 col-md-4">
+                <div className="col-lg-5 col-md-4">
                   <div className="row">
                   <div className="col-12" style={{margin: "15px 0px"}}>
                   <h3>{data.length != 0  && data.name}</h3>
@@ -113,7 +113,7 @@ function ProfileDetails() {
                     <div className="col-lg-6 col-md-4" >
                     <span className="view_head_span">{Math.floor((Date.now() - new Date(data.dob)) / (31557600000))}, </span>
                                   <span className="view_head_span">{data.length != 0  && data.get_height.height}</span><br />
-                      <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}${data.get_caste ? data.get_caste.caste : ""}`) }</span><br />
+                      <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}, ${data.get_caste ?  data.get_caste.caste : ""}`) }</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_mother_tongue.mother_tongue}</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_city.name} </span>                 
                     </div>
