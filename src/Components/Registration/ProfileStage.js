@@ -44,6 +44,8 @@ function ProfileStage() {
   const [matrimonial, setMatrimonial] = useState("");
   const [date, setDate] = useState("");
   const [residence, setResidence] = useState("");
+
+  const [requiredError, setRequiredError] = useState(false);
   // var countries = {};
   const maritalOptions = [
     { value: "1", label: "Never Married" },
@@ -74,6 +76,20 @@ function ProfileStage() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
+  useEffect(() => {
+    if((country == undefined || country == null || country == "") || (state == undefined || state == null ||  state == '') || (city == undefined ||city == null || city == ''  ) || (height == undefined || height == null || height == '') || (moth == undefined ||moth == null || moth == '') || (religion == undefined ||religion == null ||religion == '') || (manglik == undefined ||manglik == null ||manglik == '') || (horoscope == undefined ||horoscope == null ||horoscope == '') || (matrimonial == undefined ||matrimonial == null ||matrimonial == '') || (residence == undefined ||residence == null ||residence == '')){
+      setRequiredError(true);
+    } else{
+      setRequiredError(false);
+    }
+    }, [country, state, city, height, moth, religion, manglik, horoscope, matrimonial, residence]);
+  
   useEffect(() => {
     axios
       .get(`${window.Url}api/basicDropdown`, headers_param)
@@ -172,12 +188,17 @@ function ProfileStage() {
     e.preventDefault();
     const userName = JSON.parse(window.sessionStorage.getItem("user_data")).name;
 
+    const valueCheck = (formvalue) => {
+      const dataValue = (formvalue == undefined || formvalue == null || formvalue == '') ? '': formvalue.value;
+      return dataValue;
+    };
+    
     const formData = new FormData();
     formData.append("name", userName);
     formData.append("dob", date);
     formData.append("marital_status", matrimonial.value);
     formData.append("religion", religion.value);
-    formData.append("caste", caste.value);
+    formData.append("caste", valueCheck(caste));
     formData.append("mother_tongue", moth.value);
     formData.append("horrorscope_match_required", horoscope.value);
     formData.append("height", height.value);
@@ -205,6 +226,7 @@ function ProfileStage() {
             icon: "success",
             text: data.msg,
           });
+          close();
           dispatch(regActiveLink('career'));
           history.go(0);
         } else {
@@ -212,6 +234,7 @@ function ProfileStage() {
             icon: "error",
             text: data.msg,
           });
+          close();
         }
 
         // console.log(data);
@@ -276,6 +299,8 @@ function ProfileStage() {
               }}
               hasValue
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (moth == undefined || moth == null || moth == '') ? 'Please select a mother tongue' : ''}</span>
             </div>
           </div>
           <div className="col-md-4">
@@ -294,6 +319,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (religion == undefined || religion == null || religion == '') ? 'Please select a religion' : ''}</span>
             </div>
           </div>
           <div className="col-md-4">
@@ -324,7 +351,7 @@ function ProfileStage() {
               defaultValue=""
               isClearable
               isSearchable
-              name="religion"
+              name="manglik"
               placeholder="Select Option"
               options={generalOptions}
               onChange={(e) => {
@@ -332,6 +359,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (manglik == undefined || manglik == null || manglik == '') ? 'Please select manglik' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -351,6 +380,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (horoscope == undefined || horoscope == null || horoscope == '') ? 'Please select horoscope' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -370,6 +401,8 @@ function ProfileStage() {
               }}
               isRequired
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (matrimonial == undefined || matrimonial == null || matrimonial == '') ? 'Please select maritial status' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -389,6 +422,8 @@ function ProfileStage() {
               }}
               required
             />
+              <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (height == undefined || height == null || height == '') ? 'Please select height' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -408,6 +443,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (residence == undefined || residence == null || residence == '') ? 'Please select residence' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -428,6 +465,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (country == undefined || country == null || country == '') ? 'Please select country' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -447,6 +486,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (state == undefined || state == null || state == '') ? 'Please select state' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -466,6 +507,8 @@ function ProfileStage() {
               }}
               required
             />
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (city == undefined || city == null || city == '') ? 'Please select city' : ''}</span>
             </div>
           </div>
           <div className="col-md-3">
@@ -485,7 +528,8 @@ function ProfileStage() {
           </div>
         </div>
         <div className="col-md-12 text-center mt-3">
-          <input type="submit" className="lr_btn float-none" value="Continue" />
+          <input type="submit" className="lr_btn float-none" value="Continue"           
+          style={{cursor: (requiredError == true) ? "not-allowed": "pointer" }} />
         </div>
       </form>
       </div>

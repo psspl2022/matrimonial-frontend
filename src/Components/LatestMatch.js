@@ -83,6 +83,53 @@ function LatestMatch() {
                                                         <div className="img-profile text-center">
                                                             {item.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`} alt="user profile image" style={{ height: "180px", margin: "0px auto", width: "auto" }} />)}
 
+<<<<<<< HEAD
+{!item.get_profile_image && (<img src={ (item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px auto", width:"auto"}}/>)}
+                            </div>
+                                        </div>
+                                        <div className="job-des-dt">
+                                            <h2 style={{fontWeight:"200"}}>{ item.name }</h2>
+                                            {/* <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                elit. Etiam cursus pulvinar dolor nec...
+                                            </p> */}
+                              <div className="job-skills">
+                                <span>
+                                  Age:{" "}
+                                  {Math.floor(
+                                    (Date.now() - new Date(item.dob)) /
+                                      31557600000
+                                  )}{" "}
+                                  years
+                                </span>
+                                <span>Height: {item.get_height.height} </span>
+                                <span>
+                                  Religion: {item.get_religion.religion}{" "}
+                                </span>
+                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                <span>
+                                  Mother Tongue:{" "}
+                                  {item.get_mother_tongue.mother_tongue}{" "}
+                                </span>
+                                <span>Salary: {item.get_income.income} </span>
+                                <span>
+                                  Qualification: {item.get_education.education}{" "}
+                                </span>
+                                <span>
+                                  Occupation: {item.get_occupation.occupation}{" "}
+                                </span>
+                                {/* <span className="more-skills">+4</span> */}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        ))
+                       
+} 
+                                      </OwlCarousel> 
+                                      </>
+                                       }
+=======
                                                             {!item.get_profile_image && (<img src={(item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{ height: "180px", margin: "0px auto", width: "auto" }} />)}
                                                         </div>
                                                     </div>
@@ -123,6 +170,7 @@ function LatestMatch() {
                                     </OwlCarousel>
                                     </>
                                 }
+>>>>>>> 570327a3af99331111471b99ec61ae2fc9bf7281
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 export default function DesiredList() {
   const [grid, setGrid] = useState(false);  
   const [data, setData] = useState([]);
+  const [msg, setMsg] = useState('');
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([]);
   const [fetchDone, setFetchDone] = useState(false);
@@ -20,6 +21,12 @@ export default function DesiredList() {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+  };
+
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
   };
 
   useEffect(() => {
@@ -66,9 +73,13 @@ export default function DesiredList() {
     axios
       .get(`${window.Url}api/showDesiredProfiles`, headers_data)
       .then(({ data }) => {
-        setData(data);
-        setForFilter(data);
-        setFetchDone(true);
+        if(data.msg ){
+          setMsg(data.msg);
+          setFetchDone(true);
+        } else{
+          setData(data);
+          setForFilter(data);
+        }
       });
   }
 
@@ -112,6 +123,7 @@ export default function DesiredList() {
               icon: "error",
               title: response.data.errmsg,
           });
+          close();
         }
       });
   };
@@ -319,17 +331,17 @@ export default function DesiredList() {
                                     <span>
                                       Religion: {item[2].get_religion.religion}{" "}
                                     </span>
-                                    <span>Caste: {item[2].get_caste.caste} </span>
+                                    {(item.get_caste != null) ?<span> Caste: item.get_caste.caste </span>: ""}
                                     <span>
                                       Mother Tongue:{" "}
                                       {item[2].get_mother_tongue.mother_tongue}{" "}
                                     </span>
                                     <span>
-                                      Salary: {item[3].get_income.income}{" "}
+                                      Salary: {item[2].get_income.income}{" "}
                                     </span>
                                     <span>
                                       Qualification:{" "}
-                                      {item[3].get_education.education}{" "}
+                                      {item[2].get_education.education}{" "}
                                     </span>
                                     {/* <span >Occupation: { item[1].get_occupation.occupation } </span> */}
                                     {/* <span className="more-skills">+4</span> */}
@@ -352,7 +364,7 @@ export default function DesiredList() {
                                                       >o
                                                   </li> */}
                                     <li className="bkd-pm">
-                                      {item[4].includes(item[2].reg_id) && (
+                                      {item[2].get_interest_sent !=null && (
                                         <button
                                           className="bookmark1"
                                           style={{
@@ -365,7 +377,7 @@ export default function DesiredList() {
                                         </button>
                                       )}
 
-                                      {!item[4].includes(item[2].reg_id) && (
+                                      {item[2].get_interest_sent == null && (
                                         <button
                                           className="bookmark1"
                                           onClick={(e) =>
@@ -383,7 +395,7 @@ export default function DesiredList() {
                                       </button>
                                     </li>
                                     <li className="bkd-pm">
-                                      {item[5].includes(item[2].reg_id) && (
+                                      {item[2].getShortlist==null&& (
                                         <button
                                           className="bookmark1"
                                           onClick={(e) =>
@@ -398,7 +410,7 @@ export default function DesiredList() {
                                         </button>
                                       )}
 
-                                      {!item[5].includes(item[2].reg_id) && (
+                                      {item[2].getShortlist!=null && (
                                         <button className="bookmark1">
                                           <i
                                             className="fas fa-star"
@@ -428,6 +440,10 @@ export default function DesiredList() {
                             <ProfileSkeleton />
                             <ProfileSkeleton />
                         </div>
+                      )}
+
+                      { ( data.length==0 && fetchDone ) && (
+                        <h2 class="ml-5 mt-5">{msg}</h2>
                       )}
 
                       <div className="col-12">

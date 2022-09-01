@@ -34,6 +34,12 @@ const submitImageDetails = async (e) => {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   await axios
     .post(`${window.Url}api/storeProfileImage`, formData, headers_param)
     .then(({ data }) => {
@@ -42,6 +48,7 @@ const submitImageDetails = async (e) => {
           icon: "success",
           text: data.msg,
         });
+        close();
         dispatch(regActiveLink('homepage'));
         history.go(0);
         // history.replace('/');
@@ -50,6 +57,7 @@ const submitImageDetails = async (e) => {
           icon: "error",
           text: data.error_msg,
         });
+        close();
       }
     });
 };

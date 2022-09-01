@@ -264,7 +264,7 @@ function Banner() {
               </div>
             </div>
             <div className="col-lg-2 col-md-2 col-12 mt-15">
-              <div className="form-group mb-0">
+              <div className="form-group mb-0" >
                 <label>and Mother Tongue</label>
                 <Select
                   className="basic-single"
@@ -275,6 +275,8 @@ function Banner() {
                   onChange={(e) => {
                     setMoth(e);
                   }}
+                  style={{zIndex:'1000'}}
+                  
                 />
               </div>
             </div>

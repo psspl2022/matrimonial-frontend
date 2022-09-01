@@ -25,6 +25,12 @@ function MyProfileSidebar() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => {
     if (sessionStorage.hasOwnProperty("user_data")) {
       const user_data = window.sessionStorage.getItem("user_data");
@@ -60,10 +66,6 @@ function MyProfileSidebar() {
             } else{
               setUserImage(`${ process.env.PUBLIC_URL + "/female_avatar.png" }`);
             }
-          // Swal.fire({
-          //   icon: "error",
-          //   text: data.error_msg,
-          // });
         }
       });
   };
@@ -95,10 +97,6 @@ function MyProfileSidebar() {
             getProfileImage();
             setImageInProcess(false);
           } else {
-            // Swal.fire({
-            //   icon: "error",
-            //   text: data.error_msg,
-            // });
           }
         });
     }

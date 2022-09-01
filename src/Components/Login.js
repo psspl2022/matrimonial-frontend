@@ -28,6 +28,12 @@ function Login() {
 
   const [verified, setverified] = useState(false);
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   function onChange() {
     setverified(true);
   }
@@ -48,9 +54,11 @@ function Login() {
             icon: "success",
             text: data.msg,
           });
+          close();
           window.sessionStorage.setItem("access_token", data.token);
           window.sessionStorage.setItem("user_data", JSON.stringify(data.user));
           window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
+          window.sessionStorage.setItem("stage", JSON.stringify(data.stage));
           history.replace("/registrationStage");
           //   return <Redirect to='/registrationStage' />
         } else {
@@ -58,6 +66,7 @@ function Login() {
             icon: "error",
             text: data.error,
           });
+          close();
         }
       })
       .catch(({ data }) => {
@@ -68,6 +77,7 @@ function Login() {
             text: data.error,
             icon: "error",
           });
+          close();
         }
       });
   };

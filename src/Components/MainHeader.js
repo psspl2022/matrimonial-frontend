@@ -61,6 +61,12 @@ function MainHeader(props) {
         "Content-Type": "application/json",
       },
     };
+
+    const close = () =>{
+      setTimeout(() => {
+        Swal.close();
+      }, 2000);
+    };
     
     axios
       .get(`${window.Url}api/getProfileImage`, headers_param)
@@ -122,6 +128,9 @@ function MainHeader(props) {
             icon: "success",
             text: data.message,
           });
+          setTimeout(() => {
+            Swal.close();
+          }, 2000);
           window.sessionStorage.removeItem("access_token");
           window.sessionStorage.removeItem("user_data");
           window.sessionStorage.removeItem("gender");
@@ -134,6 +143,9 @@ function MainHeader(props) {
             icon: "error",
             text: data.message,
           });
+          setTimeout(() => {
+            Swal.close();
+          }, 2000);
         }
       });
   };
@@ -160,14 +172,14 @@ function MainHeader(props) {
                       <ul>
                         <li>
                           <div className="wlcm-text">
-                            Welcome to Matrimonial
+                            Welcome to Namdeo Matrimony
                           </div>
                         </li>
                       </ul>
                     </div>
                     <div className="top-right-hd">
                       <ul>
-                        <li className="dropdown">
+                        {/* <li className="dropdown">
                           <a
                             href="#"
                             className="icon14 dropdown-toggle-no-caret"
@@ -191,7 +203,7 @@ function MainHeader(props) {
                             <i className="fas fa-bell"></i>
                             <div className="circle-alrt"></div>
                           </a>                          
-                        </li>
+                        </li> */}
                         <li>
                           <div className="account order-1 dropdown">
                             <a
@@ -480,7 +492,7 @@ function MainHeader(props) {
                         </a>
                         <div className="dropdown-menu pages-dropdown ">
                         <NavLink
-                          to="/latest"
+                          to="/dailyRecommendation"
                           className="link-item font-lobster"
                           role="button"
                         >
@@ -598,7 +610,7 @@ function MainHeader(props) {
                         </div>
                       </li> */}
                     </ul>
-                    <a
+                    {/* <a
                       href="#"
                       className="search-link"
                       role="button"
@@ -606,7 +618,7 @@ function MainHeader(props) {
                       datatarget="#searchModal"
                     >
                       <i className="fas fa-search"></i>
-                    </a>
+                    </a> */}
                     {token.length === 0 && (
                       <div>
                         <NavLink to="/login" style={{letterSpacing: "1px"}} onClick={() => props.getUrl('/login')} className="add-post font-fredokaone">

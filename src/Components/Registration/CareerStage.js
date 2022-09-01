@@ -31,9 +31,19 @@ function CareerStage() {
   const [income, setIncome] = useState('');
   const [desc, setDesc] = useState('');
 
+  const [requiredError, setRequiredError] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    if((high == undefined || high == null || high == "") || (employed == undefined || employed == null ||  employed == '') || (occupation == undefined ||occupation == null || occupation == ''  ) || (income == undefined || income == null || income == '')){
+      setRequiredError(true);      
+    } else{
+      setRequiredError(false);
+    }
+  }, [high, employed, occupation, income]);
 
   const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
@@ -43,6 +53,12 @@ function CareerStage() {
       'Content-Type': 'application/json'
     }
   }
+
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
 
   useEffect(() => {
     axios.get(`${window.Url}api/careerDropdown`, headers_param)
@@ -74,14 +90,20 @@ function CareerStage() {
       });
   }, []);
 
+  const valueCheck = (formvalue) => {
+    const dataValue = (formvalue == undefined || formvalue == null || formvalue == '') ? '': formvalue.value;
+    return dataValue;
+  };
+  
+
   const submitCareerDetails = async (e) => {
     e.preventDefault();
 
     const formData = new FormData()
     formData.append('schooling', schooling)
     formData.append('highest_qualification', high.value)
-    formData.append('ug_qualification', ug.value)
-    formData.append('pg_qualification', pg.value)
+    formData.append('ug_qualification', valueCheck(ug))
+    formData.append('pg_qualification', valueCheck(pg))
     formData.append('employement_sector', employed.value)
     formData.append('occupation', occupation.value)
     formData.append('income', income.value)
@@ -101,7 +123,8 @@ function CareerStage() {
         Swal.fire({
           icon:"success",
           text:data.msg
-        })
+        });
+        close();
         dispatch(regActiveLink('family'));
         history.go(0);
     }
@@ -109,7 +132,8 @@ function CareerStage() {
       Swal.fire({
         icon:"error",
         text:data.msg
-      })
+      });
+      close();
     }
       
       // console.log(data);
@@ -159,6 +183,8 @@ function CareerStage() {
                 }}
                 required
               />
+              <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (high == undefined || high == null || high == '') ? 'Please select highest qualification' : ''}</span>
             </div>
           </div>
           <div className="col-md-4">
@@ -176,7 +202,6 @@ function CareerStage() {
                 onChange={(event) => {
                   setUG(event);
                 }}
-                required
               />
             </div>
           </div>
@@ -212,9 +237,10 @@ function CareerStage() {
                 onChange={(event) => {
                   setEmployed(event);
                 }}
-                required
               />
               </div> 
+              <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (employed == undefined || employed == null || employed == '') ? 'Please select a employed sector' : ''}</span>
           </div>
           <div className="col-md-4">
              <div className="form-group">
@@ -231,9 +257,10 @@ function CareerStage() {
                 onChange={(event) => {
                   setOccupation(event);
                 }}
-                required
               />
             </div>
+            <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (occupation == undefined || occupation == null || occupation == '') ? 'Please select occupation' : ''}</span>
             <div className="form-group">
         <label className="label15">Annual Income*</label>
         <Select
@@ -248,8 +275,9 @@ function CareerStage() {
           onChange={(event) => {
             setIncome(event);
           }}
-          required
         />
+        <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (income == undefined || income == null || income == '') ? 'Please select income' : ''}</span>
       </div>
           </div>
           <div className="col-md-4">
@@ -266,7 +294,8 @@ function CareerStage() {
           <input
         type="submit"
         className="lr_btn float-none"
-        value="Continue" />
+        value="Continue" 
+        style={{cursor: (requiredError == true) ? "not-allowed": "pointer" }}/>
           </div>
         </div>
     </form>

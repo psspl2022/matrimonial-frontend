@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 import "../../App.css";
 import { useSelector, useDispatch } from "react-redux";
 
-function RegisterHeader() {
+function RegisterHeader(props) {
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ function RegisterHeader() {
     // return () => {
     //   window.removeEventListener("scroll", isSticky);
     // };
-  });
+  },);
 
   /* Method that will fix header after a specific scrollable */
   const isSticky = (e) => {
@@ -37,7 +37,7 @@ function RegisterHeader() {
                   {/* <NavLink className="order-lg-0 ml-lg-0 ml-3" to="/"><img src="matrimonial_logo.png" alt="" style={{maxHeight:'40px'}} /></NavLink> */}
                   <NavLink
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
-                    to="/"
+                    to="/" onClick={() => props.getUrl('/')}
                   >
                     <div className="row">
                       <div className="col-4">
