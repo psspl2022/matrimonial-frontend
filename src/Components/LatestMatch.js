@@ -142,18 +142,22 @@ function LatestMatch() {
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
                                 </span>
-                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                <span>Caste: {item.get_caste.caste} </span>
                                 <span>
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}
                                 </span>
+<<<<<<< HEAD
                                 <span>Salary: {item.get_income.income}{" "} </span>
+=======
+                                {/* <span>Salary: {item.get_income.income}{" "} </span>
+>>>>>>> 0fa94bd (update search match)
                                 <span>
                                   Qualification: {item.get_education.education}{" "}
                                 </span>
                                 <span>
                                   Occupation: {item.get_occupation.occupation}{" "}
-                                </span>
+                                </span> */}
                                 {/* <span className="more-skills">+4</span> */}
                               </div>
                             </div>

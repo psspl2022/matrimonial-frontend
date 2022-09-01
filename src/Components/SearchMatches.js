@@ -16,6 +16,7 @@ export default function SearchMatches(props) {
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [key, setKey] = useState([]);
+  const [check, setCheck] = useState(true);
   const [page, setPage] = useState("0");
   const [searchData, setSearchData] = useState([]);
   const [browseData, setBrowseData] = useState([]);
@@ -90,10 +91,12 @@ export default function SearchMatches(props) {
             ? parfilterData[8].includes(prof_data.marital_status)
             : 1);
         setCheck(check);
-        // console.log(check);
+
         if (check) {
-          // console.log(prof_data.length);
-          // return prof_data.length;
+          return prof_data;
+        }
+        else {
+          prof_data = ["none"];
           return prof_data;
         }
 
