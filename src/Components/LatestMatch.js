@@ -109,9 +109,9 @@ function LatestMatch() {
                                     src={
                                       item.get_user_register.gender == 1
                                         ? process.env.PUBLIC_URL +
-                                          "/male_avatar.png"
+                                        "/male_avatar.png"
                                         : process.env.PUBLIC_URL +
-                                          "/female_avatar.png"
+                                        "/female_avatar.png"
                                     }
                                     alt="user profile image"
                                     style={{
@@ -134,7 +134,7 @@ function LatestMatch() {
                                   Age:{" "}
                                   {Math.floor(
                                     (Date.now() - new Date(item.dob)) /
-                                      31557600000
+                                    31557600000
                                   )}{" "}
                                   years
                                 </span>
@@ -147,18 +147,13 @@ function LatestMatch() {
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}
                                 </span>
-<<<<<<< HEAD
-                                <span>Salary: {item.get_income.income}{" "} </span>
-=======
-                                {/* <span>Salary: {item.get_income.income}{" "} </span>
->>>>>>> 0fa94bd (update search match)
-                                <span>
+
+                                <><span>Salary: {item.get_income.income}{" "} </span><span>
                                   Qualification: {item.get_education.education}{" "}
-                                </span>
-                                <span>
-                                  Occupation: {item.get_occupation.occupation}{" "}
-                                </span> */}
-                                {/* <span className="more-skills">+4</span> */}
+                                </span><span>
+                                    Occupation: {item.get_occupation.occupation}{" "}
+                                  </span></>
+                                <span className="more-skills">+4</span>
                               </div>
                             </div>
                           </div>

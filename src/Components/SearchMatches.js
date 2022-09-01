@@ -61,12 +61,10 @@ export default function SearchMatches(props) {
       </div>
     );
   };
+  // side filter 
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
-        // console.log(prof_data);
-        // console.log(prof_data.marital_status + "=>" + parfilterData[8]);
-        // console.log(prof_data.height +">= "+parfilterData[3]);
         const check = (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
           (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
           (parfilterData[2] != ""
