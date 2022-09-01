@@ -89,6 +89,7 @@ export default function SearchMatches(props) {
           (parfilterData[8] != ""
             ? parfilterData[8].includes(prof_data.marital_status)
             : 1);
+        setCheck(check);
         // console.log(check);
         if (check) {
           // console.log(prof_data.length);
@@ -384,7 +385,7 @@ export default function SearchMatches(props) {
                           }}
                         >
                           {" "}
-                          {data &&
+                          {data && check &&
                             data.map((item, index) => (
                               <Usercard
                                 item={item}
@@ -396,8 +397,9 @@ export default function SearchMatches(props) {
                                   }`}
                               />
                             ))}
-                          {fetchDone || (data.length == 0 && loding())}
-                          {/* {(data.length == 0 ) && (
+                          {check}
+                          {(data.length == 0 && loding())}
+                          {(!check) && (
                             <LazyLoadImage
                               src="./empty.jpg"
                               style={{
@@ -406,7 +408,7 @@ export default function SearchMatches(props) {
                                 height: "400px",
                               }}
                             />
-                          )} */}
+                          )}
                         </div>
 
                         <div className="row view-group" id="products">
