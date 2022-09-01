@@ -7,22 +7,22 @@ import DesiredList from "./DesiredProfile/DesiredList";
 const animatedComponents = makeAnimated();
 
 const maritialOptions = [
-    { value: "1", label: "Never Married" },
-    { value: "2", label: "Awaiting Divorce" },
-    { value: "3", label: "Divorced" },
-    { value: "4", label: "Widowed" },
-    { value: "5", label: "Annulled" },
+  { value: "1", label: "Never Married" },
+  { value: "2", label: "Awaiting Divorce" },
+  { value: "3", label: "Divorced" },
+  { value: "4", label: "Widowed" },
+  { value: "5", label: "Annulled" },
 ];
 
 export default function SearchFilters(props) {
   const [clearAll, setClearAll] = useState(true);
   const [ages, setAges] = useState({});
-  const [heights, setHeights] = useState({}); 
+  const [heights, setHeights] = useState({});
   const [moths, setMoths] = useState([]);
   const [religions, setReligions] = useState([]);
   const [castes, setCastes] = useState([]);
   const [incomes, setIncomes] = useState([]);
-  
+
   const [miniAge, setMiniAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [miniHeight, setMinHeight] = useState("");
@@ -34,13 +34,13 @@ export default function SearchFilters(props) {
   const [maritial, setMaritial] = useState([]);
 
   const token = window.sessionStorage.getItem('access_token');
-// const headers_data = {
-//     headers: {
-//         'authorization': 'Bearer ' + token,
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//     }
-// }
+  // const headers_data = {
+  //     headers: {
+  //         'authorization': 'Bearer ' + token,
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //     }
+  // }
 
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function SearchFilters(props) {
           data.height.map(function (height) {
             return { value: height.id, label: height.height };
           })
-        );     
+        );
 
         setReligions(
           data.religion.map(function (religion) {
@@ -87,13 +87,14 @@ export default function SearchFilters(props) {
             };
           })
         );
-  })
-}, []);
+      })
+  }, []);
 
-const SubmitFilter = () => {
-  const filterData = [(miniAge)?miniAge.label:"", (maxAge)?maxAge.label:"", (miniHeight)?miniHeight.value:"", (maxHeight)?maxHeight.value:"", (minIncome)?minIncome.value:"", (maxIncome)?maxIncome.value:"", religion, moth, maritial];
-  props.setParFilterData(filterData);
-}
+  const SubmitFilter = () => {
+    const filterData = [(miniAge) ? miniAge.label : "", (maxAge) ? maxAge.label : "", (miniHeight) ? miniHeight.value : "", (maxHeight) ? maxHeight.value : "", (minIncome) ? minIncome.label : "", (maxIncome) ? maxIncome.label : "", religion, moth, maritial];
+    // console.log(maxIncome);
+    props.setParFilterData(filterData);
+  }
 
   return (
     <>
@@ -155,7 +156,7 @@ const SubmitFilter = () => {
                 className="basic-single"
                 classNamePrefix="select"
                 isClearable
-                isSearchable                                                  
+                isSearchable
                 onChange={(e) =>
                   setMiniAge(e)
                 }
@@ -191,7 +192,7 @@ const SubmitFilter = () => {
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
-            onChange={(e) => 
+            onChange={(e) =>
               setReligion(Array.isArray(e) ? e.map(x => x.value) : [])
             }
             isMulti
@@ -209,7 +210,7 @@ const SubmitFilter = () => {
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
-            onChange={(e) => 
+            onChange={(e) =>
               setMoth(Array.isArray(e) ? e.map(x => x.value) : [])
             }
             isMulti
@@ -230,31 +231,35 @@ const SubmitFilter = () => {
             </div> */}
           </div>
           <div className="row">
-                          <div className="col-lg-6 pr-1">
-                            <Select
-                              closeMenuOnSelect={false}
-                              components={animatedComponents}
-                              onChange={(e) =>
-                                setMinIncome(e)
-                              }
-                              // value={minincome}
-                              options={incomes}
-                              placeholder="Select Min"    
-                            />
-                          </div>
-                          <div className="col-lg-6 pl-0 ">
-                            <Select
-                            closeMenuOnSelect={false}
-                            components={animatedComponents}
-                            onChange={(e) =>
-                              setMaxIncome(e)
-                            }
-                            // value={maxincome}
-                            options={incomes}
-                            placeholder="Select Max"   
-                          />
-                          </div>
-                        </div>
+            <div className="col-lg-6 pr-1">
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isClearable
+                isSearchable
+                onChange={(e) =>
+                  setMinIncome(e)
+                }
+                // value={minincome}
+                options={incomes}
+                placeholder="Select Min"
+              />
+            </div>
+            <div className="col-lg-6 pl-0 ">
+              <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isClearable
+                isSearchable
+                onChange={(e) =>
+                  setMaxIncome(e)
+                }
+                // value={incomes[incomes.length - 1]}
+                options={incomes}
+                placeholder="Select Max"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="fltr-group">
@@ -266,7 +271,7 @@ const SubmitFilter = () => {
           <Select
             closeMenuOnSelect={false}
             components={animatedComponents}
-            onChange={(e) => 
+            onChange={(e) =>
               setMaritial(Array.isArray(e) ? e.map(x => x.value) : [])
             }
             isMulti

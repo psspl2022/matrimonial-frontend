@@ -41,6 +41,7 @@ export default function SearchMatches(props) {
   //   useEffect(() => {
   //     setData(props.profileData);
   //   }, [props]);
+  // it run before loading data 
   const loding = () => {
     return (
       <div
@@ -62,24 +63,22 @@ export default function SearchMatches(props) {
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
-        if (
-          (parfilterData[0] != ""
-            ? Math.floor(
-              (Date.now() - new Date(prof_data.dob)) / 31557600000
-            ) >= parfilterData[0]
+        // console.log(prof_data);
+        // console.log(prof_data.marital_status + "=>" + parfilterData[8]);
+        // console.log(prof_data.height +">= "+parfilterData[3]);
+        const check = (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
+          (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
+          (parfilterData[2] != ""
+            ? prof_data.height >= parfilterData[2]
             : 1) &&
-          (parfilterData[1] != ""
-            ? Math.floor(
-              (Date.now() - new Date(prof_data.dob)) / 31557600000
-            ) <= parfilterData[1]
+          (parfilterData[3] != ""
+            ? prof_data.height <= parfilterData[3]
             : 1) &&
-          (parfilterData[2] != "" ? prof_data.height >= parfilterData[2] : 1) &&
-          (parfilterData[3] != "" ? prof_data.height <= parfilterData[3] : 1) &&
           (parfilterData[4] != ""
-            ? prof_data[3].get_income.income >= parfilterData[4]
+            ? prof_data.get_income.income >= parfilterData[4]
             : 1) &&
           (parfilterData[5] != ""
-            ? prof_data[3].get_income.income <= parfilterData[5]
+            ? prof_data.get_income.income <= parfilterData[5]
             : 1) &&
           (parfilterData[6] != ""
             ? parfilterData[6].includes(prof_data.religion)
@@ -88,15 +87,18 @@ export default function SearchMatches(props) {
             ? parfilterData[7].includes(prof_data.mother_tongue)
             : 1) &&
           (parfilterData[8] != ""
-            ? parfilterData[8].includes(prof_data.maritial_status)
-            : 1)
-        ) {
+            ? parfilterData[8].includes(prof_data.marital_status)
+            : 1);
+        // console.log(check);
+        if (check) {
+          // console.log(prof_data.length);
+          // return prof_data.length;
           return prof_data;
         }
+
       })
     );
   }, [parfilterData]);
-
   function showAllProfiles(page) {
     axios
       .get(`${window.Url}api/getAllUserProfiles/` + page, headers_data)
@@ -109,73 +111,91 @@ export default function SearchMatches(props) {
         setFetchDone(true);
       });
   }
-
+  // browese profile by 
   useEffect(() => {
-    if (props.browse == "religion") {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (props.browseId != "" ? props.browseId == prof_data.religion : 0) {
-            return prof_data;
-          }
-        })
-      );
-    }
-
-    if (props.browse == "caste") {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (props.browseId != "" ? props.browseId == prof_data.caste : 0) {
-            return prof_data;
-          }
-        })
-      );
-    }
-
-    if (props.browse == "mother") {
+    if (props.browse == 'religion') {
       setData(
         forFilter.filter((prof_data) => {
           if (
-            props.browseId != "" ? props.browseId == prof_data.mother_tongue : 0
+            (props.browseId != ""
+              ? (props.browseId == prof_data.religion)
+              : 0)
           ) {
             return prof_data;
           }
         })
-      );
+      )
     }
 
-    if (props.browse == "state") {
+    if (props.browse == 'caste') {
       setData(
         forFilter.filter((prof_data) => {
-          if (props.browseId != "" ? props.browseId == prof_data.state : 0) {
+          if (
+            (props.browseId != ""
+              ? (props.browseId == prof_data.caste)
+              : 0)
+          ) {
             return prof_data;
           }
         })
-      );
+      )
     }
 
-    if (props.browse == "city") {
+    if (props.browse == 'mother') {
       setData(
         forFilter.filter((prof_data) => {
-          if (props.browseId != "" ? props.browseId == prof_data.city : 0) {
+          if (
+            (props.browseId != ""
+              ? (props.browseId == prof_data.mother_tongue)
+              : 0)
+          ) {
             return prof_data;
           }
         })
-      );
+      )
     }
 
-    if (props.browse == "occupation") {
+    if (props.browse == 'state') {
+      setData(
+        forFilter.filter((prof_data) => {
+          if (
+            (props.browseId != ""
+              ? (props.browseId == prof_data.state)
+              : 0)
+          ) {
+            return prof_data;
+          }
+        })
+      )
+    }
+
+    if (props.browse == 'city') {
+      setData(
+        forFilter.filter((prof_data) => {
+          if (
+            (props.browseId != ""
+              ? (props.browseId == prof_data.city)
+              : 0)
+          ) {
+            return prof_data;
+          }
+        })
+      )
+    }
+
+    if (props.browse == 'occupation') {
       alert("ok");
       setData(
         forFilter.filter((prof_data) => {
           if (
-            props.browseId != ""
-              ? props.browseId == prof_data.get_occupation.id
-              : 0
+            (props.browseId != ""
+              ? (props.browseId == prof_data.get_occupation.id)
+              : 0)
           ) {
             return prof_data;
           }
         })
-      );
+      )
     }
   }, [props, forFilter]);
 
@@ -189,50 +209,48 @@ export default function SearchMatches(props) {
   }, [page]);
 
   useEffect(() => {
-    const formData = new FormData();
-    formData.append("gender", search[0]);
-    formData.append("min_age", search[1]);
-    formData.append("max_age", search[2]);
-    formData.append("religion", search[3]);
-    formData.append("mother", search[4]);
+    const formData = new FormData()
+    formData.append('gender', search[0])
+    formData.append('min_age', search[1])
+    formData.append('max_age', search[2])
+    formData.append('religion', search[3])
+    formData.append('mother', search[4])
 
     setData(
       forFilter.filter((prof_data) => {
         if (
-          (search[1] != undefined
-            ? Math.floor(
-              (Date.now() - new Date(prof_data.dob)) / 31557600000
-            ) >= search[1]
-            : 1) &&
-          (search[2] != undefined
-            ? Math.floor(
-              (Date.now() - new Date(prof_data.dob)) / 31557600000
-            ) <= search[2]
-            : 1) &&
+          (search[1] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= search[1] : 1) &&
+          (search[2] != undefined ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= search[2] : 1) &&
           (search[0] != undefined
-            ? search[0] == prof_data.get_user_register.gender
+            ? (search[0] == prof_data.get_user_register.gender)
             : 1) &&
-          (search[3] != undefined ? search[3] == prof_data.religion : 1) &&
-          (search[4] != undefined ? search[4] == prof_data.mother_tongue : 1)
+          (search[3] != undefined
+            ? (search[3] == prof_data.religion)
+            : 1) &&
+          (search[4] != undefined
+            ? (search[4] == prof_data.mother_tongue)
+            : 1)
         ) {
           return prof_data;
         }
       })
     );
 
-    axios.post(`${window.Url}api/searchProfile`, formData).then(({ data }) => {
-      setSearchData(data);
-      setFetchDone(true);
-      window.setTimeout(() => {
-        dispatch(resetSearch());
-      }, 5000);
-    });
+    axios
+      .post(`${window.Url}api/searchProfile`, formData)
+      .then(({ data }) => {
+        setSearchData(data);
+        setFetchDone(true);
+        window.setTimeout(() => {
+          dispatch(resetSearch())
+        }, 5000);
+      });
   }, [forFilter]);
 
   useEffect(() => {
-    const formData = new FormData();
-    formData.append("browse", props.browse);
-    formData.append("browseId", props.browseId);
+    const formData = new FormData()
+    formData.append('browse', props.browse)
+    formData.append('browseId', props.browseId)
 
     axios
       .post(`${window.Url}api/postBrowseProfile`, formData)

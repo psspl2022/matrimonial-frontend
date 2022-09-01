@@ -206,9 +206,8 @@ export default function SearchResult(props) {
                 {data &&
                   data.map((item, index) => (
                     <div
-                      className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${
-                        grid == true ? "list-group-item1" : ""
-                      }`}
+                      className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+                        }`}
                       key={index}
                     >
                       <div className="job-item mt-30">
@@ -235,9 +234,9 @@ export default function SearchResult(props) {
                                   src={
                                     item.get_user_register.gender == 1
                                       ? process.env.PUBLIC_URL +
-                                        "/male_avatar.png"
+                                      "/male_avatar.png"
                                       : process.env.PUBLIC_URL +
-                                        "/female_avatar.png"
+                                      "/female_avatar.png"
                                   }
                                   alt="user profile image"
                                   style={{
@@ -291,14 +290,14 @@ export default function SearchResult(props) {
                                 !item.get_interest_received.reg_id.includes(
                                   item["reg_id"]
                                 )) && (
-                                <button
-                                  className="bookmark1"
-                                  onClick={(e) => sendIntrest(item["reg_id"])}
-                                  title="Send Interest"
-                                >
-                                  <i className="fas fa-envelope 2x"></i>
-                                </button>
-                              )}
+                                  <button
+                                    className="bookmark1"
+                                    onClick={(e) => sendIntrest(item["reg_id"])}
+                                    title="Send Interest"
+                                  >
+                                    <i className="fas fa-envelope 2x"></i>
+                                  </button>
+                                )}
                             </li>
                             <li className="bkd-pm">
                               <button className="bookmark1">
@@ -308,7 +307,7 @@ export default function SearchResult(props) {
                             <li className="bkd-pm">
                               {item.get_shortlist &&
                                 item.get_shortlist.saved_reg_id ==
-                                  item["reg_id"] && (
+                                item["reg_id"] && (
                                   <button
                                     className="bookmark1"
                                     onClick={(e) =>
@@ -325,17 +324,17 @@ export default function SearchResult(props) {
 
                               {(item.get_shortlist == null ||
                                 item.get_shortlist.saved_reg_id !=
-                                  item["reg_id"]) && (
-                                <button className="bookmark1">
-                                  <i
-                                    className="fas fa-star"
-                                    onClick={(e) =>
-                                      shortlistProfile(item["reg_id"])
-                                    }
-                                    title="Shortlist Profile"
-                                  ></i>
-                                </button>
-                              )}
+                                item["reg_id"]) && (
+                                  <button className="bookmark1">
+                                    <i
+                                      className="fas fa-star"
+                                      onClick={(e) =>
+                                        shortlistProfile(item["reg_id"])
+                                      }
+                                      title="Shortlist Profile"
+                                    ></i>
+                                  </button>
+                                )}
                             </li>
 
                             <li className="bkd-pm">
