@@ -125,10 +125,7 @@ function LatestMatch() {
                             </div>
                             <div className="job-des-dt">
                               <h2 style={{ fontWeight: "200" }}>{item.name}</h2>
-                              {/* <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Etiam cursus pulvinar dolor nec...
-                                            </p> */}
+
                               <div className="job-skills">
                                 <span>
                                   Age:{" "}
