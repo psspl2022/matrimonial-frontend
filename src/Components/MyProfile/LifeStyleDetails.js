@@ -31,8 +31,8 @@ const bloodGroupOptions = [
 ];
 
 const yesNoOptions = [
-  { value: "1", label: "Yes" },
-  { value: "0", label: "No" },
+  { value: "2", label: "Yes" },
+  { value: "1", label: "No" },
 ];
 
 const thalaOptions = [
@@ -42,24 +42,30 @@ const thalaOptions = [
 ];
 
 const ChallengedOptions = [
-  { value: "0", label: "None" },
-  { value: "1", label: "Physically" },
-  { value: "2", label: "Mentally" },
+  { value: "1", label: "None" },
+  { value: "2", label: "Physically" },
+  { value: "3", label: "Mentally" },
 ];
 
 export default function LifeStyleDetails() {
   const [Edit, setEdit] = useState(false);
-    const [diet, setDiet] = useState('');
-    const [drink, setDrink] = useState('');
-    const [smoke, setSmoke] = useState('');
-    const [pet, setPet] = useState('');
-    const [house, setHouse] = useState('');
-    const [car, setCar] = useState('');
-    const [bg, setBG] = useState('');
-    const [hiv, setHiv] = useState('');
-    const [thala, setThala] = useState("");
-    const [challenged, setChallenged] = useState("");
-  
+
+  const [languages, setLanguages] = useState([]);
+
+  const [language, setLanguage] = useState("");
+  const [diet, setDiet] = useState('');
+  const [drink, setDrink] = useState('');
+  const [smoke, setSmoke] = useState('');
+  const [pet, setPet] = useState('');
+  const [house, setHouse] = useState('');
+  const [car, setCar] = useState('');
+  const [bg, setBG] = useState('');
+  const [hiv, setHiv] = useState('');
+  const [thala, setThala] = useState("");
+  const [challenged, setChallenged] = useState("");
+
+  const [selectLanguage, setSelectLanguage] = useState("");
+
     const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
       headers: {
@@ -68,12 +74,44 @@ export default function LifeStyleDetails() {
         "Content-Type": "application/json",
       },
     };
+
+    const close = () =>{
+      setTimeout(() => {
+        Swal.close();
+      }, 2000);
+    };
+
+    useEffect(() => {
+      document.title = "LifeStyle Details";
+      axios
+        .get(`${window.Url}api/lifestyleDropdown`, headers_param)
+        .then(({ data }) => {
+          setLanguages(
+            data.language.map(function (language) {
+              return { value: language.id, label: language.language };
+            })
+          );
+          
+        });
+    }, []);
   
     useEffect(() => {
       document.title = "LifeStyle Details";
       axios
         .get(`${window.Url}api/showLifeStyle`, headers_param)
         .then(({ data }) => {
+
+          setSelectLanguage(
+            languages.filter((language_data) => {
+              if (
+                data.language_i_speak.split(",").map(Number).includes(language_data.value)
+              ) {
+                return language_data;
+              }
+            })
+          );
+          setLanguage(data.language_i_speak);
+
           setDiet(
             dietaryOptions.filter((diet_data)=>{
               if(diet_data.value===data.diet_habit){
@@ -145,35 +183,56 @@ export default function LifeStyleDetails() {
               })[0]
               );
         });
-    }, []);
+    }, [languages]);
+
+    const arrayOfValues = (e) => {
+      const value = Array.isArray(e) ? e.map((x) => x.value) : [];
+      return value;
+    };
+
+   
+
+    const handleLanguage = (e) => {
+      setSelectLanguage(e);
+      setLanguage(arrayOfValues(e));
+    };
+
+    const valueCheck = (formvalue) => {
+      const dataValue = (formvalue == undefined || formvalue == null) ? 0 : formvalue.value;
+      return dataValue;
+    };
 
     const submitLifeStyleDetails = async (e) => {
         e.preventDefault();
     
         const formData = new FormData()
-        formData.append('diet_habit', diet.value)
-        formData.append('drink_habit', drink.value)
-        formData.append('smoking_habit', smoke.value)
-        formData.append('open_to_pets', pet.value)
-        formData.append('own_a_house', house.value)
-        formData.append('own_a_car', car.value)
-        formData.append('blood_group', bg.value)
-        formData.append('hiv_pos', hiv.value)
-        formData.append('thalessemia', thala.value)
-        formData.append('challenged', challenged.value)
+        formData.append('language', language)
+      
+        formData.append('diet_habit', valueCheck(diet))
+        formData.append('drink_habit', valueCheck(drink))
+        formData.append('smoking_habit', valueCheck(diet))
+        formData.append('open_to_pets', valueCheck(pet))
+        formData.append('own_a_house', valueCheck(house))
+        formData.append('own_a_car', valueCheck(car))
+        formData.append('blood_group', (bg == undefined || bg == null) ? 'NULL' : bg.value)
+        formData.append('hiv_pos', valueCheck(hiv))
+        formData.append('thalessemia', valueCheck(thala))
+        formData.append('challenged', valueCheck(challenged))
     
         await axios.post(`${window.Url}api/editLifeStyle`, formData, headers_param).then(({data})=>{
           if (data.hasOwnProperty('msg')) {
             Swal.fire({
               icon:"success",
               text:data.msg
-            })
+            });
+            close();
         }
         else{
           Swal.fire({
             icon:"error",
             text:data.msg
-          })
+          });
+          close();
         }
         })
       }
@@ -215,6 +274,7 @@ export default function LifeStyleDetails() {
                         placeholder="Select Your Dietary Habits"
                         options={dietaryOptions}
                         value={diet}
+                        defaultValue={dietaryOptions[1]}        
                         onChange={(e) => {
                           setDiet(e);
                         }}
@@ -327,8 +387,10 @@ export default function LifeStyleDetails() {
                         components={animatedComponents}
                         defaultValue=""
                         isMulti
+                        options={languages}
+                        value={selectLanguage}
                         placeholder="Select Languages"
-                        // options={heightOptions}
+                        onChange={handleLanguage}
                         isDisabled={!Edit}
                       />
                     </div>
@@ -356,12 +418,13 @@ export default function LifeStyleDetails() {
                       <label className="label15">HIV+?</label>
                       <Select
                         className="basic-single"
-                        classNamePrefix="select"
+                        classNamePrefix="select"                        
                         isClearable
                         isSearchable
                         placeholder="Select Option"
-                        options={yesNoOptions}
                         value={hiv}
+                        options={yesNoOptions}
+                        defaultValue={{label: "Choose one", value: ""}}                     
                         onChange={(e) => {
                           setHiv(e);
                         }}

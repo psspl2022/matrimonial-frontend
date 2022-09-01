@@ -104,7 +104,7 @@ function profiles(){
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
                                 </span>
-                                <span>Caste: {item.get_caste.caste} </span>
+                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
                                 <span>
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}

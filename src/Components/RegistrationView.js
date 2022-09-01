@@ -14,6 +14,12 @@ function SignUp() {
     window.scrollTo(0, 0)
   }, [])
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   // const navigate = useNavigate();
   const [verified, setverified] = useState(false);
   const history = useHistory();
@@ -88,6 +94,7 @@ function SignUp() {
           icon:"success",
           text:data.msg
         })
+        close();
         window.sessionStorage.setItem('access_token', data.token);
         window.sessionStorage.setItem('user_data',JSON.stringify(data.user));
         history.replace("/registrationStage");
@@ -96,7 +103,8 @@ function SignUp() {
       Swal.fire({
         icon:"error",
         text:"Check Your Fields Properly"
-      })
+      });
+      close();
     }
       
       // console.log(data);
@@ -108,7 +116,8 @@ function SignUp() {
         Swal.fire({
           text:data.errors,
           icon:"error"
-        })
+        });
+        close();
       }
     })
   }

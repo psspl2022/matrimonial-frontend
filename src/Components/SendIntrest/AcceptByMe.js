@@ -121,7 +121,7 @@ export default function AcceptByMe() {
                                                 <span>Age: { Math.floor((Date.now() - new Date(item.dob)) / (31557600000)) } years</span>
                                                 <span>Height: { item.get_height.height } </span>                                                
                                                 <span>Religion: { item.get_religion.religion } </span>
-                                                <span>Caste: { item.get_caste.caste } </span>
+                                                <span>Caste: {(item.get_caste != null) ? item.get_caste.caste : ""}  </span>
                                                 <span>Mother Tongue: { item.get_mother_tongue.mother_tongue } </span>
                                                 <span >Salary: { item.get_income.income } </span>
                                                 <span >Qualification: { item.get_education.education } </span> 
@@ -140,6 +140,12 @@ export default function AcceptByMe() {
                                      <ProfileSkeleton />
                                  </div>
                                )}
+
+                    {data.length == 0 && fetchDone && (
+                        <div className="desired_section">
+                          <h3 class="ml-5 mt-5">No Data Found!!</h3>
+                        </div>
+                      )}
                                 
                                 <div class="col-12">
                                     <div class="main-p-pagination">

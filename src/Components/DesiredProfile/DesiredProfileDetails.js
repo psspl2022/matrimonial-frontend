@@ -133,6 +133,12 @@ const headers_data = {
     }
 }
 
+const close = () =>{
+  setTimeout(() => {
+    Swal.close();
+  }, 2000);
+};
+
   useEffect(() => {
     document.title = "Desired Partner";
     // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
@@ -201,7 +207,7 @@ const headers_data = {
 
         setOccupations(
           data.occupation.map(function (occupation) {
-            return { value: occupation.id, label: occupation.occupation_category };
+            return { value: occupation.id, label: occupation.occupation };
           })
         );
 
@@ -254,6 +260,7 @@ useEffect(async () => {
           }
         })
       );
+      setMarital(data.marital);
 
       setSelectCountry(        
         countries.filter((country_data)=>{
@@ -263,7 +270,8 @@ useEffect(async () => {
             } 
           }
         })
-      );   
+      ); 
+      setCountry(data.country);  
 
       setSelectResidence(        
         residencies.filter((residence_data)=>{  
@@ -274,6 +282,7 @@ useEffect(async () => {
           }
         })
       );
+      setResidence(data.residential);
 
       setSelectReligion(        
         religions.filter((religion_data)=>{ 
@@ -284,6 +293,7 @@ useEffect(async () => {
           } 
         })
       );
+      setReligion(data.religion);
 
       setSelectCaste(        
         castes.filter((caste_data)=>{  
@@ -294,6 +304,7 @@ useEffect(async () => {
           } 
         })
       );
+      setCaste(data.caste);
 
       setSelectMother(        
         moths.filter((mother_data)=>{  
@@ -304,6 +315,7 @@ useEffect(async () => {
           }
         })
       );
+      setMothertongue(data.mother_tongue);
 
       setSelectManglik(        
         manglikOptions.filter((manglik_data)=>{   
@@ -314,6 +326,7 @@ useEffect(async () => {
           } 
         })
       );
+      setManglik(data.manglik);
 
       setSelectEducation(        
         highests.filter((education_data)=>{ 
@@ -324,6 +337,7 @@ useEffect(async () => {
           }
         })
       );
+      setEducation(data.highest_education)
 
       setSelectOccupation(        
         occupations.filter((occupation_data)=>{        
@@ -332,6 +346,7 @@ useEffect(async () => {
             } 
         })
       );
+      setOccupation(data.occupation);
 
       setMinincome(
         income.filter((mininc) => {
@@ -356,6 +371,7 @@ useEffect(async () => {
           } 
         })
       );
+      setDiet(data.diet);
 
         setSelectDrink(        
           drinkingOptions.filter((drink_data)=>{
@@ -364,6 +380,7 @@ useEffect(async () => {
             } 
           })
         );
+        setDrinking(data.drinking);
 
         setSelectSmoke(        
           smokingOptions.filter((smoke_data)=>{
@@ -372,6 +389,7 @@ useEffect(async () => {
             } 
           })
         );
+        setSmoking(data.smoking)
 
         setSelectChallenge(             
           ChallengedOptions.filter((challenge_data)=>{
@@ -382,6 +400,7 @@ useEffect(async () => {
           }
           })
         );
+        setChallenge(data.challenged)
 
         // console.log("disha"+ data.about_desired)
        
@@ -469,14 +488,19 @@ const handleChallenge = (e) =>{
   setSelectChallenge(e);
 }
 
+const valueCheck = (formvalue) => {
+  const dataValue = (formvalue == undefined || formvalue == null || formvalue == '') ? '': formvalue.value;
+  return dataValue;
+};
+
 const addDesiredBasic = (e) => {
 e.preventDefault();
   const formData = new FormData();
-  formData.append("minage", miniage.value);
-  formData.append("maxage", maxiage.value);  
-  formData.append("minheight", miniheight.value);
-  formData.append("maxheight", maxiheight.value);
-  formData.append("country", country);
+  formData.append("minage", valueCheck(miniage));
+  formData.append("maxage", valueCheck(maxiage));  
+  formData.append("minheight", valueCheck(miniheight));
+  formData.append("maxheight", valueCheck(maxiheight));
+  formData.append("country", valueCheck(country));
   formData.append("residence", residence);
   formData.append("marital", marital);
 
@@ -488,12 +512,14 @@ e.preventDefault();
             icon: "success",
             title: response.data.msg,
           });
+          close();
           history.replace("/desiredProfile");
         } else {
           Swal.fire({
             icon: "error",
             title: response.data.errors,
         });
+        close();
       }
     }
   )
@@ -515,12 +541,14 @@ const addDesiredReligion = (e) => {
               icon: "success",
               title: response.data.msg,
             });
+            close();
             history.replace("/desiredProfile");
           } else {
             Swal.fire({
               icon: "error",
               title: response.data.errors,
           });
+          close();
         }
       }
     )
@@ -529,8 +557,8 @@ const addDesiredReligion = (e) => {
 const addDesiredCareer = (e) => {
   e.preventDefault();
     const formData = new FormData();
-    formData.append("minincome", minincome.value);
-    formData.append("maxincome", maxincome.value);  
+    formData.append("minincome", valueCheck(minincome));
+    formData.append("maxincome", valueCheck(maxincome));  
     formData.append("occupation", occupation);
     formData.append("education", education);
   
@@ -542,12 +570,14 @@ const addDesiredCareer = (e) => {
               icon: "success",
               title: response.data.msg,
             });
+            close();
             history.replace("/desiredProfile");
           } else {
             Swal.fire({
               icon: "error",
               title: response.data.errors,
           });
+          close();
         }
       }
     )
@@ -569,12 +599,14 @@ const addDesiredLifestyle = (e) => {
               icon: "success",
               title: response.data.msg,
             });
+            close();
             history.replace("/desiredProfile");
           } else {
             Swal.fire({
               icon: "error",
               title: response.data.errors,
           });
+          close();
         }
       }
     )
@@ -593,12 +625,14 @@ const addDesiredAbout = (e) => {
               icon: "success",
               title: response.data.msg,
             });
+            close();
             history.replace("/desiredProfile");
           } else {
             Swal.fire({
               icon: "error",
               title: response.data.errors,
           });
+          close();
         }
       }
     )
@@ -628,10 +662,10 @@ const addDesiredAbout = (e) => {
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center mt-3">                  
                         <h4 className="mr-3">Basic details</h4>
-                      <span className="edit-icon" style={{marginTop:"-5px" }}>
+                      {/* <span className="edit-icon" style={{marginTop:"-5px" }}>
                         <i className=" fas fa-edit fa-1x" ></i>
                         <div style={{marginTop:"-5px" }} ><span style={{fontSize:"11px" }}>Edit</span></div>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                    
@@ -689,7 +723,7 @@ const addDesiredAbout = (e) => {
                             closeMenuOnSelect={false}
                             components={animatedComponents}
                             onChange={(e) =>
-                              setMaxiheight(e.target.value)
+                              setMaxiheight(e)
                             }
                             value={maxiheight}
                             options={height}
@@ -754,10 +788,10 @@ const addDesiredAbout = (e) => {
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center mt-3">                  
                         <h4 className="mr-3">Religion & Ethnicity </h4>
-                      <span className="edit-icon" style={{marginTop:"-5px" }}>
+                      {/* <span className="edit-icon" style={{marginTop:"-5px" }}>
                         <i className=" fas fa-edit fa-1x" ></i>
                         <div style={{marginTop:"-5px" }} ><span style={{fontSize:"11px" }}>Edit</span></div>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                    
@@ -831,10 +865,10 @@ const addDesiredAbout = (e) => {
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center mt-3">                  
                         <h4 className="mr-3">Education & Work </h4>
-                      <span className="edit-icon" style={{marginTop:"-5px" }}>
+                      {/* <span className="edit-icon" style={{marginTop:"-5px" }}>
                         <i className=" fas fa-edit fa-1x" ></i>
                         <div style={{marginTop:"-5px" }} ><span style={{fontSize:"11px" }}>Edit</span></div>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                    
@@ -910,10 +944,10 @@ const addDesiredAbout = (e) => {
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center mt-3">                  
                         <h4 className="mr-3">Lifestyle</h4>
-                      <span className="edit-icon" style={{marginTop:"-5px" }}>
+                      {/* <span className="edit-icon" style={{marginTop:"-5px" }}>
                         <i className=" fas fa-edit fa-1x" ></i>
                         <div style={{marginTop:"-5px" }} ><span style={{fontSize:"11px" }}>Edit</span></div>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                    
@@ -986,10 +1020,10 @@ const addDesiredAbout = (e) => {
                   <div className="col-lg-12">
                     <div className="d-flex justify-content-center mt-3">                  
                         <h4 className="mr-3">Desired partner </h4>
-                      <span className="edit-icon" style={{marginTop:"-5px" }}>
+                      {/* <span className="edit-icon" style={{marginTop:"-5px" }}>
                         <i className=" fas fa-edit fa-1x" ></i>
                         <div style={{marginTop:"-5px" }} ><span style={{fontSize:"11px" }}>Edit</span></div>
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                    

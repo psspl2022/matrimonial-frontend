@@ -6,7 +6,7 @@ function MainFooter() {
     return (
         <>
             <footer className="footer">
-                <div className="subscribe-newsletter">
+                {/* <div className="subscribe-newsletter">
                     <div className="container">
                         <div className="row justify-content-between">
                             <div className="col-lg-6 col-md-6">
@@ -27,7 +27,7 @@ function MainFooter() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-md-3">
@@ -41,11 +41,10 @@ function MainFooter() {
                                 <h4>Explore</h4>
                                 <ul>
                                     <li><NavLink to="/">Home</NavLink></li>
-                                    <li><NavLink to="/signUp">Login / SignUp</NavLink></li>
+                                    {/* <li><NavLink to="/signUp">Login</NavLink></li>
+                                    <li><NavLink to="/login">SignUp</NavLink></li> */}
                                     <li><NavLink to="/findMatches">Advanced Search</NavLink></li>
-                                    <li><a href="contact_us.html">Sitemap</a></li>
-                                    <li><a href="privacy_policy.html">Create Horoscope</a></li>
-                                    <li><a href="Terms.html">Terms and Conditions</a></li>
+                                    {/* <li><a href="Terms.html">Terms and Conditions</a></li> */}
                                 </ul>
                             </div>
                         </div>
@@ -63,7 +62,7 @@ function MainFooter() {
                                 <h4>Seeking Help</h4>
                                 <ul>
                                     <li><a href="browse_jobs.html">Contact Us</a></li>
-                                    <li><a href="my_freelancer_jobs.html">Feedback / Queries</a></li>
+                                    {/* <li><a href="my_freelancer_jobs.html">Feedback / Queries</a></li> */}
                                 </ul>
                             </div>
                         </div>

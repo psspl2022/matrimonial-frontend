@@ -113,7 +113,7 @@ function ProfileDetails() {
                     <div className="col-lg-6 col-md-4" >
                     <span className="view_head_span">{Math.floor((Date.now() - new Date(data.dob)) / (31557600000))}, </span>
                                   <span className="view_head_span">{data.length != 0  && data.get_height.height}</span><br />
-                      <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}: ${data.get_caste.caste}`) }</span><br />
+                      <span className="view_head_span">{data.length != 0  && (`${data.get_religion.religion}${data.get_caste ? data.get_caste.caste : ""}`) }</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_mother_tongue.mother_tongue}</span><br />
                       <span className="view_head_span">{data.length != 0  && data.get_city.name} </span>                 
                     </div>

@@ -25,6 +25,12 @@ function PhoneStage() {
     }
   }
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => {
     axios.get(`${window.Url}api/sendOtp`, headers_param)
    .then(({ data }) => {
@@ -57,6 +63,7 @@ function PhoneStage() {
           icon: "error",
           text: data.error_msg,
         });
+        close();
       }
     });
 };
@@ -81,6 +88,7 @@ const skipStage = async (e) => {
           icon: "success",
           text: data.msg,
         });
+        close();
         dispatch(regActiveLink('profile'));
         history.go(0);
       } else {
@@ -88,6 +96,7 @@ const skipStage = async (e) => {
           icon: "error",
           text: data.error_msg,
         });
+        close();
       }
     });
 };

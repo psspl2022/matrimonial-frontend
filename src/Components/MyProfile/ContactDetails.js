@@ -16,6 +16,7 @@ export default function ContactDetails() {
     const [parentAdd, setParentAdd] = useState("");
     const [parentPincode, setParentPincode] = useState("");
   
+
     const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
       headers: {
@@ -25,6 +26,13 @@ export default function ContactDetails() {
       },
     };
   
+    const close = () =>{
+        setTimeout(() => {
+          Swal.close();
+        }, 2000);
+      };
+
+      
     useEffect(() => {
         document.title = "Contact Details";
       axios
@@ -43,33 +51,39 @@ export default function ContactDetails() {
         });
     }, []);
 
+    const valueCheck = (formvalue) => {
+        const dataValue = (formvalue == undefined || formvalue == null) ? '' : formvalue.value;
+        return dataValue;
+      };
+
     const submitContactDetails = async (e) => {
         e.preventDefault();
     
         const formData = new FormData()
         formData.append('contact', cont)
-        formData.append('alter_contact', altCont)
-        formData.append('email', email)
-        formData.append('alter_email', altEmail)
-        formData.append('landline', landline)
-        formData.append('time_for_call', suitableTime)
-        formData.append('contact_address', contAdd)
-        formData.append('contact_pincode', contPincode)
-        formData.append('parent_address', parentAdd)
-        formData.append('parent_pincode', parentPincode)
+        formData.append('alter_contact', valueCheck(altCont))
+        formData.append('alter_email', valueCheck(altEmail))
+        formData.append('landline', valueCheck(landline))
+        formData.append('time_for_call', valueCheck(suitableTime))
+        formData.append('contact_address', valueCheck(contAdd))
+        formData.append('contact_pincode', valueCheck(contPincode))
+        formData.append('parent_address', valueCheck(parentAdd))
+        formData.append('parent_pincode', valueCheck(parentPincode))
     
         await axios.post(`${window.Url}api/editContact`, formData, headers_param).then(({data})=>{
           if (data.hasOwnProperty('msg')) {
             Swal.fire({
               icon:"success",
               text:data.msg
-            })
+            });
+            close();
         }
         else{
           Swal.fire({
             icon:"error",
             text:data.msg
-          })
+          });
+          close();
         }
         })
       }
@@ -86,6 +100,18 @@ export default function ContactDetails() {
                         
                             <form onSubmit={submitContactDetails}>
                                 <div className="row">
+                                <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label className="label15">Email Id</label>
+                                            <input type="email" className="job-input" placeholder="Enter Email Id" disabled onChange={(e) => { setEmail(e.target.value); }} value={ email } />
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label className="label15">Alternate Email Id</label>
+                                            <input type="email" className="job-input" placeholder="Enter Alternate Email Id" disabled={ Edit==false ? 'disabled' : ''} onChange={(e) => { setAltEmail(e.target.value); }} value={ altEmail } />
+                                        </div>
+                                    </div>
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label className="label15">Contact No.</label>
@@ -98,18 +124,7 @@ export default function ContactDetails() {
                                             <input type="tel" className="job-input" placeholder="Your Alternate Contact No." disabled={ Edit==false ? 'disabled' : ''} onChange={(e) => { setAltCont(e.target.value); }} value={ altCont } />
                                         </div>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Email Id</label>
-                                            <input type="email" className="job-input" placeholder="Enter Email Id" disabled={ Edit==false ? 'disabled' : ''} onChange={(e) => { setEmail(e.target.value); }} value={ email } />
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Alternate Email Id</label>
-                                            <input type="email" className="job-input" placeholder="Enter Alternate Email Id" disabled={ Edit==false ? 'disabled' : ''} onChange={(e) => { setAltEmail(e.target.value); }} value={ altEmail } />
-                                        </div>
-                                    </div>
+                                   
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label className="label15">Landline No.</label>

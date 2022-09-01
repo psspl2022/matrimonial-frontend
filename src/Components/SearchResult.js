@@ -159,8 +159,8 @@ export default function SearchResult(props) {
                 <li className="sort-list-dt">
                   <div className="ui selection dropdown skills-search sort-dropdown">
                     <input name="gender" type="hidden" value="default" />
-                    <i className="dropdown icon d-icon"></i>
-                    <div className="text">Sort By</div>
+                    {/* <i className="dropdown icon d-icon"></i>
+                    <div className="text">Sort By</div> */}
                     <div className="menu">
                       <div className="item" data-value="0">
                         Relevance

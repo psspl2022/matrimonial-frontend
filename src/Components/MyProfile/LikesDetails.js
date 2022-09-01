@@ -16,6 +16,7 @@ export default function LikesDetails() {
   const [moviesTypes, setMoviesTypes] = useState([]);
   const [sports, setSports] = useState([]);
   const [cuisines, setCuisines] = useState([]);
+  const [colors, setColors] = useState([]);
 
   const [color, setColor] = useState("");
   const [hobby, setHobby] = useState("");
@@ -40,6 +41,8 @@ export default function LikesDetails() {
   const [selectmoviesType, setSelectmoviesType] = useState("");
   const [selectsport, setSelectsport] = useState("");
   const [selectcuisine, setSelectcuisine] = useState("");
+  const [selectColor, setSelectColor] = useState("");
+
 
   const token = window.sessionStorage.getItem("access_token");
   const headers_param = {
@@ -50,12 +53,20 @@ export default function LikesDetails() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   const arrayOfValues = (e) => {
     const value = Array.isArray(e) ? e.map((x) => x.value) : [];
     return value;
   };
   const handleColor = (e) => {
-    setColor(e.target.value);
+    // setColor(e);
+    setSelectColor(e);
+    setColor(arrayOfValues(e));
   };
 
   const handleHobby = (e) => {
@@ -123,6 +134,13 @@ export default function LikesDetails() {
     axios
       .get(`${window.Url}api/likesDropdown`, headers_param)
       .then(({ data }) => {
+
+        setColors(
+          data.colors.map(function (color) {
+            return { value: color.id, label: color.name };
+          })
+        );
+
         setHobbies(
           data.hobbies.map(function (hobby_data) {
             return { value: hobby_data.id, label: hobby_data.hobby };
@@ -176,6 +194,18 @@ export default function LikesDetails() {
     axios
       .get(`${window.Url}api/showLikesDetails`, headers_param)
       .then(({ data }) => {
+
+        setSelectColor(
+          colors.filter((color_data) => {
+            if (
+              data.color.split(",").map(Number).includes(color_data.value)
+            ) {
+              return color_data;
+            }
+          })
+        );
+        setColor(data.colors);
+        
         setSelectHobby(
           hobbies.filter((hobby_data) => {
             if (
@@ -186,6 +216,7 @@ export default function LikesDetails() {
           })
         );
         setHobby(data.hobbies);
+
         setSelectInterest(
           interests.filter((int_data) => {
             if (
@@ -257,7 +288,7 @@ export default function LikesDetails() {
           })
         );
 
-        setTVShow(data.color);
+        setColor(data.color);
         setRead(data.fav_read);
         setTVShow(data.tv_show);
         setMovie(data.movie);
@@ -293,12 +324,14 @@ export default function LikesDetails() {
             icon: "success",
             title: response.data.msg,
           });
+          close();
           // history.replace("/desiredProfile");
         } else {
           Swal.fire({
             icon: "error",
             title: response.data.error_msg,
           });
+          close();
         }
       });
   };
@@ -337,23 +370,27 @@ export default function LikesDetails() {
                         components={animatedComponents}
                         defaultValue=""
                         isMulti
-                        placeholder="Enter Color"
-                        value={selectHobby}
-                        onChange={handleHobby}
+                        placeholder="Select Color"
+                        options={colors}
+                        value={selectColor}
+                        onChange={handleColor}
                         isDisabled={!Edit}
                       />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="form-group">
-                      <label className="label15">Color</label>
-                      <input
-                        type="text"
-                        className="job-input"
-                        placeholder="Enter TV Shows"
-                        disabled={Edit == false ? "disabled" : ""}
-                        onChange={handleColor}
-                        value={color}
+                      <label className="label15">Hobbies</label>
+                      <Select
+                        closeMenuOnSelect={false}
+                        components={animatedComponents}
+                        defaultValue=""
+                        isMulti
+                        placeholder="Select Your Hobies"
+                        options={hobbies}
+                        value={selectHobby}
+                        onChange={handleHobby}
+                        isDisabled={!Edit}
                       />
                     </div>
                   </div>

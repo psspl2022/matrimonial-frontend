@@ -17,6 +17,12 @@ export default function AboutMe() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(async () => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     await axios
@@ -45,11 +51,13 @@ export default function AboutMe() {
             icon: "success",
             text: data.msg,
           });
+          close();
         } else {
           Swal.fire({
             icon: "error",
             text: data.msg,
           });
+          close();
         }
       });
   };

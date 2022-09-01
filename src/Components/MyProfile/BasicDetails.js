@@ -57,6 +57,7 @@ export default function BasicDetails() {
   const [moth, setMoth] = useState("");
   const [selectMoth, setSelectMoth] = useState("");
   const [residence, setResidence] = useState("");
+  const [selectResidence, setSelectResidence] = useState("");
   const [religion, setReligion] = useState("");
   const [selectReligion, setSelectReligion] = useState("");
   const [caste, setCaste] = useState("");
@@ -78,6 +79,12 @@ export default function BasicDetails() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     document.title = "Basic Details";
@@ -89,7 +96,7 @@ export default function BasicDetails() {
             return { value: residence.id, label: residence.residence };
           })
         );
-        
+
         setHeights(
           data.height.map(function (height) {
             return { value: height.id, label: height.height };
@@ -104,7 +111,6 @@ export default function BasicDetails() {
             };
           })
         );
-       
 
         setReligions(
           data.religion.map(function (religion) {
@@ -155,13 +161,6 @@ export default function BasicDetails() {
             }
           })[0]
         );
-        // setCaste(
-        //   castes.filter((caste_data) => {
-        //     if (caste_data.value == data.basic.caste) {
-        //       return caste_data;
-        //     }
-        //   })[0]
-        // );
         setMoth(
           moths.filter((moth_data) => {
             if (moth_data.value == data.basic.mother_tongue) {
@@ -176,13 +175,6 @@ export default function BasicDetails() {
             }
           })[0]
         );
-        // setCountry(
-        //   countries.filter((country_data) => {
-        //     if (country_data.value == data.basic.country) {
-        //       return country_data;
-        //     }
-        //   })[0]
-        // );
         setSect(
           sects.filter((sec_data) => {
             if (sec_data.value == data.basic.sect) {
@@ -214,13 +206,13 @@ export default function BasicDetails() {
     axios
      .get(`${window.Url}api/casteDropdown/${religion.value}`, headers_param)
      .then(({ data }) => {
-      setCastes(
-         data.caste.map(function (caste_data) {
-           return { value: caste_data.id, label: caste_data.caste };
-         })
-       );
+        setCastes(
+          data.caste.map(function (caste_data) {
+            return { value: caste_data.id, label: caste_data.caste };
+          })
+        );
      });
- };
+    };
 
  useEffect(() => {
   setTimeout(()=>{
@@ -233,6 +225,8 @@ export default function BasicDetails() {
     );
   },10)
 }, [castes]);
+
+
 
 useEffect(() => {
   setTimeout(()=>{
@@ -261,12 +255,17 @@ useEffect(() => {
         }
       })[0]
     );
+
+     setState("");
+     setCity("");
   },10)   
  }, [countries]);
 
 
   useEffect(() => {
+    setTimeout(()=>{
     getAllStates();
+  },10)  
   }, [country]);
 
   const getAllStates = () => {
@@ -324,10 +323,50 @@ useEffect(() => {
       },10)
     }, [cities]);
 
+    
+
+    const valueCheck = (formvalue) => {
+      const dataValue = (formvalue == undefined || formvalue == null) ? '' : formvalue.value;
+      return dataValue;
+    };
+
+    const submitBasicDetails = async (e) => {
+      e.preventDefault();
   
+      const formData = new FormData()
+      formData.append('marital_status', valueCheck(maritalStatus));
+      formData.append('religion', valueCheck(religion));
+      formData.append('residence', valueCheck(residence));
+      formData.append('caste', valueCheck(caste));
+      formData.append('mother_tongue', valueCheck(moth));
+      formData.append('height', valueCheck(height));
+      formData.append('country', valueCheck(country));
+      formData.append('state', valueCheck(state));
+      formData.append('city', valueCheck(city));
+      formData.append('sect', valueCheck(sect));
 
+   
+      await axios.post(`${window.Url}api/editBasic`, formData, headers_param)
+      .then(({data})=>{
+        if (data.hasOwnProperty('msg')) {
+          Swal.fire({
+            icon:"success",
+            text:data.msg
+          });
+          close();          
+      }
+      else{
+        Swal.fire({
+          icon:"error",
+          text:data.msg
+        });
+        close();
+      }
+      });
 
+    }
 
+  
 
 
   return (
@@ -354,7 +393,7 @@ useEffect(() => {
               </span>
             </div>
             <div className="post_job_body">
-              <form>
+              <form onSubmit={submitBasicDetails}>
                 <div className="row">
           
                   <div className="col-lg-6">
@@ -363,7 +402,7 @@ useEffect(() => {
                       <input
                         type="text"
                         className="job-input"
-                        disabled={Edit == false ? "disabled" : ""}
+                        disabled
                         placeholder="Your Full Name"
                         value={name}
                       />
@@ -375,12 +414,11 @@ useEffect(() => {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        isClearable
                         isSearchable
                         placeholder="Select Your Gender"
                         value={gender}
                         options={genderOptions}
-                        isDisabled={!Edit}
+                        isDisabled
                         onChange={(e) => {
                           setGender(e);
                         }}
@@ -395,7 +433,7 @@ useEffect(() => {
                         type="date"
                         className="job-input"
                         placeholder="Your DOB"
-                        disabled={Edit == false ? "disabled" : ""}
+                        disabled
                         value={date}
                         onChange={(e) => {
                           setDate(e.target.value);
@@ -410,7 +448,6 @@ useEffect(() => {
                         className="basic-single"
                         classNamePrefix="select"
                         // defaultValue={maritalOptions[parseInt(maritalStatus)-1]}
-                        isClearable
                         isSearchable
                         placeholder="Select Your Marital Status"
                         value={maritalStatus}
@@ -429,7 +466,6 @@ useEffect(() => {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        isClearable
                         isSearchable
                         placeholder="Select Your Height"
                         options={heights}
@@ -449,7 +485,6 @@ useEffect(() => {
                         className="basic-single"
                         classNamePrefix="select"
                         defaultValue={religions[0]}
-                        isClearable
                         isSearchable
                         placeholder="Select Your Religion"
                         options={religions}
@@ -468,7 +503,6 @@ useEffect(() => {
                         className="basic-single"
                         classNamePrefix="select"
                         defaultValue={castes[0]}
-                        isClearable
                         isSearchable
                         placeholder="Select Your Caste"
                         options={castes}
@@ -498,7 +532,6 @@ useEffect(() => {
                         className="basic-single"
                         classNamePrefix="select"
                         defaultValue={moths[0]}
-                        isClearable
                         isSearchable
                         placeholder="Select Mother Tongue"
                         options={moths}
@@ -517,7 +550,6 @@ useEffect(() => {
                         className="basic-single"
                         classNamePrefix="select"
                         defaultValue={residences[0]}
-                        isClearable
                         isSearchable
                         placeholder="Select Residence"
                         options={residences}
@@ -535,7 +567,7 @@ useEffect(() => {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        isClearable
+                        defaultValue={countries[0]}
                         isSearchable
                         placeholder="Select Country Living In"
                         options={countries}
@@ -553,7 +585,7 @@ useEffect(() => {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        isClearable
+                        defaultValue={states[0]}
                         isSearchable
                         placeholder="Select State Living In"
                         options={states}
@@ -571,7 +603,7 @@ useEffect(() => {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        isClearable
+                        defaultValue={cities[0]}
                         isSearchable
                         placeholder="Select City Living In"
                         options={cities}
@@ -583,22 +615,7 @@ useEffect(() => {
                       />
                     </div>
                   </div>
-                  {/* <div className="col-lg-6">
-                                        <div className="form-group">
-                                            <label className="label15">Annual Income</label>
-                                            <Select
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                defaultValue={IncomeOptions[0]}
-                                                isClearable
-                                                isSearchable
-                                                name="income"
-                                                placeholder="Select Your Annual Income"
-                                                options={IncomeOptions}
-                                                isDisabled={ !Edit }
-                                            />
-                                        </div>
-                                    </div> */}
+                
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Sect</label>

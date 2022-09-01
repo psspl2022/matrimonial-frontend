@@ -32,6 +32,12 @@ export default function EducationDetails() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => { 
     document.title = "Education Details";
     axios
@@ -158,13 +164,15 @@ export default function EducationDetails() {
         Swal.fire({
           icon:"success",
           text:data.msg
-        })
+        });
+        close();
     }
     else{
       Swal.fire({
         icon:"error",
         text:data.msg
       })
+      close();
     }
     })
   }

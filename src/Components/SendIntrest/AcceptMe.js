@@ -147,7 +147,7 @@ export default function AcceptMe() {
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
                                 </span>
-                                <span>Caste: {item.get_caste.caste} </span>
+                                <span>Caste: {(item.get_caste != null) ? item.get_caste.caste : ""}  </span>
                                 <span>
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}
@@ -171,6 +171,12 @@ export default function AcceptMe() {
                           <ProfileSkeleton />
                           <ProfileSkeleton />
                           <ProfileSkeleton />
+                        </div>
+                      )}
+
+                      {data.length == 0 && fetchDone && (
+                        <div className="desired_section">
+                          <h3 class="ml-5 mt-5">No Data Found!!</h3>
                         </div>
                       )}
 

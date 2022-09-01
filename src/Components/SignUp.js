@@ -16,9 +16,17 @@ function SignUp() {
     document.title = "SignUp";
   }, [])
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   // const navigate = useNavigate();
   const [verified, setverified] = useState(false);
   const history = useHistory();
+
+  const [info, setInfo] = useState(false);
 
   const [profileFor, setProfileFor] = useState("");
   const [gender, setGender] = useState();
@@ -29,6 +37,7 @@ function SignUp() {
   const [phno, setPhno] = useState("");
   const [passError, setPassError] = useState(false);
   const [validationError,setValidationError] = useState({});
+  const [requiredError, setRequiredError] = useState(false);
 
   const {userExists} = CheckTokenExist();
   
@@ -55,6 +64,15 @@ function SignUp() {
       history.replace("/myprofile");
     }
   }, []);
+
+ 
+  useEffect(() => {
+  if((gender != undefined ||gender != null) && (profileFor != undefined || profileFor != null)){
+    setRequiredError(true);
+  } else{
+    setRequiredError(false);
+  }
+  }, [gender, profileFor]);
 
   function onChange(value) {
     setverified(true);
@@ -91,7 +109,8 @@ function SignUp() {
         Swal.fire({
           icon:"success",
           text:data.msg
-        })
+        });
+        close();
         window.sessionStorage.setItem('access_token', data.token);
         window.sessionStorage.setItem('user_data',JSON.stringify(data.user));
         history.replace("/registrationStage");
@@ -100,7 +119,8 @@ function SignUp() {
       Swal.fire({
         icon:"error",
         text:data.error
-      })
+      });
+      close();
       history.replace("/login");
     }
       
@@ -113,7 +133,8 @@ function SignUp() {
         Swal.fire({
           text:data.errors,
           icon:"error"
-        })
+        });
+        close();
       }
     })
   }
@@ -149,6 +170,8 @@ function SignUp() {
                           setProfileFor(event)
                         }}
                       />
+                     <span style={{color: '#ff0000',
+    fontWeight: '400', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (profileFor == undefined || profileFor == null) ? 'Please select a value' : ''}</span>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -165,8 +188,11 @@ function SignUp() {
                       options={genderOptions}
                       onChange={(event)=>{
                         setGender(event)
-                      }}
+                      }}    
                     />
+
+                  <span style={{color: '#ff0000',
+    fontWeight: '400', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (gender== undefined || gender == null) ? 'Please select gender' : ''}</span>
                   </div>
                   </div>
                   <div className="col-md-4">
@@ -211,7 +237,16 @@ function SignUp() {
                   </div>
                   <div className="col-md-4">
                     <div className="form-group">
-                      <label className="label15">Password*</label>
+                      <label className="label15">Password* <i class="fas fa-info-circle" style={{cursor:"pointer"}} onClick={()=>{
+                              setInfo(!info)
+                          }}></i> </label>
+                        <div class="position-relative" >
+                          <div  class={info == false ? 'd-none' : ''} style={{backgroundColor:"black", color:"white", padding:"10px", borderRadius:"5px", position:"absolute", zIndex: "0", top:"-2px"}}>
+                          <span class="">Password contain atleast 8 characters.
+                          Password should be match all criteria given below:<br/> <ol ><li>English uppercase characters (A – Z)</li> <li>English lowercase characters (a – z)</li> <li>Base 10 digits (0 – 9)</li> <li>Non-alphanumeric (For example: !, $, #, or %)</li></ol></span>
+                          </div>
+                        </div>
+                    </div>
                       <input
                         type="password"
                         className="job-input"
@@ -223,8 +258,9 @@ function SignUp() {
                         }}
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                         required
+                        
                       />
-                    </div>
+                    
                   </div>
                   <div className="col-md-4">                    
                     <div className="form-group mb-4">
@@ -240,6 +276,7 @@ function SignUp() {
                         }}
                         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                         required
+                       
                       />
                       {passError==true && (<span className="text-danger">Confirm Password and Password does not matched</span>) }
                     </div>
@@ -277,7 +314,8 @@ function SignUp() {
                         }
                       }}
                       value="Register"
-                      style={{cursor : verified===false ? "not-allowed" : "pointer" }}
+                      style={{cursor:  (validationError === false )  ?  "not-allowed" : (requiredError === false) ? "not-allowed": "pointer" }}
+                      
                     />  
                     </div>              
                 </div>

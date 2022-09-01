@@ -292,7 +292,7 @@ export default function SearchMatches(props) {
                    </div>
                    <div className="mtab-right">
                      <ul>
-                       <li className="sort-list-dt">
+                       {/* <li className="sort-list-dt">
                          <div className="ui selection dropdown skills-search sort-dropdown">
                            <input name="gender" type="hidden" value="default" />
                            <i className="dropdown icon d-icon"></i>
@@ -312,12 +312,12 @@ export default function SearchMatches(props) {
                              </div>
                            </div>
                          </div>
-                       </li>  
+                       </li>   */}
                      </ul> 
                    </div>   
                          <div className="mtab-right">
                              <ul>
-                                 <li className="sort-list-dt">
+                                 {/* <li className="sort-list-dt">
                                      <div
                                          className="ui selection dropdown skills-search sort-dropdown"
                                      >
@@ -331,7 +331,7 @@ export default function SearchMatches(props) {
                                              <div className="item" data-value="3">Last 15 Days</div>
                                          </div>
                                      </div>
-                                 </li>
+                                 </li> */}
                                  <li className="grid-list">
                                      <button className="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
                                          <i className="fas fa-th-large"></i>
@@ -379,7 +379,7 @@ export default function SearchMatches(props) {
                                  <span>
                                    Religion: {item.get_religion.religion}{" "}
                                  </span>
-                                 <span>Caste: {item.get_caste.caste} </span>
+                                 {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
                                  <span>
                                    Mother Tongue:{" "}
                                    {item.get_mother_tongue.mother_tongue}{" "}
@@ -447,7 +447,7 @@ export default function SearchMatches(props) {
                       </div>
                       <div className="mtab-right">
                         <ul>
-                          <li className="sort-list-dt">
+                          {/* <li className="sort-list-dt">
                             <div className="ui selection dropdown skills-search sort-dropdown">
                               <input name="gender" type="hidden" value="default" />
                               <i className="dropdown icon d-icon"></i>
@@ -467,12 +467,12 @@ export default function SearchMatches(props) {
                                 </div>
                               </div>
                             </div>
-                          </li>  
+                          </li>   */}
                         </ul> 
                       </div>   
                             <div className="mtab-right">
                                 <ul>
-                                    <li className="sort-list-dt">
+                                    {/* <li className="sort-list-dt">
                                         <div
                                             className="ui selection dropdown skills-search sort-dropdown"
                                         >
@@ -486,7 +486,7 @@ export default function SearchMatches(props) {
                                                 <div className="item" data-value="3">Last 15 Days</div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> */}
                                     <li className="grid-list">
                                         <button className="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
                                             <i className="fas fa-th-large"></i>
@@ -534,7 +534,7 @@ export default function SearchMatches(props) {
                                     <span>
                                       Religion: {item.get_religion.religion}{" "}
                                     </span>
-                                    <span>Caste: {item.get_caste.caste} </span>
+                                    {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
                                     <span>
                                       Mother Tongue:{" "}
                                       {item.get_mother_tongue.mother_tongue}{" "}
@@ -635,7 +635,7 @@ export default function SearchMatches(props) {
             </div>
             <div className="mtab-right">
               <ul>
-                <li className="sort-list-dt">
+                {/* <li className="sort-list-dt">
                   <div className="ui selection dropdown skills-search sort-dropdown">
                     <input name="gender" type="hidden" value="default" />
                     <i className="dropdown icon d-icon"></i>
@@ -655,7 +655,7 @@ export default function SearchMatches(props) {
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> */}
                 <li className="grid-list">
                   <button
                     className="gl-btn"
@@ -735,7 +735,7 @@ export default function SearchMatches(props) {
                               <span>
                                 Religion: {item.get_religion.religion}{" "}
                               </span>
-                              <span>Caste: {item.get_caste.caste} </span>
+                              {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
                               <span>
                                 Mother Tongue:{" "}
                                 {item.get_mother_tongue.mother_tongue}{" "}
@@ -750,10 +750,8 @@ export default function SearchMatches(props) {
                         <div className="job-buttons">
                           <ul className="link-btn">
                             <li className="bkd-pm">
-                              {item.get_interest_received &&
-                                item.get_interest_received.reg_id.includes(
-                                  item["reg_id"]
-                                ) && (
+                              {item.get_interest_sent != null
+                                 && (
                                   <button
                                     className="bookmark1"
                                     style={{
@@ -766,10 +764,8 @@ export default function SearchMatches(props) {
                                   </button>
                                 )}
 
-                              {(item.get_interest_received == null ||
-                                !item.get_interest_received.reg_id.includes(
-                                  item["reg_id"]
-                                )) && (
+                              {(item.get_interest_sent == null 
+                                )&& (
                                 <button
                                   className="bookmark1"
                                   onClick={(e) => sendIntrest(item["reg_id"])}

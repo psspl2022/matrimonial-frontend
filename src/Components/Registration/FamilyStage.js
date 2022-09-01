@@ -15,7 +15,6 @@ function FamilyStage() {
   const history = useHistory();
 
   const familyTypes = [
-    { value: "0", label: "Select Option" },
     { value: "1", label: "Nuclear" },
     { value: "2", label: "Joint" },
     { value: "3", label: "Others" },
@@ -33,7 +32,7 @@ function FamilyStage() {
   ];
 
   const [occupations, setOccupations] = useState([]);
-  const [familyLivingIn, setFamilyLivingIn] = useState([]);
+  const [state, setState] = useState([]);
   const [nativeCities, setNativeCities] = useState([]);
 
   const [famType, setFamType] = useState('');
@@ -41,13 +40,23 @@ function FamilyStage() {
   const [motherOccupation, setMotherOccupation] = useState('');
   const [bro, setBro] = useState('');
   const [sis, setSis] = useState('');
-  const [famLiving, setFamLiving] = useState('');
+  const [nativeState, setNativeState] = useState('');
   const [nativeCity, setNativeCity] = useState('');
   const [aboutFam, setAboutFam] = useState('');
+
+  const [requiredError, setRequiredError] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    if((fatherOccupation == undefined || fatherOccupation == null || fatherOccupation == "") || (motherOccupation == undefined || motherOccupation == null ||  motherOccupation == '') || (bro == undefined ||bro == null || bro == ''  ) || (sis == undefined || sis == null || sis == '')|| (famType == undefined || famType == null || famType == '')|| (nativeCity == undefined || nativeCity == null || nativeCity == '')|| (nativeState == undefined || nativeState == null || nativeState == '')){
+      setRequiredError(true);      
+    } else{
+      setRequiredError(false);
+    }
+  }, [fatherOccupation, motherOccupation, bro, sis, famType, nativeCity,nativeState]);
 
   const token = window.sessionStorage.getItem('access_token');
   const headers_param = {
@@ -58,6 +67,12 @@ function FamilyStage() {
     }
   }
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => {
     axios.get(`${window.Url}api/familyDropdown`, headers_param)
       .then(({ data }) => {
@@ -65,26 +80,22 @@ function FamilyStage() {
           return { value: occupation.id, label: occupation.occupation };
         }))
 
-        setFamilyLivingIn(data.state.map(function (state) {
+        setState(data.state.map(function (state) {
           return { value: state.id, label: state.name };
         }))
-
-        // setNativeCities(data.city.map(function (city) {
-        //   return { value: city.id, label: city.name };
-        // }))
 
       });
   }, []);
 
   useEffect(() => {
-    axios.get(`${window.Url}api/cityDropdown/${famLiving.value}`, headers_param)
+    axios.get(`${window.Url}api/cityDropdown/${nativeState.value}`, headers_param)
    .then(({ data }) => {
   
     setNativeCities(data.city.map(function (city) {
           return { value: city.id, label: city.name };
         }) );
    });
-  }, [famLiving]);
+  }, [nativeState]);
 
   const submitFamilyDetails = async (e) => {
     e.preventDefault();
@@ -95,7 +106,7 @@ function FamilyStage() {
     formData.append('mother_occupation', motherOccupation.value)
     formData.append('brother_count', bro.value)
     formData.append('sister_count', sis.value)
-    formData.append('native_state', famLiving.value)
+    formData.append('native_state', nativeState.value)
     formData.append('native_city', nativeCity.value)
     formData.append('about_family', aboutFam)
 
@@ -113,7 +124,8 @@ function FamilyStage() {
         Swal.fire({
           icon:"success",
           text:data.msg
-        })
+        });
+        close();
         dispatch(regActiveLink('phone'));
         history.go(0);
     }
@@ -121,7 +133,8 @@ function FamilyStage() {
       Swal.fire({
         icon:"error",
         text:data.msg
-      })
+      });
+      close();
     }
     })
   }
@@ -152,8 +165,9 @@ function FamilyStage() {
                     onChange={(event) => {
                       setFamType(event);
                     }}
-                    required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (famType == undefined || famType == null || famType == '') ? 'Please select family type' : ''}</span>
                 </div>
                     </div>
                     <div className="col-md-4">
@@ -171,8 +185,8 @@ function FamilyStage() {
                     onChange={(event) => {
                       setFatherOccupation(event);
                     }}
-                    required
-                  />
+                  /><span style={{color: '#ff0000',
+                  fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (fatherOccupation == undefined || fatherOccupation == null || fatherOccupation == '') ? 'Please select father occupation' : ''}</span>
                 </div>
                     </div>
                     <div className="col-md-4">
@@ -190,8 +204,9 @@ function FamilyStage() {
                     onChange={(event) => {
                       setMotherOccupation(event);
                     }}
-                    required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (motherOccupation == undefined || motherOccupation == null || motherOccupation == '') ? 'Please select mother occupation' : ''}</span>
                 </div>
                     </div>
                     <div className="col-md-4">
@@ -209,25 +224,28 @@ function FamilyStage() {
                     onChange={(event) => {
                       setBro(event);
                     }}
-                    required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (bro == undefined || bro == null || bro == '') ? 'Please select highest brother count' : ''}</span>
                 </div>
                     <div className="form-group">
-                  <label className="label15">Family Living In*</label>
+                  <label className="label15">Native State*</label>
                   <Select
                     className="basic-single"
                     classNamePrefix="select"
                     defaultValue=''
                     isClearable
                     isSearchable
-                    name="family_living_in"
+                    name="native_state"
                     placeholder="Select State"
-                    options={familyLivingIn}
+                    options={state}
                     onChange={(event) => {
-                      setFamLiving(event);
+                      setNativeState(event);
                     }}
                     required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (nativeState == undefined || nativeState == null || nativeState == '') ? 'Please select native state' : ''}</span>
                 </div>
                     </div>
                     <div className="col-md-4">
@@ -246,8 +264,9 @@ function FamilyStage() {
                     onChange={(event) => {
                       setSis(event);
                     }}
-                    required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (sis == undefined || sis == null || sis == '') ? 'Please select sister count' : ''}</span>
                 </div>
                 <div className="form-group">
                   <label className="label15">Native City*</label>
@@ -263,8 +282,9 @@ function FamilyStage() {
                     onChange={(event) => {
                       setNativeCity(event);
                     }}
-                    required
                   />
+                  <span style={{color: '#ff0000',
+    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (nativeCity == undefined || nativeCity == null || nativeCity == '') ? 'Please select native city' : ''}</span>
                 </div>
                     </div>
                     <div className="col-md-4">
@@ -280,7 +300,8 @@ function FamilyStage() {
                     <input
         type="submit"
         className="lr_btn float-none"
-        value="Add to my Profile" />
+        value="Add to my Profile" 
+        style={{cursor: (requiredError == true) ? "not-allowed": "pointer" }}/>
                     </div>
                   </div>   
         </form>

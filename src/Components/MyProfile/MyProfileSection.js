@@ -27,6 +27,12 @@ function MyProfileSection() {
 			"Content-Type": "application/json"
 		  },
 		};
+
+    const close = () =>{
+      setTimeout(() => {
+        Swal.close();
+      }, 2000);
+    };
 	
 		await axios
 		  .get(`${window.Url}api/logout`, headers_param)
@@ -36,8 +42,9 @@ function MyProfileSection() {
 				icon: "success",
 				text: data.message,
 			  });
+        close();
 			  window.sessionStorage.removeItem('access_token');
-          	  window.sessionStorage.removeItem('user_data');
+        window.sessionStorage.removeItem('user_data');
 				// setToken('');
 				// setUserData('');
 			  history.replace('/');
@@ -46,6 +53,7 @@ function MyProfileSection() {
 				icon: "error",
 				text: data.message,
 			  });
+        close();
 			}
 		  });
 	  };

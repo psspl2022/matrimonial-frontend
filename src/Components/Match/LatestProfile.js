@@ -22,6 +22,12 @@ export default function LatestProfile() {
     },
   };
 
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0)
         latestProfile();
@@ -113,6 +119,7 @@ export default function LatestProfile() {
               icon: "error",
               title: response.data.errmsg,
           });
+          close();
         }
       });
   };
@@ -244,7 +251,7 @@ export default function LatestProfile() {
                                     <span>
                                       Religion: {item.get_religion.religion}{" "}
                                     </span>
-                                    <span>Caste: {item.get_caste.caste} </span>
+                                    {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
                                     <span>
                                       Mother Tongue:{" "}
                                       {item.get_mother_tongue.mother_tongue}{" "}
@@ -301,6 +308,7 @@ export default function LatestProfile() {
                                           onClick={(e) =>
                                             shortlistProfile(item.reg_id)
                                           }
+                                          title="Un-Shortlist Profile"
                                           style={{
                                             color: "#fff",
                                             background: "#ee0a4b",
@@ -339,6 +347,12 @@ export default function LatestProfile() {
                         <div className="desired_section">
                             <ProfileSkeleton />
                             <ProfileSkeleton />
+                        </div>
+                      )}
+
+                      {data.length == 0 && fetchDone && (
+                        <div className="desired_section">
+                          <h3 class="ml-5 mt-5">No Data Found!!</h3>
                         </div>
                       )}
 

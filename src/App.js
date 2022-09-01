@@ -6,7 +6,7 @@ import SuccessMatches from "./Components/SuccessMatches";
 import MembershipPlan from "./Components/MembershipPlan";
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Redirect, useNavigate } from "react-router-dom";
 import { Switch } from "react-router-dom";
 import SearchMatches from "./Components/SearchMatches";
 import RegistrationView from "./Components/RegistrationView";
@@ -28,11 +28,16 @@ import Shortlist from "./Components/Shortlist/Shortlist";
 import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import LatestProfile from "./Components/Match/LatestProfile";
 import DailyRecommendation from "./Components/Match/DailyRecommendation";
+import axios from "axios";
 
 function App() {
   const [browse, setBrowse] = useState(null);
   const [browseid, setBrowseId] = useState(null);
   const [url, setUrl] = useState('/');
+  const [stage, setStage] = useState('6');
+  
+
+  const history = useHistory();
 
  useEffect(()=>{
    setUrl(window.location.pathname)
@@ -40,7 +45,18 @@ function App() {
 
   function getUrl(url)
   {
-    setUrl(url)    
+    setUrl(url);
+    axios
+      .get(`${window.Url}api/getRegisterFormStatus`,headers_param)
+      .then(({ data }) => {
+       setStage(data['0'].stage_no);
+       
+       if(data['0'].stage_no < 6 ){
+        if(url!='/registrationStage'){
+          window.location.replace('/registrationStage');
+        }
+       }
+      });  
   }
 
 
@@ -50,11 +66,34 @@ function App() {
     setBrowseId(id)
     
   }
+
+  const token = window.sessionStorage.getItem("access_token");
+    const headers_param = {
+      headers: {
+        authorization: "Bearer "+ token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+
+  useEffect(() => {
+    axios
+      .get(`${window.Url}api/getRegisterFormStatus`,headers_param)
+      .then(({ data }) => {
+       setStage(data['0'].stage_no);
+       
+       if(data['0'].stage_no < 6 ){
+        if(window.location.pathname!='/registrationStage'){
+          window.location.replace('/registrationStage');
+        }
+       }
+      });
+    },[]);
+
   return (
     <div className="App">
-      <BrowserRouter>
-      
-      { url != "/registrationStage" && <>
+      <BrowserRouter>      
+      {  (stage == 6) ? (url != "/registrationStage" ) && <>
       <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}/>
         <Switch>
             <Route path="/" exact>
@@ -122,9 +161,13 @@ function App() {
         </Switch>
         <MainFooter />
         </> 
-        }  
+       :  <><Redirect
+            to={{
+              pathname: "/registrationStage",
+            }}
+          /></> }
         <Switch>
-        
+      
         {/* <Route path="/" exact>
             {browse==null &&
             <>
@@ -137,12 +180,14 @@ function App() {
             </>
             } 
         </Route> */}
-          
-       
+  
+
         <Route path="/registrationStage" exact>
-            <RegisterHeader />
+            <RegisterHeader getUrl={getUrl} />
             <RegistrationStage  getUrlData={getUrl}/>
           </Route>
+   
+
         </Switch>    
          
       </BrowserRouter>

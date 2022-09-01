@@ -5,14 +5,12 @@ import Swal from "sweetalert2";
 
 export default function FamilyDetails() {
   const familyTypes = [
-    { value: "0", label: "Select Option" },
     { value: "1", label: "Nuclear" },
     { value: "2", label: "Joint" },
     { value: "3", label: "Others" },
   ];
 
   const familyStatus = [
-    { value: "0", label: "Select Option" },
     { value: "1", label: "Rich" },
     { value: "2", label: "Upper Class" },
     { value: "3", label: "Middle Class" },
@@ -20,14 +18,12 @@ export default function FamilyDetails() {
   ];
 
   const familyValues = [
-    { value: "0", label: "Select Option" },
     { value: "1", label: "Liberal" },
     { value: "2", label: "Orthodox" },
     { value: "3", label: "Conservative" },
   ];
 
   const broAndSister = [
-    { value: 0, label: "None" },
     { value: 1, label: "1" },
     { value: 2, label: "2" },
     { value: 3, label: "3" },
@@ -38,8 +34,8 @@ export default function FamilyDetails() {
   ];
 
   const yesNoOptions = [
-    { value: "1", label: "Yes" },
-    { value: "0", label: "No" },
+    { value: "1", label: "No" },
+    { value: "2", label: "Yes" },
   ];
 
   const [Edit, setEdit] = useState(false);
@@ -73,6 +69,12 @@ export default function FamilyDetails() {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+  };
+
+  const close = () =>{
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
   };
 
   useEffect(() => {
@@ -198,7 +200,9 @@ export default function FamilyDetails() {
   }, [familyLiv]);
 
   const getAllCities = () => {
-     axios
+    if(familyLiv != undefined && familyLiv != null)
+    {
+      axios
       .get(`${window.Url}api/cityDropdown/${familyLiv.value}`, headers_param)
       .then(({ data }) => {
         setCities(
@@ -207,6 +211,7 @@ export default function FamilyDetails() {
           })
         );
       });
+    }   
   };
 
   useEffect(() => {
@@ -219,40 +224,48 @@ export default function FamilyDetails() {
     );
   }, [cities]);
 
+
+  const valueCheck = (formvalue) => {
+    const dataValue = (formvalue == undefined || formvalue == null) ? 0 : formvalue.value;
+    return dataValue;
+  };
   const submitFamilyDetails = async (e) => {
     e.preventDefault();
 
     const formData = new FormData()
-    formData.append('profile_handler_name', handler)
-    formData.append('father_occupation', fatherOcc.value)
-    formData.append('mother_occupation', motherOcc.value)
-    formData.append('brother_count', bro.value)
-    formData.append('married_brother_count', marriedBro.value)
-    formData.append('sister_count', sis.value)
-    formData.append('married_sister_count', marriedSis.value)
-    formData.append('gotra', gothra)
-    formData.append('gotra_maternal', maternalGothra)
-    formData.append('family_status', familySta.value)
-    formData.append('family_values', familyVal.value)
-    formData.append('family_type', familyTyp.value)
-    formData.append('family_income', familyInc.value)
-    formData.append('native_state', familyLiv.value)
-    formData.append('native_city', familyCity.value)
-    formData.append('living_with_parent', livingWithFam.value)
+    formData.append('profile_handler_name', (handler == undefined || handler == null) ? '' : handler.value)
+    formData.append('father_occupation', (fatherOcc == undefined || fatherOcc == null) ? null : fatherOcc.value)
+    formData.append('mother_occupation', (motherOcc == undefined || motherOcc == null) ? null : motherOcc.value)
+    formData.append('brother_count', (bro == undefined || bro == null) ? '' : bro.value)
+    formData.append('married_brother_count', (marriedBro == undefined || marriedBro == null) ? '' : marriedBro.value)
+    formData.append('sister_count', (sis == undefined || sis == null) ? '' : sis.value)
+    formData.append('married_sister_count',(marriedSis == undefined || marriedSis == null) ? '' : marriedSis.value)
+    formData.append('gotra', (gothra == undefined || gothra == null) ? '' : gothra.value)
+    formData.append('gotra_maternal', (maternalGothra == undefined || maternalGothra == null) ? '' : maternalGothra.value)
+    formData.append('family_status', valueCheck(familySta))
+    formData.append('family_values', valueCheck(familyVal))
+    formData.append('family_type', valueCheck(familyTyp))
+    formData.append('family_income', (familyInc == undefined || familyInc == null) ? '' : familyInc.value)
+    formData.append('native_state', (familyLiv == undefined || familyLiv == null) ? null: familyLiv.value)
+    formData.append('native_city', (familyCity == undefined || familyCity == null) ? null : familyCity.value)
+    formData.append('living_with_parent', valueCheck(livingWithFam))
 
 
     await axios.post(`${window.Url}api/editFamily`, formData, headers_param).then(({data})=>{
+      console.log(data);
       if (data.hasOwnProperty('msg')) {
         Swal.fire({
           icon:"success",
           text:data.msg
-        })
+        });
+        close();
     }
     else{
       Swal.fire({
         icon:"error",
         text:data.error_msg
-      })
+      });
+        close();
     }
     })
   }
@@ -310,7 +323,7 @@ export default function FamilyDetails() {
                         isClearable
                         isSearchable
                         name="mother_occupation"
-                        placeholder="Select mother's Occupation"
+                        placeholder="Select Mother's Occupation"
                         options={occupations}
                         value={motherOcc}
                         onChange={(event) => {
@@ -326,7 +339,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={occupations[0]}
                         isClearable
                         isSearchable
                         placeholder="Select Father's Occupation"
@@ -345,7 +358,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={broAndSister['']}
                         isClearable
                         isSearchable
                         name="sister"
@@ -365,7 +378,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={broAndSister['']}
                         isClearable
                         isSearchable
                         name="sister"
@@ -385,7 +398,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={broAndSister['']}
                         isClearable
                         isSearchable
                         name="brother"
@@ -405,7 +418,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={broAndSister['']}
                         isClearable
                         isSearchable
                         name="brother"
@@ -474,7 +487,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={incomes[0]}
                         isClearable
                         isSearchable
                         placeholder="Select Family Income"
@@ -550,7 +563,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={cities[0]}
                         isClearable
                         isSearchable
                         placeholder="Select City"
@@ -569,7 +582,7 @@ export default function FamilyDetails() {
                       <Select
                         className="basic-single"
                         classNamePrefix="select"
-                        defaultValue=""
+                        defaultValue={yesNoOptions[0]}
                         isClearable
                         isSearchable
                         placeholder="Select Living with parents"
