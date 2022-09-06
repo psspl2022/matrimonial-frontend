@@ -109,9 +109,9 @@ function LatestMatch() {
                                     src={
                                       item.get_user_register.gender == 1
                                         ? process.env.PUBLIC_URL +
-                                          "/male_avatar.png"
+                                        "/male_avatar.png"
                                         : process.env.PUBLIC_URL +
-                                          "/female_avatar.png"
+                                        "/female_avatar.png"
                                     }
                                     alt="user profile image"
                                     style={{
@@ -125,16 +125,13 @@ function LatestMatch() {
                             </div>
                             <div className="job-des-dt">
                               <h2 style={{ fontWeight: "200" }}>{item.name}</h2>
-                              {/* <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit. Etiam cursus pulvinar dolor nec...
-                                            </p> */}
+
                               <div className="job-skills">
                                 <span>
                                   Age:{" "}
                                   {Math.floor(
                                     (Date.now() - new Date(item.dob)) /
-                                      31557600000
+                                    31557600000
                                   )}{" "}
                                   years
                                 </span>
@@ -142,19 +139,18 @@ function LatestMatch() {
                                 <span>
                                   Religion: {item.get_religion.religion}{" "}
                                 </span>
-                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste}  </span>)}
+                                <span>Caste: {item.get_caste.caste} </span>
                                 <span>
                                   Mother Tongue:{" "}
                                   {item.get_mother_tongue.mother_tongue}{" "}
                                 </span>
-                                <span>Salary: {item.get_income.income}{" "} </span>
-                                <span>
+
+                                <><span>Salary: {item.get_income.income}{" "} </span><span>
                                   Qualification: {item.get_education.education}{" "}
-                                </span>
-                                <span>
-                                  Occupation: {item.get_occupation.occupation}{" "}
-                                </span>
-                                {/* <span className="more-skills">+4</span> */}
+                                </span><span>
+                                    Occupation: {item.get_occupation.occupation}{" "}
+                                  </span></>
+                                <span className="more-skills">+4</span>
                               </div>
                             </div>
                           </div>

@@ -16,6 +16,7 @@ export default function SearchMatches(props) {
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [key, setKey] = useState([]);
+  const [check, setCheck] = useState(true);
   const [page, setPage] = useState("0");
   const [check, setCheck] = useState(true);
   const [searchData, setSearchData] = useState([]);
@@ -61,12 +62,10 @@ export default function SearchMatches(props) {
       </div>
     );
   };
+  // side filter 
   useEffect(() => {
     setData(
       forFilter.filter((prof_data) => {
-        // console.log(prof_data);
-        // console.log(prof_data.marital_status + "=>" + parfilterData[8]);
-        // console.log(prof_data.height +">= "+parfilterData[3]);
         const check = (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
           (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
           (parfilterData[2] != ""
@@ -91,10 +90,12 @@ export default function SearchMatches(props) {
             ? parfilterData[8].includes(prof_data.marital_status)
             : 1);
         setCheck(check);
-        // console.log(check);
+
         if (check) {
-          // console.log(prof_data.length);
-          // return prof_data.length;
+          return prof_data;
+        }
+        else {
+          prof_data = ["none"];
           return prof_data;
         }
 
