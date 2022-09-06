@@ -393,11 +393,9 @@ useEffect(async () => {
 
         setSelectChallenge(             
           ChallengedOptions.filter((challenge_data)=>{
-            if(data.challenged != null){
-            if(data.challenged.split(",").map(Number).includes(challenge_data.value)){
+            if(data.challenged.split(",").includes(challenge_data.value)){
               return challenge_data;              
             } 
-          }
           })
         );
         setChallenge(data.challenged)
@@ -500,7 +498,7 @@ e.preventDefault();
   formData.append("maxage", valueCheck(maxiage));  
   formData.append("minheight", valueCheck(miniheight));
   formData.append("maxheight", valueCheck(maxiheight));
-  formData.append("country", valueCheck(country));
+  formData.append("country",country);
   formData.append("residence", residence);
   formData.append("marital", marital);
 

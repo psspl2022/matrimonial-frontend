@@ -96,7 +96,7 @@ export function Usercard(props) {
                 </span>
                 <span>Height: {props.item.get_height.height} </span>
                 <span>Religion: {props.item.get_religion.religion} </span>
-                <span>Caste: {props.item.get_caste.caste} </span>
+                {props.item.get_caste != null && (<span>Caste: {props.item.get_caste.caste} </span>)}
                 <span>
                   Mother Tongue: {props.item.get_mother_tongue.mother_tongue}{" "}
                 </span>
