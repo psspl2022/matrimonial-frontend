@@ -18,7 +18,6 @@ export default function SearchMatches(props) {
   const [key, setKey] = useState([]);
   const [check, setCheck] = useState(true);
   const [page, setPage] = useState("0");
-  const [check, setCheck] = useState(true);
   const [searchData, setSearchData] = useState([]);
   const [browseData, setBrowseData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
