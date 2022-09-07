@@ -206,6 +206,9 @@ export default function SearchMatches(props) {
     showAllProfiles(page, parfilterData);
     setFetchDone(true);
   }, [page, parfilterData]);
+  useEffect(() => {
+    setPage(0);
+  }, [parfilterData]);
 
   useEffect(() => {
     const formData = new FormData()
