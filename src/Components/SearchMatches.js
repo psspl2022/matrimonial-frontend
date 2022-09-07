@@ -257,16 +257,16 @@ export default function SearchMatches(props) {
     axios
       .post(`${window.Url}api/postBrowseProfile`, formData)
       .then(({ data }) => {
-        setBrowseData(data);
+        setBrowseData(data['data']);
         setFetchDone(true);
       });
-  }, [props]);
+  }, [forFilter]);
 
   return (
     <>
       {!token && (
         <>
-          {browseData.length == 0 && (
+          {!browseData && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -277,7 +277,7 @@ export default function SearchMatches(props) {
                         <div className="tab-content ">
                           <div className="tab-pane active" id="tab-1">
                             <div className="row view-group " id="products">
-                              {browseData &&
+                              {searchData &&
                                 searchData.map((item, index) => (
 
                                   <>
@@ -296,7 +296,7 @@ export default function SearchMatches(props) {
                                   </>
                                 ))}
 
-                              {data.length == 0 || (!fetchDone && loding())}
+                              {data || (!fetchDone && loding())}
 
                               <div className="col-12">
                                 <div className="main-p-pagination">
@@ -312,9 +312,9 @@ export default function SearchMatches(props) {
                 </div>
               </main>
             </>
-          )}
+      )}
 
-          {browseData.length != 0 && (
+          {browseData && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -361,7 +361,7 @@ export default function SearchMatches(props) {
             </>
           )}
         </>
-      )}
+     )} 
 
       {token && (
         <Showdata data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
