@@ -177,7 +177,7 @@ export default function SearchMatches(props) {
     }
 
     if (props.browse == 'occupation') {
-      alert("ok");
+
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -249,18 +249,18 @@ export default function SearchMatches(props) {
       });
   }, [forFilter]);
 
-  // useEffect(() => {
-  //   const formData = new FormData()
-  //   formData.append('browse', props.browse)
-  //   formData.append('browseId', props.browseId)
+  useEffect(() => {
+    const formData = new FormData()
+    formData.append('browse', props.browse)
+    formData.append('browseId', props.browseId)
 
-  //   axios
-  //     .post(`${window.Url}api/postBrowseProfile`, formData)
-  //     .then(({ data }) => {
-  //       setBrowseData(data);
-  //       setFetchDone(true);
-  //     });
-  // }, [props]);
+    axios
+      .post(`${window.Url}api/postBrowseProfile`, formData)
+      .then(({ data }) => {
+        setBrowseData(data);
+        setFetchDone(true);
+      });
+  }, [props]);
 
   return (
     <>
@@ -282,7 +282,7 @@ export default function SearchMatches(props) {
 
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                      {"search "}
+                                  
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
@@ -329,7 +329,7 @@ export default function SearchMatches(props) {
                                 browseData.map((item, index) => (
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                      {"search "}
+                                   
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
