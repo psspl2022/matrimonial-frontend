@@ -7,12 +7,12 @@ import { useHistory } from "react-router-dom";
 import TawkTo from 'tawkto-react';
 
 function MainHeader(props) {
-  const [religionStyle, setReligionStyle] = useState({display: 'block,'});
-  const [casteStyle, setCasteStyle] = useState({display: 'none'});
-  const [motherStyle, setMotherStyle] = useState({display: 'none'});
-  const [stateStyle, setStateStyle] = useState({display: 'none'});
-  const [cityStyle, setCityStyle] = useState({display: 'none'});
-  const [occupationStyle, setOccupationStyle] = useState({display: 'none'});
+  const [religionStyle, setReligionStyle] = useState({ display: 'block,' });
+  const [casteStyle, setCasteStyle] = useState({ display: 'none' });
+  const [motherStyle, setMotherStyle] = useState({ display: 'none' });
+  const [stateStyle, setStateStyle] = useState({ display: 'none' });
+  const [cityStyle, setCityStyle] = useState({ display: 'none' });
+  const [occupationStyle, setOccupationStyle] = useState({ display: 'none' });
   const [show, setShow] = useState(false);
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState({});
@@ -29,18 +29,18 @@ function MainHeader(props) {
     // 	window.removeEventListener('scroll', isSticky);
     // };
   });
-//   useEffect(() => {
-//     if(token.length != 0){
-//     var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
+  //   useEffect(() => {
+  //     if(token.length != 0){
+  //     var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
 
-//     tawk.onStatusChange((status) => 
-//     {
-//       // tawk.minimize();
-//         // console.log(status)
-//     })
-//   }
+  //     tawk.onStatusChange((status) => 
+  //     {
+  //       // tawk.minimize();
+  //         // console.log(status)
+  //     })
+  //   }
 
-// }, [])
+  // }, [])
 
   useEffect(() => {
     if (sessionStorage.hasOwnProperty("access_token")) {
@@ -53,31 +53,31 @@ function MainHeader(props) {
       setGender(window.sessionStorage.getItem("gender"));
     }
 
-	const token = window.sessionStorage.getItem("access_token");
+    const token = window.sessionStorage.getItem("access_token");
     const headers_param = {
       headers: {
-        authorization: "Bearer "+ token,
+        authorization: "Bearer " + token,
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     };
 
-    const close = () =>{
+    const close = () => {
       setTimeout(() => {
         Swal.close();
       }, 2000);
     };
-    
+
     axios
       .get(`${window.Url}api/getProfileImage`, headers_param)
       .then(({ data }) => {
         if (data.hasOwnProperty("msg")) {
           setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`);
         } else {
-          if(gender.gender == 1){
-          setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
-          } else{
-            setUserImage(`${ process.env.PUBLIC_URL + "/female_avatar.png" }`);
+          if (gender.gender == 1) {
+            setUserImage(`${process.env.PUBLIC_URL + "/male_avatar.png"}`);
+          } else {
+            setUserImage(`${process.env.PUBLIC_URL + "/female_avatar.png"}`);
           }
           // Swal.fire({
           //   icon: "error",
@@ -86,25 +86,24 @@ function MainHeader(props) {
         }
       });
 
-      if(token){
-        var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
-    
-        tawk.onStatusChange((status) => 
-        {
-          // tawk.minimize();
-        })
-      }
+    if (token) {
+      var tawk = new TawkTo('62965117b0d10b6f3e74f9ce', '1g4dipi24');
 
-      browseProfileBy();
-    
+      tawk.onStatusChange((status) => {
+        // tawk.minimize();
+      })
+    }
+
+    browseProfileBy();
+
   }, []);
 
- 
+
   const browseProfileBy = () => {
     axios
       .get(`${window.Url}api/browseProfileBy`)
-      .then(( response ) => {
-          setData(response.data);
+      .then((response) => {
+        setData(response.data);
       });
   };
 
@@ -254,25 +253,25 @@ function MainHeader(props) {
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12">
                 <nav className="navbar navbar-expand-lg navbar-light bg-dark1 justify-content-sm-start">
-                  
+
                   <NavLink
                     className="order-1 order-lg-0 ml-lg-0 ml-3 mr-auto"
-                    to="" style={{ width: "200px"}}
+                    to="" style={{ width: "200px" }}
                   >
                     <div className="row">
                       <div className="col-4">
-                      <img
-                        src="matrimonial_logo.png"
-                        alt=""
-                        style={{ maxHeight: "40px"}}
-                      />
-                      </div>                    
+                        <img
+                          src="matrimonial_logo.png"
+                          alt=""
+                          style={{ maxHeight: "40px" }}
+                        />
+                      </div>
                       <div className="col-8">
-                      <span style={{color:'#ee0a4b', fontSize:"28px", fontStyle: "italic", fontWeight:"700"}} >Namdeo</span><r /><br /><span style={{ letterSpacing: "0px", fontWeight:"700"}}> MATRIMONY <i class="fa fa-heart" aria-hidden="true"></i></span>
+                        <span style={{ color: '#ee0a4b', fontSize: "28px", fontStyle: "italic", fontWeight: "700" }} >Namdeo</span><r /><br /><span style={{ letterSpacing: "0px", fontWeight: "700" }}> MATRIMONY <i className="fa fa-heart" aria-hidden="true"></i></span>
                       </div>
                     </div>
-                    
-                   
+
+
                   </NavLink>
                   <button
                     className="navbar-toggler align-self-start"
@@ -283,9 +282,8 @@ function MainHeader(props) {
                   </button>
                   <div
                     onBlur={(e) => setShow(false)}
-                    className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${
-                      show ? "open" : ""
-                    }`}
+                    className={`collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu ${show ? "open" : ""
+                      }`}
                     id="navbarSupportedContent"
                   >
                     <ul className="navbar-nav align-self-stretch">
@@ -300,7 +298,7 @@ function MainHeader(props) {
                       </>
                       )} */}
                       <li className="nav-item dropdown">
-                      <a
+                        <a
                           href="#"
                           className="nav-link dropdown-toggle-no-caret font-lobster"
                           role="button"
@@ -308,254 +306,254 @@ function MainHeader(props) {
                         >
                           Browse Profiles By
                         </a>
-                        <div className="dropdown-menu pages-dropdown row" style={{width:"0px", }}>
-                          <div className="col-3" style={{position:"relative", }}>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'block'});
-                            setCasteStyle({display: 'none'});
-                            setMotherStyle({display: 'none'});
-                            setStateStyle({display: 'none'});
-                            setCityStyle({display: 'none'});
-                            setOccupationStyle({display: 'none'});
-                        }}
-                      
-                        >
-                          Religion
-                        </NavLink>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'none'});
-                            setCasteStyle({display: 'block'});
-                            setMotherStyle({display: 'none'});
-                            setStateStyle({display: 'none'});
-                            setCityStyle({display: 'none'});
-                            setOccupationStyle({display: 'none'});
-                        }}
-                        
-                        >
-                          Caste 
-                        </NavLink>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'none'});
-                            setCasteStyle({display: 'none'});
-                            setMotherStyle({display: 'block'});
-                            setStateStyle({display: 'none'});
-                            setCityStyle({display: 'none'});
-                            setOccupationStyle({display: 'none'});
-                        }}
-                       
-                        >
-                          Mother Tongue 
-                        </NavLink>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'none'});
-                            setCasteStyle({display: 'none'});
-                            setMotherStyle({display: 'none'});
-                            setStateStyle({display: 'block'});
-                            setCityStyle({display: 'none'});
-                            setOccupationStyle({display: 'none'});
-                        }}
-                        // onMouseLeave={e => {
-                        //     setMotherStyle({display: 'none'})
-                        // }}
-                        >
-                          State
-                        </NavLink>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'none'});
-                            setCasteStyle({display: 'none'});
-                            setMotherStyle({display: 'none'});
-                            setStateStyle({display: 'none'});
-                            setCityStyle({display: 'block'});
-                            setOccupationStyle({display: 'none'});
-                        }}
-                       
-                        >
-                        City 
-                        </NavLink>
-                        <NavLink
-                          to=""
-                          className="link-item font-lobster"
-                          role="button"
-                          onMouseEnter={e => {
-                            setReligionStyle({display: 'none'});
-                            setCasteStyle({display: 'none'});
-                            setMotherStyle({display: 'none'});
-                            setStateStyle({display: 'none'});
-                            setCityStyle({display: 'none'});
-                            setOccupationStyle({display: 'block'});
-                        }}
-                        >
-                          Occupation 
-                        </NavLink>
-                        </div>
-                        <div className="home-div col-9" style={religionStyle}>
-                          <div className="row mt-2">
-                          {data['religion'] && data.religion.map((item, index) => (
-                            <div className="col-md-4">
-                              <NavLink to='/findMatches'><span className="home-browse-span" key={'r'+item.id} onClick={() => props.getBrowsedata('religion', item.id)}
-                              >{item.religion}</span></NavLink>
-                            </div>
-                          ))}
-                          </div>
-                        </div>
-                        <div className="home-div col-9" style={casteStyle} >
-                        <div className="row mt-2">
-                          {data['caste'] && data.caste.map((item, index) => (
-                            <div className="col-md-4">
-                              <NavLink to='/findMatches'><span className="home-browse-span" key={'c'+item.id} onClick={() => props.getBrowsedata('caste', item.id)}>{item.caste}</span>
-                              </NavLink>
-                            </div>
-                          ))}
-                          </div>
-                        </div>
-                        <div className="home-div col-9" style={motherStyle} >
-                        <div className="row mt-2">
-                          {data['mother_tongue'] && data.mother_tongue.map((item, index) => (
-                            <div className="col-md-4">
-                            <NavLink to='/findMatches'><span className="home-browse-span" key={'m'+item.id} onClick={() => props.getBrowsedata('mother', item.id)}>{item.mother_tongue}</span>
+                        <div className="dropdown-menu pages-dropdown row" style={{ width: "0px", }}>
+                          <div className="col-3" style={{ position: "relative", }}>
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'block' });
+                                setCasteStyle({ display: 'none' });
+                                setMotherStyle({ display: 'none' });
+                                setStateStyle({ display: 'none' });
+                                setCityStyle({ display: 'none' });
+                                setOccupationStyle({ display: 'none' });
+                              }}
+
+                            >
+                              Religion
                             </NavLink>
-                            </div>
-                          ))}
-                          </div>
-                        </div>
-                        <div className="home-div col-9" style={stateStyle}>
-                        <div className="row mt-2">
-                          {data['state'] && data.state.map((item, index) => (
-                            <div className="col-md-4">
-                              <NavLink to='/findMatches'><span className="home-browse-span" key={'s'+item.id} onClick={() => props.getBrowsedata('state', item.id)}>{item.name}</span>
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'none' });
+                                setCasteStyle({ display: 'block' });
+                                setMotherStyle({ display: 'none' });
+                                setStateStyle({ display: 'none' });
+                                setCityStyle({ display: 'none' });
+                                setOccupationStyle({ display: 'none' });
+                              }}
+
+                            >
+                              Caste
                             </NavLink>
-                            </div>
-                          ))}
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'none' });
+                                setCasteStyle({ display: 'none' });
+                                setMotherStyle({ display: 'block' });
+                                setStateStyle({ display: 'none' });
+                                setCityStyle({ display: 'none' });
+                                setOccupationStyle({ display: 'none' });
+                              }}
+
+                            >
+                              Mother Tongue
+                            </NavLink>
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'none' });
+                                setCasteStyle({ display: 'none' });
+                                setMotherStyle({ display: 'none' });
+                                setStateStyle({ display: 'block' });
+                                setCityStyle({ display: 'none' });
+                                setOccupationStyle({ display: 'none' });
+                              }}
+                            // onMouseLeave={e => {
+                            //     setMotherStyle({display: 'none'})
+                            // }}
+                            >
+                              State
+                            </NavLink>
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'none' });
+                                setCasteStyle({ display: 'none' });
+                                setMotherStyle({ display: 'none' });
+                                setStateStyle({ display: 'none' });
+                                setCityStyle({ display: 'block' });
+                                setOccupationStyle({ display: 'none' });
+                              }}
+
+                            >
+                              City
+                            </NavLink>
+                            <NavLink
+                              to=""
+                              className="link-item font-lobster"
+                              role="button"
+                              onMouseEnter={e => {
+                                setReligionStyle({ display: 'none' });
+                                setCasteStyle({ display: 'none' });
+                                setMotherStyle({ display: 'none' });
+                                setStateStyle({ display: 'none' });
+                                setCityStyle({ display: 'none' });
+                                setOccupationStyle({ display: 'block' });
+                              }}
+                            >
+                              Occupation
+                            </NavLink>
                           </div>
-                        </div>
-                        <div className="home-div col-9" style={cityStyle}>
-                        <div className="row mt-2">
-                          {data['city'] && data.city.map((item, index) => (
-                            <div className="col-md-4">
-                              <span className="home-browse-span" key={'ci'+item.id} onClick={() => props.getBrowsedata('city', item.id)}>{item.name}</span>
+                          <div className="home-div col-9" style={religionStyle}>
+                            <div className="row mt-2">
+                              {data['religion'] && data.religion.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <NavLink to='/findMatches'><span className="home-browse-span" key={'r' + item.id} onClick={() => props.getBrowsedata('religion', item.id)}
+                                  >{item.religion}</span></NavLink>
+                                </div>
+                              ))}
                             </div>
-                          ))}
                           </div>
-                        </div>
-                        <div className="home-div col-9" style={occupationStyle}>
-                        <div className="row mt-2">
-                          {data['occupation'] && data.occupation.map((item, index) => (
-                            <div className="col-md-4">
-                              <span className="home-browse-span" key={'o'+item.id } onClick={() => props.getBrowsedata('occupation', item.id)}>{item.occupation}</span>
+                          <div className="home-div col-9" style={casteStyle} >
+                            <div className="row mt-2">
+                              {data['caste'] && data.caste.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <NavLink to='/findMatches'><span className="home-browse-span" key={'c' + item.id} onClick={() => props.getBrowsedata('caste', item.id)}>{item.caste}</span>
+                                  </NavLink>
+                                </div>
+                              ))}
                             </div>
-                          ))}
                           </div>
-                        </div>
+                          <div className="home-div col-9" style={motherStyle} >
+                            <div className="row mt-2">
+                              {data['mother_tongue'] && data.mother_tongue.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <NavLink to='/findMatches'><span className="home-browse-span" key={'m' + item.id} onClick={() => props.getBrowsedata('mother', item.id)}>{item.mother_tongue}</span>
+                                  </NavLink>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="home-div col-9" style={stateStyle}>
+                            <div className="row mt-2">
+                              {data['state'] && data.state.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <NavLink to='/findMatches'><span className="home-browse-span" key={'s' + item.id} onClick={() => props.getBrowsedata('state', item.id)}>{item.name}</span>
+                                  </NavLink>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="home-div col-9" style={cityStyle}>
+                            <div className="row mt-2">
+                              {data['city'] && data.city.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <span className="home-browse-span" key={'ci' + item.id} onClick={() => props.getBrowsedata('city', item.id)}>{item.name}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="home-div col-9" style={occupationStyle}>
+                            <div className="row mt-2">
+                              {data['occupation'] && data.occupation.map((item, index) => (
+                                <div className="col-md-4" key={index}>
+                                  <span className="home-browse-span" key={'o' + item.id} onClick={() => props.getBrowsedata('occupation', item.id)}>{item.occupation}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </li>
                       {token.length != 0 && (
-                      <li className="nav-item">
-                        <NavLink to="/findMatches" className= "font-lobster nav-link">
-                          Find Matches
-                        </NavLink>
-                        {/* <div className="dropdown-menu pages-dropdown">
+                        <li className="nav-item">
+                          <NavLink to="/findMatches" className="font-lobster nav-link">
+                            Find Matches
+                          </NavLink>
+                          {/* <div className="dropdown-menu pages-dropdown">
 													<a className="link-item" href="browse_jobs.html">Browse Match</a>
 													<a className="link-item" href="job_single_view.html">Single Match View</a>
 													<a className="link-item" href="post_a_job.html">Post a Match</a>
 												</div> */}
-                      </li>
-                      ) }
+                        </li>
+                      )}
                       {token.length != 0 && (
-                      <li className="nav-item dropdown">
-                      <a
-                          href="#"
-                          className="nav-link dropdown-toggle-no-caret font-lobster"
-                          role="button"
-                          data-toggle="dropdown"
-                        >
-                          Matches
-                        </a>
-                        <div className="dropdown-menu pages-dropdown ">
-                        <NavLink
-                          to="/dailyRecommendation"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Daily Recommendation
-                        </NavLink>
-                        <NavLink
-                          to="/latest"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Latest Profile
-                        </NavLink>
-                        <NavLink
-                          to="/shortlist"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Shortlist Profile
-                        </NavLink>
-                        <NavLink
-                          to="/desiredlist"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Desired Profile Match
-                        </NavLink>
-                        </div>
-                        {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
-                        {/* <div className="dropdown-menu pages-dropdown">
+                        <li className="nav-item dropdown">
+                          <a
+                            href="#"
+                            className="nav-link dropdown-toggle-no-caret font-lobster"
+                            role="button"
+                            data-toggle="dropdown"
+                          >
+                            Matches
+                          </a>
+                          <div className="dropdown-menu pages-dropdown ">
+                            <NavLink
+                              to="/dailyRecommendation"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Daily Recommendation
+                            </NavLink>
+                            <NavLink
+                              to="/latest"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Latest Profile
+                            </NavLink>
+                            <NavLink
+                              to="/shortlist"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Shortlist Profile
+                            </NavLink>
+                            <NavLink
+                              to="/desiredlist"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Desired Profile Match
+                            </NavLink>
+                          </div>
+                          {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
+                          {/* <div className="dropdown-menu pages-dropdown">
 													<a className="link-item" href="browse_projects.html">Browse Matches</a>
 													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
-                        {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
-                        {/* </div> */}
-                      </li>
-                      ) }
+                          {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
+                          {/* </div> */}
+                        </li>
+                      )}
                       {token.length != 0 && (
-                      <li className="nav-item dropdown">
-                      <a
-                          href="#"
-                          className="nav-link dropdown-toggle-no-caret"
-                          role="button"
-                          data-toggle="dropdown"
-                        >
-                          Inbox
-                        </a>
-                        <div className="dropdown-menu pages-dropdown">
-                        <NavLink
-                          to="/interest"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Interest
-                        </NavLink>
-                        <NavLink
-                          to="/accept"
-                          className="link-item font-lobster"
-                          role="button"
-                        >
-                          Acceptances
-                        </NavLink>
-                        </div>
-                      </li>
-                      ) }
+                        <li className="nav-item dropdown">
+                          <a
+                            href="#"
+                            className="nav-link dropdown-toggle-no-caret"
+                            role="button"
+                            data-toggle="dropdown"
+                          >
+                            Inbox
+                          </a>
+                          <div className="dropdown-menu pages-dropdown">
+                            <NavLink
+                              to="/interest"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Interest
+                            </NavLink>
+                            <NavLink
+                              to="/accept"
+                              className="link-item font-lobster"
+                              role="button"
+                            >
+                              Acceptances
+                            </NavLink>
+                          </div>
+                        </li>
+                      )}
                       {/* <li className="nav-item dropdown">
                         <a
                           href="#"
@@ -621,10 +619,10 @@ function MainHeader(props) {
                     </a> */}
                     {token.length === 0 && (
                       <div>
-                        <NavLink to="/login" style={{letterSpacing: "1px"}} onClick={() => props.getUrl('/login')} className="add-post font-fredokaone">
+                        <NavLink to="/login" style={{ letterSpacing: "1px" }} onClick={() => props.getUrl('/login')} className="add-post font-fredokaone">
                           Login
                         </NavLink>
-                        <NavLink to="/signUp" style={{letterSpacing: "1px"}} onClick={()=> props.getUrl('/signUp')} className="add-task font-fredokaone">
+                        <NavLink to="/signUp" style={{ letterSpacing: "1px" }} onClick={() => props.getUrl('/signUp')} className="add-task font-fredokaone">
                           Register
                         </NavLink>{" "}
                       </div>
@@ -645,17 +643,17 @@ function MainHeader(props) {
           </div>
         </div>
       </header>
-      { loaderImg && 
-      <div className="main_loader">
-        <div class="loading">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+      {loaderImg &&
+        <div className="main_loader">
+          <div className="loading">
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+          </div>
         </div>
-      </div>
-}
+      }
     </>
   );
 }

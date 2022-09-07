@@ -14,17 +14,17 @@ import { useHistory } from "react-router-dom";
 function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
-	const history = useHistory();
+  const history = useHistory();
   const activeState = useSelector((state) => state.changeActiveLink);
 
-  useEffect(() => {    
-    if(activeState == 'homepage')
-    props.getUrlData('/')
+  useEffect(() => {
+    if (activeState == 'homepage')
+      props.getUrlData('/')
   });
   // dispatch(regActiveLink('career'));
-  useEffect(() => {    
+  useEffect(() => {
     props.getUrlData('/registrationStage')
-  },[])
+  }, [])
 
 
   const token = window.sessionStorage.getItem('access_token');
@@ -38,51 +38,51 @@ function RegistrationStage(props) {
 
   useEffect(() => {
     axios.get(`${window.Url}api/getRegisterFormStatus`, headers_param)
-   .then(({ data }) => {
-    setTabName(() => {
-      switch(data[0].stage_no){
-        case 1: return 'otp' ;
-        case 2: return 'profile' ;
-        case 3: return 'career' ;
-        case 4: return 'family' ;
-        case 5: return 'profileimg' ;
-        case 6: return 'homepage';
-        default : return 'profile';
-      }
-     })
-    //  if(TabName!='')
-      
+      .then(({ data }) => {
+        setTabName(() => {
+          switch (data[0].stage_no) {
+            case 1: return 'otp';
+            case 2: return 'profile';
+            case 3: return 'career';
+            case 4: return 'family';
+            case 5: return 'profileimg';
+            case 6: return 'homepage';
+            default: return 'profile';
+          }
+        })
+        //  if(TabName!='')
 
-   });
- }, []);
 
- useEffect(() => {
-   if(TabName==='homepage'){
-     history.replace('/');
-     props.getUrlData('/')
-   }
-  dispatch(regActiveLink(TabName));
- },[TabName])
+      });
+  }, []);
 
-  
+  useEffect(() => {
+    if (TabName === 'homepage') {
+      history.replace('/');
+      props.getUrlData('/')
+    }
+    dispatch(regActiveLink(TabName));
+  }, [TabName])
+
+
   return (
     <>
       <main className="browse-section pt-4" >
         <div className="container my-3">
           <div className="row justify-content-md-center">
             <div className="col-md-12">
-                
-                { TabName==='profile' && <ProfileStage /> }
-                { TabName==='career' && <CareerStage /> }
-                { TabName==='family' && <FamilyStage /> }
-                { TabName==='otp' && <PhoneStage /> }
-                { TabName==='profileimg' && <ProfileImageStage /> }
-            
+
+              {TabName === 'profile' && <ProfileStage />}
+              {TabName === 'career' && <CareerStage />}
+              {TabName === 'family' && <FamilyStage />}
+              {TabName === 'otp' && <PhoneStage />}
+              {TabName === 'profileimg' && <ProfileImageStage />}
+
             </div>
           </div>
         </div>
       </main>
-      
+
     </>
   );
 }

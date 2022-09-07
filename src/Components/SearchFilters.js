@@ -44,7 +44,6 @@ export default function SearchFilters(props) {
 
 
   useEffect(() => {
-    // const user = JSON.parse(window.sessionStorage.getItem("user_data")).reg_id;
     axios
       .get(`${window.Url}api/desiredDropdown`)
       .then(({ data }) => {
@@ -91,8 +90,8 @@ export default function SearchFilters(props) {
   }, []);
 
   const SubmitFilter = () => {
-    const filterData = [(miniAge) ? miniAge.label : "", (maxAge) ? maxAge.label : "", (miniHeight) ? miniHeight.value : "", (maxHeight) ? maxHeight.value : "", (minIncome) ? minIncome.label : "", (maxIncome) ? maxIncome.label : "", religion, moth, maritial];
-    // console.log(maxIncome);
+    const filterData = [(miniAge) ? miniAge.label : 20, (maxAge) ? maxAge.label : 70, (miniHeight) ? miniHeight.value : 1, (maxHeight) ? maxHeight.value : 49, (minIncome) ? minIncome.value : 1, (maxIncome) ? maxIncome.value : 6, (religion.length != 0) ? religion : "null", moth != 0 ? moth : "null", maritial != 0 ? maritial : "null"];
+    // console.log(filterData);
     props.setParFilterData(filterData);
   }
 

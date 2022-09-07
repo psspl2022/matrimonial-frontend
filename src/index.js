@@ -6,7 +6,7 @@ import './index.css';
 import store from './store';
 import { Provider } from 'react-redux';
 
-store.subscribe(() => console.log(store.getState()));
+// store.subscribe(() => console.log(store.getState()));
 
 window.AppName = "Namdeo Matrimony";
 window.Url = "http://127.0.0.1:8000/";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function MainFooter() {
 
@@ -33,7 +33,7 @@ function MainFooter() {
                         <div className="col-lg-3 col-md-3">
                             <div className="about-jobby">
                                 <a href="index.html"><img src="images/logo1.svg" alt="" /></a>
-                                <p><sup><i class="fa fa-quote-left" style={{fontSize:"10px"}} aria-hidden="true"></i></sup> A good marriage is one  where each partner secretly suspects they got the better deal  <sup><i class="fa fa-quote-right" style={{fontSize:"10px"}} aria-hidden="true"></i></sup></p>
+                                <p><sup><i className="fa fa-quote-left" style={{ fontSize: "10px" }} aria-hidden="true"></i></sup> A good marriage is one  where each partner secretly suspects they got the better deal  <sup><i className="fa fa-quote-right" style={{ fontSize: "10px" }} aria-hidden="true"></i></sup></p>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3">
@@ -73,7 +73,7 @@ function MainFooter() {
                         <div className="row">
                             <div className="col-lg-6 col-md-6">
                                 <div className="copyright">
-                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">Namdeo <i class="fa fa-heart " aria-hidden="true"></i>Matrimony</a>. All Right Reserved.
+                                    <i className="far fa-copyright"></i>Copyright {(new Date().getFullYear())} <a href="#">Namdeo <i className="fa fa-heart " aria-hidden="true"></i>Matrimony</a>. All Right Reserved.
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">
@@ -92,7 +92,7 @@ function MainFooter() {
             </footer>
             <button id="pageup" title="Go to top"><i className="fas fa-arrow-up"></i></button>
 
-            
+
         </>
     );
 }

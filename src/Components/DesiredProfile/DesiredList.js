@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function DesiredList() {
-  const [grid, setGrid] = useState(false);  
+  const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [msg, setMsg] = useState('');
   const [forFilter, setForFilter] = useState([]);
@@ -23,7 +23,7 @@ export default function DesiredList() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -31,8 +31,8 @@ export default function DesiredList() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-        showDesiredProfiles();
-        document.title = "Desired Partner List";
+    showDesiredProfiles();
+    document.title = "Desired Partner List";
   }, []);
 
   useEffect(() => {
@@ -73,10 +73,10 @@ export default function DesiredList() {
     axios
       .get(`${window.Url}api/showDesiredProfiles`, headers_data)
       .then(({ data }) => {
-        if(data.msg ){
+        if (data.msg) {
           setMsg(data.msg);
           setFetchDone(true);
-        } else{
+        } else {
           setData(data);
           setForFilter(data);
         }
@@ -120,8 +120,8 @@ export default function DesiredList() {
           showDesiredProfiles();
         } else {
           Swal.fire({
-              icon: "error",
-              title: response.data.errmsg,
+            icon: "error",
+            title: response.data.errmsg,
           });
           close();
         }
@@ -234,13 +234,12 @@ export default function DesiredList() {
                       {data &&
                         data.map((item, index) => (
                           <div
-                            className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${
-                              grid == true ? "list-group-item1" : ""
-                            }`}
+                            className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+                              }`}
                             key={index}
                           >
-                           
-                              <div className="job-item detail-card mt-30">
+
+                            <div className="job-item detail-card mt-30">
                               <NavLink to={`/profileDetail/${item[2].reg_id}`} >
                                 <div
                                   className="job-top-dt text-right"
@@ -254,75 +253,21 @@ export default function DesiredList() {
                                         marginRight: "-4px",
                                         fontSize: "12px",
                                       }}
-                                      className={`${item[0] <= 40 && "yellow"} ${
-                                        item[0] <= 90 && "green"
-                                      } ${item[0] > 90 && "pink"}`}
+                                      className={`${item[0] <= 40 && "yellow"} ${item[0] <= 90 && "green"
+                                        } ${item[0] > 90 && "pink"}`}
                                     >
                                       {item[0]}% Matched
                                     </span>
                                   </div>
                                   <div className="img-profile text-center">
-                                  {item[2].get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${item[2].get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                                    {item[2].get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${item[2].get_profile_image.identity_card_doc}`} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
 
-                                  {!item['2'].get_profile_image && (<img src={ (item[2].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                                    {!item['2'].get_profile_image && (<img src={(item[2].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
                                   </div>
                                 </div>
                                 <div className="job-des-dt">
                                   <h4>{item[2].name}</h4>
-                                  {/* <p>
-                          <div class="mtab-right">
-                              <ul>
-                                  <li class="sort-list-dt">
-                                      <div
-                                          class="ui selection dropdown skills-search sort-dropdown"
-                                      >
-                                          <input name="gender" type="hidden" value="default" />
-                                          <i class="dropdown icon d-icon"></i>
-                                          <div class="text">Sort By</div>
-                                          <div class="menu">
-                                              <div class="item" data-value="0">Relevance</div>
-                                              <div class="item" data-value="1">New</div>
-                                              <div class="item" data-value="2">Old</div>
-                                              <div class="item" data-value="3">Last 15 Days</div>
-                                          </div>
-                                      </div>
-                                  </li>
-                                  <li class="grid-list">
-                                      <button class="gl-btn" onClick={()=>{ setGrid(false) }} id="grid">
-                                          <i class="fas fa-th-large"></i>
-                                      </button>
-                                      <button class="gl-btn" onClick={()=>{ setGrid(true) }} id="list">
-                                          <i class="fas fa-th-list"></i>
-                                      </button>
-                                  </li>
-                              </ul>
-                          </div>
-                      </div>
-                      <div class="tab-content">
-                          <div class="tab-pane active" id="tab-1">
-                              <div class="row view-group" id="products">
-                              {
-                                              data.map((item)=>
 
-                                  <div class={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid==true?'list-group-item1':''}`} key="{item[0].reg_id}">
-                                      <div className="job-item mt-30">
-                                          <div className="job-top-dt text-right"  style={{paddingTop:"3px"}}>
-                                              <div className="desired_percent">
-                                                  <span  stye={{padding:"3px 8px", marginTop:"-4px",  marginRight:"-4px", fontSize:"12px" }} className={`${item[0]<=40 && 'yellow' } ${item[0]<=90 && 'green' } ${item[0]>90 && 'pink' }`}>{item[0] }% Matched</span>
-                                              </div>  
-                                              <div className="img-profile">  
-                                                  <img
-                                                      src={ process.env.PUBLIC_URL + "/profile1.jpg" }
-                                                      alt="" style={{maxHeight:'220px', width: '100%'}}
-                                                  />
-                                                  </div>
-                                          </div>
-                                          <div className="job-des-dt">
-                                              <h4 style={{ fontWeight: "200" }} >{ item[2].name }</h4>
-                                              {/* <p>
-                                                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                  elit. Etiam cursus pulvinar dolor nec...
-                                              </p> */}
                                   <div className="job-skills">
                                     <span>Age: {item[1]} years</span>
                                     <span>
@@ -331,7 +276,7 @@ export default function DesiredList() {
                                     <span>
                                       Religion: {item[2].get_religion.religion}{" "}
                                     </span>
-                                    {(item.get_caste != null) ?<span> Caste: item.get_caste.caste </span>: ""}
+                                    {(item.get_caste != null) ? <span> Caste: item.get_caste.caste </span> : ""}
                                     <span>
                                       Mother Tongue:{" "}
                                       {item[2].get_mother_tongue.mother_tongue}{" "}
@@ -347,15 +292,15 @@ export default function DesiredList() {
                                     {/* <span className="more-skills">+4</span> */}
                                   </div>
                                 </div>
-                                </NavLink>
-                                <div className="job-buttons">
-                                  <ul className="link-btn">
-                                    {/* <li>
+                              </NavLink>
+                              <div className="job-buttons">
+                                <ul className="link-btn">
+                                  {/* <li>
                                                       <a href="#" className="link-j1" title="Message"
                                                       >Message</a
                                                       >
                                                   </li> */}
-                                    {/* <li>
+                                  {/* <li>
                                                       <a
                                                           href="job_single_view.html"
                                                           className="link-j1"
@@ -363,87 +308,87 @@ export default function DesiredList() {
                                                       >View Details</a
                                                       >o
                                                   </li> */}
-                                    <li className="bkd-pm">
-                                      {item[2].get_interest_sent !=null && (
-                                        <button
-                                          className="bookmark1"
-                                          style={{
-                                            color: "#fff",
-                                            background: "#ee0a4b",
-                                            cursor: "none",
-                                          }}
-                                        >
-                                          <i className="fas fa-check 2x"></i>
-                                        </button>
-                                      )}
-
-                                      {item[2].get_interest_sent == null && (
-                                        <button
-                                          className="bookmark1"
-                                          onClick={(e) =>
-                                            sendIntrest(item[2].reg_id)
-                                          }
-                                          title="Send Interest"
-                                        >
-                                          <i className="fas fa-envelope 2x"></i>
-                                        </button>
-                                      )}
-                                    </li>
-                                    <li className="bkd-pm">
-                                      <button className="bookmark1">
-                                        <i className="fas fa-comment 2x"></i>
+                                  <li className="bkd-pm">
+                                    {item[2].get_interest_sent != null && (
+                                      <button
+                                        className="bookmark1"
+                                        style={{
+                                          color: "#fff",
+                                          background: "#ee0a4b",
+                                          cursor: "none",
+                                        }}
+                                      >
+                                        <i className="fas fa-check 2x"></i>
                                       </button>
-                                    </li>
-                                    <li className="bkd-pm">
-                                      {item[2].getShortlist==null&& (
-                                        <button
-                                          className="bookmark1"
+                                    )}
+
+                                    {item[2].get_interest_sent == null && (
+                                      <button
+                                        className="bookmark1"
+                                        onClick={(e) =>
+                                          sendIntrest(item[2].reg_id)
+                                        }
+                                        title="Send Interest"
+                                      >
+                                        <i className="fas fa-envelope 2x"></i>
+                                      </button>
+                                    )}
+                                  </li>
+                                  <li className="bkd-pm">
+                                    <button className="bookmark1">
+                                      <i className="fas fa-comment 2x"></i>
+                                    </button>
+                                  </li>
+                                  <li className="bkd-pm">
+                                    {item[2].getShortlist == null && (
+                                      <button
+                                        className="bookmark1"
+                                        onClick={(e) =>
+                                          shortlistProfile(item[2].reg_id)
+                                        }
+                                        style={{
+                                          color: "#fff",
+                                          background: "#ee0a4b",
+                                        }}
+                                      >
+                                        <i className="fas fa-star"></i>
+                                      </button>
+                                    )}
+
+                                    {item[2].getShortlist != null && (
+                                      <button className="bookmark1">
+                                        <i
+                                          className="fas fa-star"
                                           onClick={(e) =>
                                             shortlistProfile(item[2].reg_id)
                                           }
-                                          style={{
-                                            color: "#fff",
-                                            background: "#ee0a4b",
-                                          }}
-                                        >
-                                          <i className="fas fa-star"></i>
-                                        </button>
-                                      )}
-
-                                      {item[2].getShortlist!=null && (
-                                        <button className="bookmark1">
-                                          <i
-                                            className="fas fa-star"
-                                            onClick={(e) =>
-                                              shortlistProfile(item[2].reg_id)
-                                            }
-                                            title="Shortlist Profile"
-                                          ></i>
-                                        </button>
-                                      )}
-                                    </li>
-
-                                    <li className="bkd-pm">
-                                      <button className="bookmark1">
-                                        <i className="fas fa-heart"></i>
+                                          title="Shortlist Profile"
+                                        ></i>
                                       </button>
-                                    </li>
-                                  </ul>
-                                </div>
+                                    )}
+                                  </li>
+
+                                  <li className="bkd-pm">
+                                    <button className="bookmark1">
+                                      <i className="fas fa-heart"></i>
+                                    </button>
+                                  </li>
+                                </ul>
                               </div>
-                           
+                            </div>
+
                           </div>
                         ))}
 
-                      { ( data.length==0 && !fetchDone ) && (
+                      {(data.length == 0 && !fetchDone) && (
                         <div className="desired_section">
-                            <ProfileSkeleton />
-                            <ProfileSkeleton />
+                          <ProfileSkeleton />
+                          <ProfileSkeleton />
                         </div>
                       )}
 
-                      { ( data.length==0 && fetchDone ) && (
-                        <h2 class="ml-5 mt-5">{msg}</h2>
+                      {(data.length == 0 && fetchDone) && (
+                        <h2 className="ml-5 mt-5">{msg}</h2>
                       )}
 
                       <div className="col-12">

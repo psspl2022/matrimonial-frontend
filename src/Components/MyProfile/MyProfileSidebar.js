@@ -25,7 +25,7 @@ function MyProfileSidebar() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -59,13 +59,13 @@ function MyProfileSidebar() {
       .get(`${window.Url}api/getProfileImage`, headers_param)
       .then(({ data }) => {
         if (data.hasOwnProperty("msg")) {
-         setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`)
+          setUserImage(`${window.Url}Documents/Image_Documents/${data.msg.identity_card_doc}`)
         } else {
-          if(gender.gender == 1){
-            setUserImage(`${ process.env.PUBLIC_URL + "/male_avatar.png" }`);
-            } else{
-              setUserImage(`${ process.env.PUBLIC_URL + "/female_avatar.png" }`);
-            }
+          if (gender.gender == 1) {
+            setUserImage(`${process.env.PUBLIC_URL + "/male_avatar.png"}`);
+          } else {
+            setUserImage(`${process.env.PUBLIC_URL + "/female_avatar.png"}`);
+          }
         }
       });
   };
@@ -84,7 +84,7 @@ function MyProfileSidebar() {
       });
   };
   useEffect(() => {
-    if(image){
+    if (image) {
       setImageInProcess(true);
       console.log("image upload section");
       const formData = new FormData();
@@ -107,11 +107,13 @@ function MyProfileSidebar() {
       <div className="account_dt_left">
         <div className="job-center-dt">
           <div className="admin-profile-loader">
-            <img src={userImage} alt="user profile image" />
-            { 
-            imageInProcess && <div className="container">
-              <span className="loader"></span>
-            </div>
+            {
+              <img
+                src={userImage ? userImage : "/loding.gif"}
+                // beforeLoad={{ before }}
+                effect="blur"
+                alt="user profile image"
+              />
             }
           </div>
           <div className="job-urs-dts">
@@ -141,142 +143,14 @@ function MyProfileSidebar() {
             <li>
               <a href="#" className="web_link">
                 <i className="fas fa-globe"></i>Current Membership Plan:{" "}
-                <span style={{ color: "brown", fontWeight:"600" }} >
+                <span style={{ color: "brown", fontWeight: "600" }} >
                   {memdata.length != 0 && memdata['user'].get_package.name}{" "}
                 </span>
               </a>
             </li>
           </ul>
         </div>
-        {/* <div className="group_skills_bar">
-          <h6>Profile Completeness</h6>
-          <div className="group_bar1">
-            <span>85%</span>
-            <div className="progress skill_process">
-              <div
-                className="progress-bar progress_bar_skills"
-                role="progressbar"
-                style={{ width: "85%" }}
-                aria-valuenow="85"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              ></div>
-            </div>
-          </div>
-          <a href="#" className="skiils_button">
-            Complete Required Skills
-          </a>
-        </div> */}
-        {/* <div className="rlt_section">
-          <div className="rtl_left">
-            <h6>Rating</h6>
-          </div>
-          <div className="rtl_right">
-            <div className="star">
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <span>4.9</span>
-            </div>
-          </div>
-        </div> */}
-        {/* <div className="rlt_section">
-          <div className="rtl_left">
-            <h6>Location</h6>
-          </div>
-          <div className="rtl_right">
-            <span>
-              <i className="fas fa-map-marker-alt lc_icon"></i> Ludhiana, India
-            </span>
-          </div>
-          <div className="my_location">
-            <div id="map"></div>
-          </div> */}
-        {/* <ul className="rlt_section2">
-            <li>
-              <div className="rtl_left2">
-                <h6>Hourly Rate</h6>
-              </div>
-              <div className="rtl_right2">
-                <span>$50 / hr</span>
-              </div>
-            </li>
-            <li>
-              <div className="rtl_left2">
-                <h6>Age</h6>
-              </div>
-              <div className="rtl_right2">
-                <span>28</span>
-              </div>
-            </li>
-            <li>
-              <div className="rtl_left2">
-                <h6>Experenice</h6>
-              </div>
-              <div className="rtl_right2">
-                <span>5 Year</span>
-              </div>
-            </li>
-            <li>
-              <div className="rtl_left2">
-                <h6>Job Done</h6>
-              </div>
-              <div className="rtl_right2">
-                <span>69</span>
-              </div>
-            </li>
-          </ul> */}
-        {/* </div> */}
-        {/* <div className="social_section3 mb80">
-          <div className="social_leftt3">
-            <h6>Contact Social Account</h6>
-          </div>
-          <div className="social_right3">
-            <a href="#">
-              <i className="far fa-edit"></i>
-            </a>
-          </div>
-          <ul className="social_accounts">
-            <li>
-              <a href="#" className="social_links">
-                <i className="fab fa-facebook-f f1"></i>
-                http://facebook.com/johndoe
-              </a>
-            </li>
-            <li>
-              <a href="#" className="social_links">
-                <i className="fab fa-twitter t1"></i>
-                http://twitter.com/johndoe
-              </a>
-            </li>
-            {/*<li>
-              <a href="#" className="social_links">
-                <i className="fab fa-linkedin-in l1"></i>
-                http://linkedin.com/johndoe
-              </a>
-            </li>
-            <li>
-              <a href="#" className="social_links">
-                <i className="fab fa-dribbble d1"></i>
-                http://dribbble.com/johndoe
-              </a>
-            </li>
-            <li>
-              <a href="#" className="social_links">
-                <i className="fab fa-behance b1"></i>
-                http://behance.net/johndoe
-              </a>
-            </li>
-            <li>
-              <a href="#" className="social_links">
-                <i className="fab fa-github g1"></i>
-                http://github.com/johndoe
-              </a>
-            </li> 
-          </ul>
-        </div> */}
+
       </div>
     </>
   );
