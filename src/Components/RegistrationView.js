@@ -100,7 +100,7 @@ function SignUp() {
         history.replace("/registrationStage");
     }
     else{
-      Swal.fire({
+      Swal.fire({   
         icon:"error",
         text:"Check Your Fields Properly"
       });
