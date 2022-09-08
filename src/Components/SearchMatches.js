@@ -177,7 +177,7 @@ export default function SearchMatches(props) {
     }
 
     if (props.browse == 'occupation') {
-      alert("ok");
+
       setData(
         forFilter.filter((prof_data) => {
           if (
@@ -249,24 +249,24 @@ export default function SearchMatches(props) {
       });
   }, [forFilter]);
 
-  // useEffect(() => {
-  //   const formData = new FormData()
-  //   formData.append('browse', props.browse)
-  //   formData.append('browseId', props.browseId)
+  useEffect(() => {
+    const formData = new FormData()
+    formData.append('browse', props.browse)
+    formData.append('browseId', props.browseId)
 
-  //   axios
-  //     .post(`${window.Url}api/postBrowseProfile`, formData)
-  //     .then(({ data }) => {
-  //       setBrowseData(data);
-  //       setFetchDone(true);
-  //     });
-  // }, [props]);
+    axios
+      .post(`${window.Url}api/postBrowseProfile`, formData)
+      .then(({ data }) => {
+        setBrowseData(data['data']);
+        setFetchDone(true);
+      });
+  }, [forFilter]);
 
   return (
     <>
       {!token && (
         <>
-          {browseData.length == 0 && (
+          {!browseData && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -277,12 +277,12 @@ export default function SearchMatches(props) {
                         <div className="tab-content ">
                           <div className="tab-pane active" id="tab-1">
                             <div className="row view-group " id="products">
-                              {browseData &&
+                              {searchData &&
                                 searchData.map((item, index) => (
 
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                      {"search "}
+                                  
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
@@ -296,7 +296,7 @@ export default function SearchMatches(props) {
                                   </>
                                 ))}
 
-                              {data.length == 0 || (!fetchDone && loding())}
+                              {data || (!fetchDone && loding())}
 
                               <div className="col-12">
                                 <div className="main-p-pagination">
@@ -312,9 +312,9 @@ export default function SearchMatches(props) {
                 </div>
               </main>
             </>
-          )}
+      )}
 
-          {browseData.length != 0 && (
+          {browseData && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -329,7 +329,7 @@ export default function SearchMatches(props) {
                                 browseData.map((item, index) => (
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                      {"search "}
+                                   
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
@@ -361,7 +361,7 @@ export default function SearchMatches(props) {
             </>
           )}
         </>
-      )}
+     )} 
 
       {token && (
         <Showdata data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
