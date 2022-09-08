@@ -282,7 +282,7 @@ export default function SearchMatches(props) {
 
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                  
+
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
@@ -312,7 +312,7 @@ export default function SearchMatches(props) {
                 </div>
               </main>
             </>
-      )}
+          )}
 
           {browseData && (
             <>
@@ -329,7 +329,7 @@ export default function SearchMatches(props) {
                                 browseData.map((item, index) => (
                                   <>
                                     <Suspense key={index} fallback={loding()}>
-                                   
+
                                       <Usercard
                                         item={item}
                                         showAllProfiles={showAllProfiles}
@@ -361,7 +361,7 @@ export default function SearchMatches(props) {
             </>
           )}
         </>
-     )} 
+      )}
 
       {token && (
         <Showdata data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
