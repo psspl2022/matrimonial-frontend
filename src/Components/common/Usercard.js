@@ -55,6 +55,20 @@ export function Usercard(props) {
               className="job-top-dt text-right"
               style={{ paddingTop: "3px" }}
             >
+              {props.item.percentage && <div className="desired_percent">
+                <span
+                  stye={{
+                    padding: "3px 8px",
+                    marginTop: "-4px",
+                    marginRight: "-4px",
+                    fontSize: "12px",
+                  }}
+                  className={`${props.item.percentage <= 40 && "yellow"} ${props.item.percentage <= 90 && "green"
+                    } ${props.item.percentage > 90 && "pink"}`}
+                >
+                  {props.item.percentage}% Matched
+                </span>
+              </div>}
               <div className="desired_percent"></div>
               <div className="img-profile text-center">
                 {props.item.get_profile_image && (
@@ -96,7 +110,7 @@ export function Usercard(props) {
                 </span>
                 <span>Height: {props.item.get_height.height} </span>
                 <span>Religion: {props.item.get_religion.religion} </span>
-           
+
                 <span>
                   Mother Tongue: {props.item.get_mother_tongue.mother_tongue}{" "}
                 </span>

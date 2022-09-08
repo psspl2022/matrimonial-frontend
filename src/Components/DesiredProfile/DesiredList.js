@@ -1,19 +1,26 @@
-import SearchFilters from "../SearchFilters";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
-
-export default function DesiredList() {
+import { useSelector } from "react-redux";
+import { resetSearch } from "../../actions/index";
+import { useDispatch } from "react-redux";
+import Showdata from "../common/Showdata";
+export default function SearchMatches(props) {
+  const search = useSelector((state) => state.changeSearch);
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
-  const [msg, setMsg] = useState('');
+  const [key, setKey] = useState([]);
+  const [check, setCheck] = useState(1);
+  const [page, setPage] = useState("0");
+  const [total, setTotal] = useState();
+  const [CurrentPage, setCurrentPage] = useState(0);
+  const [searchData, setSearchData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
-  const [parfilterData, setParFilterData] = useState([]);
+  const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
-
+  const dispatch = useDispatch();
+  /////////////////////Secure tokens 
   const token = window.sessionStorage.getItem("access_token");
   const headers_data = {
     headers: {
@@ -22,417 +29,97 @@ export default function DesiredList() {
       "Content-Type": "application/json",
     },
   };
-
-  const close = () => {
-    setTimeout(() => {
-      Swal.close();
-    }, 2000);
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    showDesiredProfiles();
-    document.title = "Desired Partner List";
-  }, []);
-
-  useEffect(() => {
-    setData(
-      forFilter.filter((prof_data) => {
-        if (
-          (parfilterData[0] != "" ? prof_data[1] >= parfilterData[0] : 1) &&
-          (parfilterData[1] != "" ? prof_data[1] <= parfilterData[1] : 1) &&
-          (parfilterData[2] != ""
-            ? prof_data[2].height >= parfilterData[2]
-            : 1) &&
-          (parfilterData[3] != ""
-            ? prof_data[2].height <= parfilterData[3]
-            : 1) &&
-          (parfilterData[4] != ""
-            ? prof_data[3].income >= parfilterData[4]
-            : 1) &&
-          (parfilterData[5] != ""
-            ? prof_data[3].income <= parfilterData[5]
-            : 1) &&
-          (parfilterData[6] != ""
-            ? parfilterData[6].includes(prof_data[2].religion)
-            : 1) &&
-          (parfilterData[7] != ""
-            ? parfilterData[7].includes(prof_data[2].mother_tongue)
-            : 1) &&
-          (parfilterData[8] != ""
-            ? parfilterData[8].includes(prof_data[2].marital_status)
-            : 1)
-        ) {
-          return prof_data;
-        }
-      })
+  // skeleten loading Function
+  const loding = () => {
+    return (
+      <div
+        className="desired_section"
+        style={{
+          width: "100%",
+          display: "grid",
+          gridTemplateColumns: "auto auto",
+          columnGap: "20px",
+        }}
+      >
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+        <ProfileSkeleton />
+      </div>
     );
+  };
+  ////////////////////////////////////////////////
+  /////////Function to fatch Data////////////////
+  ////////////////////////////////////////////////
+  function showAllProfiles(page, filter) {
+    function formatDate(date, year = 0) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear() - year;
+
+      if (month.length < 2)
+        month = '0' + month;
+      if (day.length < 2)
+        day = '0' + day;
+
+      return [year, month, day].join('-');
+    }
+    const formData = new FormData()
+    var d = new Date();
+    formData.append('minage', formatDate(d, filter[0]))
+    formData.append('maxage', formatDate(d, filter[1]))
+    formData.append('minheight', filter[2])
+    formData.append('maxheight', filter[3])
+    formData.append('minincome', filter[4])
+    formData.append('maxincome', filter[5])
+    formData.append('religion', filter[6])
+    formData.append('moth', filter[7])
+    formData.append('martital', filter[8])
+    formData.append('page', page)
+    axios
+      .post(`${window.Url}api/showDesiredProfiles`, formData, headers_data)
+      .then(({ data }) => {
+        setData(data.data);
+        console.log(data.data);
+        setKey(data.key);
+        setCurrentPage(data.page);
+        setTotal(data.total);
+        setForFilter(data.data);
+        if (data.data.length > 0) {
+          setCheck(1);
+        }
+        else {
+          setCheck(0);
+        }
+        setFetchDone(true);
+      });
+  };
+  ////////////////////////////////////////////////
+  /////////Browse Profile Section FUnction End////////////////
+  ////////////////////////////////////////////////
+  useEffect(() => {
+    window.scrollTo(10, 0);
+    // showAllProfiles(page, parfilterData);
+    document.title = "Letest Matches";
+  }, []);
+  // change rerun function on page value change 
+  useEffect(() => {
+    setFetchDone(false);
+    window.scroll({ top: 200, left: 0, behavior: 'smooth' })
+    showAllProfiles(page, parfilterData);
+    setFetchDone(true);
+  }, [page, parfilterData]);
+  useEffect(() => {
+    setPage(0);
   }, [parfilterData]);
 
-  function showDesiredProfiles() {
-    axios
-      .get(`${window.Url}api/showDesiredProfiles`, headers_data)
-      .then(({ data }) => {
-        if (data.msg) {
-          setMsg(data.msg);
-          setFetchDone(true);
-        } else {
-          setData(data);
-          setForFilter(data);
-        }
-      });
-  }
-
-  const sendIntrest = (id) => {
-    const update = {
-      id: id,
-    };
-    axios
-      .post(`${window.Url}api/sendIntrest`, update, headers_data)
-      .then((response) => {
-        if (response.data.hasOwnProperty("succmsg")) {
-          // Swal.fire({
-          //     icon: "success",
-          //     title: response.data.succmsg,
-          // });
-          showDesiredProfiles();
-        } else {
-          // Swal.fire({
-          //     icon: "error",
-          //     title: response.data.errmsg,
-          // });
-        }
-      });
-  };
-
-  const shortlistProfile = (id) => {
-    const update = {
-      id: id,
-    };
-    axios
-      .post(`${window.Url}api/shortlist`, update, headers_data)
-      .then((response) => {
-        if (response.data.hasOwnProperty("succmsg")) {
-          // Swal.fire({
-          //     icon: "success",
-          //     title: response.data.succmsg,
-          // });
-          showDesiredProfiles();
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: response.data.errmsg,
-          });
-          close();
-        }
-      });
-  };
 
   return (
     <>
-      <main className="browse-section">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-4 col-md-5">
-              <SearchFilters setParFilterData={setParFilterData} />
-            </div>
-            <div className="col-lg-8 col-md-7 mainpage">
-              <div className="browse-banner">
-                <div className="bbnr-left">
-                  <img
-                    src={
-                      process.env.PUBLIC_URL +
-                      "/THEME/gambolthemes.net/html-items/jobby/jobby-freelancer/images/browse/trophy.png"
-                    }
-                    alt=""
-                  />
-                  <div className="bbnr-text">
-                    <h4>Upgrade to Pro</h4>
-                    <p>Unlimited Matches and Apply.</p>
-                  </div>
-                </div>
-                <div className="bbnr-right">
-                  <NavLink to="/membershipDetail/3" className="plan-btn">
-                    Upgrade Plan
-                  </NavLink>
-                </div>
-              </div>
-              <div className="main-tabs">
-                <div className="res-tabs">
-                  <div className="mtab-left">
-                    <ul className="nav nav-tabs" id="myTab" role="tablist">
-                      <li className="nav-item">
-                        <a
-                          href="#tab-1"
-                          className="nav-link active"
-                          data-toggle="tab"
-                        >
-                          Your Desired Match
-                        </a>
-                      </li>
-                      {/* <li className="nav-item">
-                                    <a href="#tab-2" className="nav-link" data-toggle="tab"
-                                    >Full Time</a
-                                    >
-                                </li>
-                                <li className="nav-item">
-                                    <a href="#tab-3" className="nav-link" data-toggle="tab"
-                                    >Part Time</a
-                                    >
-                                </li> */}
-                    </ul>
-                  </div>
-                  <div className="mtab-right">
-                    <ul>
-                      <li className="sort-list-dt">
-                        <div className="ui selection dropdown skills-search sort-dropdown">
-                          <input name="gender" type="hidden" value="default" />
-                          <i className="dropdown icon d-icon"></i>
-                          <div className="text">Sort By</div>
-                          <div className="menu">
-                            <div className="item" data-value="0">
-                              Relevance
-                            </div>
-                            <div className="item" data-value="1">
-                              New
-                            </div>
-                            <div className="item" data-value="2">
-                              Old
-                            </div>
-                            <div className="item" data-value="3">
-                              Last 15 Days
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="grid-list">
-                        <button
-                          className="gl-btn"
-                          onClick={() => {
-                            setGrid(false);
-                          }}
-                          id="grid"
-                        >
-                          <i className="fas fa-th-large"></i>
-                        </button>
-                        <button
-                          className="gl-btn"
-                          onClick={() => {
-                            setGrid(true);
-                          }}
-                          id="list"
-                        >
-                          <i className="fas fa-th-list"></i>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="tab-content">
-                  <div className="tab-pane active" id="tab-1">
-                    <div className="row view-group" id="products">
-                      {data &&
-                        data.map((item, index) => (
-                          <div
-                            className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
-                              }`}
-                            key={index}
-                          >
-
-                            <div className="job-item detail-card mt-30">
-                              <NavLink to={`/profileDetail/${item[2].reg_id}`} >
-                                <div
-                                  className="job-top-dt text-right"
-                                  style={{ paddingTop: "3px" }}
-                                >
-                                  <div className="desired_percent">
-                                    <span
-                                      stye={{
-                                        padding: "3px 8px",
-                                        marginTop: "-4px",
-                                        marginRight: "-4px",
-                                        fontSize: "12px",
-                                      }}
-                                      className={`${item[0] <= 40 && "yellow"} ${item[0] <= 90 && "green"
-                                        } ${item[0] > 90 && "pink"}`}
-                                    >
-                                      {item[0]}% Matched
-                                    </span>
-                                  </div>
-                                  <div className="img-profile text-center">
-                                    {item[2].get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${item[2].get_profile_image.identity_card_doc}`} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
-
-                                    {!item['2'].get_profile_image && (<img src={(item[2].get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
-                                  </div>
-                                </div>
-                                <div className="job-des-dt">
-                                  <h4>{item[2].name}</h4>
-
-                                  <div className="job-skills">
-                                    <span>Age: {item[1]} years</span>
-                                    <span>
-                                      Height: {item[2].get_height.height}{" "}
-                                    </span>
-                                    <span>
-                                      Religion: {item[2].get_religion.religion}{" "}
-                                    </span>
-                                    {(item.get_caste != null) ? <span> Caste: item.get_caste.caste </span> : ""}
-                                    <span>
-                                      Mother Tongue:{" "}
-                                      {item[2].get_mother_tongue.mother_tongue}{" "}
-                                    </span>
-                                    <span>
-                                      Salary: {item[2].get_income.income}{" "}
-                                    </span>
-                                    <span>
-                                      Qualification:{" "}
-                                      {item[2].get_education.education}{" "}
-                                    </span>
-                                    {/* <span >Occupation: { item[1].get_occupation.occupation } </span> */}
-                                    {/* <span className="more-skills">+4</span> */}
-                                  </div>
-                                </div>
-                              </NavLink>
-                              <div className="job-buttons">
-                                <ul className="link-btn">
-                                  {/* <li>
-                                                      <a href="#" className="link-j1" title="Message"
-                                                      >Message</a
-                                                      >
-                                                  </li> */}
-                                  {/* <li>
-                                                      <a
-                                                          href="job_single_view.html"
-                                                          className="link-j1"
-                                                          title="View Details"
-                                                      >View Details</a
-                                                      >o
-                                                  </li> */}
-                                  <li className="bkd-pm">
-                                    {item[2].get_interest_sent != null && (
-                                      <button
-                                        className="bookmark1"
-                                        style={{
-                                          color: "#fff",
-                                          background: "#ee0a4b",
-                                          cursor: "none",
-                                        }}
-                                      >
-                                        <i className="fas fa-check 2x"></i>
-                                      </button>
-                                    )}
-
-                                    {item[2].get_interest_sent == null && (
-                                      <button
-                                        className="bookmark1"
-                                        onClick={(e) =>
-                                          sendIntrest(item[2].reg_id)
-                                        }
-                                        title="Send Interest"
-                                      >
-                                        <i className="fas fa-envelope 2x"></i>
-                                      </button>
-                                    )}
-                                  </li>
-                                  <li className="bkd-pm">
-                                    <button className="bookmark1">
-                                      <i className="fas fa-comment 2x"></i>
-                                    </button>
-                                  </li>
-                                  <li className="bkd-pm">
-                                    {item[2].getShortlist == null && (
-                                      <button
-                                        className="bookmark1"
-                                        onClick={(e) =>
-                                          shortlistProfile(item[2].reg_id)
-                                        }
-                                        style={{
-                                          color: "#fff",
-                                          background: "#ee0a4b",
-                                        }}
-                                      >
-                                        <i className="fas fa-star"></i>
-                                      </button>
-                                    )}
-
-                                    {item[2].getShortlist != null && (
-                                      <button className="bookmark1">
-                                        <i
-                                          className="fas fa-star"
-                                          onClick={(e) =>
-                                            shortlistProfile(item[2].reg_id)
-                                          }
-                                          title="Shortlist Profile"
-                                        ></i>
-                                      </button>
-                                    )}
-                                  </li>
-
-                                  <li className="bkd-pm">
-                                    <button className="bookmark1">
-                                      <i className="fas fa-heart"></i>
-                                    </button>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-
-                          </div>
-                        ))}
-
-                      {(data.length == 0 && !fetchDone) && (
-                        <div className="desired_section">
-                          <ProfileSkeleton />
-                          <ProfileSkeleton />
-                        </div>
-                      )}
-
-                      {(data.length == 0 && fetchDone) && (
-                        <h2 className="ml-5 mt-5">{msg}</h2>
-                      )}
-
-                      <div className="col-12">
-                        <div className="main-p-pagination">
-                          <nav aria-label="Page navigation example">
-                            {/* <ul className="pagination">
-                                                <li className="page-item">
-                                                    <a
-                                                        className="page-link"
-                                                        href="#"
-                                                        aria-label="Previous"
-                                                    >
-                                                        PREV
-                                                    </a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link active" href="#">1</a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">2</a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">...</a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#">24</a>
-                                                </li>
-                                                <li className="page-item">
-                                                    <a className="page-link" href="#" aria-label="Next">
-                                                        NEXT
-                                                    </a>
-                                                </li>
-                                            </ul> */}
-                          </nav>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+      {token && (
+        <Showdata desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
+      )}
     </>
   );
 }

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import ProfileSkeleton from "../Dummy Skeleton/ProfileSkeleton";
 
 export default function DailyRecommendation() {
-  const [grid, setGrid] = useState(false);  
+  const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([]);
@@ -21,18 +21,18 @@ export default function DailyRecommendation() {
       "Content-Type": "application/json",
     },
   };
-  
-  const close = () =>{
+
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
   };
-  
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
     dailyRecommendation();
-        document.title = "Daily Recommendation";
+    document.title = "Daily Recommendation";
   }, []);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function DailyRecommendation() {
         if (
 
           (parfilterData[0] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) >= parfilterData[0] : 1) &&
-        (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
-    
+          (parfilterData[1] != "" ? (Math.floor((Date.now() - new Date(prof_data.dob)) / (31557600000))) <= parfilterData[1] : 1) &&
+
           (parfilterData[2] != ""
             ? prof_data.height >= parfilterData[2]
             : 1) &&
@@ -118,8 +118,8 @@ export default function DailyRecommendation() {
           dailyRecommendation();
         } else {
           Swal.fire({
-              icon: "error",
-              title: response.data.errmsg,
+            icon: "error",
+            title: response.data.errmsg,
           });
           close();
         }
@@ -168,7 +168,7 @@ export default function DailyRecommendation() {
                           Daily Recommendation
                         </a>
                       </li>
-                     
+
                     </ul>
                   </div>
                   <div className="mtab-right">
@@ -223,30 +223,29 @@ export default function DailyRecommendation() {
                       {data &&
                         data.map((item, index) => (
                           <div
-                            className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${
-                              grid == true ? "list-group-item1" : ""
-                            }`}
+                            className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+                              }`}
                             key={index}
                           >
-                           
-                              <div className="job-item detail-card mt-30">
+
+                            <div className="job-item detail-card mt-30">
                               <NavLink to={`/profileDetail/${item.reg_id}`} >
                                 <div
                                   className="job-top-dt text-right"
                                   style={{ paddingTop: "3px" }}
                                 >
-                                 
-                                  <div className="img-profile text-center">
-                                  {item.get_profile_image &&(<img src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
 
-                                  {!item.get_profile_image && (<img src={ (item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{height:"180px", margin:"0px 10px"}}/>)}
+                                  <div className="img-profile text-center">
+                                    {item.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
+
+                                    {!item.get_profile_image && (<img src={(item.get_user_register.gender == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
                                   </div>
                                 </div>
                                 <div className="job-des-dt">
                                   <h4>{item.name}</h4>
-                                 
+
                                   <div className="job-skills">
-                                  <span>Age: {Math.floor((Date.now() - new Date(item.dob)) / (31557600000))} years</span>
+                                    <span>Age: {Math.floor((Date.now() - new Date(item.dob)) / (31557600000))} years</span>
                                     <span>
                                       Height: {item.get_height.height}{" "}
                                     </span>
@@ -265,89 +264,89 @@ export default function DailyRecommendation() {
                                       Qualification:{" "}
                                       {item.get_education.education}{" "}
                                     </span>
-                                  
+
                                   </div>
                                 </div>
-                                </NavLink>
-                                <div className="job-buttons">
-                                  <ul className="link-btn">
-                                    
-                                    <li className="bkd-pm">
-                                      {item.get_interest_sent && (
-                                        <button
-                                          className="bookmark1"
-                                          style={{
-                                            color: "#fff",
-                                            background: "#ee0a4b",
-                                            cursor: "none",
-                                          }}
-                                        >
-                                          <i className="fas fa-check 2x"></i>
-                                        </button>
-                                      )}
+                              </NavLink>
+                              <div className="job-buttons">
+                                <ul className="link-btn">
 
-                                      {!item.get_interest_sent && (
-                                        <button
-                                          className="bookmark1"
-                                          onClick={(e) =>
-                                            sendIntrest(item.reg_id)
-                                          }
-                                          title="Send Interest"
-                                        >
-                                          <i className="fas fa-envelope 2x"></i>
-                                        </button>
-                                      )}
-                                    </li>
-                                    <li className="bkd-pm">
-                                      <button className="bookmark1">
-                                        <i className="fas fa-comment 2x"></i>
+                                  <li className="bkd-pm">
+                                    {item.get_interest_sent && (
+                                      <button
+                                        className="bookmark1"
+                                        style={{
+                                          color: "#fff",
+                                          background: "#ee0a4b",
+                                          cursor: "none",
+                                        }}
+                                      >
+                                        <i className="fas fa-check 2x"></i>
                                       </button>
-                                    </li>
-                                    <li className="bkd-pm">
-                                      {item.getshortlist && (
-                                        <button
-                                          className="bookmark1"
+                                    )}
+
+                                    {!item.get_interest_sent && (
+                                      <button
+                                        className="bookmark1"
+                                        onClick={(e) =>
+                                          sendIntrest(item.reg_id)
+                                        }
+                                        title="Send Interest"
+                                      >
+                                        <i className="fas fa-envelope 2x"></i>
+                                      </button>
+                                    )}
+                                  </li>
+                                  <li className="bkd-pm">
+                                    <button className="bookmark1">
+                                      <i className="fas fa-comment 2x"></i>
+                                    </button>
+                                  </li>
+                                  <li className="bkd-pm">
+                                    {item.getshortlist && (
+                                      <button
+                                        className="bookmark1"
+                                        onClick={(e) =>
+                                          shortlistProfile(item.reg_id)
+                                        }
+                                        style={{
+                                          color: "#fff",
+                                          background: "#ee0a4b",
+                                        }}
+                                      >
+                                        <i className="fas fa-star"></i>
+                                      </button>
+                                    )}
+
+                                    {!item.getshortlist && (
+                                      <button className="bookmark1">
+                                        <i
+                                          className="fas fa-star"
                                           onClick={(e) =>
                                             shortlistProfile(item.reg_id)
                                           }
-                                          style={{
-                                            color: "#fff",
-                                            background: "#ee0a4b",
-                                          }}
-                                        >
-                                          <i className="fas fa-star"></i>
-                                        </button>
-                                      )}
-
-                                      {!item.getshortlist && (
-                                        <button className="bookmark1">
-                                          <i
-                                            className="fas fa-star"
-                                            onClick={(e) =>
-                                              shortlistProfile(item.reg_id)
-                                            }
-                                            title="Shortlist Profile"
-                                          ></i>
-                                        </button>
-                                      )}
-                                    </li>
-
-                                    <li className="bkd-pm">
-                                      <button className="bookmark1">
-                                        <i className="fas fa-heart"></i>
+                                          title="Shortlist Profile"
+                                        ></i>
                                       </button>
-                                    </li>
-                                  </ul>
-                                </div>
+                                    )}
+                                  </li>
+
+                                  <li className="bkd-pm">
+                                    <button className="bookmark1">
+                                      <i className="fas fa-heart"></i>
+                                    </button>
+                                  </li>
+                                </ul>
                               </div>
-                           
+                            </div>
+
                           </div>
                         ))}
 
-                      { ( data.length==0 && !fetchDone ) && (
+                      {(data.length == 0 && !fetchDone) && (
                         <div className="desired_section">
-                            <ProfileSkeleton />
-                            <ProfileSkeleton />
+                          <ProfileSkeleton />
+                          <ProfileSkeleton />
                         </div>
                       )}
 
@@ -360,7 +359,7 @@ export default function DailyRecommendation() {
                       <div className="col-12">
                         <div className="main-p-pagination">
                           <nav aria-label="Page navigation example">
-                           
+
                           </nav>
                         </div>
                       </div>
