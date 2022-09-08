@@ -195,7 +195,7 @@ export default function SearchMatches(props) {
   /////////Browse Profile Section FUnction End////////////////
   ////////////////////////////////////////////////
   useEffect(() => {
-    window.scrollTo(10, 0);
+    window.scroll({ top: 200, left: 0, behavior: 'smooth' })
     // showAllProfiles(page, parfilterData);
     document.title = "Search Matches";
   }, []);

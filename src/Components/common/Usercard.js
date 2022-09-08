@@ -1,4 +1,4 @@
-import React, { memo, Suspense } from "react";
+import React, { memo, Suspense, useEffect } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { img } from "react-lazy-load-image-component";
@@ -18,10 +18,7 @@ export function Usercard(props) {
     axios
       .post(`${window.Url}api/sendIntrest`, update, headers_data)
       .then((response) => {
-        if (response.data.hasOwnProperty("succmsg")) {
-          props.showAllProfiles(page);
-        } else {
-        }
+        props.showAllProfiles(page);
       });
   };
 
@@ -32,14 +29,7 @@ export function Usercard(props) {
     axios
       .post(`${window.Url}api/shortlist`, update, headers_data)
       .then((response) => {
-        if (response.data.hasOwnProperty("succmsg")) {
-          props.showAllProfiles(page);
-        } else {
-          //   Swal.fire({
-          //       icon: "error",
-          //       title: response.data.errmsg,
-          //   });
-        }
+        props.showAllProfiles(page);
       });
   };
 
@@ -122,28 +112,24 @@ export function Usercard(props) {
             </div>
           </NavLink>
           <div className="job-buttons">
-            <ul className="link-btn">
+            <ul className="link-btn d-flex justify-content-around">
               <li className="bkd-pm">
-                {props.item.get_interest_received &&
-                  props.item.get_interest_received.reg_id.includes(
-                    props.item["reg_id"]
-                  ) && (
+                {(props.item.get_interest_sent != null)
+                  && (
                     <button
                       className="bookmark1"
                       style={{
                         color: "#fff",
                         background: "#ee0a4b",
-                        cursor: "none",
+                        cursor: "not-allowed",
                       }}
                     >
                       <i className="fas fa-check 2x"></i>
                     </button>
                   )}
 
-                {(props.item.get_interest_received == null ||
-                  !props.item.get_interest_received.reg_id.includes(
-                    props.item["reg_id"]
-                  )) && (
+                {(props.item.get_interest_sent == null
+                ) && (
                     <button
                       className="bookmark1"
                       onClick={(e) =>
@@ -155,11 +141,11 @@ export function Usercard(props) {
                     </button>
                   )}
               </li>
-              <li className="bkd-pm">
+              {/* <li className="bkd-pm">
                 <button className="bookmark1">
                   <i className="fas fa-comment 2x"></i>
                 </button>
-              </li>
+              </li> */}
               <li className="bkd-pm">
                 {props.item.get_shortlist &&
                   props.item.get_shortlist.saved_reg_id ==
@@ -173,6 +159,7 @@ export function Usercard(props) {
                         color: "#fff",
                         background: "#ee0a4b",
                       }}
+                      title="Unshort Profile"
                     >
                       <i className="fas fa-star"></i>
                     </button>
@@ -187,17 +174,17 @@ export function Usercard(props) {
                         onClick={(e) =>
                           shortlistProfile(props.item["reg_id"], props.page)
                         }
-                        title="Searched Profile"
+                        title="Short Profile"
                       ></i>
                     </button>
                   )}
               </li>
-
+              {/* 
               <li className="bkd-pm">
                 <button className="bookmark1">
                   <i className="fas fa-heart"></i>
                 </button>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
