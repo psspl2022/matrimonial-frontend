@@ -19,13 +19,13 @@ export default function SearchMatches(props) {
   const [key, setKey] = useState([]);
   const [check, setCheck] = useState(1);
   const [page, setPage] = useState("0");
-  const [searchData, setSearchData] = useState([]);
   const [total, setTotal] = useState();
+  const [CurrentPage, setCurrentPage] = useState(0);
+  const [searchData, setSearchData] = useState([]);
   const [browseData, setBrowseData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
-  const [CurrentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
   /////////////////////Secure tokens 
   const token = window.sessionStorage.getItem("access_token");
