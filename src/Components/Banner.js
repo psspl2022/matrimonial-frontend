@@ -19,7 +19,7 @@ function Banner() {
   const [moths, setMoths] = useState([]);
   const [religions, setReligions] = useState([]);
 
-  const [lookingFor, setLookingFor] = useState("");
+  const [lookingFor, setLookingFor] = useState();
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [religion, setReligion] = useState("");
@@ -33,10 +33,23 @@ function Banner() {
   const searchSubmit = () => {
     dispatch(forSearch([lookingFor.value,minAge.label,maxAge.label,religion.value,moth.value])) 
   }
+  var genderConst = 0;
+  if(sessionStorage.hasOwnProperty("gender")){
+    genderConst = JSON.parse(window.sessionStorage.getItem("gender")).gender;
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Home";
+    if(genderConst && genderConst == 1){
+      setLookingFor(2);
+    }
+
+    if(genderConst && genderConst == 2){
+      setLookingFor(1);
+    }
+  
+
     axios.get(`${window.Url}api/desiredDropdown`).then(({ data }) => {
       setAge(
         data.age.map(function (age) {
@@ -186,9 +199,11 @@ function Banner() {
           />
         </div>
       </div>
+     
       <div className="Search-section">
         <div className="container">
-          <div className="row">
+         
+          <div className="row">          
             <div className="col-lg-2 col-md-2 col-12">
               <div className="form-group mb-0">
                 <label>I'am looking for a</label>
@@ -198,9 +213,12 @@ function Banner() {
                   name="lookingForOptions"
                   placeholder="Looking For"
                   options={lookingForOptions}
+                  isDisabled = {genderConst!=0 ? "disabled" : ""}
+                  value = {genderConst!=0 ? (genderConst == 1 ? lookingForOptions[0] : lookingForOptions[1]) : ''}
                   onChange={(e) => {
                     setLookingFor(e);
                   }}
+                  
                 />
               </div>
             </div>
@@ -298,8 +316,10 @@ function Banner() {
               </NavLink>
             </div>
           </div>
+          
         </div>
       </div>
+
     </>
   );
 }
