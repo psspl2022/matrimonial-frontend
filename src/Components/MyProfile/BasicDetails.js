@@ -70,7 +70,8 @@ export default function BasicDetails() {
   const [gender, setGender] = useState("");
   const [selectGender, setSelectGender] = useState("");
 
-  const token = window.sessionStorage.getItem("access_token");
+  const token = window.sessionStorage.getItem("gender.gnder");
+  
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,
