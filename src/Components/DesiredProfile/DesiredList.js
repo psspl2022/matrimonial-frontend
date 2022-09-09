@@ -15,7 +15,7 @@ export default function SearchMatches(props) {
   const [page, setPage] = useState("0");
   const [total, setTotal] = useState();
   const [CurrentPage, setCurrentPage] = useState(0);
-  const [searchData, setSearchData] = useState([]);
+  const [msg, setMsg] = useState(false);
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
@@ -80,17 +80,20 @@ export default function SearchMatches(props) {
     axios
       .post(`${window.Url}api/showDesiredProfiles`, formData, headers_data)
       .then(({ data }) => {
-        setData(data.data);
-        console.log(data.data);
-        setKey(data.key);
-        setCurrentPage(data.page);
-        setTotal(data.total);
-        setForFilter(data.data);
-        if (data.data.length > 0) {
-          setCheck(1);
-        }
-        else {
-          setCheck(0);
+        if (data['msg']) {
+          setMsg(data['msg']);
+        } else {
+          setData(data.data);
+          setKey(data.key);
+          setCurrentPage(data.page);
+          setTotal(data.total);
+          setForFilter(data.data);
+          if (data.data.length > 0) {
+            setCheck(1);
+          }
+          else {
+            setCheck(0);
+          }
         }
         setFetchDone(true);
       });
@@ -118,7 +121,7 @@ export default function SearchMatches(props) {
   return (
     <>
       {token && (
-        <Showdata desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
+        <Showdata msg={msg} desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
       )}
     </>
   );

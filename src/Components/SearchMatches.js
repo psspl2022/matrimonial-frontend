@@ -24,7 +24,7 @@ export default function SearchMatches(props) {
   const [searchData, setSearchData] = useState([]);
   const [browseData, setBrowseData] = useState([]);
   const [forFilter, setForFilter] = useState([]);
-  const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
+  const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
   const dispatch = useDispatch();
   /////////////////////Secure tokens 
@@ -83,6 +83,11 @@ export default function SearchMatches(props) {
     formData.append('religion', filter[6])
     formData.append('moth', filter[7])
     formData.append('martital', filter[8])
+    formData.append('caste', filter[9])
+    formData.append('occupation', filter[10])
+    formData.append('state', filter[11])
+    formData.append('city', filter[12])
+    // console.log(filter);
     formData.append('page', page)
     axios
       .post(`${window.Url}api/getAllUserProfiles`, formData, headers_data)
@@ -106,91 +111,64 @@ export default function SearchMatches(props) {
   /////////Browse Profile Section FUnction////////////////
   ////////////////////////////////////////////////
   useEffect(() => {
+    // let data = [20, 70, 1, 49, 1, 6, "null", "null", "null"]
     if (props.browse == 'religion') {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.religion)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
+      if ((props.browseId != "")) {
+        let data = [20, 70, 1, 49, 1, 6, props.browseId, "null", "null", "null", "null", "null"]
+        setParFilterData(data);
+      }
     }
-
-    if (props.browse == 'caste') {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.caste)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
-    }
-
     if (props.browse == 'mother') {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.mother_tongue)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
-    }
 
-    if (props.browse == 'state') {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.state)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
-    }
+      if (
+        (props.browseId != "")
+      ) {
+        let data = [20, 70, 1, 49, 1, 6, "null", props.browseId, "null", "null", "null", "null", "null"]
+        setParFilterData(data);
+      }
 
-    if (props.browse == 'city') {
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.city)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
     }
+    if (props.browse == 'caste') {
 
+      if (
+        (props.browseId != "")
+      ) {
+        let data = [20, 70, 1, 49, 1, 6, "null", "null", "null", props.browseId, "null", "null", "null"]
+        setParFilterData(data);
+      }
+
+    }
     if (props.browse == 'occupation') {
 
-      setData(
-        forFilter.filter((prof_data) => {
-          if (
-            (props.browseId != ""
-              ? (props.browseId == prof_data.get_occupation.id)
-              : 0)
-          ) {
-            return prof_data;
-          }
-        })
-      )
+      if (
+        (props.browseId != "")
+      ) {
+        let data = [20, 70, 1, 49, 1, 6, "null", "null", "null", "null", props.browseId, "null", "null"]
+        setParFilterData(data);
+      }
+
     }
-  }, [props, forFilter]);
+    if (props.browse == 'state') {
+
+      if (
+        (props.browseId != "")
+      ) {
+        let data = [20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", props.browseId, "null"]
+        setParFilterData(data);
+      }
+
+    }
+    if (props.browse == 'city') {
+
+      if (
+        (props.browseId != "")
+      ) {
+        let data = [20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", props.browseId]
+        setParFilterData(data);
+      }
+
+    }
+  }, [props.browseId]);
   ////////////////////////////////////////////////
   /////////Browse Profile Section FUnction End////////////////
   ////////////////////////////////////////////////

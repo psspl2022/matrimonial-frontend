@@ -19,7 +19,9 @@ export function Showdata(props) {
                             <Upgradebanner />
                             <div className="main-tabs">
                                 <Topcat title="Find Match" setGrid={props.setGrid} />
-                                <Datacontainer title={props.title} data={props.data} key1={props.key1} check={props.check} showAllProfiles={props.showAllProfiles} page={props.page} grid={props.grid} CurrentPage={props.CurrentPage} total={props.total} setPage={props.setPage} />
+
+                                {!props.msg && <Datacontainer title={props.title} data={props.data} key1={props.key1} check={props.check} showAllProfiles={props.showAllProfiles} page={props.page} grid={props.grid} CurrentPage={props.CurrentPage} total={props.total} setPage={props.setPage} />}
+                                {props.msg && <h1 className="text-center" style={{ margin: "auto", minHeight: "200px" }}>{props.msg}</h1>}
                                 {/* card use  */}
                             </div>
                         </div>

@@ -90,7 +90,7 @@ export default function SearchFilters(props) {
   }, []);
 
   const SubmitFilter = () => {
-    const filterData = [(miniAge) ? miniAge.label : 20, (maxAge) ? maxAge.label : 70, (miniHeight) ? miniHeight.value : 1, (maxHeight) ? maxHeight.value : 49, (minIncome) ? minIncome.value : 1, (maxIncome) ? maxIncome.value : 6, (religion.length != 0) ? religion : "null", moth != 0 ? moth : "null", maritial != 0 ? maritial : "null"];
+    const filterData = [(miniAge) ? miniAge.label : 20, (maxAge) ? maxAge.label : 70, (miniHeight) ? miniHeight.value : 1, (maxHeight) ? maxHeight.value : 49, (minIncome) ? minIncome.value : 1, (maxIncome) ? maxIncome.value : 6, (religion.length != 0) ? religion : "null", moth != 0 ? moth : "null", maritial != 0 ? maritial : "null", "null", "null", "null", "null"];
     // console.log(filterData);
     props.setParFilterData(filterData);
   }
