@@ -46,8 +46,7 @@ export function Datacontainer(props) {
                                     index={index}
                                     name={item.name}
                                     page={props.page}
-                                    className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${props.grid == true ? "list-group-item1" : ""
-                                        }`}
+                                    className={props.className}
                                 />
                             ))}
                         {(props.data.length == 0 && props.check > 0 && loding())}
