@@ -7,6 +7,7 @@ import $ from "jquery";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
+import moment from "moment/moment";
 
 
 
@@ -44,6 +45,12 @@ function ProfileStage() {
   const [matrimonial, setMatrimonial] = useState("");
   const [date, setDate] = useState("");
   const [residence, setResidence] = useState("");
+
+  const d = new Date();
+  d.setFullYear(d.getFullYear()-21);
+  var minDate = (moment((new Date().setFullYear(new Date().getFullYear()-21))).format('YYYY-MM-DDThh:mm'));
+
+  console.log( minDate);
 
   const [requiredError, setRequiredError] = useState(false);
   // var countries = {};
@@ -273,7 +280,8 @@ function ProfileStage() {
             <div className="form-group">
             <label className="label15">Date Of Birth*</label>
             <input
-              type="date"
+             type="date"
+            max = {(moment((new Date().setFullYear(new Date().getFullYear()-21))).format('yyyy-MM-DD'))}
               className="job-input"
               placeholder="Enter Email Address"
               onChange={(e) => {
