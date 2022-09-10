@@ -10,6 +10,7 @@ export default function SearchMatches(props) {
   const search = useSelector((state) => state.changeSearch);
   const [grid, setGrid] = useState(false);
   const [data, setData] = useState([]);
+  const [msg, setMsg] = useState(false);
   const [key, setKey] = useState([]);
   const [check, setCheck] = useState(1);
   const [page, setPage] = useState("0");
@@ -84,16 +85,30 @@ export default function SearchMatches(props) {
           setMsg(data['msg']);
         } else {
           setData(data.data);
+<<<<<<< Updated upstream
+=======
+          console.log(data.data);
+>>>>>>> Stashed changes
           setKey(data.key);
           setCurrentPage(data.page);
           setTotal(data.total);
           setForFilter(data.data);
+<<<<<<< Updated upstream
           if (data.data.length > 0) {
             setCheck(1);
           }
           else {
             setCheck(0);
           }
+=======
+        }
+
+        if (data.data.length > 0) {
+          setCheck(1);
+        }
+        else {
+          setCheck(0);
+>>>>>>> Stashed changes
         }
         setFetchDone(true);
       });
@@ -120,9 +135,17 @@ export default function SearchMatches(props) {
 
   return (
     <>
+<<<<<<< Updated upstream
       {token && (
         <Showdata className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
           }`} msg={msg} desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
+=======
+      {token && !msg && (
+        <Showdata desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
+>>>>>>> Stashed changes
+      )}
+        {token && msg && (
+        <h1 className="text-center">{msg}</h1>
       )}
     </>
   );

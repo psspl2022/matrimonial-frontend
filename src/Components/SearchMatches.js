@@ -189,6 +189,7 @@ export default function SearchMatches(props) {
   }, [parfilterData]);
 
   useEffect(() => {
+    console.log(search)
     const formData = new FormData()
     formData.append('gender', search[0])
     formData.append('min_age', search[1])
@@ -225,7 +226,7 @@ export default function SearchMatches(props) {
           dispatch(resetSearch())
         }, 5000);
       });
-  }, [forFilter]);
+  }, [search]);
 
   useEffect(() => {
     const formData = new FormData()
@@ -235,16 +236,16 @@ export default function SearchMatches(props) {
     axios
       .post(`${window.Url}api/postBrowseProfile`, formData)
       .then(({ data }) => {
-        setBrowseData(data['data']);
+        setBrowseData(data);
         setFetchDone(true);
       });
-  }, [forFilter]);
+  }, [forFilter, props]);
 
   return (
     <>
       {!token && (
         <>
-          {!browseData && (
+          {browseData.length == 0 && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -275,6 +276,11 @@ export default function SearchMatches(props) {
                                 ))}
 
                               {data || (!fetchDone && loding())}
+                              {searchData.length == 0 && fetchDone && (
+                                <div className="browse-section">
+                                  <h3 class="ml-5 mt-5">No Data Found!!</h3>
+                                </div>
+                              )}
 
                               <div className="col-12">
                                 <div className="main-p-pagination">
@@ -292,7 +298,7 @@ export default function SearchMatches(props) {
             </>
           )}
 
-          {browseData && (
+          {props.browse && browseData.length > 0 && (
             <>
               <main className="browse-section">
                 <div className="container">
@@ -322,7 +328,11 @@ export default function SearchMatches(props) {
                                 ))}
 
                               {data.length == 0 || (!fetchDone && loding())}
-
+                              {props.browse == null && browseData.length == 0 && fetchDone && (
+                                <div className="browse-section">
+                                  <h3 class="ml-5 mt-5">No Data Found!!</h3>
+                                </div>
+                              )}
                               <div className="col-12">
                                 <div className="main-p-pagination">
                                   <nav aria-label="Page navigation example"></nav>

@@ -113,11 +113,11 @@ export function Profile(props) {
             <div className="col-lg-10 col-md-10 mx-auto" >
                 <h1 className="text-center">Profile Details Section</h1>
                 <div className="row" style={{ background: "aliceblue" }}>
-                    <div className="col-lg-4 col-md-4 text-center d-flex align-items-center">
+                    <div className="col-lg-4 col-md-4 text-center d-flex align-items-center mx-auto my-auto">
                         {/* here  */}
-                        {data.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" class="mx-auto" style={{ height: "180px", margin: "0px 10px" }} />)}
+                        {data.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" class="mx-auto" style={{    maxWidth: "300px", maxHeight: "180px", margin: "0px 10px" }} />)}
 
-                        {!data.get_profile_image && (<img src={data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{ height: "180px", margin: "0px 10px" }} />)}
+                        {!data.get_profile_image && (<img src={data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" style={{  maxWidth: "300px", maxHeight:  "180px", margin: "0px 10px" }} />)}
 
                     </div>
                     <div className="col-lg-5 col-md-4">

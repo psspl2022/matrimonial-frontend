@@ -297,7 +297,7 @@ function SignUp() {
                           }}
 
                         />
-                        {nameValid('PLease Input Vaild Name It Should  Minimume 3 character And Only COntain Alphabets and Space')}
+                        {nameValid('Please input valid name')}
                       </div>
                     </div>
 

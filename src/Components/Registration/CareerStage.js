@@ -282,8 +282,8 @@ function CareerStage() {
           </div>
           <div className="col-md-4">
           <div className="form-group">
-        <label className="label15">Describe Yourself</label>
-        <textarea className="w-100 p-2" rows={7} placeholder="Write About YourSelf" 
+        <label className="label15">Describe Your Career Journey</label>
+        <textarea className="w-100 p-2" rows={7} placeholder="Write About Career" 
           onChange={(event) => {
             setDesc(event.target.value);
           }}
