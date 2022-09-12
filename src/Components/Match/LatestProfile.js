@@ -20,6 +20,7 @@ export default function SearchMatches(props) {
   const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
   const dispatch = useDispatch();
+  const [msg, setMsg] = useState(false);
   /////////////////////Secure tokens 
   const token = window.sessionStorage.getItem("access_token");
   const headers_data = {
@@ -80,16 +81,20 @@ export default function SearchMatches(props) {
     axios
       .post(`${window.Url}api/latestProfile`, formData, headers_data)
       .then(({ data }) => {
-        setData(data.data);
-        setKey(data.key);
-        setCurrentPage(data.page);
-        setTotal(data.total);
-        setForFilter(data.data);
-        if (data.data.length > 0) {
-          setCheck(1);
-        }
-        else {
-          setCheck(0);
+        if (data['msg']) {
+          setMsg(data['msg']);
+        } else {
+          setData(data.data);
+          setKey(data.key);
+          setCurrentPage(data.page);
+          setTotal(data.total);
+          setForFilter(data.data);
+          if (data.data.length > 0) {
+            setCheck(1);
+          }
+          else {
+            setCheck(0);
+          }
         }
         setFetchDone(true);
       });
@@ -155,7 +160,7 @@ export default function SearchMatches(props) {
   return (
     <>
       {token && (
-        <Showdata className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+        <Showdata title="Latest Match" msg={msg} filter={parfilterData} className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
           }`} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
       )}
     </>

@@ -1,4 +1,4 @@
-import SearchFilters from "./SearchFilters";
+
 import React from "react";
 import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
@@ -9,9 +9,6 @@ import { useDispatch } from "react-redux";
 import Usercard from "./common/Usercard";
 import Topcat from "./common/Topcat";
 import Showdata from "./common/Showdata";
-import Upgradebanner from "./common/Upgradebanner";
-import PaginationBar from "./common/PaginationBar";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 export default function SearchMatches(props) {
   const search = useSelector((state) => state.changeSearch);
   const [grid, setGrid] = useState(false);
@@ -26,6 +23,7 @@ export default function SearchMatches(props) {
   const [forFilter, setForFilter] = useState([]);
   const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
+  const [msg, setMsg] = useState(false);
   const dispatch = useDispatch();
   /////////////////////Secure tokens 
   const token = window.sessionStorage.getItem("access_token");
@@ -58,7 +56,7 @@ export default function SearchMatches(props) {
   ////////////////////////////////////////////////
   /////////Function to fatch Data////////////////
   ////////////////////////////////////////////////
-  function showAllProfiles(page, filter) {
+  function showAllProfiles(page, filter = [20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]) {
     function formatDate(date, year = 0) {
       var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -92,16 +90,20 @@ export default function SearchMatches(props) {
     axios
       .post(`${window.Url}api/getAllUserProfiles`, formData, headers_data)
       .then(({ data }) => {
-        setData(data.data);
-        setKey(data.key);
-        setCurrentPage(data.page);
-        setTotal(data.total);
-        setForFilter(data.data);
-        if (data.data.length > 0) {
-          setCheck(1);
-        }
-        else {
-          setCheck(0);
+        if (data['msg']) {
+          setMsg(data['msg']);
+        } else {
+          setData(data.data);
+          setKey(data.key);
+          setCurrentPage(data.page);
+          setTotal(data.total);
+          setForFilter(data.data);
+          if (data.data.length > 0) {
+            setCheck(1);
+          }
+          else {
+            setCheck(0);
+          }
         }
         setFetchDone(true);
       });
@@ -342,7 +344,8 @@ export default function SearchMatches(props) {
       )}
 
       {token && (
-        <Showdata className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+
+        <Showdata msg={msg} title="Find Match" filter={parfilterData} className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
           }`} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
       )}
     </>

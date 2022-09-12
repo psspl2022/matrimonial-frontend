@@ -41,6 +41,7 @@ export function Datacontainer(props) {
                         {props.data && props.check > 0 &&
                             props.data.map((item, index) => (
                                 <Usercard key={index}
+                                    filter={props.filter}
                                     item={item}
                                     showAllProfiles={props.showAllProfiles}
                                     index={index}

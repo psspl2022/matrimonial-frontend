@@ -12,6 +12,7 @@ export default function Shortlist() {
   const [total, setTotal] = useState();
   const [CurrentPage, setCurrentPage] = useState(0);
   const [fetchDone, setFetchDone] = useState(false);
+  const [msg, setMsg] = useState(false);
   const token = window.sessionStorage.getItem("access_token");
   const headers_data = {
     headers: {
@@ -37,10 +38,20 @@ export default function Shortlist() {
     axios
       .post(`${window.Url}api/getShortlist`, formData, headers_data)
       .then(({ data }) => {
-        setData(data.data);
-        setKey(data.key);
-        setCurrentPage(data.page);
-        setTotal(data.total);
+        if (data['msg']) {
+          setMsg(data['msg']);
+        } else {
+          setData(data.data);
+          setKey(data.key);
+          setCurrentPage(data.page);
+          setTotal(data.total);
+          if (data.data.length > 0) {
+            setCheck(1);
+          }
+          else {
+            setCheck(0);
+          }
+        }
         setFetchDone(true);
       });
   }
@@ -53,8 +64,8 @@ export default function Shortlist() {
             <div className="col-lg-12 col-md-12 mainpage mx-auto">
               <Upgradebanner />
               <div className="main-tabs">
-                <Topcat title="Find Match" setGrid={setGrid} />
-                <Datacontainer className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={shortlist} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
+                <Topcat title="Shortlisted Profile" setGrid={setGrid} />
+                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={shortlist} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
               </div>
             </div>
           </div>

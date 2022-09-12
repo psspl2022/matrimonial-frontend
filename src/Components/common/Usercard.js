@@ -1,7 +1,6 @@
-import React, { memo, Suspense, useEffect } from "react";
+import React, { memo } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-import { img } from "react-lazy-load-image-component";
 export function Usercard(props) {
   const token = window.sessionStorage.getItem("access_token");
   const headers_data = {
@@ -11,25 +10,25 @@ export function Usercard(props) {
       "Content-Type": "application/json",
     },
   };
-  const sendIntrest = (id, page) => {
+  const sendIntrest = (id, page, filter) => {
     const update = {
       id: id,
     };
     axios
       .post(`${window.Url}api/sendIntrest`, update, headers_data)
       .then((response) => {
-        props.showAllProfiles(page);
+        props.showAllProfiles(page, filter);
       });
   };
 
-  const shortlistProfile = (id, page) => {
+  const shortlistProfile = (id, page, filter) => {
     const update = {
       id: id,
     };
     axios
       .post(`${window.Url}api/shortlist`, update, headers_data)
       .then((response) => {
-        props.showAllProfiles(page);
+        props.showAllProfiles(page, filter);
       });
   };
 
@@ -133,7 +132,7 @@ export function Usercard(props) {
                     <button
                       className="bookmark1"
                       onClick={(e) =>
-                        sendIntrest(props.item["reg_id"], props.page)
+                        sendIntrest(props.item["reg_id"], props.page, props.filter)
                       }
                       title="Send Interest"
                     >
@@ -153,7 +152,7 @@ export function Usercard(props) {
                     <button
                       className="bookmark1"
                       onClick={(e) =>
-                        shortlistProfile(props.item["reg_id"], props.page)
+                        shortlistProfile(props.item["reg_id"], props.page, props.filter)
                       }
                       style={{
                         color: "#fff",
@@ -172,19 +171,13 @@ export function Usercard(props) {
                       <i
                         className="fas fa-star"
                         onClick={(e) =>
-                          shortlistProfile(props.item["reg_id"], props.page)
+                          shortlistProfile(props.item["reg_id"], props.page, props.filter)
                         }
                         title="Short Profile"
                       ></i>
                     </button>
                   )}
               </li>
-              {/* 
-              <li className="bkd-pm">
-                <button className="bookmark1">
-                  <i className="fas fa-heart"></i>
-                </button>
-              </li> */}
             </ul>
           </div>
         </div>

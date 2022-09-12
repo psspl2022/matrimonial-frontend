@@ -121,7 +121,7 @@ export default function SearchMatches(props) {
   return (
     <>
       {token && (
-        <Showdata className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
+        <Showdata title="Desired Profile" filter={parfilterData} className={`lg-item col-lg-6 col-xs-6 grid-group-item1 ${grid == true ? "list-group-item1" : ""
           }`} msg={msg} desire={true} data={data} setParFilterData={setParFilterData} total={total} setPage={setPage} page={page} CurrentPage={CurrentPage} showAllProfiles={showAllProfiles} setGrid={setGrid} key1={key} check={check} />
       )}
     </>
