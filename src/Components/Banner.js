@@ -19,7 +19,7 @@ function Banner() {
   const [moths, setMoths] = useState([]);
   const [religions, setReligions] = useState([]);
 
-  const [lookingFor, setLookingFor] = useState();
+  const [lookingFor, setLookingFor] = useState("");
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [religion, setReligion] = useState("");
@@ -31,6 +31,7 @@ function Banner() {
   const dispatch = useDispatch();
 
   const searchSubmit = () => {
+    // console.log([lookingFor.value,minAge.value,maxAge.value,religion.value,moth.value]);
     dispatch(forSearch([lookingFor.value,minAge.label,maxAge.label,religion.value,moth.value])) 
   }
   var genderConst = 0;
@@ -214,7 +215,7 @@ function Banner() {
                   placeholder="Looking For"
                   options={lookingForOptions}
                   isDisabled = {genderConst!=0 ? "disabled" : ""}
-                  value = {genderConst!=0 ? (genderConst == 1 ? lookingForOptions[0] : lookingForOptions[1]) : ''}
+                  value = {genderConst!=0 ? (genderConst == 1 ? lookingForOptions[0] : lookingForOptions[1]) : lookingFor}
                   onChange={(e) => {
                     setLookingFor(e);
                   }}

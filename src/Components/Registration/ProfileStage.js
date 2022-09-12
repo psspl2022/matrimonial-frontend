@@ -46,12 +46,6 @@ function ProfileStage() {
   const [date, setDate] = useState("");
   const [residence, setResidence] = useState("");
 
-  const d = new Date();
-  d.setFullYear(d.getFullYear()-21);
-  var minDate = (moment((new Date().setFullYear(new Date().getFullYear()-21))).format('YYYY-MM-DDThh:mm'));
-
-  console.log( minDate);
-
   const [requiredError, setRequiredError] = useState(false);
   // var countries = {};
   const maritalOptions = [
@@ -282,6 +276,7 @@ function ProfileStage() {
             <input
              type="date"
             max = {(moment((new Date().setFullYear(new Date().getFullYear()-21))).format('yyyy-MM-DD'))}
+            min = {(moment((new Date().setFullYear(new Date().getFullYear()-70))).format('yyyy-MM-DD'))}
               className="job-input"
               placeholder="Enter Email Address"
               onChange={(e) => {
