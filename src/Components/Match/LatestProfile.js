@@ -100,7 +100,7 @@ export default function SearchMatches(props) {
   useEffect(() => {
     window.scrollTo(10, 0);
     // showAllProfiles(page, parfilterData);
-    document.title = "Letest Matches";
+    document.title = "Latest Match";
   }, []);
   // change rerun function on page value change 
   useEffect(() => {
