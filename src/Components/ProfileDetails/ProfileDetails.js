@@ -121,9 +121,9 @@ function ProfileDetails() {
                 <div className="row" style={{ background: "aliceblue" }}>
                   <div className="col-lg-4 col-md-4 text-center d-flex align-items-center">
                     {/* here  */}
-                    {data.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" class="mx-auto img-fluid" style={{   margin: "0px 10px" }} />)}
+                    {data.get_profile_image && (<img src={`${window.Url}Documents/Image_Documents/${data.get_profile_image.identity_card_doc}`} alt="user profile image" class="mx-auto img-fluid" style={{ margin: "0px 10px" }} />)}
 
-                    {!data.get_profile_image && (<img src={data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" class="mx-auto img-fluid" style={{   margin: "0px 10px" }} />)}
+                    {!data.get_profile_image && (<img src={data.length != 0 && (data.get_user_register['gender'] == 1 ? process.env.PUBLIC_URL + "/male_avatar.png" : process.env.PUBLIC_URL + "/female_avatar.png")} alt="user profile image" class="mx-auto img-fluid" style={{ margin: "0px 10px" }} />)}
 
                   </div>
                   <div className="col-lg-5 col-md-4">

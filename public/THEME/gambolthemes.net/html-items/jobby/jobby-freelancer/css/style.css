@@ -7504,3 +7504,8 @@ h6 {
 .react-select__option {
   max-height: 150px !important;
 }
+
+.nav-link,
+.edit-icon {
+  cursor: pointer;
+}

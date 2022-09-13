@@ -236,6 +236,7 @@ export default function SearchMatches(props) {
   ////////////////////////////////////////////////
   useEffect(() => {
     window.scroll({ top: 200, left: 0, behavior: 'smooth' })
+    setParFilterData([20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]);
     // showAllProfiles(page, parfilterData);
     document.title = "Search Matches";
   }, []);
