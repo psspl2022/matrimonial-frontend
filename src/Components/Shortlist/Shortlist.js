@@ -65,7 +65,7 @@ export default function Shortlist() {
               <Upgradebanner />
               <div className="main-tabs">
                 <Topcat title="Shortlisted Profile" setGrid={setGrid} />
-                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={shortlist} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
+                <Datacontainer link={true} msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={shortlist} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
               </div>
             </div>
           </div>

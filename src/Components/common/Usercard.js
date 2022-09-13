@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
 export function Usercard(props) {
   const token = window.sessionStorage.getItem("access_token");
@@ -20,7 +21,35 @@ export function Usercard(props) {
         props.showAllProfiles(page, filter);
       });
   };
-
+  const close = () => {
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
+  const interestRevert = (id, revert, page, filter) => {
+    const update = {
+      id: id,
+      revert: revert,
+    };
+    axios
+      .post(`${window.Url}api/interestRevert`, update, headers_data)
+      .then((response) => {
+        if (response.data.hasOwnProperty("succmsg")) {
+          Swal.fire({
+            icon: "success",
+            title: response.data.succmsg,
+          });
+          close();
+          props.showAllProfiles(page, filter);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: response.data.errmsg,
+          });
+          props.showAllProfiles(page, filter);
+        }
+      });
+  };
   const shortlistProfile = (id, page, filter) => {
     const update = {
       id: id,
@@ -39,7 +68,7 @@ export function Usercard(props) {
         key={props.index}
       >
         <div className="job-item mt-30">
-          <NavLink to={`/profileDetail/${props.item["reg_id"]}`}>
+          <NavLink to={props.browse ? 'findMatches' : `/profileDetail/${props.item["reg_id"]}`}>
             <div
               className="job-top-dt text-right"
               style={{ paddingTop: "3px" }}
@@ -110,7 +139,7 @@ export function Usercard(props) {
               </div>
             </div>
           </NavLink>
-          <div className="job-buttons">
+          {props.link && <div className="job-buttons">
             <ul className="link-btn d-flex justify-content-around">
               <li className="bkd-pm">
                 {(props.item.get_interest_sent != null)
@@ -179,7 +208,51 @@ export function Usercard(props) {
                   )}
               </li>
             </ul>
-          </div>
+          </div>}
+          {props.accept &&
+            <div className="job-buttons">
+              <ul className="link-btn d-flex">
+                <li
+                  style={{
+                    width: "44%",
+                    borderRight: "2px solid #fff",
+                    margin: "0 10px",
+                  }}
+                >
+                  <button
+                    className="btn btn-md accept-link py-2"
+                    style={{
+                      borderRadius: "20px",
+                      fontWeight: "700",
+                    }}
+                    onClick={(e) =>
+                      interestRevert(props.item.reg_id, "1", props.page, props.filter)
+                    }
+                    title="Accept"
+                  >
+                    Accept
+                  </button>
+                </li>
+                <li style={{ width: "44%", margin: "0 10px" }}>
+                  <button
+                    className=" btn btn-md reject-link py-2"
+                    style={{
+                      borderRadius: "20px",
+                      fontWeight: "700",
+                    }}
+                    onClick={(e) =>
+                      interestRevert(props.item.reg_id, "2", props.page, props.filter)
+                    }
+                    title="Reject"
+                  >
+                    Reject
+                  </button>
+                </li>
+
+
+              </ul>
+            </div>}
+
         </div>
       </div>
     </>
