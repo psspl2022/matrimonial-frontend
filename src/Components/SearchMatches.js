@@ -87,6 +87,12 @@ export default function SearchMatches(props) {
     formData.append('occupation', filter[10])
     formData.append('state', filter[11])
     formData.append('city', filter[12])
+    if (filter[13]) {
+      formData.append('gender', filter[13])
+    }
+    else {
+      formData.append('gender', null)
+    }
     // console.log(filter);
     formData.append('page', page)
     axios
@@ -255,6 +261,7 @@ export default function SearchMatches(props) {
     parfilterData[1] = search[2] ? search[2] : parfilterData[1];
     parfilterData[6] = search[3] ? search[3] : parfilterData[6];
     parfilterData[7] = search[4] ? search[4] : parfilterData[7];
+    parfilterData[13] = search[0] ? search[0] : "null";
     setParFilterData(parfilterData);
     // console.log(parfilterData)
   }, [search]);
