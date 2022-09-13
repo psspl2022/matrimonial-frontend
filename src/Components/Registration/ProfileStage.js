@@ -457,7 +457,6 @@ function ProfileStage() {
               className="basic-single"
               classNamePrefix="select"
               defaultValue=""
-              isClearable
               isSearchable
               name="country"
               id="country"
@@ -479,7 +478,6 @@ function ProfileStage() {
               className="basic-single"
               classNamePrefix="select"
               defaultValue=""
-              isClearable
               isSearchable
               name="state"
               placeholder="Select State"
@@ -500,7 +498,6 @@ function ProfileStage() {
               className="basic-single"
               classNamePrefix="select"
               defaultValue=""
-              isClearable
               isSearchable
               name="city"
               placeholder="Select City"
