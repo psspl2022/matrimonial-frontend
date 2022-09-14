@@ -9,7 +9,7 @@ import { keyboard } from "@testing-library/user-event/dist/keyboard";
 import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
-
+import Swal from "sweetalert2";
 
 function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
@@ -55,11 +55,16 @@ function RegistrationStage(props) {
 
       });
   }, []);
+  const close = () => {
+    setTimeout(() => {
+      Swal.close();
+    }, 2000);
+  };
 
   useEffect(() => {
     if (TabName === 'homepage') {
-      history.replace('/');
-      props.getUrlData('/')
+      close();
+      window.location.href = "/"
     }
     dispatch(regActiveLink(TabName));
   }, [TabName])

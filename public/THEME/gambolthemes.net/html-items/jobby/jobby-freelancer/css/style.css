@@ -7506,6 +7506,7 @@ h6 {
 }
 
 .nav-link,
-.edit-icon {
+.edit-icon,
+.link-item {
   cursor: pointer;
 }

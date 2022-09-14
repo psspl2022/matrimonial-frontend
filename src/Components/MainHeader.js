@@ -471,11 +471,6 @@ function MainHeader(props) {
                           <NavLink to="/findMatches" className="font-lobster nav-link">
                             Find Matches
                           </NavLink>
-                          {/* <div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_jobs.html">Browse Match</a>
-													<a className="link-item" href="job_single_view.html">Single Match View</a>
-													<a className="link-item" href="post_a_job.html">Post a Match</a>
-												</div> */}
                         </li>
                       )}
                       {token.length != 0 && (
@@ -518,12 +513,6 @@ function MainHeader(props) {
                               Desired Profile Match
                             </NavLink>
                           </div>
-                          {/* <a href="#" className="nav-link dropdown-toggle-no-caret" role="button" data-toggle="dropdown">Desired Profile</a> */}
-                          {/* <div className="dropdown-menu pages-dropdown">
-													<a className="link-item" href="browse_projects.html">Browse Matches</a>
-													<a className="link-item" href="project_single_view.html">Single Match View</a> */}
-                          {/* <a className="link-item" href="post_a_project.html">Post a Project</a> */}
-                          {/* </div> */}
                         </li>
                       )}
                       {token.length != 0 && (
@@ -554,69 +543,15 @@ function MainHeader(props) {
                           </div>
                         </li>
                       )}
-                      {/* <li className="nav-item dropdown">
-                        <a
-                          href="#"
-                          className="nav-link dropdown-toggle-no-caret font-lobster"
-                          role="button"
-                          data-toggle="dropdown"
-                        >
-                          Upgrade Plan
-                        </a>
-                        <div className="dropdown-menu pages-dropdown ">
-                          <a className="link-item" href="browse_companies.html">
-                            Browse Plans
-                          </a>
-                          <a
-                            className="link-item font-lobster"
-                            href="other_company_profile.html"
-                          >
-                            Membership Plan History
-                          </a>
-                        </div>
-                      </li> */}
+
                       <li className="nav-item">
-                        <a href="javascript:void(Tawk_API.toggle())" className="nav-link font-lobster" role="button">
+                        <a href="javascript:void()" className="nav-link font-lobster" role="button">
                           Help
                         </a>
                       </li>
-                      {/* <li className="nav-item dropdown pages152">
-                        <a
-                          href="#"
-                          className="nav-link dropdown-toggle-no-caret font-lobster"
-                          role="button"
-                          id="dropdownPageLink"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          Pages <i className="fas fa-caret-down p-crt"></i>
-                        </a>
-                        <div
-                          className="dropdown-menu"
-                          aria-labelledby="dropdownPageLink"
-                        >
-                          <NavLink className="link-item" to="/">
-                            About
-                          </NavLink>
-                          <NavLink className="link-item" to="/blog">
-                            Our Blog
-                          </NavLink>
-                          <NavLink className="link-item" to="/view">
-                            Signle Blog View
-                          </NavLink>
-                        </div>
-                      </li> */}
+
                     </ul>
-                    {/* <a
-                      href="#"
-                      className="search-link"
-                      role="button"
-                      datatoggle="modal"
-                      datatarget="#searchModal"
-                    >
-                      <i className="fas fa-search"></i>
-                    </a> */}
+
                     {token.length === 0 && (
                       <div>
                         <NavLink to="/login" style={{ letterSpacing: "1px" }} onClick={() => props.getUrl('/login')} className="add-post font-fredokaone">

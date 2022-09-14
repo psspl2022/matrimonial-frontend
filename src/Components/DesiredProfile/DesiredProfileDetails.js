@@ -10,24 +10,7 @@ function DesiredProfileDetails() {
 
   const animatedComponents = makeAnimated();
 
-  const income = [
-    { value: "0", label: "0 Lakh" },
-    { value: "1", label: "1 Lakh" },
-    { value: "2", label: "2 Lakh" },
-    { value: "3", label: "3 Lakh" },
-    { value: "4", label: "4 Lakh " },
-    { value: "5", label: "5 Lakh" },
-    { value: "7.5", label: "7.5 Lakh" },
-    { value: "10", label: "10 Lakh" },
-    { value: "15", label: "15 Lakh" },
-    { value: "20", label: "20 Lakh" },
-    { value: "25", label: "25 Lakh" },
-    { value: "35", label: "35 Lakh" },
-    { value: "50", label: "50 Lakh" },
-    { value: "70", label: "70 Lakh " },
-    { value: "100", label: "1 Crore " },
 
-  ];
 
   const maritalOptions = [
     { value: 1, label: "Never Married" },
@@ -78,6 +61,7 @@ function DesiredProfileDetails() {
   const [highests, setHighest] = useState([]);
   const [residencies, setResidencies] = useState([]);
   const [occupations, setOccupations] = useState([]);
+  const [income, setIncome] = useState([]);
 
 
   const [miniage, setMiniage] = useState([]);
@@ -150,7 +134,11 @@ function DesiredProfileDetails() {
             return { value: country.id, label: country.name };
           })
         );
-
+        setIncome(
+          data.income.map(function (income) {
+            return { value: income.id, label: income.income };
+          })
+        );
         setAge(
           data.age.map(function (age) {
             return { value: age.id, label: age.age };
@@ -407,7 +395,7 @@ function DesiredProfileDetails() {
       });
 
   }, [occupations]);
-
+  console.log(income);
   const handleMarital = (e) => {
     const value = (Array.isArray(e) ? e.map(x => x.value) : []);
     setMarital(value);

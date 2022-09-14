@@ -38,9 +38,9 @@ function CareerStage() {
   }, [])
 
   useEffect(() => {
-    if((high == undefined || high == null || high == "") || (employed == undefined || employed == null ||  employed == '') || (occupation == undefined ||occupation == null || occupation == ''  ) || (income == undefined || income == null || income == '')){
-      setRequiredError(true);      
-    } else{
+    if ((high == undefined || high == null || high == "") || (employed == undefined || employed == null || employed == '') || (occupation == undefined || occupation == null || occupation == '') || (income == undefined || income == null || income == '')) {
+      setRequiredError(true);
+    } else {
       setRequiredError(false);
     }
   }, [high, employed, occupation, income]);
@@ -54,7 +54,7 @@ function CareerStage() {
     }
   }
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -84,17 +84,19 @@ function CareerStage() {
         }))
 
         setIncomes(data.income.map(function (income) {
-          return { value: income.id, label: income.income };
+          return {
+            value: income.id, label: (income.income.replace(" Lakh", "") - 5) + "-" + income.income
+          };
         }))
 
       });
   }, []);
 
   const valueCheck = (formvalue) => {
-    const dataValue = (formvalue == undefined || formvalue == null || formvalue == '') ? '': formvalue.value;
+    const dataValue = (formvalue == undefined || formvalue == null || formvalue == '') ? '' : formvalue.value;
     return dataValue;
   };
-  
+
 
   const submitCareerDetails = async (e) => {
     e.preventDefault();
@@ -112,30 +114,30 @@ function CareerStage() {
     const token = window.sessionStorage.getItem('access_token');
     const headers_param = {
       headers: {
-          'authorization': 'Bearer '+token,
-          'Accept' : 'application/json',
-          'Content-Type': 'application/json'
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-  }
+    }
 
-    await axios.post(`${window.Url}api/createCareer`, formData, headers_param).then(({data})=>{
+    await axios.post(`${window.Url}api/createCareer`, formData, headers_param).then(({ data }) => {
       if (data.hasOwnProperty('msg')) {
         Swal.fire({
-          icon:"success",
-          text:data.msg
+          icon: "success",
+          text: data.msg
         });
         close();
         dispatch(regActiveLink('family'));
         history.go(0);
-    }
-    else{
-      Swal.fire({
-        icon:"error",
-        text:data.msg
-      });
-      close();
-    }
-      
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          text: data.msg
+        });
+        close();
+      }
+
       // console.log(data);
       // navigate("/")
     })
@@ -147,159 +149,167 @@ function CareerStage() {
   return (
     <>
 
-<div className="lg_form">
-      <div className="main-heading">
-        <h2>Fill The Fields Related to Career</h2>
-        <div className="line-shape1">
-          <img src="images/line.svg" alt="" />
-        </div>
-      </div>
-      <form onSubmit={submitCareerDetails}>
-        <div className="row">
-          <div className="col-md-4">
-            <div className="form-group">
-              <label className="label15">Schooling Board</label>
-              <input type="text" className="job-input" placeholder="Enter Schooling" 
-                onChange={(event) => {
-                  setSchooling(event.target.value);
-                }}
-                required />
-            </div>
-          </div>
-          <div className="col-md-4">
-              <div className="form-group">
-              <label className="label15">Highest Degree</label>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue=''
-                isClearable
-                isSearchable
-                name="highest_degree"
-                placeholder="Select Highest Degree"
-                options={highest}
-                onChange={(event) => {
-                  setHigh(event);
-                }}
-                required
-              />
-              <span style={{color: '#ff0000',
-    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (high == undefined || high == null || high == '') ? 'Please select highest qualification' : ''}</span>
-            </div>
-          </div>
-          <div className="col-md-4">
-                <div className="form-group">
-              <label className="label15">UG Degree</label>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue=''
-                isClearable
-                isSearchable
-                name="ug_deg"
-                placeholder="Select UG Degree"
-                options={ugDegrees}
-                onChange={(event) => {
-                  setUG(event);
-                }}
-              />
-            </div>
-          </div>
-          <div className="col-md-4">
-              <div className="form-group">
-            <label className="label15">PG Degree</label>
-            <Select
-              className="basic-single"
-              classNamePrefix="select"
-              defaultValue=''
-              isClearable
-              isSearchable
-              name="pg_degree"
-              placeholder="Select PG Degree"
-              options={pgDegrees}
-              onChange={(event) => {
-                setPG(event);
-              }}
-              required
-            />
-          </div>
-          <div className="form-group">
-              <label className="label15">Employed In*</label>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue=''
-                isClearable
-                isSearchable
-                name="employed_in"
-                placeholder="Select Employed Sector"
-                options={employedSectors}
-                onChange={(event) => {
-                  setEmployed(event);
-                }}
-              />
-              </div> 
-              <span style={{color: '#ff0000',
-    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (employed == undefined || employed == null || employed == '') ? 'Please select a employed sector' : ''}</span>
-          </div>
-          <div className="col-md-4">
-             <div className="form-group">
-              <label className="label15">Occupation*</label>
-              <Select
-                className="basic-single"
-                classNamePrefix="select"
-                defaultValue=''
-                isClearable
-                isSearchable
-                name="occupation"
-                placeholder="Select Occupation"
-                options={occupations}
-                onChange={(event) => {
-                  setOccupation(event);
-                }}
-              />
-            </div>
-            <span style={{color: '#ff0000',
-    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (occupation == undefined || occupation == null || occupation == '') ? 'Please select occupation' : ''}</span>
-            <div className="form-group">
-        <label className="label15">Annual Income*</label>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          defaultValue=''
-          isClearable
-          isSearchable
-          name="annual_income"
-          placeholder="Select Annual Income"
-          options={incomes}
-          onChange={(event) => {
-            setIncome(event);
-          }}
-        />
-        <span style={{color: '#ff0000',
-    fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'}}> { (income == undefined || income == null || income == '') ? 'Please select income' : ''}</span>
-      </div>
-          </div>
-          <div className="col-md-4">
-          <div className="form-group">
-        <label className="label15">Describe Your Career Journey</label>
-        <textarea className="w-100 p-2" rows={7} placeholder="Write About Career" 
-          onChange={(event) => {
-            setDesc(event.target.value);
-          }}
-          required></textarea>
-      </div>
-          </div>
-          <div className="col-md-12 text-center">
-          <input
-        type="submit"
-        className="lr_btn float-none"
-        value="Continue" 
-        style={{cursor: (requiredError == true) ? "not-allowed": "pointer" }}/>
+      <div className="lg_form">
+        <div className="main-heading">
+          <h2>Fill The Fields Related to Career</h2>
+          <div className="line-shape1">
+            <img src="images/line.svg" alt="" />
           </div>
         </div>
-    </form>
-</div>
+        <form onSubmit={submitCareerDetails}>
+          <div className="row">
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">Schooling Board</label>
+                <input type="text" className="job-input" placeholder="Enter Schooling"
+                  onChange={(event) => {
+                    setSchooling(event.target.value);
+                  }}
+                  required />
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">Highest Degree</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="highest_degree"
+                  placeholder="Select Highest Degree"
+                  options={highest}
+                  onChange={(event) => {
+                    setHigh(event);
+                  }}
+                  required
+                />
+                <span style={{
+                  color: '#ff0000',
+                  fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'
+                }}> {(high == undefined || high == null || high == '') ? 'Please select highest qualification' : ''}</span>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">UG Degree</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="ug_deg"
+                  placeholder="Select UG Degree"
+                  options={ugDegrees}
+                  onChange={(event) => {
+                    setUG(event);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">PG Degree</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="pg_degree"
+                  placeholder="Select PG Degree"
+                  options={pgDegrees}
+                  onChange={(event) => {
+                    setPG(event);
+                  }}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="label15">Employed In*</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="employed_in"
+                  placeholder="Select Employed Sector"
+                  options={employedSectors}
+                  onChange={(event) => {
+                    setEmployed(event);
+                  }}
+                />
+              </div>
+              <span style={{
+                color: '#ff0000',
+                fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'
+              }}> {(employed == undefined || employed == null || employed == '') ? 'Please select a employed sector' : ''}</span>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">Occupation*</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="occupation"
+                  placeholder="Select Occupation"
+                  options={occupations}
+                  onChange={(event) => {
+                    setOccupation(event);
+                  }}
+                />
+              </div>
+              <span style={{
+                color: '#ff0000',
+                fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'
+              }}> {(occupation == undefined || occupation == null || occupation == '') ? 'Please select occupation' : ''}</span>
+              <div className="form-group">
+                <label className="label15">Annual Income*</label>
+                <Select
+                  className="basic-single"
+                  classNamePrefix="select"
+                  defaultValue=''
+                  isClearable
+                  isSearchable
+                  name="annual_income"
+                  placeholder="Select Annual Income"
+                  options={incomes}
+                  onChange={(event) => {
+                    setIncome(event);
+                  }}
+                />
+                <span style={{
+                  color: '#ff0000',
+                  fontWeight: '300', fontFamily: 'Roboto,helvetica,arial,sans-serif'
+                }}> {(income == undefined || income == null || income == '') ? 'Please select income' : ''}</span>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="form-group">
+                <label className="label15">Describe Your Career Journey</label>
+                <textarea className="w-100 p-2" rows={7} placeholder="Write About Career"
+                  onChange={(event) => {
+                    setDesc(event.target.value);
+                  }}
+                  required></textarea>
+              </div>
+            </div>
+            <div className="col-md-12 text-center">
+              <input
+                type="submit"
+                className="lr_btn float-none"
+                value="Continue"
+                style={{ cursor: (requiredError == true) ? "not-allowed" : "pointer" }} />
+            </div>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

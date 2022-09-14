@@ -32,13 +32,13 @@ export default function EducationDetails() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
   };
 
-  useEffect(() => { 
+  useEffect(() => {
     document.title = "Education Details";
     axios
       .get(`${window.Url}api/careerDropdown`, headers_param)
@@ -75,7 +75,9 @@ export default function EducationDetails() {
 
         setIncomes(
           data.income.map(function (income) {
-            return { value: income.id, label: income.income };
+            return {
+              value: income.id, label: (income.income.replace(" Lakh", "") - 5) + "-" + income.income
+            };
           })
         );
       });
@@ -87,51 +89,51 @@ export default function EducationDetails() {
       .get(`${window.Url}api/showCareer`, headers_param)
       .then(({ data }) => {
         setHigh(
-          highest.filter((highest_deg)=>{
-            if(highest_deg.value===data.highest_qualification){
+          highest.filter((highest_deg) => {
+            if (highest_deg.value === data.highest_qualification) {
               return highest_deg;
-          } 
+            }
           })[0]
-          );
-          setUG(
-            ugDegrees.filter((ugDeg)=>{
-              if(ugDeg.value===data.ug_qualification){
-                return ugDeg;
-            } 
-            })[0]
-          );
-          setPG(
-            pgDegrees.filter((pgDeg)=>{
-              if(pgDeg.value===data.pg_qualification){
-                return pgDeg;
-            } 
-            })[0]
-          );
-          setEmployed(
-            employedSectors.filter((emp_sec)=>{
-              if(emp_sec.value==data.employement_sector){
-                return emp_sec;
-            } 
-            })[0]
-          );
-          setOccupation(
-            occupations.filter((occ)=>{
-              if(occ.value==data.occupation){
-                return occ;
-            } 
-            })[0]
-          );
-          setIncome(
-            incomes.filter((inc)=>{
-              if(inc.value==data.income){
-                return inc;
-            } 
-            })[0]
-          );
-          setSchooling(data.schooling);
-          setUGColg(data.ug_clg);
-          setPGColg(data.pg_clg);
-          setOrg(data.organization_name);
+        );
+        setUG(
+          ugDegrees.filter((ugDeg) => {
+            if (ugDeg.value === data.ug_qualification) {
+              return ugDeg;
+            }
+          })[0]
+        );
+        setPG(
+          pgDegrees.filter((pgDeg) => {
+            if (pgDeg.value === data.pg_qualification) {
+              return pgDeg;
+            }
+          })[0]
+        );
+        setEmployed(
+          employedSectors.filter((emp_sec) => {
+            if (emp_sec.value == data.employement_sector) {
+              return emp_sec;
+            }
+          })[0]
+        );
+        setOccupation(
+          occupations.filter((occ) => {
+            if (occ.value == data.occupation) {
+              return occ;
+            }
+          })[0]
+        );
+        setIncome(
+          incomes.filter((inc) => {
+            if (inc.value == data.income) {
+              return inc;
+            }
+          })[0]
+        );
+        setSchooling(data.schooling);
+        setUGColg(data.ug_clg);
+        setPGColg(data.pg_clg);
+        setOrg(data.organization_name);
       });
   }, [incomes]);
 
@@ -153,27 +155,27 @@ export default function EducationDetails() {
     const token = window.sessionStorage.getItem('access_token');
     const headers_param = {
       headers: {
-          'authorization': 'Bearer '+token,
-          'Accept' : 'application/json',
-          'Content-Type': 'application/json'
+        'authorization': 'Bearer ' + token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-  }
+    }
 
-    await axios.post(`${window.Url}api/EditCareer`, formData, headers_param).then(({data})=>{
+    await axios.post(`${window.Url}api/EditCareer`, formData, headers_param).then(({ data }) => {
       if (data.hasOwnProperty('msg')) {
         Swal.fire({
-          icon:"success",
-          text:data.msg
+          icon: "success",
+          text: data.msg
         });
         close();
-    }
-    else{
-      Swal.fire({
-        icon:"error",
-        text:data.msg
-      })
-      close();
-    }
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          text: data.msg
+        })
+        close();
+      }
     })
   }
 
@@ -392,8 +394,14 @@ export default function EducationDetails() {
                     </div>
                   </div>
 
+
                   <div className="col-lg-12">
-                    <button className="post_jp_btn" type="submit">
+                    <button
+                      className="post_jp_btn"
+                      type="submit"
+                      disabled={Edit == false ? "disabled" : ""}
+                      style={Edit == false ? { backgroundColor: "#242424", cursor: 'not-allowed' } : { backgroundColor: "#ee0a4b" }}
+                    >
                       SAVE CHANGES
                     </button>
                   </div>

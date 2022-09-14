@@ -132,7 +132,7 @@ export function Usercard(props) {
                 <span>
                   Mother Tongue: {props.item.get_mother_tongue.mother_tongue}{" "}
                 </span>
-                <span>Salary: {props.item.get_income.income} </span>
+                <span>Salary: {props.item.get_income.income.replace(" Lakh", "") - 5} -{props.item.get_income.income} </span>
                 <span>
                   Qualification: {props.item.get_education.education}{" "}
                 </span>

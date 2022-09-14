@@ -53,7 +53,7 @@ export default function LikesDetails() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -205,7 +205,7 @@ export default function LikesDetails() {
           })
         );
         setColor(data.colors);
-        
+
         setSelectHobby(
           hobbies.filter((hobby_data) => {
             if (
@@ -300,7 +300,7 @@ export default function LikesDetails() {
 
   const submitLikesDetails = (e) => {
     e.preventDefault();
-    const formData = new FormData();    
+    const formData = new FormData();
     formData.append("color", color);
     formData.append("hobbies", hobby);
     formData.append("interest", interest);
@@ -362,7 +362,7 @@ export default function LikesDetails() {
             <div className="post_job_body">
               <form onSubmit={submitLikesDetails}>
                 <div className="row">
-                <div className="col-lg-6">
+                  <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Color</label>
                       <Select
@@ -571,8 +571,14 @@ export default function LikesDetails() {
                       />
                     </div>
                   </div>
+
                   <div className="col-lg-12">
-                    <button className="post_jp_btn" type="submit">
+                    <button
+                      className="post_jp_btn"
+                      type="submit"
+                      disabled={Edit == false ? "disabled" : ""}
+                      style={Edit == false ? { backgroundColor: "#242424", cursor: 'not-allowed' } : { backgroundColor: "#ee0a4b" }}
+                    >
                       SAVE CHANGES
                     </button>
                   </div>

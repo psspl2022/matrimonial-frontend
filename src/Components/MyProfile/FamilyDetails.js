@@ -61,7 +61,7 @@ export default function FamilyDetails() {
   const [familyCity, setFamilyCity] = useState("");
   const [livingWithFam, setLivingWithFam] = useState("");
   const [cityData, setCityData] = useState("");
-  
+
   const token = window.sessionStorage.getItem("access_token");
   const headers_param = {
     headers: {
@@ -71,7 +71,7 @@ export default function FamilyDetails() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -200,18 +200,17 @@ export default function FamilyDetails() {
   }, [familyLiv]);
 
   const getAllCities = () => {
-    if(familyLiv != undefined && familyLiv != null)
-    {
+    if (familyLiv != undefined && familyLiv != null) {
       axios
-      .get(`${window.Url}api/cityDropdown/${familyLiv.value}`, headers_param)
-      .then(({ data }) => {
-        setCities(
-          data.city.map(function (city) {
-            return { value: city.id, label: city.name };
-          })
-        );
-      });
-    }   
+        .get(`${window.Url}api/cityDropdown/${familyLiv.value}`, headers_param)
+        .then(({ data }) => {
+          setCities(
+            data.city.map(function (city) {
+              return { value: city.id, label: city.name };
+            })
+          );
+        });
+    }
   };
 
   useEffect(() => {
@@ -239,34 +238,34 @@ export default function FamilyDetails() {
     formData.append('brother_count', (bro == undefined || bro == null) ? '' : bro.value)
     formData.append('married_brother_count', (marriedBro == undefined || marriedBro == null) ? '' : marriedBro.value)
     formData.append('sister_count', (sis == undefined || sis == null) ? '' : sis.value)
-    formData.append('married_sister_count',(marriedSis == undefined || marriedSis == null) ? '' : marriedSis.value)
+    formData.append('married_sister_count', (marriedSis == undefined || marriedSis == null) ? '' : marriedSis.value)
     formData.append('gotra', (gothra == undefined || gothra == null) ? '' : gothra.value)
     formData.append('gotra_maternal', (maternalGothra == undefined || maternalGothra == null) ? '' : maternalGothra.value)
     formData.append('family_status', valueCheck(familySta))
     formData.append('family_values', valueCheck(familyVal))
     formData.append('family_type', valueCheck(familyTyp))
     formData.append('family_income', (familyInc == undefined || familyInc == null) ? '' : familyInc.value)
-    formData.append('native_state', (familyLiv == undefined || familyLiv == null) ? null: familyLiv.value)
+    formData.append('native_state', (familyLiv == undefined || familyLiv == null) ? null : familyLiv.value)
     formData.append('native_city', (familyCity == undefined || familyCity == null) ? null : familyCity.value)
     formData.append('living_with_parent', valueCheck(livingWithFam))
 
 
-    await axios.post(`${window.Url}api/editFamily`, formData, headers_param).then(({data})=>{
+    await axios.post(`${window.Url}api/editFamily`, formData, headers_param).then(({ data }) => {
       console.log(data);
       if (data.hasOwnProperty('msg')) {
         Swal.fire({
-          icon:"success",
-          text:data.msg
+          icon: "success",
+          text: data.msg
         });
         close();
-    }
-    else{
-      Swal.fire({
-        icon:"error",
-        text:data.error_msg
-      });
+      }
+      else {
+        Swal.fire({
+          icon: "error",
+          text: data.error_msg
+        });
         close();
-    }
+      }
     })
   }
 
@@ -596,8 +595,14 @@ export default function FamilyDetails() {
                     </div>
                   </div>
 
+
                   <div className="col-lg-12">
-                    <button className="post_jp_btn" type="submit">
+                    <button
+                      className="post_jp_btn"
+                      type="submit"
+                      disabled={Edit == false ? "disabled" : ""}
+                      style={Edit == false ? { backgroundColor: "#242424", cursor: 'not-allowed' } : { backgroundColor: "#ee0a4b" }}
+                    >
                       SAVE CHANGES
                     </button>
                   </div>

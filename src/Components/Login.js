@@ -28,7 +28,7 @@ function Login() {
 
   const [verified, setverified] = useState(false);
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -136,21 +136,21 @@ function Login() {
                     />
                   </div>
                   <div className="form-group text-center">
-                  <input
-                    type="submit"
-                    className="lr_btn float-none"
-                    onClick={(e) => {
-                      if (!verified) {
-                        e.preventDefault();
-                      }
-                    }}
-                    value="Login"
-                    style={{
-                      marginTop: "7rem",
-                      cursor: verified === false ? "not-allowed" : "pointer",
-                    }}
-                  />
-                  </div>  
+                    <input
+                      type="submit"
+                      className="lr_btn float-none"
+                      onClick={(e) => {
+                        if (!verified) {
+                          e.preventDefault();
+                        }
+                      }}
+                      value="Login"
+                      style={{
+                        marginTop: "7rem",
+                        cursor: verified === false ? "not-allowed" : "pointer",
+                      }}
+                    />
+                  </div>
                 </form>
                 <div className="done145">
                   <div className="done146">

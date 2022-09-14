@@ -15,18 +15,18 @@ const IncomeOptions = [
 ];
 
 const maritalOptions = [
-    { value: 1, label: "Never Married" },
-    { value: 2, label: "Awaiting Divorce" },
-    { value: 3, label: "Divorced" },
-    { value: 4, label: "Widowed" },
-    { value: 5, label: "Annulled" },
-  ];
+  { value: 1, label: "Never Married" },
+  { value: 2, label: "Awaiting Divorce" },
+  { value: 3, label: "Divorced" },
+  { value: 4, label: "Widowed" },
+  { value: 5, label: "Annulled" },
+];
 
-  const genderOptions = [
-    { value: 1, label: "Male" },
-    { value: 2, label: "Female" },
-    { value: 3, label: "Others" },
-  ];
+const genderOptions = [
+  { value: 1, label: "Male" },
+  { value: 2, label: "Female" },
+  { value: 3, label: "Others" },
+];
 
 export default function BasicDetails() {
   const [Edit, setEdit] = useState(false);
@@ -71,7 +71,7 @@ export default function BasicDetails() {
   const [selectGender, setSelectGender] = useState("");
 
   const token = window.sessionStorage.getItem("access_token");
-  
+
   const headers_param = {
     headers: {
       authorization: "Bearer " + token,
@@ -80,7 +80,7 @@ export default function BasicDetails() {
     },
   };
 
-  const close = () =>{
+  const close = () => {
     setTimeout(() => {
       Swal.close();
     }, 2000);
@@ -121,7 +121,7 @@ export default function BasicDetails() {
 
       });
 
-      axios
+    axios
       .get(`${window.Url}api/sectDropdown`, headers_param)
       .then(({ data }) => {
         setSects(
@@ -133,7 +133,7 @@ export default function BasicDetails() {
 
   }, []);
 
-  useEffect(async() => {
+  useEffect(async () => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
     await axios
       .get(`${window.Url}api/showBasic/${user}`, headers_param)
@@ -154,7 +154,7 @@ export default function BasicDetails() {
             }
           })[0]
         );
-       
+
         setReligion(
           religions.filter((rel_data) => {
             if (rel_data.value == data.basic.religion) {
@@ -195,82 +195,82 @@ export default function BasicDetails() {
         setStateData(data.basic.state);
         setCityData(data.basic.city);
       });
-  },[sect]);
+  }, [sect]);
 
   useEffect(() => {
-    setTimeout(()=>{
+    setTimeout(() => {
       getAllCastes();
-    },10)
+    }, 10)
   }, [religion]);
 
   const getAllCastes = () => {
     axios
-     .get(`${window.Url}api/casteDropdown/${religion.value}`, headers_param)
-     .then(({ data }) => {
+      .get(`${window.Url}api/casteDropdown/${religion.value}`, headers_param)
+      .then(({ data }) => {
         setCastes(
           data.caste.map(function (caste_data) {
             return { value: caste_data.id, label: caste_data.caste };
           })
         );
-     });
-    };
+      });
+  };
 
- useEffect(() => {
-  setTimeout(()=>{
-    setCaste(
-      castes.filter((caste_data) => {
-        if (caste_data.value == casteData) {
-          return caste_data;
-        }
-      })[0]
-    );
-  },10)
-}, [castes]);
+  useEffect(() => {
+    setTimeout(() => {
+      setCaste(
+        castes.filter((caste_data) => {
+          if (caste_data.value == casteData) {
+            return caste_data;
+          }
+        })[0]
+      );
+    }, 10)
+  }, [castes]);
 
-
-
-useEffect(() => {
-  setTimeout(()=>{
-    getAllCountries();
-  },10);  
-}, [residence]);
-
-  const getAllCountries = () => {
-    axios
-     .get(`${window.Url}api/countryDropdown/${residence.value}`, headers_param)
-     .then(({ data }) => {
-      setCountries(
-         data.country.map(function (country_data) {
-           return { value: country_data.id, label: country_data.name };
-         })
-       );
-     });
- };
-
- useEffect(() => {
-  setTimeout(()=>{
-    setCountry(
-      countries.filter((country_data) => {
-        if (country_data.value == countryData) {
-          return country_data;
-        }
-      })[0]
-    );
-
-     setState("");
-     setCity("");
-  },10)   
- }, [countries]);
 
 
   useEffect(() => {
-    setTimeout(()=>{
-    getAllStates();
-  },10)  
+    setTimeout(() => {
+      getAllCountries();
+    }, 10);
+  }, [residence]);
+
+  const getAllCountries = () => {
+    axios
+      .get(`${window.Url}api/countryDropdown/${residence.value}`, headers_param)
+      .then(({ data }) => {
+        setCountries(
+          data.country.map(function (country_data) {
+            return { value: country_data.id, label: country_data.name };
+          })
+        );
+      });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCountry(
+        countries.filter((country_data) => {
+          if (country_data.value == countryData) {
+            return country_data;
+          }
+        })[0]
+      );
+
+      setState("");
+      setCity("");
+    }, 10)
+  }, [countries]);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      getAllStates();
+    }, 10)
   }, [country]);
 
   const getAllStates = () => {
-     axios
+    axios
       .get(`${window.Url}api/stateDropdown/${country.value}`, headers_param)
       .then(({ data }) => {
         setStates(
@@ -293,15 +293,15 @@ useEffect(() => {
 
 
 
-   useEffect(() => {
-        setTimeout(()=>{
-          getAllCities();
-        },10)
-    
+  useEffect(() => {
+    setTimeout(() => {
+      getAllCities();
+    }, 10)
+
   }, [state]);
 
   const getAllCities = () => {
-     axios
+    axios
       .get(`${window.Url}api/cityDropdown/${state.value}`, headers_param)
       .then(({ data }) => {
         setCities(
@@ -309,65 +309,65 @@ useEffect(() => {
             return { value: city_data.id, label: city_data.name };
           })
         );
-      });      
-    };
+      });
+  };
 
-    useEffect(() => {
-      setTimeout(()=>{
-        setCity(
-          cities.filter((city_data) => {
-            if (city_data.value == cityData) {
-              return city_data;
-            }
-          })[0]
-        );
-      },10)
-    }, [cities]);
+  useEffect(() => {
+    setTimeout(() => {
+      setCity(
+        cities.filter((city_data) => {
+          if (city_data.value == cityData) {
+            return city_data;
+          }
+        })[0]
+      );
+    }, 10)
+  }, [cities]);
 
-    
 
-    const valueCheck = (formvalue) => {
-      const dataValue = (formvalue == undefined || formvalue == null) ? '' : formvalue.value;
-      return dataValue;
-    };
 
-    const submitBasicDetails = async (e) => {
-      e.preventDefault();
-  
-      const formData = new FormData()
-      formData.append('marital_status', valueCheck(maritalStatus));
-      formData.append('religion', valueCheck(religion));
-      formData.append('residence', valueCheck(residence));
-      formData.append('caste', valueCheck(caste));
-      formData.append('mother_tongue', valueCheck(moth));
-      formData.append('height', valueCheck(height));
-      formData.append('country', valueCheck(country));
-      formData.append('state', valueCheck(state));
-      formData.append('city', valueCheck(city));
-      formData.append('sect', valueCheck(sect));
+  const valueCheck = (formvalue) => {
+    const dataValue = (formvalue == undefined || formvalue == null) ? '' : formvalue.value;
+    return dataValue;
+  };
 
-   
-      await axios.post(`${window.Url}api/editBasic`, formData, headers_param)
-      .then(({data})=>{
+  const submitBasicDetails = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData()
+    formData.append('marital_status', valueCheck(maritalStatus));
+    formData.append('religion', valueCheck(religion));
+    formData.append('residence', valueCheck(residence));
+    formData.append('caste', valueCheck(caste));
+    formData.append('mother_tongue', valueCheck(moth));
+    formData.append('height', valueCheck(height));
+    formData.append('country', valueCheck(country));
+    formData.append('state', valueCheck(state));
+    formData.append('city', valueCheck(city));
+    formData.append('sect', valueCheck(sect));
+
+
+    await axios.post(`${window.Url}api/editBasic`, formData, headers_param)
+      .then(({ data }) => {
         if (data.hasOwnProperty('msg')) {
           Swal.fire({
-            icon:"success",
-            text:data.msg
+            icon: "success",
+            text: data.msg
           });
-          close();          
-      }
-      else{
-        Swal.fire({
-          icon:"error",
-          text:data.msg
-        });
-        close();
-      }
+          close();
+        }
+        else {
+          Swal.fire({
+            icon: "error",
+            text: data.msg
+          });
+          close();
+        }
       });
 
-    }
+  }
 
-  
+
 
 
   return (
@@ -396,7 +396,7 @@ useEffect(() => {
             <div className="post_job_body">
               <form onSubmit={submitBasicDetails}>
                 <div className="row">
-          
+
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Full Name*</label>
@@ -423,7 +423,7 @@ useEffect(() => {
                         onChange={(e) => {
                           setGender(e);
                         }}
-                        
+
                       />
                     </div>
                   </div>
@@ -457,7 +457,7 @@ useEffect(() => {
                         onChange={(e) => {
                           setMaritalStatus(e);
                         }}
-                        
+
                       />
                     </div>
                   </div>
@@ -478,7 +478,7 @@ useEffect(() => {
                       />
                     </div>
                   </div>
-               
+
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Religion</label>
@@ -616,7 +616,7 @@ useEffect(() => {
                       />
                     </div>
                   </div>
-                
+
                   <div className="col-lg-6">
                     <div className="form-group">
                       <label className="label15">Sect</label>
@@ -636,20 +636,15 @@ useEffect(() => {
                       />
                     </div>
                   </div>
-                  {/* <div className="col-lg-12">
-                    <div className="form-group">
-                      <label className="label15">Profile Managed by</label>
-                      <input
-                        type="email"
-                        className="job-input"
-                        placeholder="Profile Managed by"
-                        disabled={Edit == false ? "disabled" : ""}
-                      />
-                    </div>
-                  </div> */}
+
 
                   <div className="col-lg-12">
-                    <button className="post_jp_btn" type="submit">
+                    <button
+                      className="post_jp_btn"
+                      type="submit"
+                      disabled={Edit == false ? "disabled" : ""}
+                      style={Edit == false ? { backgroundColor: "#242424", cursor: 'not-allowed' } : { backgroundColor: "#ee0a4b" }}
+                    >
                       SAVE CHANGES
                     </button>
                   </div>
