@@ -163,7 +163,7 @@ export function Usercard(props) {
                       onClick={(e) =>
                         sendIntrest(props.item["reg_id"], props.page, props.filter)
                       }
-                      title="Send Interest"
+                      data-title="Send Interest"
                     >
                       <i className="fas fa-envelope 2x"></i>
                     </button>
@@ -187,7 +187,7 @@ export function Usercard(props) {
                         color: "#fff",
                         background: "#ee0a4b",
                       }}
-                      title="Unshort Profile"
+                      data-title="Unshort Profile"
                     >
                       <i className="fas fa-star"></i>
                     </button>
@@ -196,13 +196,14 @@ export function Usercard(props) {
                 {(props.item.get_shortlist == null ||
                   props.item.get_shortlist.saved_reg_id !=
                   props.item["reg_id"]) && (
-                    <button className="bookmark1">
-                      <i
-                        className="fas fa-star"
-                        onClick={(e) =>
+                    <button className="bookmark1"
+                                              onClick={(e) =>
                           shortlistProfile(props.item["reg_id"], props.page, props.filter)
                         }
-                        title="Short Profile"
+                        data-title="Short Profile"
+                        >
+                      <i
+                        className="fas fa-star"
                       ></i>
                     </button>
                   )}
@@ -228,7 +229,7 @@ export function Usercard(props) {
                     onClick={(e) =>
                       interestRevert(props.item.reg_id, "1", props.page, props.filter)
                     }
-                    title="Accept"
+                    data-title="Accept"
                   >
                     Accept
                   </button>
@@ -243,7 +244,7 @@ export function Usercard(props) {
                     onClick={(e) =>
                       interestRevert(props.item.reg_id, "2", props.page, props.filter)
                     }
-                    title="Reject"
+                    data-title="Reject"
                   >
                     Reject
                   </button>
