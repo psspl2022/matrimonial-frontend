@@ -60,13 +60,12 @@ function Banner() {
       );
 
       setGroomAge(
-        age.filter((groom, index) => {
-          if (index != 0 && index != 1 && index != 2) {
-            return{ groom: age.id, label: groom.age };
+        data.age.map(function (age, index) {
+          if (index > 2) {
+            return { value: age.id, label: age.age };
           }
-        })
-      );
-     
+        })?.filter(x => x !== undefined)
+      );  
 
       setMoths(
         data.mother_tongue.map(function (mother_tongue) {
@@ -76,9 +75,20 @@ function Banner() {
           };
         })
       );
+
+      setReligions(
+        data.religion.map(function (religion) {
+          return {
+            value: religion.id,
+            label: religion.religion,
+          };
+        })
+      );
     });
 
   },[]);
+
+ 
 
     
   const options = {
@@ -236,7 +246,7 @@ function Banner() {
                   classNamePrefix="react-select"
                   name="minage"
                   placeholder="Min Age"
-                  options={lookingFor && (lookingFor.value == 2 ? (age) : (groomAge))}
+                  options={lookingFor ? (lookingFor.value == 2 ? (age) : (groomAge)) : genderConst!=0 && (genderConst == 1 ? (age) :  (groomAge))}
                   onChange={(e) => {
                     setMinAge(e);
                   }}

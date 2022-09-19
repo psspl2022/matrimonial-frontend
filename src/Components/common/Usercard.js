@@ -142,9 +142,10 @@ export function Usercard(props) {
           {props.link && <div className="job-buttons">
             <ul className="link-btn d-flex justify-content-around">
               <li className="bkd-pm">
-                {(props.item.get_interest_sent != null)
-                  && (
-                    <button
+                {props.item.get_interest_sent != null
+                  && 
+                 props.item.get_interest_sent.revert == "0"  &&
+                    (<button
                       className="bookmark1"
                       style={{
                         color: "#fff",
@@ -153,8 +154,35 @@ export function Usercard(props) {
                       }}
                     >
                       <i className="fas fa-check 2x"></i>
-                    </button>
-                  )}
+                    </button>)
+                 }
+
+                  {props.item.get_interest_sent != null
+                  && props.item.get_interest_sent.revert == "1"  && (<button
+                    className="bookmark1"
+                    style={{
+                      color: "#fff",
+                      background: "#ee0a4b",
+                      cursor: "not-allowed",
+                    }}
+                  >
+                    <i class="fas fa-smile 2x"></i>
+                  </button>)
+                  }
+
+                {props.item.get_interest_sent != null
+                  && props.item.get_interest_sent.revert == "2"  && (<button
+                    className="bookmark1"
+                    style={{
+                      color: "#fff",
+                      background: "#ee0a4b",
+                      cursor: "not-allowed",
+                    }}
+                  >
+                    <i class="fas fa-frown 2x"></i>
+                  </button>)
+                  }
+
 
                 {(props.item.get_interest_sent == null
                 ) && (

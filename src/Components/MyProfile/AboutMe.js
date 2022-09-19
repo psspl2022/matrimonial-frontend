@@ -22,6 +22,10 @@ export default function AboutMe() {
       Swal.close();
     }, 2000);
   };
+  
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  } 
 
   useEffect(async () => {
     const user = JSON.parse(window.sessionStorage.getItem("user_data")).user_reg_id;
@@ -96,7 +100,7 @@ export default function AboutMe() {
                         rows={7}
                         disabled={Edit == false ? "disabled" : ""}
                         placeholder="Write something about yourself"
-                        value={aboutYourself}
+                        value={!aboutYourself ? aboutYourself : capitalize(aboutYourself)}
                         onChange={(e) => {
                           setAboutYourself(e.target.value);
                         }}
@@ -111,7 +115,7 @@ export default function AboutMe() {
                         rows={7}
                         placeholder="Write About Your Family"
                         disabled={Edit == false ? "disabled" : ""}
-                        value={aboutFamily}
+                        value={!aboutFamily ? aboutFamily : capitalize(aboutFamily)}
                         onChange={(e) => {
                           setAboutFamily(e.target.value);
                         }}
@@ -128,7 +132,7 @@ export default function AboutMe() {
                         rows={7}
                         placeholder="Write About Your Education"
                         disabled={Edit == false ? "disabled" : ""}
-                        value={aboutEducation}
+                        value={!aboutEducation ? aboutEducation : capitalize(aboutEducation)}
                         onChange={(e) => {
                           setAboutEducation(e.target.value);
                         }}
