@@ -171,7 +171,7 @@ export function Usercard(props) {
                       cursor: "not-allowed",
                     }}
                   >
-                    <i class="fas fa-smile 2x"></i>
+                    <i class="fas fa-smile 2x" style={{ lineHeight : "0.75", fontSize : "1.8rem" }}></i>
                   </button>)
                   }
 
@@ -184,7 +184,7 @@ export function Usercard(props) {
                       cursor: "not-allowed",
                     }}
                   >
-                    <i class="fas fa-frown 2x"></i>
+                    <i class="fas fa-frown 2x" style={{ lineHeight : "0.75", fontSize : "1.8rem" }}></i>
                   </button>)
                   }
 
