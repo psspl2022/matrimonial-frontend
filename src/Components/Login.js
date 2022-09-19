@@ -37,7 +37,9 @@ function Login() {
   function onChange() {
     setverified(true);
   }
-
+  if (history.location.state) {
+    window.AppName = "See The Profile";
+  }
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -59,7 +61,12 @@ function Login() {
           window.sessionStorage.setItem("user_data", JSON.stringify(data.user));
           window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
           window.sessionStorage.setItem("stage", JSON.stringify(data.stage));
-          history.replace("/registrationStage");
+          if (history.location.state) {
+
+            const data = history.location.state.data;
+            history.push("/registrationStage", { data: data });
+          }
+          else { history.replace("/registrationStage"); }
           //   return <Redirect to='/registrationStage' />
         } else {
           Swal.fire({

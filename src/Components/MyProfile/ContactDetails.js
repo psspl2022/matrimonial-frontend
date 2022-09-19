@@ -162,17 +162,17 @@ export default function ContactDetails() {
                                         </div>
                                     </div>
 
-                                    
-                  <div className="col-lg-12">
-                    <button
-                      className="post_jp_btn"
-                      type="submit"
-                      disabled={Edit == false ? "disabled" : ""}
-                      style={Edit == false ?{backgroundColor: "#242424",cursor: 'not-allowed'}:{backgroundColor: "#ee0a4b"}}
-                    >
-                      SAVE CHANGES
-                    </button>
-                  </div>
+
+                                    <div className="col-lg-12">
+                                        <button
+                                            className="post_jp_btn"
+                                            type="submit"
+                                            disabled={Edit == false ? "disabled" : ""}
+                                            style={Edit == false ? { backgroundColor: "#242424", cursor: 'not-allowed' } : { backgroundColor: "#ee0a4b" }}
+                                        >
+                                            SAVE CHANGES
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

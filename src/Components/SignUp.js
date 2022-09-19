@@ -7,6 +7,10 @@ import Select from "react-select";
 import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
 import bgimage from "../background2.jpeg";
+import TwitterLogin from 'react-twitter-auth';
+import FacebookLogin from 'react-facebook-login';
+import { GoogleLogin } from 'react-google-login';
+
 // import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 function SignUp() {
@@ -43,6 +47,7 @@ function SignUp() {
   const [validationError, setValidationError] = useState({});
   const [requiredError, setRequiredError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('')
+
   function confirmPass(val) {
     setCPass(val);
     if (pass != val && val != "") {
@@ -420,6 +425,24 @@ function SignUp() {
                   <NavLink to="/login">
                     Sign in Now<i className="fas fa-angle-double-right"></i>
                   </NavLink>
+                </div>
+                <div className="col-1 m-auto">
+                  {/* <TwitterLogin loginUrl="http://localhost:4000/api/v1/auth/twitter"
+                    // onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
+                    requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse" /> */}
+                  {/* <FacebookLogin
+                    style={{ maxWidth: "200px" }}
+                    appId="XXXXXXXXXX"
+                    autoLoad={false}
+                    fields="name,email,picture"
+                  // callback={this.facebookResponse}
+                  /> */}
+                  <GoogleLogin
+                    clientId="687289036097-685fdvidipeb7ahtkcbf44mhlidr833n.apps.googleusercontent.com"
+                    buttonText="Login"
+                  // onSuccess={console.log(this.googleResponse)}
+                  // onFailure={this.googleResponse}
+                  />
                 </div>
               </div>
             </div>

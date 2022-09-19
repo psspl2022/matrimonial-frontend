@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import AboutProfile from "./AboutProfile";
 import EducationProfile from "./EducationProfile";
@@ -18,7 +18,10 @@ function ProfileDetails() {
   const { reg_id } = useParams();
   const [data, setData] = useState([]);
   const [fetchDone, setFetchDone] = useState(false);
-
+  const location = useLocation()
+  if (!token) {
+    history.push("/login", { data: location.pathname });
+  }
   const headers_data = {
     headers: {
       authorization: "Bearer " + token,
@@ -105,7 +108,6 @@ function ProfileDetails() {
       });
   };
 
-
   return (
     <>
       <main className="browse-section pt-5" style={{ background: "rgb(240 236 262" }}>
@@ -154,35 +156,42 @@ function ProfileDetails() {
                   <div className="col-lg-3 col-md-4" style={{ background: "rgb(222 19 82)" }}>
 
                     {(!data.get_interest_sent) && (
-                      <><span className="view_profile_font1"><i className="fas fa-check view_profile_font2" style={{
-                        color: "black",
-                      }}
-                      ></i>Send Interest</span><br /></>
+                      <div onClick={(e) => sendIntrest(data.reg_id)} style={{
+                        cursor: "pointer"
+                      }}><span className="view_profile_font1"><i className="fas fa-check view_profile_font2"
+                      ></i>Send Interest</span><br /></div>
                     )}
 
                     {(data.get_interest_sent) && (
-                      <><span className="view_profile_font1"><i className="fas fa-check view_profile_font2" onClick={(e) => sendIntrest(data.reg_id)} style={{
+                      <div onClick={(e) => sendIntrest(data.reg_id)} style={{
                         cursor: "pointer"
-                      }}
-                      ></i>Send Interest</span><br /></>
+                      }}><span className="view_profile_font1"><i className="fas fa-check view_profile_font2"
+                        style={{
+                          color: "black",
+                        }}
+                      ></i>Interest Sent</span><br /></div>
                     )}
 
-                    <span className="view_profile_font1"><i className="fas fa-comment view_profile_font2"></i> Chat</span><br />
+                    {/* <span className="view_profile_font1"><i className="fas fa-comment view_profile_font2"></i> Chat</span><br /> */}
 
-                    {(!data.get_shortlist) && (
-                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) => shortlistProfile(data.reg_id)} style={{
-                        color: "black",
+                    {(data.getshortlist == null) && (
+                      <div onClick={(e) => shortlistProfile(data.reg_id)} style={{
                         cursor: "pointer"
-                      }} ></i> Shortlist</span><br /></>
+                      }}><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" ></i> Shortlist</span><br /></div>
                     )}
 
-                    {(data.get_shortlist) && (
-                      <><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" onClick={(e) => shortlistProfile(data.reg_id)} style={{
-                        cursor: "pointer"
-                      }} ></i> Shortlist</span><br /></>
-                    )}
+                    {(data.getshortlist &&
+                      data.getshortlist.saved_reg_id ==
+                      data["reg_id"]) && (
+                        <div onClick={(e) => shortlistProfile(data.reg_id)} style={{
+                          cursor: "pointer"
+                        }}><span className="view_profile_font1"><i className="fas fa-star view_profile_font2" style={{
+                          color: "black",
+                          cursor: "pointer"
+                        }} ></i> Shortlisted</span><br /></div>
+                      )}
 
-                    <span className="view_profile_font1"><i className="fas fa-heart view_profile_font2"></i> Favourite</span><br />
+                    {/* <span className="view_profile_font1"><i className="fas fa-heart view_profile_font2"></i> Favourite</span><br /> */}
                   </div>
                 </div>
               </div>

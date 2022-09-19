@@ -40,7 +40,7 @@ export function Datacontainer(props) {
                         {" "}
                         {props.data && props.check > 0 &&
                             props.data.map((item, index) => (
-                                <Usercard key={index}
+                                <Usercard browse={props.browse} key={index}
                                     link={props.link}
                                     filter={props.filter}
                                     item={item}

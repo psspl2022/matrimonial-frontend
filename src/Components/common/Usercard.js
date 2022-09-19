@@ -68,7 +68,12 @@ export function Usercard(props) {
         key={props.index}
       >
         <div className="job-item mt-30">
-          <NavLink to={props.browse ? 'findMatches' : `/profileDetail/${props.item["reg_id"]}`}>
+          <NavLink to={{
+            pathname: `/profileDetail/${props.item["reg_id"]}`,
+            myProps: {
+              hello: "Hello World"
+            }
+          }}>
             <div
               className="job-top-dt text-right"
               style={{ paddingTop: "3px" }}

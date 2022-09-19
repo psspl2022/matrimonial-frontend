@@ -64,7 +64,14 @@ function RegistrationStage(props) {
   useEffect(() => {
     if (TabName === 'homepage') {
       close();
-      window.location.href = "/"
+      if (history.location.state) {
+        const data = history.location.state.data;
+        window.location.replace(data);
+      }
+      else {
+
+        history.go(-1);
+      }
     }
     dispatch(regActiveLink(TabName));
   }, [TabName])

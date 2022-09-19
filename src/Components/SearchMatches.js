@@ -74,21 +74,21 @@ export default function SearchMatches(props) {
     }
     const formData = new FormData()
     var d = new Date();
-    formData.append('minage', formatDate(d, filter[0]))
-    formData.append('maxage', formatDate(d, filter[1]))
+    formData.append('minage', formatDate(d, (filter[0] == "o" ? 20 : filter[0])))
+    formData.append('maxage', formatDate(d, (filter[1] == "m" ? 70 : filter[1])))
     formData.append('minheight', filter[2])
     formData.append('maxheight', filter[3])
     formData.append('minincome', filter[4])
     formData.append('maxincome', filter[5])
-    formData.append('religion', filter[6])
-    formData.append('moth', filter[7])
+    formData.append('religion', (filter[6] == "e" ? "null" : filter[6]))
+    formData.append('moth', (filter[7] == "p" ? "null" : filter[7]))
     formData.append('martital', filter[8])
     formData.append('caste', filter[9])
     formData.append('occupation', filter[10])
     formData.append('state', filter[11])
     formData.append('city', filter[12])
     if (filter[13]) {
-      formData.append('gender', filter[13])
+      formData.append('gender', (filter[13] == 'h' ? null : filter[13]))
     }
     else {
       formData.append('gender', null)
@@ -132,14 +132,14 @@ export default function SearchMatches(props) {
     }
     const formData = new FormData()
     var d = new Date();
-    formData.append('minage', formatDate(d, filter[0]))
-    formData.append('maxage', formatDate(d, filter[1]))
+    formData.append('minage', formatDate(d, (filter[0] == "o" ? 20 : filter[0])))
+    formData.append('maxage', formatDate(d, (filter[1] == "m" ? 70 : filter[1])))
     formData.append('minheight', filter[2])
     formData.append('maxheight', filter[3])
     formData.append('minincome', filter[4])
     formData.append('maxincome', filter[5])
-    formData.append('religion', filter[6])
-    formData.append('moth', filter[7])
+    formData.append('religion', (filter[6] == "e" ? "null" : filter[6]))
+    formData.append('moth', (filter[7] == "p" ? "null" : filter[7]))
     formData.append('martital', filter[8])
     formData.append('caste', filter[9])
     formData.append('occupation', filter[10])
@@ -236,7 +236,7 @@ export default function SearchMatches(props) {
   ////////////////////////////////////////////////
   useEffect(() => {
     window.scroll({ top: 200, left: 0, behavior: 'smooth' })
-    setParFilterData([20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]);
+    // setParFilterData([20, 70, 1, 49, 1, 6, "null", "null", "null", "null", "null", "null", "null"]);
     // showAllProfiles(page, parfilterData);
     document.title = "Search Matches";
   }, []);
@@ -247,9 +247,11 @@ export default function SearchMatches(props) {
     window.scroll({ top: 200, left: 0, behavior: 'smooth' })
     if (token) {
       showAllProfiles(page, parfilterData);
+      console.log(parfilterData);
     }
     else {
       showAllProfiles2(page, parfilterData);
+      console.log(parfilterData);
     }
     setFetchDone(true);
   }, [page, parfilterData]);
