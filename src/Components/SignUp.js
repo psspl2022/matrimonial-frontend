@@ -203,6 +203,7 @@ function SignUp() {
           });
           close();
           window.sessionStorage.setItem('access_token', data.token);
+          window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
           window.sessionStorage.setItem('user_data', JSON.stringify(data.user));
           history.replace("/registrationStage");
         }

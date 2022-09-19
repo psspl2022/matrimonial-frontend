@@ -16,6 +16,7 @@ function Banner() {
     { value: "1", label: "Groom" },
   ];
   const [age, setAge] = useState({});
+  const [groomAge, setGroomAge] = useState({});
   const [moths, setMoths] = useState([]);
   const [religions, setReligions] = useState([]);
 
@@ -58,11 +59,13 @@ function Banner() {
         })
       );
 
-      setReligions(
-        data.religion.map(function (religion) {
-          return { value: religion.id, label: religion.religion };
-        })
-      );
+      setGroomAge(
+        data.age.map(function (age, index) {
+          if (index > 2) {
+            return { value: age.id, label: age.age };
+          }
+        })?.filter(x => x !== undefined)
+      );  
 
       setMoths(
         data.mother_tongue.map(function (mother_tongue) {
@@ -72,10 +75,22 @@ function Banner() {
           };
         })
       );
+
+      setReligions(
+        data.religion.map(function (religion) {
+          return {
+            value: religion.id,
+            label: religion.religion,
+          };
+        })
+      );
     });
 
-  }, []);
+  },[]);
 
+ 
+
+    
   const options = {
     margin: 10,
     responsiveClass: true,
@@ -231,7 +246,7 @@ function Banner() {
                   classNamePrefix="react-select"
                   name="minage"
                   placeholder="Min Age"
-                  options={age}
+                  options={lookingFor ? (lookingFor.value == 2 ? (age) : (groomAge)) : genderConst!=0 && (genderConst == 1 ? (age) :  (groomAge))}
                   onChange={(e) => {
                     setMinAge(e);
                   }}
@@ -260,7 +275,7 @@ function Banner() {
                   classNamePrefix="react-select"
                   name="minage"
                   placeholder="Max Age"
-                  options={age}
+                  options={lookingFor ? (lookingFor.value == 2 ? (age) : (groomAge)) : genderConst!=0 && (genderConst == 1 ? (age) :  (groomAge))}
                   onChange={(e) => {
                     setMaxAge(e);
                   }}

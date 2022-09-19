@@ -20,6 +20,10 @@ export default function About(reg_id) {
     } 
   }, []);
 
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  } 
+
   const about = () => {
     axios
       .post(`${window.Url}api/about`,reg_id, headers_param)
@@ -45,9 +49,12 @@ export default function About(reg_id) {
                   {data['user'] && data['user'].profile_for} 
                 </span><br />
                 </div>
-                <div className="mb-3 mt-2">
-                <span className="view_profile_about_span ">
-                  { ((data['about'] && data['about'].description!=null ) || (data['about'] && data['about'].description!=null )) ? data['about'].description : "Not filled in"} 
+                <div className="mb-3 mt-2">  <span className="view_profile_about_span">
+                  About {data['user'] && ((data['user'].gender == 2) ? "Her" : "Him" )} 
+                </span><br />
+
+                <span className="view_head_span ">
+                  { ((data['about'] && data['about'].description!=null ) || (data['about'] && data['about'].description!=null )) ? capitalize(data['about'].description) : "Not filled in"} 
                 </span><br />
               </div>
             
@@ -56,14 +63,14 @@ export default function About(reg_id) {
                   About {data['user'] && ((data['user'].gender == 2) ? "Her" : "His" )} family
                 </span><br />
                 <span className="view_head_span">
-                  { ( (data['family'] && data['family'].about_family!=null )) ? data['family'].about_family : "Not filled in"} 
+                  { ( (data['family'] && data['family'].about_family!=null )) ? capitalize(data['family'].about_family) : "Not filled in"} 
                 </span><br />
               </div>
           
               <div className="my-3">
-              <span className="view_profile_about_span">Education & Occupation</span>
+              <span className="view_profile_about_span">  About {data['user'] && ((data['user'].gender == 2) ? "Her" : "His" )} familyEducation & Occupation</span>
             <span className="view_head_span"><br />
-              { ( (data['career'] && data['career'].express_yourself!=null )) ? data['career'].express_yourself : "Not filled in"} 
+              { ( (data['career'] && data['career'].express_yourself!=null )) ? capitalize(data['career'].express_yourself) : "Not filled in"} 
             </span><br />
               </div>
               </div>

@@ -20,6 +20,8 @@ function ProfileStage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [min, setMin] = useState();
+
   const [name, setName] = useState("");
   const [pincode, setPincode] = useState("");
 
@@ -66,7 +68,16 @@ function ProfileStage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const gender = JSON.parse(window.sessionStorage.getItem("gender")).gender;
+  
+    if(gender == "2"){
+      setMin(moment((new Date().setFullYear(new Date().getFullYear()-18))).format('yyyy-MM-DD'))
+    } else{
+      setMin(moment((new Date().setFullYear(new Date().getFullYear()-21))).format('yyyy-MM-DD'))
+    }
   }, []);
+
+
 
   const token = window.sessionStorage.getItem("access_token");
   const headers_param = {
@@ -275,7 +286,7 @@ function ProfileStage() {
             <label className="label15">Date Of Birth*</label>
             <input
              type="date"
-            max = {(moment((new Date().setFullYear(new Date().getFullYear()-21))).format('yyyy-MM-DD'))}
+            max = {min}
             min = {(moment((new Date().setFullYear(new Date().getFullYear()-70))).format('yyyy-MM-DD'))}
               className="job-input"
               placeholder="Enter Email Address"
