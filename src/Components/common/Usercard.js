@@ -78,6 +78,19 @@ export function Usercard(props) {
               className="job-top-dt text-right"
               style={{ paddingTop: "3px" }}
             >
+              {props.home && <div className="desired_percent">
+                <span
+                  stye={{
+                    padding: "3px 8px",
+                    marginTop: "-4px",
+                    marginRight: "-4px",
+                    fontSize: "12px",
+                  }}
+                  className={"pink"}
+                >
+                  Top #{props.index + 1}
+                </span>
+              </div>}
               {props.item.percentage && <div className="desired_percent">
                 <span
                   stye={{
@@ -98,10 +111,16 @@ export function Usercard(props) {
                   <img
                     src={`${window.Url}Documents/Image_Documents/${props.item.get_profile_image.identity_card_doc}`}
                     alt="user profile image"
-                    style={{
-                      height: "180px",
-                      margin: "0px 10px",
-                    }}
+                    style={
+                      (props.home ? {
+                        height: "180px",
+                        width: "auto",
+                        margin: "0px auto",
+                      } : {
+                        height: "180px",
+                        margin: "0px 10px",
+                      })
+                    }
                   />
                 )}
 
@@ -147,10 +166,9 @@ export function Usercard(props) {
           {props.link && <div className="job-buttons">
             <ul className="link-btn d-flex justify-content-around">
               <li className="bkd-pm">
-                {props.item.get_interest_sent != null
-                  && 
-                 props.item.get_interest_sent.revert == "0"  &&
-                    (<button
+                {(props.item.get_interest_sent != null)
+                  && (
+                    <button
                       className="bookmark1"
                       style={{
                         color: "#fff",
@@ -159,35 +177,8 @@ export function Usercard(props) {
                       }}
                     >
                       <i className="fas fa-check 2x"></i>
-                    </button>)
-                 }
-
-                  {props.item.get_interest_sent != null
-                  && props.item.get_interest_sent.revert == "1"  && (<button
-                    className="bookmark1"
-                    style={{
-                      color: "#fff",
-                      background: "#ee0a4b",
-                      cursor: "not-allowed",
-                    }}
-                  >
-                    <i class="fas fa-smile 2x"></i>
-                  </button>)
-                  }
-
-                {props.item.get_interest_sent != null
-                  && props.item.get_interest_sent.revert == "2"  && (<button
-                    className="bookmark1"
-                    style={{
-                      color: "#fff",
-                      background: "#ee0a4b",
-                      cursor: "not-allowed",
-                    }}
-                  >
-                    <i class="fas fa-frown 2x"></i>
-                  </button>)
-                  }
-
+                    </button>
+                  )}
 
                 {(props.item.get_interest_sent == null
                 ) && (
@@ -196,7 +187,7 @@ export function Usercard(props) {
                       onClick={(e) =>
                         sendIntrest(props.item["reg_id"], props.page, props.filter)
                       }
-                      data-title="Send Interest"
+                      title="Send Interest"
                     >
                       <i className="fas fa-envelope 2x"></i>
                     </button>
@@ -220,7 +211,7 @@ export function Usercard(props) {
                         color: "#fff",
                         background: "#ee0a4b",
                       }}
-                      data-title="Unshort Profile"
+                      title="Unshort Profile"
                     >
                       <i className="fas fa-star"></i>
                     </button>
@@ -229,14 +220,13 @@ export function Usercard(props) {
                 {(props.item.get_shortlist == null ||
                   props.item.get_shortlist.saved_reg_id !=
                   props.item["reg_id"]) && (
-                    <button className="bookmark1"
-                                              onClick={(e) =>
-                          shortlistProfile(props.item["reg_id"], props.page, props.filter)
-                        }
-                        data-title="Short Profile"
-                        >
+                    <button className="bookmark1">
                       <i
                         className="fas fa-star"
+                        onClick={(e) =>
+                          shortlistProfile(props.item["reg_id"], props.page, props.filter)
+                        }
+                        title="Short Profile"
                       ></i>
                     </button>
                   )}
@@ -262,7 +252,7 @@ export function Usercard(props) {
                     onClick={(e) =>
                       interestRevert(props.item.reg_id, "1", props.page, props.filter)
                     }
-                    data-title="Accept"
+                    title="Accept"
                   >
                     Accept
                   </button>
@@ -277,7 +267,7 @@ export function Usercard(props) {
                     onClick={(e) =>
                       interestRevert(props.item.reg_id, "2", props.page, props.filter)
                     }
-                    data-title="Reject"
+                    title="Reject"
                   >
                     Reject
                   </button>

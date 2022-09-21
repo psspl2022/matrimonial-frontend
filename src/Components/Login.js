@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
 import bgimage from "../background1.jpeg";
-
+import LoginButton from "./login1";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -169,6 +169,9 @@ function Login() {
                   <div className="done147">
                     <NavLink to="/forgetPassword">Forgot Password?</NavLink>
                   </div>
+                </div>
+                <div className="col-2 text-red m-auto">
+                  <LoginButton history={history} />
                 </div>
               </div>
             </div>

@@ -10,7 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import Contact from "./Contact";
+import bgimage from "../../background2.jpeg";
 function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function RegistrationStage(props) {
   const activeState = useSelector((state) => state.changeActiveLink);
 
   useEffect(() => {
-    if (activeState == 'homepage')
+    if (activeState === 'homepage')
       props.getUrlData('/')
   });
   // dispatch(regActiveLink('career'));
@@ -41,6 +42,7 @@ function RegistrationStage(props) {
       .then(({ data }) => {
         setTabName(() => {
           switch (data[0].stage_no) {
+            case 0: return 'contact';
             case 1: return 'otp';
             case 2: return 'profile';
             case 3: return 'career';
@@ -73,17 +75,19 @@ function RegistrationStage(props) {
         history.go(-1);
       }
     }
+
     dispatch(regActiveLink(TabName));
   }, [TabName])
 
 
   return (
     <>
-      <main className="browse-section pt-4" >
+      <main className="browse-section pt-4">
         <div className="container my-3">
           <div className="row justify-content-md-center">
             <div className="col-md-12">
 
+              {TabName === 'contact' && <Contact />}
               {TabName === 'profile' && <ProfileStage />}
               {TabName === 'career' && <CareerStage />}
               {TabName === 'family' && <FamilyStage />}

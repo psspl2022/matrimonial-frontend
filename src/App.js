@@ -29,146 +29,163 @@ import ProfileDetails from "./Components/ProfileDetails/ProfileDetails";
 import LatestProfile from "./Components/Match/LatestProfile";
 import DailyRecommendation from "./Components/Match/DailyRecommendation";
 import axios from "axios";
+import LoginButton from "./Components/login1";
+import LogoutButton from "./Components/logout1";
+
+import { gapi } from 'gapi-script';
+const clientId = "687289036097-685fdvidipeb7ahtkcbf44mhlidr833n.apps.googleusercontent.com";
+
 
 function App() {
   const [browse, setBrowse] = useState(null);
   const [browseid, setBrowseId] = useState(null);
   const [url, setUrl] = useState('/');
   const [stage, setStage] = useState('6');
-  
+
 
   const history = useHistory();
 
- useEffect(()=>{
-   setUrl(window.location.pathname)
- })
+  useEffect(() => {
+    setUrl(window.location.pathname)
 
-  function getUrl(url)
-  {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "email",
+        cookiepolicy: 'single_host_origin',
+        plugin_name: 'hello'
+      })
+    };
+
+    gapi.load('client:auth2', start)
+  });
+
+  function getUrl(url) {
     setUrl(url);
     axios
-      .get(`${window.Url}api/getRegisterFormStatus`,headers_param)
+      .get(`${window.Url}api/getRegisterFormStatus`, headers_param)
       .then(({ data }) => {
-       setStage(data['0'].stage_no);
-       
-       if(data['0'].stage_no < 6 ){
-        if(url!='/registrationStage'){
-          window.location.replace('/registrationStage');
+        setStage(data['0'].stage_no);
+
+        if (data['0'].stage_no < 6) {
+          if (url != '/registrationStage') {
+            window.location.replace('/registrationStage');
+          }
         }
-       }
-      });  
+      });
   }
 
 
-  function getBrowseProfileBy(browse,id)
-  {
+  function getBrowseProfileBy(browse, id) {
     setBrowse(browse)
     setBrowseId(id)
-    
+
   }
 
   const token = window.sessionStorage.getItem("access_token");
-    const headers_param = {
-      headers: {
-        authorization: "Bearer "+ token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
+  const headers_param = {
+    headers: {
+      authorization: "Bearer " + token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
 
   useEffect(() => {
     axios
-      .get(`${window.Url}api/getRegisterFormStatus`,headers_param)
+      .get(`${window.Url}api/getRegisterFormStatus`, headers_param)
       .then(({ data }) => {
-       setStage(data['0'].stage_no);
-       
-       if(data['0'].stage_no < 6 ){
-        if(window.location.pathname!='/registrationStage'){
-          window.location.replace('/registrationStage');
+        setStage(data['0'].stage_no);
+
+        if (data['0'].stage_no < 6) {
+          if (window.location.pathname != '/registrationStage') {
+            window.location.replace('/registrationStage');
+          }
         }
-       }
       });
-    },[]);
+  }, []);
 
   return (
     <div className="App">
-      <BrowserRouter>      
-      {  (stage == 6) ? (url != "/registrationStage" ) && <>
-      <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}/>
-        <Switch>
+
+      <BrowserRouter>
+        {(stage == 6) ? (url != "/registrationStage") && <>
+          <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl} />
+          <Switch>
             <Route path="/" exact>
-            {browse==null &&
-            <>
-            <Banner />
-            <LatestMatch />
-            <MembershipPlan />
-            <SuccessMatches />  
-            </>
-            } 
-          {browse!=null &&
-           <SearchMatches browse={browse} browseId={browseid} />
-          }     
-          </Route>         
-          <Route path="/findMatches" exact>
-            <SearchMatches browse={browse} browseId={browseid} />
-          </Route>
-          <Route path="/signUp" exact>
-            <SignUp />
-          </Route>
-          <Route path="/login" exact>
-            <Login />
-          </Route>
-          <Route path="/forgetPassword" exact>
-            <ForgetPassword />
-          </Route>
-          <Route path="/careerStage" exact>
-            <CareerStage />
-          </Route>
-          <Route path="/familyStage" exact>
-            <FamilyStage />
-          </Route>
-          <Route path="/myprofile" exact>
-            <MyProfile />
-          </Route>
-          <Route path="/desiredprofile" exact>
-            <DesiredProfileDetails />
-          </Route>
-          <Route path="/membershipDetail/:package_id" exact>
-            <MembershipDetails />
-          </Route>
-          <Route path="/desiredList" exact>
-            <DesiredList />
-          </Route>
-          <Route path="/interest" exact>
-            <Interest />
-          </Route>
-          <Route path="/accept" exact>
-            <Accept />
-          </Route>
-          <Route path="/shortlist" exact>
-            <Shortlist />
-          </Route>
-          <Route path="/profileDetail/:reg_id" exact>
-            <ProfileDetails />
-          </Route>
-          <Route path="/latest" exact>
-            <LatestProfile />
-          </Route>
-          <Route path="/dailyRecommendation" exact>
-            <DailyRecommendation />
-          </Route>   
-          <Route component={PageNotFound}></Route>      
-        </Switch>
-        <MainFooter />
-        </> 
-       :  <><Redirect
+              {browse == null &&
+                <>
+                  <Banner />
+                  <LatestMatch />
+                  <MembershipPlan />
+                  <SuccessMatches />
+                </>
+              }
+              {browse != null &&
+                <SearchMatches browse={browse} browseId={browseid} />
+              }
+            </Route>
+            <Route path="/findMatches" exact>
+              <SearchMatches browse={browse} browseId={browseid} />
+            </Route>
+            <Route path="/signUp" exact>
+              <SignUp />
+            </Route>
+            <Route path="/login" exact>
+              <Login />
+            </Route>
+            <Route path="/forgetPassword" exact>
+              <ForgetPassword />
+            </Route>
+            <Route path="/careerStage" exact>
+              <CareerStage />
+            </Route>
+            <Route path="/familyStage" exact>
+              <FamilyStage />
+            </Route>
+            <Route path="/myprofile" exact>
+              <MyProfile />
+            </Route>
+            <Route path="/desiredprofile" exact>
+              <DesiredProfileDetails />
+            </Route>
+            <Route path="/membershipDetail/:package_id" exact>
+              <MembershipDetails />
+            </Route>
+            <Route path="/desiredList" exact>
+              <DesiredList />
+            </Route>
+            <Route path="/interest" exact>
+              <Interest />
+            </Route>
+            <Route path="/accept" exact>
+              <Accept />
+            </Route>
+            <Route path="/shortlist" exact>
+              <Shortlist />
+            </Route>
+            <Route path="/profileDetail/:reg_id" exact>
+              <ProfileDetails />
+            </Route>
+            <Route path="/latest" exact>
+              <LatestProfile />
+            </Route>
+            <Route path="/dailyRecommendation" exact>
+              <DailyRecommendation />
+            </Route>
+            <Route path="/login1" exact> <LoginButton /><LogoutButton /></Route>
+            <Route component={PageNotFound}></Route>
+          </Switch>
+          <MainFooter />
+        </>
+          : <><Redirect
             to={{
               pathname: "/registrationStage",
             }}
-          /></> }
+          /></>}
         <Switch>
-      
-        {/* <Route path="/" exact>
+
+          {/* <Route path="/" exact>
             {browse==null &&
             <>
             <MainHeader getBrowsedata={getBrowseProfileBy} getUrl={getUrl}                                      B                                                                                                                                                                                                              V />
@@ -180,16 +197,16 @@ function App() {
             </>
             } 
         </Route> */}
-  
 
-        <Route path="/registrationStage" exact>
+
+          <Route path="/registrationStage" exact>
             <RegisterHeader getUrl={getUrl} />
-            <RegistrationStage  getUrlData={getUrl}/>
+            <RegistrationStage getUrlData={getUrl} />
           </Route>
-   
 
-        </Switch>    
-         
+
+        </Switch>
+
       </BrowserRouter>
     </div>
   );

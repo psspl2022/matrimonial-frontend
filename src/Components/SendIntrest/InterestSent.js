@@ -63,7 +63,7 @@ export default function IntrestSent() {
             <div class="col-lg-12 col-md-12 mainpage mx-auto">
               <div className="main-tabs">
                 <Topcat title="Intrest Sent" setGrid={setGrid} />
-                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={showIntrestSent} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
+                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid === true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={showIntrestSent} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
               </div>
 
             </div>

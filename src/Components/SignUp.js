@@ -7,10 +7,7 @@ import Select from "react-select";
 import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
 import bgimage from "../background2.jpeg";
-import TwitterLogin from 'react-twitter-auth';
-import FacebookLogin from 'react-facebook-login';
-import { GoogleLogin } from 'react-google-login';
-
+import LoginButton from "./login1";
 // import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 function SignUp() {
@@ -195,40 +192,42 @@ function SignUp() {
       formData.append('password', pass)
       formData.append('contact', phno)
 
-      await axios.post(`${window.Url}api/register`, formData).then(({ data }) => {
-        if (data.hasOwnProperty('msg')) {
-          Swal.fire({
-            icon: "success",
-            text: data.msg
-          });
-          close();
-          window.sessionStorage.setItem('access_token', data.token);
-          window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
-          window.sessionStorage.setItem('user_data', JSON.stringify(data.user));
-          history.replace("/registrationStage");
-        }
-        else {
-          Swal.fire({
-            icon: "error",
-            text: data.error
-          });
-          close();
-          history.replace("/login");
-        }
+      await axios.post(`${window.Url}api/register`, formData)
+        .then(({ data }) => {
+          if (data.hasOwnProperty('msg')) {
+            Swal.fire({
+              icon: "success",
+              text: data.msg
+            });
+            close();
+            window.sessionStorage.setItem('access_token', data.token);
+            window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
+            window.sessionStorage.setItem('user_data', JSON.stringify(data.user));
+            history.replace("/registrationStage");
+          }
+          else {
+            Swal.fire({
+              icon: "error",
+              text: data.error
+            });
+            close();
+            history.replace("/login");
+          }
 
-        // console.log(data);
-        // navigate("/")
-      }).catch(({ data }) => {
-        if (data.hasOwnProperty('errors')) {
-          setValidationError(data.errors)
-        } else {
-          Swal.fire({
-            text: data.errors,
-            icon: "error"
-          });
-          close();
-        }
-      })
+          // console.log(data);
+          // navigate("/")
+        })
+        .catch(({ data }) => {
+          if (data.hasOwnProperty('errors')) {
+            setValidationError(data.errors)
+          } else {
+            Swal.fire({
+              text: data.errors,
+              icon: "error"
+            });
+            close();
+          }
+        })
     }
 
   }
@@ -427,23 +426,8 @@ function SignUp() {
                     Sign in Now<i className="fas fa-angle-double-right"></i>
                   </NavLink>
                 </div>
-                <div className="col-1 m-auto">
-                  {/* <TwitterLogin loginUrl="http://localhost:4000/api/v1/auth/twitter"
-                    // onFailure={this.twitterResponse} onSuccess={this.twitterResponse}
-                    requestTokenUrl="http://localhost:4000/api/v1/auth/twitter/reverse" /> */}
-                  {/* <FacebookLogin
-                    style={{ maxWidth: "200px" }}
-                    appId="XXXXXXXXXX"
-                    autoLoad={false}
-                    fields="name,email,picture"
-                  // callback={this.facebookResponse}
-                  /> */}
-                  <GoogleLogin
-                    clientId="687289036097-685fdvidipeb7ahtkcbf44mhlidr833n.apps.googleusercontent.com"
-                    buttonText="Login"
-                  // onSuccess={console.log(this.googleResponse)}
-                  // onFailure={this.googleResponse}
-                  />
+                <div className="col-2 text-red m-auto">
+                  <LoginButton history={history} />
                 </div>
               </div>
             </div>

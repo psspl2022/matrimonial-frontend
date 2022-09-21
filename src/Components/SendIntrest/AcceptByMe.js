@@ -79,7 +79,7 @@ export default function AcceptByMe() {
                             </div>
                             <div className="main-tabs">
                                 <Topcat title="Accept By Me" setGrid={setGrid} />
-                                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid == true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={acceptByMe} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
+                                <Datacontainer msg={msg} className={`lg-item col-lg-4 col-xs-4 grid-group-item1 ${grid === true ? 'list-group-item1' : ''}`} data={data} key1={key} check={check} showAllProfiles={acceptByMe} page={page} grid={grid} CurrentPage={CurrentPage} total={total} setPage={setPage} />
                             </div>
                         </div>
                     </div>

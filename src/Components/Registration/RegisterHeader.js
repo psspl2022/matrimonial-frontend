@@ -11,7 +11,7 @@ function RegisterHeader(props) {
   // Sticky Menu Area
   useEffect(() => {
     window.addEventListener("scroll", isSticky);
-	document.title = "User Registration";
+    document.title = "User Registration";
     // return () => {
     //   window.removeEventListener("scroll", isSticky);
     // };
@@ -76,33 +76,29 @@ function RegisterHeader(props) {
                   >
                     <ul className="navbar-nav align-self-stretch">
                       <li
-                        className={`nav-item ${
-                          activeState == "otp" ? "theme-fontcolor" : ""
-                        }`}
+                        className={`nav-item ${activeState === "otp" ? "theme-fontcolor" : ""
+                          }`}
                       >
                         Email verification
                       </li>
                       <li
-                        className={`nav-item ${
-                          activeState == "profile" ? "theme-fontcolor" : ""
-                        }`}
+                        className={`nav-item ${activeState === "profile" ? "theme-fontcolor" : ""
+                          }`}
                       >
                         Profile Details
                       </li>
                       <li
-                        className={`nav-item ${
-                          activeState == "career" ? "theme-fontcolor" : ""
-                        }`}
+                        className={`nav-item ${activeState === "career" ? "theme-fontcolor" : ""
+                          }`}
                       >
                         Career Details
                         {/* <NavLink to="/findMatches" className="nav-link" >Find Matches</NavLink> */}
                       </li>
                       <li
-                        className={`nav-item ${
-                          activeState == "family" || activeState == "profileimg"
+                        className={`nav-item ${activeState === "family" || activeState === "profileimg"
                             ? "theme-fontcolor"
                             : ""
-                        }`}
+                          }`}
                       >
                         Lifestyle & Family
                         {/* <NavLink to="/help" className="nav-link" role="button">Help</NavLink> */}

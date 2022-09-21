@@ -8,59 +8,88 @@ import { regActiveLink } from '../../actions/index';
 
 
 function ProfileImageStage() {
-  const [image,setImage] = useState('');
+  const [image, setImage] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const login_type = window.sessionStorage.getItem('login_type');
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-   function handleChange(e){
+  function handleChange(e) {
     setImage(e.target.files[0]);
-}
-const submitImageDetails = async (e) => {
-  e.preventDefault();
+  }
+  if (login_type == "google") {
+    const changeStage = async (e) => {
+      const formData = new FormData();
+      formData.append("stage", 6);
 
-  const formData = new FormData();
-  formData.append("image", image);
+      const token = window.sessionStorage.getItem("access_token");
+      const headers_param = {
+        headers: {
+          authorization: "Bearer " + token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      };
 
-  const token = window.sessionStorage.getItem("access_token");
-  const headers_param = {
-    headers: {
-      authorization: "Bearer " + token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
+      const close = () => {
+        setTimeout(() => {
+          Swal.close();
+        }, 2000);
+      };
+
+      await axios
+        .post(`${window.Url}api/changeStage`, formData, headers_param)
+        .then(({ data }) => {
+          window.sessionStorage.setItem("stage", JSON.stringify(data.stage));
+          window.location.reload();
+        })
+    }
+    changeStage();
+  }
+  const submitImageDetails = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const token = window.sessionStorage.getItem("access_token");
+    const headers_param = {
+      headers: {
+        authorization: "Bearer " + token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+
+    const close = () => {
+      setTimeout(() => {
+        Swal.close();
+      }, 2000);
+    };
+
+    await axios
+      .post(`${window.Url}api/storeProfileImage`, formData, headers_param)
+      .then(({ data }) => {
+        if (data.hasOwnProperty("msg")) {
+          Swal.fire({
+            icon: "success",
+            text: data.msg,
+          });
+          close();
+          dispatch(regActiveLink('homepage'));
+          history.go(0);
+          // history.replace('/');
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: data.error_msg,
+          });
+          close();
+        }
+      });
   };
-
-  const close = () =>{
-    setTimeout(() => {
-      Swal.close();
-    }, 2000);
-  };
-
-  await axios
-    .post(`${window.Url}api/storeProfileImage`, formData, headers_param)
-    .then(({ data }) => {
-      if (data.hasOwnProperty("msg")) {
-        Swal.fire({
-          icon: "success",
-          text: data.msg,
-        });
-        close();
-        dispatch(regActiveLink('homepage'));
-        history.go(0);
-        // history.replace('/');
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: data.error_msg,
-        });
-        close();
-      }
-    });
-};
 
 
   return (
@@ -75,7 +104,7 @@ const submitImageDetails = async (e) => {
         <div className="col-sm-6 col-md-5 col-lg-4 mx-auto d-flex justify-content-center flex-column ">
           <div className="form-group">
             <label className="label15">Select Profile Image</label>
-            <input type="file" className="form-control" onChange={ handleChange } />
+            <input type="file" className="form-control" onChange={handleChange} />
           </div>
           <div className="col-md-8 text-center mx-auto">
             <input type="submit" className="lr_btn" value="Ready to go" />

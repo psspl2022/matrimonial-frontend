@@ -6,6 +6,7 @@ import bgimage from "../background2.jpeg";
 import { useState } from "react";
 import { useEffect } from "react";
 import ProfileSkeleton from "./Dummy Skeleton/ProfileSkeleton";
+import Usercard from "./common/Usercard";
 import axios from "axios";
 
 function LatestMatch() {
@@ -14,7 +15,8 @@ function LatestMatch() {
     responsiveClass: true,
     nav: true,
     dots: false,
-    autoplay: false,
+    autoplay: true,
+    loop: true,
     navText: ["Prev", "Next"],
     smartSpeed: 1000,
     responsive: {
@@ -84,77 +86,13 @@ function LatestMatch() {
                     {" "}
                     <OwlCarousel className="owl-theme" {...options}>
                       {data.map((item, index) => (
-                        <div className="item" key={index}>
-                          <div className="job-item mt-30">
-                            <div
-                              className="job-top-dt text-right"
-                              style={{ paddingTop: "3px" }}
-                            >
-                              <div className="job-skills"></div>
-                              <div className="img-profile text-center">
-                                {item.get_profile_image && (
-                                  <img
-                                    src={`${window.Url}Documents/Image_Documents/${item.get_profile_image.identity_card_doc}`}
-                                    alt="user profile image"
-                                    style={{
-                                      height: "180px",
-                                      margin: "0px auto",
-                                      width: "auto",
-                                    }}
-                                  />
-                                )}
-
-                                {!item.get_profile_image && (
-                                  <img
-                                    src={
-                                      item.get_user_register.gender == 1
-                                        ? process.env.PUBLIC_URL +
-                                        "/male_avatar.png"
-                                        : process.env.PUBLIC_URL +
-                                        "/female_avatar.png"
-                                    }
-                                    alt="user profile image"
-                                    style={{
-                                      height: "180px",
-                                      margin: "0px auto",
-                                      width: "auto",
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            </div>
-                            <div className="job-des-dt">
-                              <h2 style={{ fontWeight: "200" }}>{item.name}</h2>
-
-                              <div className="job-skills">
-                                <span>
-                                  Age:{" "}
-                                  {Math.floor(
-                                    (Date.now() - new Date(item.dob)) /
-                                    31557600000
-                                  )}{" "}
-                                  years
-                                </span>
-                                <span>Height: {item.get_height.height} </span>
-                                <span>
-                                  Religion: {item.get_religion.religion}{" "}
-                                </span>
-                                {item.get_caste != null && (<span>Caste: {item.get_caste.caste} </span>)}
-                          
-                                <span>
-                                  Mother Tongue:{" "}
-                                  {item.get_mother_tongue.mother_tongue}{" "}
-                                </span>
-
-                                <><span>Salary: {item.get_income.income}{" "} </span><span>
-                                  Qualification: {item.get_education.education}{" "}
-                                </span><span>
-                                    Occupation: {item.get_occupation.occupation}{" "}
-                                  </span></>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <Usercard browse={true} key={index}
+                          home={true}
+                          link={false}
+                          item={item}
+                          index={index}
+                          name={item.name}
+                        />
                       ))}
                     </OwlCarousel>
                   </>
