@@ -7512,8 +7512,9 @@ h6 {
 }
 
 
-[data-title]:hover , .job-item{
-  overflow: visible!important;
+[data-title]:hover,
+.job-item {
+  overflow: visible !important;
 
 }
 
@@ -7522,6 +7523,7 @@ h6 {
   transition: all 0.1s ease 0.5s;
   visibility: visible;
 }
+
 [data-title]:after {
   font-weight: 700;
   content: attr(data-title);
@@ -7540,6 +7542,19 @@ h6 {
   z-index: 99999;
   /* visibility: hidden; */
 }
+
 [data-title] {
   position: relative;
+}
+
+#signInButton span {
+  color: black !important;
+}
+
+#signInButton button {
+  padding: 0 10px;
+}
+
+#signInButton {
+  margin: 50px auto;
 }

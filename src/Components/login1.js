@@ -55,7 +55,8 @@ function login1(props) {
         <div id="signInButton">
             <GoogleLogin
                 clientId={clientId}
-                buttonText="Login"
+                style={{ width: "200px" }}
+                buttonText="Login / SingUp"
                 scope='https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read https://www.googleapis.com/auth/userinfo.profile'
                 onSuccess={onSuccess}
                 onFailure={onFailure}

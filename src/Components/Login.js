@@ -170,7 +170,7 @@ function Login() {
                     <NavLink to="/forgetPassword">Forgot Password?</NavLink>
                   </div>
                 </div>
-                <div className="col-2 text-red m-auto">
+                <div className="col-5 text-red m-auto">
                   <LoginButton history={history} />
                 </div>
               </div>

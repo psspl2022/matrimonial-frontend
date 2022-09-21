@@ -426,7 +426,7 @@ function SignUp() {
                     Sign in Now<i className="fas fa-angle-double-right"></i>
                   </NavLink>
                 </div>
-                <div className="col-2 text-red m-auto">
+                <div className="col-4 text-red m-auto">
                   <LoginButton history={history} />
                 </div>
               </div>
