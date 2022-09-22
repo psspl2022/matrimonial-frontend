@@ -2,7 +2,7 @@ import GoogleLogin from "react-google-login";
 import axios from "axios";
 import Swal from 'sweetalert2';
 // import { useprops.history } from "react-router-dom";
-const clientId = "687289036097-685fdvidipeb7ahtkcbf44mhlidr833n.apps.googleusercontent.com";
+const clientId = "651733878355-b60ffpmjlm928g3tnlvcbu50gd2fifmu.apps.googleusercontent.com";
 
 function login1(props) {
     const close = () => {
