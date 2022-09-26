@@ -33,7 +33,7 @@ import LoginButton from "./Components/login1";
 import LogoutButton from "./Components/logout1";
 
 import { gapi } from 'gapi-script';
-const clientId = "687289036097-685fdvidipeb7ahtkcbf44mhlidr833n.apps.googleusercontent.com";
+const clientId = "651733878355-b60ffpmjlm928g3tnlvcbu50gd2fifmu.apps.googleusercontent.com";
 
 
 function App() {
