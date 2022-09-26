@@ -78,7 +78,7 @@ export default function SearchMatches(props) {
     formData.append('martital', filter[8])
     formData.append('page', page)
     axios
-      .post(`${window.Url}api/showDesiredProfiles`, formData, headers_data)
+      .post(`${window.Url}api/test`, formData, headers_data)
       .then(({ data }) => {
         if (data['msg']) {
           setMsg(data['msg']);
