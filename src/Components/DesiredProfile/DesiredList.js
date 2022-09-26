@@ -17,7 +17,7 @@ export default function SearchMatches(props) {
   const [CurrentPage, setCurrentPage] = useState(0);
   const [msg, setMsg] = useState(false);
   const [forFilter, setForFilter] = useState([]);
-  const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 6, "null", "null", "null"]);
+  const [parfilterData, setParFilterData] = useState([20, 70, 1, 49, 1, 20, "null", "null", "null"]);
   const [fetchDone, setFetchDone] = useState(false);
   const dispatch = useDispatch();
   /////////////////////Secure tokens 
@@ -83,6 +83,7 @@ export default function SearchMatches(props) {
         if (data['msg']) {
           setMsg(data['msg']);
         } else {
+          setMsg(false);
           setData(data.data);
           console.log(data.data);
           setKey(data.key);

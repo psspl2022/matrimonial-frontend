@@ -44,7 +44,7 @@ export default function SearchFilters(props) {
   // }
 
   var genderConst = 0;
-  if(sessionStorage.hasOwnProperty("gender")){
+  if (sessionStorage.hasOwnProperty("gender")) {
     genderConst = JSON.parse(window.sessionStorage.getItem("gender")).gender;
   }
 
@@ -60,15 +60,15 @@ export default function SearchFilters(props) {
           })
         );
 
-       
-          setGroomAge(
-            data.age.map(function (age, index) {
-              if (index > 2) {
-                return { value: age.id, label: age.age };
-              }
-            })?.filter(x => x !== undefined)
-          );
-  
+
+        setGroomAge(
+          data.age.map(function (age, index) {
+            if (index > 2) {
+              return { value: age.id, label: age.age };
+            }
+          })?.filter(x => x !== undefined)
+        );
+
 
         setHeights(
           data.height.map(function (height) {
@@ -110,7 +110,7 @@ export default function SearchFilters(props) {
 
 
   const SubmitFilter = () => {
-    const filterData = [(miniAge) ? miniAge.label : 20, (maxAge) ? maxAge.label : 70, (miniHeight) ? miniHeight.value : 1, (maxHeight) ? maxHeight.value : 49, (minIncome) ? minIncome.value : 1, (maxIncome) ? maxIncome.value : 6, (religion.length != 0) ? religion : "null", moth != 0 ? moth : "null", maritial != 0 ? maritial : "null", "null", "null", "null", "null"];
+    const filterData = [(miniAge) ? miniAge.label : 20, (maxAge) ? maxAge.label : 70, (miniHeight) ? miniHeight.value : 1, (maxHeight) ? maxHeight.value : 49, (minIncome) ? minIncome.value : 1, (maxIncome) ? maxIncome.value : 20, (religion.length != 0) ? religion : "null", moth != 0 ? moth : "null", maritial != 0 ? maritial : "null", "null", "null", "null", "null"];
     // console.log(filterData);
     props.setParFilterData(filterData);
   }
@@ -181,7 +181,7 @@ export default function SearchFilters(props) {
                 }
                 value={miniAge}
                 placeholder="From Age"
-                 options={genderConst!=0 && (genderConst == 1 ? (ages) :  (groomAge))}
+                options={genderConst != 0 && (genderConst == 1 ? (ages) : (groomAge))}
               />
             </div>
             <div className="col-md-6">
@@ -196,7 +196,7 @@ export default function SearchFilters(props) {
                 }
                 value={maxAge}
                 placeholder="To Age"
-                options={genderConst!=0 && (genderConst == 1 ? (ages) :  (groomAge))}
+                options={genderConst != 0 && (genderConst == 1 ? (ages) : (groomAge))}
               />
             </div>
           </div>
