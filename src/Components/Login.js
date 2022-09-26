@@ -7,11 +7,12 @@ import { useHistory } from "react-router-dom";
 import CheckTokenExist from "./CheckTokenExist";
 import bgimage from "../background1.jpeg";
 import LoginButton from "./login1";
+import Cookies from 'universal-cookie';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validationError, setValidationError] = useState({});
-
+  const cookies = new Cookies();
   const history = useHistory();
 
   useEffect(() => {
@@ -33,7 +34,13 @@ function Login() {
       Swal.close();
     }, 2000);
   };
-
+  if (history.location.state) {
+    const data = history.location.state.data;
+    cookies.set("path", data, 360);
+  }
+  else {
+    cookies.set("path", "/", 360);
+  }
   function onChange() {
     setverified(true);
   }
@@ -61,12 +68,7 @@ function Login() {
           window.sessionStorage.setItem("user_data", JSON.stringify(data.user));
           window.sessionStorage.setItem("gender", JSON.stringify(data.gender));
           window.sessionStorage.setItem("stage", JSON.stringify(data.stage));
-          if (history.location.state) {
-
-            const data = history.location.state.data;
-            history.push("/registrationStage", { data: data });
-          }
-          else { history.replace("/registrationStage"); }
+          history.replace("/registrationStage");
           //   return <Redirect to='/registrationStage' />
         } else {
           Swal.fire({

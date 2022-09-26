@@ -67,7 +67,7 @@ export function Usercard(props) {
         className={props.className}
         key={props.index}
       >
-        <div className="job-item mt-30">
+        <div className={props.link ? "job-item mt-30 j-card" : "job-item mt-30 j-card2"}>
           <NavLink to={{
             pathname: `/profileDetail/${props.item["reg_id"]}`,
             myProps: {

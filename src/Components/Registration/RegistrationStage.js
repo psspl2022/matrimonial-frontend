@@ -12,12 +12,13 @@ import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import Contact from "./Contact";
 import bgimage from "../../background2.jpeg";
+import Cookies from 'universal-cookie';
 function RegistrationStage(props) {
   const [TabName, setTabName] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const activeState = useSelector((state) => state.changeActiveLink);
-
+  const cookies = new Cookies();
   useEffect(() => {
     if (activeState === 'homepage')
       props.getUrlData('/')
@@ -66,14 +67,9 @@ function RegistrationStage(props) {
   useEffect(() => {
     if (TabName === 'homepage') {
       close();
-      if (history.location.state) {
-        const data = history.location.state.data;
-        window.location.replace(data);
-      }
-      else {
-
-        history.go(-1);
-      }
+      const data = cookies.get('path');
+      cookies.remove('path')
+      window.location.replace(data);
     }
 
     dispatch(regActiveLink(TabName));

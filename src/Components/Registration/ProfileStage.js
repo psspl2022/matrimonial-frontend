@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { regActiveLink } from '../../actions/index';
 import { useHistory } from "react-router-dom";
 import moment from "moment/moment";
-
+import Cookies from 'universal-cookie';
 
 
 function ProfileStage() {
@@ -19,7 +19,7 @@ function ProfileStage() {
   const activeState = useSelector((state) => state.changeActiveLink);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const cookies = new Cookies();
   const [min, setMin] = useState();
 
   const [name, setName] = useState("");
@@ -240,7 +240,10 @@ function ProfileStage() {
           });
           close();
           dispatch(regActiveLink('career'));
-          history.go(0);
+          const data = cookies.get('path');
+          cookies.remove('path');
+          window.location.replace(data);
+          // history.go(0);
         } else {
           Swal.fire({
             icon: "error",
